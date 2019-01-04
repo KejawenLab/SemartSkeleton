@@ -1,0 +1,11 @@
+#GLOBAL CONFIG
+- { parameter: 'PER_PAGE', value: 17 }
+- { parameter: 'DEFAULT_ORDER', value: 'id' }
+- { parameter: 'DEFAULT_ORDER_DIRECTION', value: 'DESC' }
+- { parameter: 'SEARCH_TEXT', value: 'Cari' }
+- { parameter: 'CURRENCY_PREFIX', value: 'Rp.' }
+- { parameter: 'CURRENCY_SURFIX', value: '' }
+- { parameter: 'DECIMAL_PRECISION', value: 0 }
+- { parameter: 'DECIMAL_POINT', value: '.' }
+- { parameter: 'THOUSAND_SEPARATOR', value: ',' }
+- { parameter: 'UPLOAD_DIR', value: 'uploads' }

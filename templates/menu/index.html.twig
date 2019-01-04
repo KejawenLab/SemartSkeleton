@@ -1,0 +1,283 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}{% spaceless %}
+    <link rel="stylesheet" href="{{asset('lib/select2/css/select2.min.css')}}">
+{% endspaceless %}{% endblock %}
+
+{% block title %}{% spaceless %}{{ title | upper }}{% endspaceless %}{% endblock %}
+
+{% block page_title %}{% spaceless %}{{ title }}{% endspaceless %}{% endblock %}
+
+{% block content %}{% spaceless %}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Daftar {{ title }}</h3>
+                <div class="box-tools col-md-7 col-xs-7 col-sm-7 col-lg-7 pull-right">
+                    <div class="input-group input-group-sm">
+                        {% if is_granted('add', code_to_menu('MENU')) %}
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-danger form-modal-action"><i class="fa fa-plus-circle"></i></button>
+                            </div>
+                        {% endif %}
+                        <input type="text" name="table_search" class="form-control pull-right query-string" placeholder="{{ setting('SEARCH_TEXT') }}">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-danger search-action"><i class="fa fa-search-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body table-responsive no-padding table-bordered table-hover table-striped">
+                <table id="table-content" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Menu Induk</th>
+                            <th>Kode Menu</th>
+                            <th>Nama Menu</th>
+                            <th>Menu Order</th>
+                            <th>Css Class</th>
+                            <th>Nama Rute</th>
+                            <th>Tampilkan</th>
+                            <th>Pilihan</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-content">
+                        {% include 'menu/table-content.html.twig' %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="box box-footer">
+                <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2 pull-left margin-r-5">
+                    <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></button>
+                </div>
+                <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
+                    {% include 'menu/pagination.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-default" id="form-modal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title form-title"></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST">
+                    <input type="hidden" id="id" value="">
+                    <div class="form-group">
+                        <label for="role" class="col-sm-2 control-label">Menu Induk</label>
+                        <div class="col-sm-10">
+                            <select class="form-control select2-static" id="parent">
+                                <option value="">---PILIH MENU INDUK---</option>
+                                {% for i, data in parents %}
+                                    <option value="{{ data.id }}">{% if data.parent is not null %}{{ data.parent.name ~ ' > ' ~ data.name }}{% else %}{{ data.name }}{% endif %}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Kode</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="code" placeholder="Kode">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Nama</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" placeholder="Nama">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Menu Order</label>
+                        <div class="col-sm-10">
+                            <select class="form-control select2-static" id="menuOrder">
+                                <option value="">---PILIH MENU ORDER---</option>
+                                {% for i in 1..17 %}
+                                    <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Menu Ikon</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="iconClass" placeholder="Menu Ikon">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Nama Rute</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="routeName" placeholder="Nama Rute">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">Tampilkan Menu</label>
+                        <div class="col-sm-10">
+                            <select class="form-control select2-static" id="showable">
+                                <option value="">---TAMPILKAN/TIDAK---</option>
+                                <option value="true">TAMPILKAN</option>
+                                <option value="false">TIDAK DITAMPILKAN</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn pull-left btn-warning" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-danger save">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'default/notification_modal.html.twig' %}
+{% endspaceless %}{% endblock %}
+
+{% block javascripts %}{% spaceless %}
+<script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script>
+    $(window).ready(function () {
+        localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');
+
+        $('.select2-static').select2();
+
+        $('.query-string').val('');
+
+        $(document).on('click', '.form-modal-action', function () {
+            $('.form-title').html('Tambah Menu Baru');
+            $('#form-modal').modal();
+        });
+
+        $(document).on('click', '.save', function () {
+            let id = $('#id').val();
+            let parent = $('#parent').val();
+            let code = $('#code').val();
+            let name = $('#name').val();
+            let menuOrder = $('#menuOrder').val();
+            let iconClass = $('#iconClass').val();
+            let routeName = $('#routeName').val();
+            let showable = $('#showable').val();
+
+            $.post(Routing.generate('menus_save'), {
+                _csrf_token: localStorage.getItem('csrf_token'),
+                id: id,
+                parent: parent,
+                code: code,
+                name: name,
+                menuOrder: menuOrder,
+                iconClass: iconClass,
+                routeName: routeName,
+                showable: showable
+            }, function (response) {
+                if ('OK' === response.status) {
+                    localStorage.setItem('csrf_token', response._csrf_token);
+
+                    $('#id').val('');
+                    $('#parent').val('');
+                    $('#code').val('');
+                    $('#name').val('');
+                    $('#menuOrder').val('');
+                    $('#iconClass').val('');
+                    $('#routeName').val('');
+                    $('#showable').val('');
+
+                    $('#form-modal').modal('hide');
+
+                    $('.select2-static').trigger('change');
+
+                    toastr['success']('Data berhasil disimpan.');
+
+                    refreshTable(Routing.generate('menus_index'), '{{ title }}');
+                } else {
+                    localStorage.setItem('csrf_token', response._csrf_token);
+
+                    let listError = '<ul>';
+                    $.each(response.errors, function (key, value) {
+                        listError = listError + '<li><b> ' + value + '</b></li>';
+                    });
+                    listError = listError + '</ul>';
+
+                    $('.error-body').html(listError);
+                    $('.error-modal').modal();
+                }
+            });
+        });
+
+        $(document).on('click', '.edit', function () {
+            let id = $(this).data('primary');
+            
+            $.get(Routing.generate('menus_detail', {id : id}), function (response) {
+                let data = JSON.parse(response);
+                $('#id').val(data.id);
+
+                if (null !== data.parent) {
+                    $('#parent').val(data.parent.id);
+                }
+
+                $('#code').val(data.code);
+                $('#name').val(data.name);
+                $('#menuOrder').val(data.menuOrder);
+                $('#iconClass').val(data.iconClass);
+                $('#routeName').val(data.routeName);
+                $('#showable').val(data.showable ? 'true' : 'false');
+
+                $('.select2-static').trigger('change');
+
+                $('.form-title').html('Edit Menu');
+                $('#form-modal').modal();
+            });
+        });
+
+        $(document).on('click', '.delete', function () {
+            $('#primaryId').val($(this).data('primary'));
+            $('.delete-modal').modal();
+        });
+
+        $(document).on('click', '.notif-delete', function () {
+            $('.delete-modal').modal('hide');
+            $.post(Routing.generate('menus_remove', {id: $('#primaryId').val()}), {_csrf_token: localStorage.getItem('csrf_token')}, function (response) {
+
+                toastr['success']('Data berhasil dihapus.');
+
+                refreshTable(Routing.generate('menus_index'), '{{ title }}');
+
+                localStorage.setItem('csrf_token', response._csrf_token);
+            });
+        });
+
+        $(document).on('click', '.restore', function () {
+            $('#primaryId').val($(this).data('primary'));
+            $('.restore-modal').modal();
+        });
+
+        $(document).on('click', '.notif-restore', function () {
+            $('.restore-modal').modal('hide');
+            $.post(Routing.generate('menus_restore', {id: $('#primaryId').val()}), {_csrf_token: localStorage.getItem('csrf_token')}, function (response) {
+
+                toastr['success']('Data berhasil dipulihkan.');
+
+                refreshTable(Routing.generate('menus_index'), '{{ title }}');
+
+                localStorage.setItem('csrf_token', response._csrf_token);
+            });
+        });
+        
+        $(document).on('click', '.search-action', function () {
+            refreshTable(Routing.generate('menus_index'), '{{ title }}', {q: $('.query-string').val()});
+        });
+
+        $(document).on('click', '.pagination-container a.btn-danger', function (e) {
+            e.preventDefault();
+            let url = jQuery(this).attr('href');
+
+            refreshTable(url, '{{ title }}');
+        });
+    });
+</script>
+{% endspaceless %}{% endblock %}

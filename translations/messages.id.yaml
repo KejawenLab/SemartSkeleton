@@ -1,0 +1,25 @@
+label:
+    menu:
+        parent: 'Menu Induk'
+        code: 'Kode'
+        name: 'Nama'
+        menuOrder: 'Menu Order'
+        iconClass: 'Menu Ikon'
+        routeName: 'Nama Rute'
+    group:
+        code: 'Kode'
+        name: 'Nama'
+    region:
+        code: 'Kode'
+        name: 'Nama'
+    city:
+        code: 'Kode'
+        name: 'Nama'
+        region: 'Propinsi'
+    setting:
+        parameter: 'Parameter'
+        value: 'Nilai Parameter'
+    user:
+        group: 'Grup'
+        username: 'Nama Pengguna'
+        password: 'Kata Sandi'

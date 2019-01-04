@@ -1,0 +1,8 @@
+twig:
+    paths: ['%kernel.project_dir%/templates']
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        title: 'SEMART SKELETON'
+        title_long: 'KEJAWENLAB APPLICATION SKELETON'
+        version: '1@dev'

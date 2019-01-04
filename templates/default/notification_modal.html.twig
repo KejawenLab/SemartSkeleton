@@ -1,0 +1,57 @@
+{% spaceless %}
+<input type="hidden" id="primaryId" value=""/>
+<div class="modal modal-danger fade delete-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Notifikasi</h4>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin akan menghapus data ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-outline notif-delete">Hapus</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-warning fade restore-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Notifikasi</h4>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin akan memulihkan data ini?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-outline notif-restore">Pulihkan</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal modal-warning fade error-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Notifikasi</h4>
+            </div>
+            <div class="modal-body error-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endspaceless %}

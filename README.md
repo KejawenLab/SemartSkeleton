@@ -1,0 +1,25 @@
+# Bonafitek Skeleton
+
+## Requirements
+
+```bash
+- PHP 7.2 or Later
+- MySQL/MariaDB/PostgreSQL/Oracle as Database Engine
+- Nginx or Apache as Web Server
+- Composer
+
+```
+
+## How to install
+
+```bash
+git clone git@gitlab.com:semart/skeleton.git Bonafitek
+
+cd Bonafitek
+
+composer install --prefer-dist
+
+php vendor/bin/phpunit
+
+php bin/console semart:install
+```

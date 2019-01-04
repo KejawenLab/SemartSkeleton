@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\Skeleton\Command;
+
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+/**
+ * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
+ */
+class InstallationCommand extends Command
+{
+    protected function configure()
+    {
+        $this
+            ->setName('semart:install')
+            ->setAliases(['semart:install'])
+            ->setDescription('Install Bonafitek Application Skeleton')
+            ->setHelp('Install Bonafitek Application Skeleton')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('<info>Creating new Bonafitek Application database</info>');
+        $createDatabase = $this->getApplication()->find('doctrine:database:create');
+        $createDatabase->run(new ArrayInput([
+            'command' => 'doctrine:database:create',
+            '--if-not-exists' => true,
+        ]), $output);
+
+        $noInteraction = ['--no-interaction' => true];
+
+        $output->writeln('<info>Running Bonafitek Application migration</info>');
+        $migration = $this->getApplication()->find('doctrine:migration:migrate');
+        $migration->run(new ArrayInput([
+            'command' => 'doctrine:migration:migrate',
+        ] + $noInteraction), $output);
+
+        $output->writeln('<info>Loading Bonafitek Application initial data</info>');
+        $fixtures = $this->getApplication()->find('doctrine:fixtures:load');
+        $fixtures->run(new ArrayInput([
+                'command' => 'doctrine:fixtures:load',
+        ] + $noInteraction), $output);
+
+        $output->writeln('<info>Bonafitek Application Installation is finished</info>');
+        $output->writeln('<comment>Run <info>php bin/console server:run</info> to check your installation</comment>');
+    }
+}

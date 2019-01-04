@@ -1,0 +1,68 @@
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\Skeleton\Security\Authorization;
+
+use KejawenLab\Semart\Skeleton\Entity\Group;
+use KejawenLab\Semart\Skeleton\Entity\Menu;
+use KejawenLab\Semart\Skeleton\Entity\Role;
+use KejawenLab\Semart\Skeleton\Entity\User;
+use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+
+/**
+ * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
+ */
+class PermissionVoter extends Voter
+{
+    private $roleRepository;
+
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
+    protected function supports($attribute, $subject): bool
+    {
+        if ($subject instanceof Menu) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
+    {
+        $user = $token->getUser();
+        if (!$user instanceof User) {
+            return false;
+        }
+
+        $group = $user->getGroup();
+        if (!$group instanceof Group) {
+            return false;
+        }
+
+        $role = $this->roleRepository->findRole($group, $subject);
+        if (!$role instanceof Role) {
+            return false;
+        }
+
+        switch ($attribute) {
+            case Permission::ADD:
+            case Permission::EDIT:
+                return $role->isAddable() || $role->isEditable();
+                break;
+            case Permission::VIEW:
+                return $role->isViewable();
+                break;
+            case Permission::DELETE:
+                return $role->isDeletable();
+                break;
+        }
+
+        throw new \LogicException('This code should not be reached!');
+    }
+}
