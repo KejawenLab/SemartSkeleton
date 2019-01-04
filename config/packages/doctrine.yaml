@@ -33,4 +33,4 @@ doctrine:
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'KejawenLab\Semart\Skeleton\Entity'
-                alias: Bonafitek_Application
+                alias: Semart_Application

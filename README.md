@@ -1,4 +1,4 @@
-# Bonafitek Skeleton
+# Semart Skeleton
 
 ## Requirements
 
@@ -13,9 +13,9 @@
 ## How to install
 
 ```bash
-git clone git@gitlab.com:semart/skeleton.git Bonafitek
+git clone git@gitlab.com:semart/skeleton.git Semart
 
-cd Bonafitek
+cd Semart
 
 composer install --prefer-dist
 

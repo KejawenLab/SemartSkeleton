@@ -19,14 +19,14 @@ class InstallationCommand extends Command
         $this
             ->setName('semart:install')
             ->setAliases(['semart:install'])
-            ->setDescription('Install Bonafitek Application Skeleton')
-            ->setHelp('Install Bonafitek Application Skeleton')
+            ->setDescription('Install Semart Application Skeleton')
+            ->setHelp('Install Semart Application Skeleton')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('<info>Creating new Bonafitek Application database</info>');
+        $output->writeln('<info>Creating new Semart Application database</info>');
         $createDatabase = $this->getApplication()->find('doctrine:database:create');
         $createDatabase->run(new ArrayInput([
             'command' => 'doctrine:database:create',
@@ -35,19 +35,19 @@ class InstallationCommand extends Command
 
         $noInteraction = ['--no-interaction' => true];
 
-        $output->writeln('<info>Running Bonafitek Application migration</info>');
+        $output->writeln('<info>Running Semart Application migration</info>');
         $migration = $this->getApplication()->find('doctrine:migration:migrate');
         $migration->run(new ArrayInput([
             'command' => 'doctrine:migration:migrate',
         ] + $noInteraction), $output);
 
-        $output->writeln('<info>Loading Bonafitek Application initial data</info>');
+        $output->writeln('<info>Loading Semart Application initial data</info>');
         $fixtures = $this->getApplication()->find('doctrine:fixtures:load');
         $fixtures->run(new ArrayInput([
                 'command' => 'doctrine:fixtures:load',
         ] + $noInteraction), $output);
 
-        $output->writeln('<info>Bonafitek Application Installation is finished</info>');
+        $output->writeln('<info>Semart Application Installation is finished</info>');
         $output->writeln('<comment>Run <info>php bin/console server:run</info> to check your installation</comment>');
     }
 }

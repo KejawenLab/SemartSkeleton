@@ -27,7 +27,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Bonafitek Tests Suite">
+        <testsuite name="Semart Tests Suite">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>
