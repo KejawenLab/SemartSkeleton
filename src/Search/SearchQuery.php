@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Search;
 use Doctrine\Common\Annotations\Reader;
 use KejawenLab\Semart\Skeleton\AppEvent;
 use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
+use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -50,9 +51,9 @@ class SearchQuery implements EventSubscriberInterface
                                 $this->joinFields[] = $field;
                             }
 
-                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('%s.%s', $fields[$length - 2], $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', $queryString))));
+                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $fields[$length - 2], $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                         } else {
-                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('o.%s', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', $queryString))));
+                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(o.%s)', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                         }
                     }
                 }

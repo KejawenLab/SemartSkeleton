@@ -15,7 +15,7 @@
             <div class="box-header">
                 <h3 class="box-title">Daftar {{ title }}</h3>
                 <div class="box-tools col-md-7 col-xs-7 col-sm-7 col-lg-7 pull-right">
-                    <div class="input-group input-group-sm">
+                    <div class="input-group">
                         {% if is_granted('add', code_to_menu('MENU')) %}
                             <div class="input-group-btn">
                                 <button type="button" class="btn btn-danger form-modal-action"><i class="fa fa-plus-circle"></i></button>
@@ -40,7 +40,7 @@
                             <th>Css Class</th>
                             <th>Nama Rute</th>
                             <th>Tampilkan</th>
-                            <th>Pilihan</th>
+                            <th style="width: 107px">Pilihan</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
