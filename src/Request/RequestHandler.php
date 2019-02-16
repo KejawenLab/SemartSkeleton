@@ -47,6 +47,11 @@ class RequestHandler
         $this->eventDispatcher->dispatch(AppEvent::REQUEST_EVENT, $filterEvent);
 
         $reflection = new \ReflectionObject($object);
+
+        if ($parent = $reflection->getParentClass()) {
+            $reflection = $parent;
+        }
+
         $properties = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE|\ReflectionProperty::IS_PROTECTED);
 
         foreach ($properties as $property) {
