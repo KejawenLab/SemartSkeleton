@@ -2,15 +2,24 @@ version: '2'
 services:
     app:
         build: .
-        restart: always
         environment:
+            NGINX_WEBROOT: /pemprov/public
             APP_ENV: dev
-            APP_SECRET: aae212068d961c1d0633d680fea91252
-            DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+            APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
+            DATABASE_DRIVER: pdo_pgsql
+            DATABASE_SERVER_VERSION: 9.5
+            DATABASE_CHARSET: utf8
+            DATABASE_URL: pgsql://semart:semart@db:5432/pemprov?sslmode=disable
+            REDIS_URL: redis://session
+        links:
+            - db
+            - session
+        depends_on:
+            - db
+            - session
 
     balancer:
         image: dockercloud/haproxy:latest
-        restart: always
         ports:
             - 8080:80
         volumes:
@@ -19,23 +28,15 @@ services:
             - app
         depends_on:
             - app
-
+            
     db:
         image: postgres:alpine
-        restart: always
         environment:
-            POSTGRES_USER: semarthris
-            POSTGRES_PASSWORD: semarthris
-            POSTGRES_DB: semarthris
+            POSTGRES_USER: semart
+            POSTGRES_PASSWORD: semart
+            POSTGRES_DB: semart
         volumes:
             - ./database:/var/lib/postgresql/data:rw
 
     session:
         image: redis:alpine
-        restart: always
-
-    adminer:
-        image: adminer
-        restart: always
-        ports:
-            - 9999:8080
