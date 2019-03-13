@@ -53,7 +53,7 @@ RUN composer config -g repositories.packagist composer https://packagist.jp
 RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-suggest --optimize-autoloader --classmap-authoritative -vvv && \
    composer clear-cache
 
-WORKDIR /pemprov
+WORKDIR /semart
 
 COPY composer.json ./
 COPY composer.lock ./

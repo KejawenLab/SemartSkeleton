@@ -3,13 +3,13 @@ services:
     app:
         build: .
         environment:
-            NGINX_WEBROOT: /pemprov/public
+            NGINX_WEBROOT: /semart/public
             APP_ENV: dev
             APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
             DATABASE_DRIVER: pdo_pgsql
             DATABASE_SERVER_VERSION: 9.5
             DATABASE_CHARSET: utf8
-            DATABASE_URL: pgsql://semart:semart@db:5432/pemprov?sslmode=disable
+            DATABASE_URL: pgsql://semart:semart@db:5432/semart?sslmode=disable
             REDIS_URL: redis://session
         links:
             - db
