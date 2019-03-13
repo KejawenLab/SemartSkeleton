@@ -11,7 +11,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install nginx supervisor vim software-properties-common curl ca-certificates unzip -y
 RUN apt-get update
 RUN apt-get install php php-cli php-curl php-intl php-mbstring php-xml php-zip \
-    php-bcmath php-cli php-fpm php-imap php-json php-opcache php-apcu php-xmlrpc \
+    php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc \
     php-bz2 php-common php-gd php-ldap php-pgsql php-readline php-soap php-tidy php-xsl php-apcu php-redis -y
 
 RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer.phar && chmod a+x /usr/local/bin/composer
