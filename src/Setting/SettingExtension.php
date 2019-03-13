@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Setting;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class SettingExtension extends \Twig_Extension
+class SettingExtension extends AbstractExtension
 {
     private $settingService;
 
@@ -19,7 +22,7 @@ class SettingExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('setting', [$this, 'findSetting']),
+            new TwigFunction('setting', [$this, 'findSetting']),
         ];
     }
 

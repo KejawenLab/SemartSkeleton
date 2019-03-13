@@ -26,36 +26,40 @@ class SearchQuery implements EventSubscriberInterface
 
     public function apply(FilterPagination $event): void
     {
+        if ('' === $queryString = $event->getRequest()->query->get('q', '')) {
+            return;
+        }
+
         $queryBuilder = $event->getQueryBuilder();
-        if ('' !== $queryString = $event->getRequest()->query->get('q', '')) {
-            $annotations = $this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass()));
-            foreach ($annotations as $annotation) {
-                if ($annotation instanceof Searchable) {
-                    $searchable = $annotation->getFields();
-                    foreach ($searchable as $value) {
-                        if (false !== strpos($value, '.')) {
-                            $fields = explode('.', $value);
+        $annotations = $this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass()));
+        foreach ($annotations as $annotation) {
+            if (!$annotation instanceof Searchable) {
+                continue;
+            }
 
-                            $length = count($fields);
-                            foreach ($fields as $key => $field) {
-                                if ($key === $length - 1 || in_array($field, $this->joinFields)) {
-                                    continue;
-                                }
+            $searchable = $annotation->getFields();
+            foreach ($searchable as $value) {
+                if (false !== strpos($value, '.')) {
+                    $fields = explode('.', $value);
 
-                                if (0 === $key) {
-                                    $queryBuilder->join(sprintf('o.%s', $field), $field);
-                                } else {
-                                    $queryBuilder->join(sprintf('%s.%s', $fields[$key - 1], $field), $field);
-                                }
-
-                                $this->joinFields[] = $field;
-                            }
-
-                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $fields[$length - 2], $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
-                        } else {
-                            $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(o.%s)', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                    $length = count($fields);
+                    foreach ($fields as $key => $field) {
+                        if ($key === $length - 1 || \in_array($field, $this->joinFields)) {
+                            continue;
                         }
+
+                        if (0 === $key) {
+                            $queryBuilder->join(sprintf('o.%s', $field), $field);
+                        } else {
+                            $queryBuilder->join(sprintf('%s.%s', $fields[$key - 1], $field), $field);
+                        }
+
+                        $this->joinFields[] = $field;
                     }
+
+                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $fields[$length - 2], $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                } else {
+                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(o.%s)', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                 }
             }
         }

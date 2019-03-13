@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Search;
+namespace KejawenLab\Semart\Skeleton\Sort;
 
 /**
  * @Annotation()
@@ -10,7 +10,7 @@ namespace KejawenLab\Semart\Skeleton\Search;
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class Searchable
+class Sortable
 {
     private $fields = [];
 

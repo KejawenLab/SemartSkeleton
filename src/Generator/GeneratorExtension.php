@@ -5,20 +5,22 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Generator;
 
 use Doctrine\Common\Inflector\Inflector;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class GeneratorExtension extends \Twig_Extension
+class GeneratorExtension extends AbstractExtension
 {
     public function getFilters(): array
     {
         return [
-            new \Twig_SimpleFilter('pluralize', [$this, 'pluralize']),
-            new \Twig_SimpleFilter('humanize', [$this, 'humanize']),
-            new \Twig_SimpleFilter('underscore', [$this, 'underscore']),
-            new \Twig_SimpleFilter('dash', [$this, 'dash']),
-            new \Twig_SimpleFilter('camelcase', [$this, 'camelcase']),
+            new TwigFunction('pluralize', [$this, 'pluralize']),
+            new TwigFunction('humanize', [$this, 'humanize']),
+            new TwigFunction('underscore', [$this, 'underscore']),
+            new TwigFunction('dash', [$this, 'dash']),
+            new TwigFunction('camelcase', [$this, 'camelcase']),
         ];
     }
 

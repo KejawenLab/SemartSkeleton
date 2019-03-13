@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
 use Symfony\Component\HttpFoundation\RequestStack;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class PaginationExtension extends \Twig_Extension
+class PaginationExtension extends AbstractExtension
 {
     private $request;
 
@@ -21,7 +23,7 @@ class PaginationExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('start_page_number', [$this, 'startPageNumber']),
+            new TwigFunction('start_page_number', [$this, 'startPageNumber']),
         ];
     }
 

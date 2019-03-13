@@ -7,11 +7,13 @@ namespace KejawenLab\Semart\Skeleton\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class MenuExtension extends \Twig_Extension
+class MenuExtension extends AbstractExtension
 {
     private $menuLoader;
 
@@ -29,8 +31,8 @@ class MenuExtension extends \Twig_Extension
     public function getFunctions(): array
     {
         return [
-            new \Twig_SimpleFunction('render_menu', [$this, 'renderMenu']),
-            new \Twig_SimpleFunction('code_to_menu', [$this, 'findMenu']),
+            new TwigFunction('render_menu', [$this, 'renderMenu']),
+            new TwigFunction('code_to_menu', [$this, 'findMenu']),
         ];
     }
 
