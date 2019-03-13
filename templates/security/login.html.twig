@@ -214,7 +214,7 @@
             box-sizing: border-box;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 </head>
 <body>
     <div class="wrapper fadeInDown">
@@ -233,10 +233,10 @@
     </div>
 </body>
 {% if error %}
-    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
     <script>
         setTimeout(function () {
-            swal({
+            Swal.fire({
                 title: "PESAN ERROR",
                 text: "Kombinasi username dan password tidak sesuai",
                 type: "error"
