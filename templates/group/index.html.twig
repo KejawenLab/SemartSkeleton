@@ -236,6 +236,8 @@
             $.get(Routing.generate('user_roles'), {q: $('.menu-search').val(), groupId: localStorage.getItem('groupId')}, function (response) {
                 $('.roles-content').html(response['table']);
 
+                $('input[type="checkbox"]').bootstrapToggle();
+
                 $('.roles-modal').modal();
             });
         });
