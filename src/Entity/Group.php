@@ -24,7 +24,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @Searchable({"code", "name"})
  * @Sortable({"code", "name"})
  *
- * @UniqueEntity("code")
+ * @UniqueEntity(fields={"code"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */

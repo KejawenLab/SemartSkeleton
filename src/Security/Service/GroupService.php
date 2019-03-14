@@ -24,6 +24,6 @@ class GroupService
      */
     public function getActiveGroups(): array
     {
-        return $this->groupRepository->findUnDeletedRecords();
+        return $this->groupRepository->findAll();
     }
 }

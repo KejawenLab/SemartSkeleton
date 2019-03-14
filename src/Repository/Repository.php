@@ -48,9 +48,11 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
 
     }
 
-    public function findUnDeletedRecords(): array
+    public function findUniqueBy(array $criteria): array
     {
-        return $this->findBy(['deletedAt' => null]);
+        $this->_em->getFilters()->disable('semart_softdeletable');
+
+        return $this->findBy(array_merge($criteria));
     }
 
     public function isCacheable(): bool

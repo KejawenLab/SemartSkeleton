@@ -28,6 +28,7 @@ label:
         notification: 'Notifikasi'
         list_title: 'Daftar'
         action: 'Pilihan'
+        non_unique_or_deleted: 'Nilai sudah digunakan atau telah dihapus. Hubungi Administrator untuk memastikan.'
     menu:
         parent: 'Menu Induk'
         code: 'Kode Menu'
