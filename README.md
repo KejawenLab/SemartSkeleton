@@ -20,7 +20,19 @@ cd Semart
 
 composer install --prefer-dist
 
-php vendor/bin/phpunit
+php bin/console semart:install
+```
+
+## KejawenLab Love Docker
+
+```bash
+git clone git@gitlab.com:semart/skeleton.git Semart
+
+cd Semart 
+
+docker-compose up -d
+
+docker-compose exec app bash
 
 php bin/console semart:install
 ```
