@@ -33,13 +33,13 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Menu Induk</th>
-                            <th>Kode Menu</th>
-                            <th>Nama Menu</th>
-                            <th>Menu Order</th>
-                            <th>Css Class</th>
-                            <th>Nama Rute</th>
-                            <th>Tampilkan</th>
+                            <th>{{ 'label.menu.parent' | trans }}</th>
+                            <th>{{ 'label.menu.code' | trans }}</th>
+                            <th>{{ 'label.menu.name' | trans }}</th>
+                            <th>{{ 'label.menu.menuOrder' | trans }}</th>
+                            <th>{{ 'label.menu.iconClass' | trans }}</th>
+                            <th>{{ 'label.menu.routeName' | trans }}</th>
+                            <th>{{ 'label.menu.showable' | trans }}</th>
                             <th style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
@@ -69,10 +69,10 @@
                 <form class="form-horizontal" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
-                        <label for="role" class="col-sm-2 control-label">Menu Induk</label>
+                        <label for="role" class="col-sm-2 control-label">{{ 'label.menu.parent' | trans }}</label>
                         <div class="col-sm-10">
                             <select class="form-control select2-static" id="parent">
-                                <option value="">---PILIH MENU INDUK---</option>
+                                <option value="">---PILIH {{ 'label.menu.parent' | trans | upper }}---</option>
                                 {% for i, data in parents %}
                                     <option value="{{ data.id }}">{% if data.parent is not null %}{{ data.parent.name ~ ' > ' ~ data.name }}{% else %}{{ data.name }}{% endif %}</option>
                                 {% endfor %}
@@ -80,22 +80,22 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Kode</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.code' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="code" placeholder="Kode">
+                            <input type="text" class="form-control" id="code" placeholder="{{ 'label.menu.code' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Nama</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.name' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Nama">
+                            <input type="text" class="form-control" id="name" placeholder="{{ 'label.menu.name' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Menu Order</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.menuOrder' | trans }}</label>
                         <div class="col-sm-10">
                             <select class="form-control select2-static" id="menuOrder">
-                                <option value="">---PILIH MENU ORDER---</option>
+                                <option value="">---PILIH {{ 'label.menu.menuOrder' | trans | upper }}---</option>
                                 {% for i in 1..17 %}
                                     <option value="{{ i }}">{{ i }}</option>
                                 {% endfor %}
@@ -103,19 +103,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Menu Ikon</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.iconClass' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="iconClass" placeholder="Menu Ikon">
+                            <input type="text" class="form-control" id="iconClass" placeholder="{{ 'label.menu.iconClass' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Nama Rute</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.routeName' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="routeName" placeholder="Nama Rute">
+                            <input type="text" class="form-control" id="routeName" placeholder="{{ 'label.menu.routeName' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Tampilkan Menu</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.showable' | trans }}</label>
                         <div class="col-sm-10">
                             <select class="form-control select2-static" id="showable">
                                 <option value="">---TAMPILKAN/TIDAK---</option>
