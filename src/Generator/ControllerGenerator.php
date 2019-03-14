@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Generator;
 use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Twig\Environment;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -19,7 +20,7 @@ class ControllerGenerator implements GeneratorInterface
 
     private $kernel;
 
-    public function __construct(\Twig_Environment $twig, Filesystem $fileSystem, KernelInterface $kernel)
+    public function __construct(Environment $twig, Filesystem $fileSystem, KernelInterface $kernel)
     {
         $this->twig = $twig;
         $this->fileSystem = $fileSystem;
