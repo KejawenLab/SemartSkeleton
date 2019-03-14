@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Tests\Repository;
 
 use KejawenLab\Semart\Skeleton\Entity\Setting;
+use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use KejawenLab\Semart\Skeleton\Repository\Repository;
 use KejawenLab\Semart\Skeleton\Repository\SettingRepository;
 use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
@@ -25,7 +26,7 @@ class SettingRepositoryTest extends DatabaseTestCase
         /** @var Setting $setting */
         $setting = $repository->findOneBy(['parameter' => 'PER_PAGE']);
 
-        $this->assertEquals(17, $setting->getValue());
+        $this->assertEquals(Paginator::PER_PAGE, $setting->getValue());
         $this->assertNull($repository->findOneBy(['parameter' => static::NOT_FOUND]));
     }
 }

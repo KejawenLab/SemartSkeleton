@@ -31,7 +31,7 @@ class ControllerGeneratorTest extends KernelTestCase
         $generator = new ControllerGenerator(static::$container->get('twig'), $fileSystem, static::$kernel);
 
         $this->assertInstanceOf(GeneratorInterface::class, $generator);
-        $this->assertEmpty($generator->generate($reflection));
+        $generator->generate($reflection);
         $this->assertFileExists($generatedIndexPath);
         $fileSystem->remove($generatedIndexPath);
     }

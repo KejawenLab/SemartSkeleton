@@ -9,8 +9,8 @@ use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>

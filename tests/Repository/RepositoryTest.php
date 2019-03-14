@@ -22,13 +22,6 @@ class RepositoryTest extends KernelTestCase
             ->willReturn(null)
         ;
 
-        $repositoryMock
-            ->expects($this->once())
-            ->method('restore')
-            ->withAnyParameters()
-        ;
-
         $this->assertNull($repositoryMock->find('1'));
-        $this->assertNull($repositoryMock->restore('1'));
     }
 }

@@ -34,16 +34,6 @@ class PaginatorTest extends DatabaseTestCase
             ->method('getValue')
             ->willReturn(Paginator::PER_PAGE)
         ;
-        $settingServiceMock
-            ->expects($this->at(1))
-            ->method('getValue')
-            ->willReturn('id')
-        ;
-        $settingServiceMock
-            ->expects($this->at(2))
-            ->method('getValue')
-            ->willReturn('DESC')
-        ;
 
         $paginator = new Paginator(
             static::$container->get('doctrine.orm.entity_manager'),

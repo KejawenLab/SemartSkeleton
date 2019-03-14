@@ -19,6 +19,9 @@
         <env name="DATABASE_SERVER_VERSION" value="5.7" />
         <env name="DATABASE_CHARSET" value="utf8mb4" />
         <env name="DATABASE_URL" value="mysql://root:aden@127.0.0.1:3306/semart_test" />
+        <env name="APPLICATION_TITLE" value="SEMART SKELETON" />
+        <env name="APPLICATION_TITLE_LONG" value="KEJAWENLAB APPLICATION SKELETON" />
+        <env name="APPLICATION_VERSION" value="1@dev" />
 
         <!-- ###+ snc/redis-bundle ### -->
         <!-- passwords that contain special characters (@, %, :, +) must be urlencoded -->
