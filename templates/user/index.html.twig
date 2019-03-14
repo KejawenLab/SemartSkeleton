@@ -1,14 +1,14 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}{% spaceless %}
+{% block stylesheets %}{% filter spaceless %}
     <link rel="stylesheet" href="{{asset('lib/select2/css/select2.min.css')}}">
-{% endspaceless %}{% endblock %}
+{% endfilter %}{% endblock %}
 
-{% block title %}{% spaceless %}{{ title | upper }}{% endspaceless %}{% endblock %}
+{% block title %}{% filter spaceless %}{{ title | upper }}{% endfilter %}{% endblock %}
 
-{% block page_title %}{% spaceless %}{{ title }}{% endspaceless %}{% endblock %}
+{% block page_title %}{% filter spaceless %}{{ title }}{% endfilter %}{% endblock %}
 
-{% block content %}{% spaceless %}
+{% block content %}{% filter spaceless %}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -97,9 +97,9 @@
 </div>
 
 {% include 'default/notification_modal.html.twig' %}
-{% endspaceless %}{% endblock %}
+{% endfilter %}{% endblock %}
 
-{% block javascripts %}{% spaceless %}
+{% block javascripts %}{% filter spaceless %}
 <script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
 <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
@@ -224,4 +224,4 @@
         });
     });
 </script>
-{% endspaceless %}{% endblock %}
+{% endfilter %}{% endblock %}
