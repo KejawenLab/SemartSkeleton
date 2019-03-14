@@ -317,7 +317,11 @@
         });
         
         $(document).on('click', '.search-action', function () {
-            refreshTable(Routing.generate('groups_index'), '{{ title }}', {q: $('.query-string').val()});
+            let params = getQueriesString();
+
+            params['q'] = $('.query-string').val();
+
+            refreshTable(Routing.generate('groups_index', params), '{{ title }}');
         });
 
         $(document).on('click', '.pagination-container a.btn-danger', function (e) {
@@ -336,7 +340,7 @@
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
-                    $.get(Routing.generate('user_roles'), {q: $('.menu-search').val(), groupId: localStorage.getItem('groupId')}, function (response) {
+                    $.get(Routing.generate('user_roles', {q: $('.menu-search').val(), groupId: localStorage.getItem('groupId')}), {}, function (response) {
                         $('.roles-content').html(response['table']);
 
                         toastr['success']('{{ 'label.crud.roles_message' | trans }}');

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -36,7 +36,7 @@ class CacheSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AppEvent::PRE_COMMIT_EVENT => [['filterEntity']],
+            Application::PRE_COMMIT_EVENT => [['filterEntity']],
         ];
     }
 }

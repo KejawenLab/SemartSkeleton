@@ -3,6 +3,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        title: 'SEMART SKELETON'
-        title_long: 'KEJAWENLAB APPLICATION SKELETON'
-        version: '1@dev'
+        title: '%env(resolve:APPLICATION_TITLE)%'
+        title_long: '%env(resolve:APPLICATION_TITLE_LONG)%'
+        version: '%env(resolve:APPLICATION_VERSION)%'

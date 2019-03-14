@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Upload;
 
+use KejawenLab\Semart\Skeleton\Application;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -21,7 +22,7 @@ class UploadHandler
 
     public function handle(UploadedFile $uploadedFile)
     {
-        $fileName = sprintf('%s.%s', $this->fileLocator->createUniqueFileName(), $uploadedFile->guessExtension() ?: 'semart');
+        $fileName = sprintf('%s.%s', $this->fileLocator->createUniqueFileName(), $uploadedFile->guessExtension() ?: Application::APP_UNIQUE_NAME);
         $uploadDir = $this->fileLocator->getUploadDir();
 
         $fileSystem = new Filesystem();

@@ -19,6 +19,8 @@ class FilterPagination extends Event
 
     private $entityClass;
 
+    private $joinAlias = [];
+
     public function getRequest(): ?Request
     {
         return $this->request;
@@ -47,5 +49,24 @@ class FilterPagination extends Event
     public function setEntityClass(string $entityClass): void
     {
         $this->entityClass = $entityClass;
+    }
+
+    public function addJoinAlias(string $field, string $alias): void
+    {
+        $this->joinAlias[$field] = $alias;
+    }
+
+    public function getJoinAlias(string $field): ?string
+    {
+        if (!array_key_exists($field, $this->joinAlias)) {
+            return null;
+        }
+
+        return $this->joinAlias[$field];
+    }
+
+    public function getJoinFields(): array
+    {
+        return array_keys($this->joinAlias);
     }
 }

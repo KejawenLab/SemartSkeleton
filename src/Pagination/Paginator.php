@@ -6,11 +6,10 @@ namespace KejawenLab\Semart\Skeleton\Pagination;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Setting\SettingService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -45,11 +44,9 @@ class Paginator
         $this->settingService = $settingService;
     }
 
-    public function paginate(string $entityClass, int $page = 1, $orderField = null, $orderDirection = null): PaginationInterface
+    public function paginate(string $entityClass, int $page = 1): PaginationInterface
     {
         $limit = (int) $this->settingService->getValue('PER_PAGE') ?: self::PER_PAGE;
-        $defaultOrderField = $orderField ?: $this->settingService->getValue('DEFAULT_ORDER');
-        $defaultOrderDirection = $orderDirection ?: Str::make($this->settingService->getValue('DEFAULT_ORDER_DIRECTION'))->uppercase()->__toString();
 
         /** @var EntityRepository $repository */
         $repository = $this->doctrine->getRepository($entityClass);
@@ -60,11 +57,7 @@ class Paginator
         $event->setRequest($this->request);
         $event->setEntityClass($entityClass);
 
-        $this->eventDispatcher->dispatch(AppEvent::PAGINATION_EVENT, $event);
-
-        if ($defaultOrderField) {
-            $queryBuilder->addOrderBy(sprintf('o.%s', $defaultOrderField), $defaultOrderDirection ?: 'DESC');
-        }
+        $this->eventDispatcher->dispatch(Application::PAGINATION_EVENT, $event);
 
         return $this->paginator->paginate($queryBuilder, $page, $limit);
     }

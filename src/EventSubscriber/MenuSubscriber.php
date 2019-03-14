@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use KejawenLab\Semart\Skeleton\Request\FilterRequest;
@@ -43,7 +43,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AppEvent::REQUEST_EVENT => [['filterRequest']],
+            Application::REQUEST_EVENT => [['filterRequest']],
         ];
     }
 }

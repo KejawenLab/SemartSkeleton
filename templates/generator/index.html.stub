@@ -177,7 +177,11 @@
         });
 
         $(document).on('click', '.search-action', function () {
-            refreshTable(Routing.generate('{# entity | pluralize | underscore #}_index'), '{{ title }}', {q: $('.query-string').val()});
+            let params = getQueriesString();
+
+            params['q'] = $('.query-string').val();
+
+            refreshTable(Routing.generate('{# entity | pluralize | underscore #}_index', params), '{{ title }}');
         });
 
         $(document).on('click', '.pagination-container a.btn-danger', function (e) {

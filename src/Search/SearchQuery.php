@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Search;
 
 use Doctrine\Common\Annotations\Reader;
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
 use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -16,8 +16,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class SearchQuery implements EventSubscriberInterface
 {
     private $annotationReader;
-
-    private $joinFields = [];
 
     public function __construct(Reader $reader)
     {
@@ -44,20 +42,23 @@ class SearchQuery implements EventSubscriberInterface
 
                     $length = count($fields);
                     foreach ($fields as $key => $field) {
-                        if ($key === $length - 1 || \in_array($field, $this->joinFields)) {
+                        if ($key === $length - 1 || \in_array($field, $event->getJoinFields())) {
                             continue;
                         }
 
+                        $random = Application::APP_UNIQUE_NAME;
+                        $alias  = $random[rand($key, strlen($random)-1)];
+
                         if (0 === $key) {
-                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $field);
+                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $alias);
                         } else {
-                            $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $field);
+                            $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $alias);
                         }
 
-                        $this->joinFields[] = $field;
+                        $event->addJoinAlias($field, $alias);
                     }
 
-                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $fields[$length - 2], $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($fields[$length - 2]), $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                 } else {
                     $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(o.%s)', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                 }
@@ -68,7 +69,7 @@ class SearchQuery implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            AppEvent::PAGINATION_EVENT => [['apply', 255]],
+            Application::PAGINATION_EVENT => [['apply', 255]],
         ];
     }
 }

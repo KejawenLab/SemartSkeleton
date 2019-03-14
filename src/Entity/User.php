@@ -11,6 +11,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\Skeleton\Contract\Entity\PrimaryableTrait;
 use KejawenLab\Semart\Skeleton\Search\Searchable;
+use KejawenLab\Semart\Skeleton\Sort\Sortable;
 use PHLAK\Twine\Str;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @Searchable({"group.code", "group.name", "username"})
- * @Searchable({"group.name", "username"})
+ * @Sortable({"group.name", "username"})
  *
  * @UniqueEntity(fields={"username"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
  *

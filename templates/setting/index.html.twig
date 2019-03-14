@@ -41,7 +41,7 @@
             </div>
             <div class="box box-footer">
                 <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2 pull-left margin-r-5">
-                    <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i> {{ 'label.crud.refresh' | trans }}</button>
                 </div>
                 <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
                     {% include 'setting/pagination.html.twig' %}
@@ -167,7 +167,11 @@
         });
         
         $(document).on('click', '.search-action', function () {
-            refreshTable(Routing.generate('settings_index'), '{{ title }}', {q: $('.query-string').val()});
+            let params = getQueriesString();
+
+            params['q'] = $('.query-string').val();
+
+            refreshTable(Routing.generate('settings_index', params), '{{ title }}');
         });
 
         $(document).on('click', '.pagination-container a.btn-danger', function (e) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
@@ -39,7 +39,7 @@ class RoleInitiationSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AppEvent::PRE_COMMIT_EVENT => [['initiate']],
+            Application::PRE_COMMIT_EVENT => [['initiate']],
         ];
     }
 }

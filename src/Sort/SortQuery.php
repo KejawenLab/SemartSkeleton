@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Sort;
 
 use Doctrine\Common\Annotations\Reader;
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -50,32 +50,30 @@ class SortQuery implements EventSubscriberInterface
                         continue;
                     }
 
-                    if (0 === $key) {
-                        $queryBuilder->leftJoin(sprintf('o.%s', $field), $field);
-                    } else {
-                        $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $field);
+                    $alias = $event->getJoinAlias($field);
+                    if (!$alias) {
+                        $random = Application::APP_UNIQUE_NAME;
+                        $alias  = $random[rand($key, strlen($random)-1)];
+
+                        if (0 === $key) {
+                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $alias);
+                        } else {
+                            $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $alias);
+                        }
                     }
+
+                    $sort = sprintf('%s.%s', $alias, $fields[$key + 1]);
                 }
-
-                $sort = $sortField;
             }
 
-            $direction = $request->query->get('d', 'a');
-            switch ($direction) {
-                case 'a':
-                    $queryBuilder->addOrderBy($sort, 'ASC');
-                    break;
-                case 'd':
-                    $queryBuilder->addOrderBy($sort, 'DESC');
-                    break;
-            }
+            $queryBuilder->addOrderBy($sort, 'a' === $request->query->get('d', 'a') ? 'ASC' : 'DESC');
         }
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            AppEvent::PAGINATION_EVENT => [['apply', -255]],
+            Application::PAGINATION_EVENT => [['apply', -255]],
         ];
     }
 }

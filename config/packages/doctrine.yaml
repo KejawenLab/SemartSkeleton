@@ -28,9 +28,9 @@ doctrine:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
                 enabled: true
         mappings:
-            SemartHris:
+            Semart:
                 is_bundle: false
                 type: annotation
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'KejawenLab\Semart\Skeleton\Entity'
-                alias: Semart_Application
+                alias: Semart

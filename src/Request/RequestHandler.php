@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -44,7 +44,7 @@ class RequestHandler
     {
         $filterEvent = new FilterRequest($request, $object);
 
-        $this->eventDispatcher->dispatch(AppEvent::REQUEST_EVENT, $filterEvent);
+        $this->eventDispatcher->dispatch(Application::REQUEST_EVENT, $filterEvent);
 
         $reflection = new \ReflectionObject($object);
 
@@ -62,7 +62,7 @@ class RequestHandler
             }
         }
 
-        $this->eventDispatcher->dispatch(AppEvent::PRE_VALIDATION_EVENT, $filterEvent);
+        $this->eventDispatcher->dispatch(Application::PRE_VALIDATION_EVENT, $filterEvent);
 
         $errors = $this->validator->validate($object);
         if (count($errors) > 0) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
-use KejawenLab\Semart\Skeleton\AppEvent;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Repository\GroupRepository;
@@ -56,8 +56,8 @@ class UserSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            AppEvent::REQUEST_EVENT => [['filterRequest']],
-            AppEvent::PRE_VALIDATION_EVENT => [['setPassword']],
+            Application::REQUEST_EVENT => [['filterRequest']],
+            Application::PRE_VALIDATION_EVENT => [['setPassword']],
         ];
     }
 }
