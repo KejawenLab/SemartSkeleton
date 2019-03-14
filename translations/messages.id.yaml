@@ -29,23 +29,25 @@ label:
         total_records: 'Total Data'
         notification: 'Notifikasi'
         list_title: 'Daftar'
+        action: 'Pilihan'
     menu:
         parent: 'Menu Induk'
-        code: 'Kode'
-        name: 'Nama'
+        code: 'Kode Menu'
+        name: 'Nama Menu'
         menuOrder: 'Menu Order'
         iconClass: 'Menu Ikon'
         routeName: 'Nama Rute'
+        showable: 'Tampilkan'
     group:
-        code: 'Kode'
-        name: 'Nama'
-    region:
-        code: 'Kode'
-        name: 'Nama'
-    city:
-        code: 'Kode'
-        name: 'Nama'
-        region: 'Propinsi'
+        code: 'Kode Grup'
+        name: 'Nama Grup'
+    role:
+        group: 'Grup'
+        menu: 'Menu'
+        addable: 'Tambah'
+        editable: 'Ubah'
+        viewable: 'Lihat'
+        deletable: 'Hapus'
     setting:
         parameter: 'Parameter'
         value: 'Nilai Parameter'

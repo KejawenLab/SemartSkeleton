@@ -35,7 +35,7 @@
                             <th>No</th>
                             <th>Pengguna</th>
                             <th>Grup</th>
-                            <th style="width: 177px">Pilihan</th>
+                            <th style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
@@ -64,10 +64,10 @@
                 <form class="form-horizontal" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
-                        <label for="role" class="col-sm-2 control-label">Grup</label>
+                        <label for="role" class="col-sm-2 control-label">{{ 'label.user.group' | trans }}</label>
                         <div class="col-sm-10">
                             <select class="form-control select2-static" id="group">
-                                <option value="">---PILIH GRUP---</option>
+                                <option value="">---PILIH {{ 'label.user.group' | trans }}---</option>
                                 {% for i, data in groups %}
                                     <option value="{{ data.id }}">{{ data.name }}</option>
                                 {% endfor %}
@@ -75,15 +75,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Username</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.user.username' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="username" placeholder="Username">
+                            <input type="text" class="form-control" id="username" placeholder="{{ 'label.user.username' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">Password</label>
+                        <label for="password" class="col-sm-2 control-label">{{ 'label.user.password' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="plainPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="plainPassword" placeholder="{{ 'label.user.password' | trans }}">
                         </div>
                     </div>
                 </form>

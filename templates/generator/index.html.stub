@@ -31,7 +31,7 @@
                             <th>No</th>
                             <th>Kode</th>
                             <th>Nama</th>
-                            <th style="width: 177px">Pilihan</th>
+                            <th style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">

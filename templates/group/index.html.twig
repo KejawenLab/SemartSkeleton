@@ -35,7 +35,7 @@
                             <th>No</th>
                             <th>Kode</th>
                             <th>Nama</th>
-                            <th style="width: 177px">Pilihan</th>
+                            <th style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
@@ -64,15 +64,15 @@
                 <form class="form-horizontal" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Kode</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.group.code' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="code" placeholder="Kode">
+                            <input type="text" class="form-control" id="code" placeholder="{{ 'label.group.code' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">Nama</label>
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.group.name' | trans }}</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="Nama">
+                            <input type="text" class="form-control" id="name" placeholder="{{ 'label.group.name' | trans }}">
                         </div>
                     </div>
                 </form>
