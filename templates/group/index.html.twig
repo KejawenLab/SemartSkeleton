@@ -32,10 +32,10 @@
                 <table id="table-content" class="table table-hover">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>{{ 'label.group.code' | trans }}</th>
-                            <th>{{ 'label.group.name' | trans }}</th>
-                            <th style="width: 177px">{{ 'label.crud.action' | trans }}</th>
+                            <th class="text-center">No</th>
+                            <th class="text-center">{{ 'label.group.code' | trans }}</th>
+                            <th class="text-center">{{ 'label.group.name' | trans }}</th>
+                            <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
@@ -94,7 +94,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Hak Akses</h4>
+                <h4 class="modal-title">{{ 'label.crud.roles' | trans }}</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group">
@@ -103,19 +103,19 @@
                         <button type="submit" class="btn btn-danger menu-search-action"><i class="fa fa-search-plus"></i> {{ 'label.crud.search' | trans }}</button>
                     </div>
                 </div>
-                <div class="row table-responsive no-padding table-bordered table-hover table-striped">
-                    <table class="table table-hover">
+                <div class="row">
+                    <table class="table table-hover table-responsive no-padding table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th rowspan="2">No</th>
-                                <th rowspan="2">Nama Menu</th>
-                                <th colspan="4" class="text-center">Hak Akses</th>
+                                <th rowspan="2" style="vertical-align: middle" class="text-center">No</th>
+                                <th rowspan="2" style="vertical-align: middle" class="text-center">{{ 'label.menu.name' | trans }}</th>
+                                <th colspan="4" style="vertical-align: middle" class="text-center">{{ 'label.crud.roles' | trans }}</th>
                             </tr>
                             <tr>
-                                <th>Tambah</th>
-                                <th>Ubah</th>
-                                <th>Lihat</th>
-                                <th>Hapus</th>
+                                <th class="text-center">{{ 'label.crud.add' | trans }}</th>
+                                <th class="text-center">{{ 'label.crud.edit' | trans }}</th>
+                                <th class="text-center">{{ 'label.crud.view' | trans }}</th>
+                                <th class="text-center">{{ 'label.crud.delete' | trans }}</th>
                             </tr>
                         </thead>
                         <tbody class="roles-content"></tbody>

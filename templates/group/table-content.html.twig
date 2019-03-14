@@ -9,7 +9,7 @@
         <td class="text-right">{{ (key + startNumber)  }}</td>
         <td>{{ data.code }}</td>
         <td>{{ data.name }}</td>
-        <td>
+        <td class="text-center">
             {% if is_admin() and data.deleted %}
                 <button data-primary="{{ data.id }}" class="btn btn-xs btn-success restore margin-r-5"><i class="fa fa-recycle"></i> {{ 'label.crud.restore' | trans }}</button>
             {% endif %}

@@ -24,6 +24,7 @@ label:
         cancel: 'Batal'
         close: 'Tutup'
         save: 'Simpan'
+        view: 'Lihat'
         save_message: 'Data berhasil disimpan.'
         page_status: 'Halaman'
         total_records: 'Total Data'
