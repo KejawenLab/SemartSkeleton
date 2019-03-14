@@ -40,3 +40,9 @@ php bin/console semart:install
 ## Documentation
 
 [Doc](doc)
+
+## Running Tests
+
+```bash
+php vendor/bin/phpunit
+```
