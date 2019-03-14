@@ -49,9 +49,9 @@ class SearchQuery implements EventSubscriberInterface
                         }
 
                         if (0 === $key) {
-                            $queryBuilder->join(sprintf('o.%s', $field), $field);
+                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $field);
                         } else {
-                            $queryBuilder->join(sprintf('%s.%s', $fields[$key - 1], $field), $field);
+                            $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $field);
                         }
 
                         $this->joinFields[] = $field;
