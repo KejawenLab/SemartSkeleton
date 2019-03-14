@@ -28,13 +28,13 @@
                     </div>
                 </div>
             </div>
-            <div class="box-body table-responsive no-padding table-bordered table-hover table-striped">
-                <table id="table-content" class="table table-hover">
+            <div class="box-body">
+                <table id="table-content" class="table table-responsive no-padding table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">{{ 'label.group.code' | trans }}</th>
-                            <th class="text-center">{{ 'label.group.name' | trans }}</th>
+                            <th class="text-center">{{ 'label.group.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable pull-right"></i></th>
+                            <th class="text-center">{{ 'label.group.name' | trans }} <i data-sort="no" data-sort-field="name" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
@@ -97,7 +97,7 @@
                 <h4 class="modal-title">{{ 'label.crud.roles' | trans }}</h4>
             </div>
             <div class="modal-body">
-                <div class="input-group">
+                <div class="input-group margin-b-7">
                     <input type="text" name="role_search" class="form-control pull-right menu-search" placeholder="{{ 'label.crud.search_text' | trans }}">
                     <div class="input-group-btn">
                         <button type="submit" class="btn btn-danger menu-search-action"><i class="fa fa-search-plus"></i> {{ 'label.crud.search' | trans }}</button>

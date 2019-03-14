@@ -29,8 +29,8 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.code' | trans }}</th>
-                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.name' | trans }}</th>
+                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable pull-right"></i></th>
+                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.name' | trans }} <i data-sort="no" data-sort-field="name" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>

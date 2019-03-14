@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Menu;
 
 use KejawenLab\Semart\Skeleton\Entity\Menu;
-use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;

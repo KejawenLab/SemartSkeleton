@@ -23,7 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
- * @Searchable({"username"})
+ * @Searchable({"group.code", "group.name", "username"})
+ * @Searchable({"group.name", "username"})
  *
  * @UniqueEntity("username")
  *

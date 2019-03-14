@@ -128,6 +128,8 @@
     <script src="{{ asset('js/jquery.numeric.min.js') }}"></script>
     <script>
         $(document).ready(function () {
+            localStorage.setItem('CURRENT_URL', window.location.href.split('?')[0]);
+
             toastr.options = {
                 "closeButton": false,
                 "debug": false,
@@ -163,6 +165,10 @@
             $('.number').number(true, 0);
         });
 
+        $(document).on('click', '.sortable', function () {
+            sort(jQuery(this));
+        });
+
         $(document).on('click', '.refresh', function () {
             refreshTable(window.location.href, '{{ title }}');
         });
@@ -186,6 +192,46 @@
 
                 container.trigger('destroy.semart.loader');
             });
+        }
+
+        function sort(element) {
+            jQuery('.sortable').each(function () {
+                let elm = jQuery(this);
+
+                elm.removeClass('fa-sort');
+                elm.removeClass('fa-sort-asc');
+                elm.removeClass('fa-sort-desc');
+                if (!elm.is(element)) {
+                    elm.addClass('fa-sort');
+                    elm.data('sort', 'no');
+                }
+            });
+            
+            let direction = element.data('sort');
+            let field = element.data('sort-field');
+            switch (direction) {
+                case 'no':
+                    element.removeClass('fa-sort');
+                    element.addClass('fa-sort-asc');
+                    element.data('sort', 'asc');
+                    direction = 'a';
+                    break;
+                case 'asc':
+                    element.removeClass('fa-sort-asc');
+                    element.addClass('fa-sort-desc');
+                    element.data('sort', 'desc');
+                    direction = 'd';
+                    break;
+                case 'desc':
+                    element.removeClass('fa-sort-desc');
+                    element.addClass('fa-sort');
+                    element.data('sort', 'no');
+                    direction = 'n';
+                    break;
+            }
+
+            let url = localStorage.getItem('CURRENT_URL') + '?s=' + field + '&d=' + direction;
+            refreshTable(url, '{{ title }}');
         }
 
         (function ($) {

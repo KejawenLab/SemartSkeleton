@@ -6,7 +6,6 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use Doctrine\Common\Annotations\Reader;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
-use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;

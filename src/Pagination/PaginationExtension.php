@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
+use KejawenLab\Semart\Skeleton\Setting\SettingService;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -15,9 +16,12 @@ class PaginationExtension extends AbstractExtension
 {
     private $request;
 
-    public function __construct(RequestStack $requestStack)
+    private $settingService;
+
+    public function __construct(RequestStack $requestStack, SettingService $settingService)
     {
         $this->request = $requestStack->getCurrentRequest();
+        $this->settingService = $settingService;
     }
 
     public function getFunctions(): array
@@ -29,6 +33,6 @@ class PaginationExtension extends AbstractExtension
 
     public function startPageNumber()
     {
-        return Paginator::PER_PAGE * ((int) $this->request->query->get('page', 1) - 1) + 1;
+        return ((int) $this->settingService->getValue('PER_PAGE') ?: Paginator::PER_PAGE) * ((int) $this->request->query->get('page', 1) - 1) + 1;
     }
 }

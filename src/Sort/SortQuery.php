@@ -40,7 +40,35 @@ class SortQuery implements EventSubscriberInterface
                 continue;
             }
 
-            $queryBuilder->addOrderBy(sprintf('o.%s', $sortField), $request->query->get('d', 'ASC'));
+            $sort = sprintf('o.%s', $sortField);
+            if (false !== strpos($sortField, '.')) {
+                $fields = explode('.', $sortField);
+
+                $length = count($fields);
+                foreach ($fields as $key => $field) {
+                    if ($key === $length - 1) {
+                        continue;
+                    }
+
+                    if (0 === $key) {
+                        $queryBuilder->leftJoin(sprintf('o.%s', $field), $field);
+                    } else {
+                        $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $field);
+                    }
+                }
+
+                $sort = $sortField;
+            }
+
+            $direction = $request->query->get('d', 'a');
+            switch ($direction) {
+                case 'a':
+                    $queryBuilder->addOrderBy($sort, 'ASC');
+                    break;
+                case 'd':
+                    $queryBuilder->addOrderBy($sort, 'DESC');
+                    break;
+            }
         }
     }
 

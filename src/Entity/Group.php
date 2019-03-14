@@ -12,6 +12,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\Skeleton\Contract\Entity\CodeNameableTrait;
 use KejawenLab\Semart\Skeleton\Contract\Entity\PrimaryableTrait;
 use KejawenLab\Semart\Skeleton\Search\Searchable;
+use KejawenLab\Semart\Skeleton\Sort\Sortable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
@@ -21,6 +22,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
  * @Searchable({"code", "name"})
+ * @Sortable({"code", "name"})
  *
  * @UniqueEntity("code")
  *

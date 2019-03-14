@@ -10,6 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\Skeleton\Contract\Entity\PrimaryableTrait;
+use KejawenLab\Semart\Skeleton\Search\Searchable;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -18,6 +19,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\RoleRepository")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
+ *
+ * @Searchable({"menu.code", "menu.name"})
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
