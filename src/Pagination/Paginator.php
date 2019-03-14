@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class Paginator
 {
-    const PER_PAGE = 17;
+    const PER_PAGE = 9;
 
     private $doctrine;
 

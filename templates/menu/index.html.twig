@@ -13,17 +13,17 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Daftar {{ title }}</h3>
+                <h3 class="box-title">{{ 'label.crud.list_title' | trans }} {{ title }}</h3>
                 <div class="box-tools col-md-7 col-xs-7 col-sm-7 col-lg-7 pull-right">
                     <div class="input-group">
                         {% if is_granted('add', code_to_menu('MENU')) %}
                             <div class="input-group-btn">
-                                <button type="button" class="btn btn-danger form-modal-action"><i class="fa fa-plus-circle"></i></button>
+                                <button type="button" class="btn btn-primary form-modal-action"><i class="fa fa-plus-circle"></i> {{ 'label.crud.add' | trans }}</button>
                             </div>
                         {% endif %}
-                        <input type="text" name="table_search" class="form-control pull-right query-string" placeholder="{{ setting('SEARCH_TEXT') }}">
+                        <input type="text" name="table_search" class="form-control pull-right query-string" placeholder="{{ 'label.crud.search_text' | trans }}">
                         <div class="input-group-btn">
-                            <button type="submit" class="btn btn-danger search-action"><i class="fa fa-search-plus"></i></button>
+                            <button type="submit" class="btn btn-danger search-action"><i class="fa fa-search-plus"></i> {{ 'label.crud.search' | trans }}</button>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                             <th>Css Class</th>
                             <th>Nama Rute</th>
                             <th>Tampilkan</th>
-                            <th style="width: 107px">Pilihan</th>
+                            <th style="width: 177px">Pilihan</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
@@ -50,7 +50,7 @@
             </div>
             <div class="box box-footer">
                 <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2 pull-left margin-r-5">
-                    <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i> {{ 'label.crud.refresh' | trans }}</button>
                 </div>
                 <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
                     {% include 'menu/pagination.html.twig' %}
@@ -127,8 +127,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn pull-left btn-warning" data-dismiss="modal">Batal</button>
-                <button type="button" class="btn btn-danger save">Simpan</button>
+                <button type="button" class="btn pull-left btn-warning" data-dismiss="modal">{{ 'label.crud.cancel' | trans }}</button>
+                <button type="button" class="btn btn-danger save">{{ 'label.crud.save' | trans }}</button>
             </div>
         </div>
     </div>
@@ -150,7 +150,7 @@
         $('.query-string').val('');
 
         $(document).on('click', '.form-modal-action', function () {
-            $('.form-title').html('Tambah Menu Baru');
+            $('.form-title').html('{{ 'label.crud.add_title' | trans({'%title%': title }) }}');
             $('#form-modal').modal();
         });
 
@@ -191,7 +191,7 @@
 
                     $('.select2-static').trigger('change');
 
-                    toastr['success']('Data berhasil disimpan.');
+                    toastr['success']('{{ 'label.crud.save_message' | trans }}');
 
                     refreshTable(Routing.generate('menus_index'), '{{ title }}');
                 } else {
@@ -229,7 +229,7 @@
 
                 $('.select2-static').trigger('change');
 
-                $('.form-title').html('Edit Menu');
+                $('.form-title').html('{{ 'label.crud.edit_title' | trans({'%title%': title }) }}');
                 $('#form-modal').modal();
             });
         });
@@ -243,7 +243,7 @@
             $('.delete-modal').modal('hide');
             $.post(Routing.generate('menus_remove', {id: $('#primaryId').val()}), {_csrf_token: localStorage.getItem('csrf_token')}, function (response) {
 
-                toastr['success']('Data berhasil dihapus.');
+                toastr['success']('{{ 'label.crud.delete_message' | trans }}');
 
                 refreshTable(Routing.generate('menus_index'), '{{ title }}');
 
@@ -260,7 +260,7 @@
             $('.restore-modal').modal('hide');
             $.post(Routing.generate('menus_restore', {id: $('#primaryId').val()}), {_csrf_token: localStorage.getItem('csrf_token')}, function (response) {
 
-                toastr['success']('Data berhasil dipulihkan.');
+                toastr['success']('{{ 'label.crud.restore_message' | trans }}');
 
                 refreshTable(Routing.generate('menus_index'), '{{ title }}');
 

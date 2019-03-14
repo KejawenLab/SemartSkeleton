@@ -2,8 +2,8 @@
     {%- if pageCount > 1 -%}
         <div class="col-md-7 col-xl-7 col-xs-7 pull-right">
             <div class="btn-group pull-right">
-                <button class="btn btn-success">Halaman: {{ current ~ '/' ~ pageCount }}</button>
-                <button class="btn btn-primary">Total Data: {{ totalCount }}</button>
+                <button class="btn btn-success">{{ 'label.crud.page_status' | trans }}: {{ current ~ '/' ~ pageCount }}</button>
+                <button class="btn btn-primary">{{ 'label.crud.total_records' | trans }}: {{ totalCount }}</button>
             </div>
             <div class="btn-group pull-right pagination-container margin-r-5">
                 {%- if first is defined and current != first -%}

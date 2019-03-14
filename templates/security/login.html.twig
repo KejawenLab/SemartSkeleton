@@ -224,10 +224,10 @@
                 <img src="{{ asset('img/logo.gif') }}" id="icon" alt="{{ title }}" />
             </div>
             <form action="{{ path('login_check') }}" method="post">
-                <input type="text" id="login" class="fadeIn second" name="_username" value="{{ username }}" placeholder="Nama Pengguna">
-                <input type="password" id="password" class="fadeIn third" name="_password" placeholder="Kata Sandi">
+                <input type="text" id="login" class="fadeIn second" name="_username" value="{{ username }}" placeholder="{{ 'label.login.username' | trans }}">
+                <input type="password" id="password" class="fadeIn third" name="_password" placeholder="{{ 'label.login.password' | trans }}">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <input type="submit" class="fadeIn fourth" value="Masuk">
+                <input type="submit" class="fadeIn fourth" value="{{ 'label.login.button' | trans }}">
             </form>
         </div>
     </div>
@@ -237,9 +237,9 @@
     <script>
         setTimeout(function () {
             Swal.fire({
-                title: "PESAN ERROR",
-                text: "Kombinasi username dan password tidak sesuai",
-                type: "error"
+                title: '{{ 'label.login.error_title' | trans }}',
+                text: '{{ 'label.login.error_message' | trans }}',
+                type: 'error'
             });
         }, 1727);
     </script>
