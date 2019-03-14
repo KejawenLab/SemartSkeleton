@@ -176,23 +176,6 @@
             });
         });
 
-        $(document).on('click', '.restore', function () {
-            $('#primaryId').val($(this).data('primary'));
-            $('.restore-modal').modal();
-        });
-
-        $(document).on('click', '.notif-restore', function () {
-            $('.restore-modal').modal('hide');
-            $.post(Routing.generate('{# entity | pluralize | underscore #}_restore', {id: $('#primaryId').val()}), {_csrf_token: localStorage.getItem('csrf_token')}, function (response) {
-
-                toastr['success']('{{ 'label.crud.restore_message' | trans }}');
-
-                refreshTable(Routing.generate('{# entity | pluralize | underscore #}_index'), '{{ title }}');
-
-                localStorage.setItem('csrf_token', response._csrf_token);
-            });
-        });
-
         $(document).on('click', '.search-action', function () {
             refreshTable(Routing.generate('{# entity | pluralize | underscore #}_index'), '{{ title }}', {q: $('.query-string').val()});
         });

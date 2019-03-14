@@ -10,9 +10,6 @@
         <td>{{ data.code }}</td>
         <td>{{ data.name }}</td>
         <td class="text-center">
-            {% if is_admin() and data.deleted %}
-                <button data-primary="{{ data.id }}" class="btn btn-xs btn-success restore margin-r-5"><i class="fa fa-recycle"></i> {{ 'label.crud.restore' | trans }}</button>
-            {% endif %}
             {% if is_granted('edit', menu) %}
                 <button data-toggle="modal" data-target="#role-modal" data-primary="{{ data.id }}" class="btn btn-xs btn-danger role margin-r-5"><i class="fa fa-lock"></i> {{ 'label.crud.roles' | trans }}</button>
             {% endif %}

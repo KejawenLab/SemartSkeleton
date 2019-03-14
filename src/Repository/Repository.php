@@ -6,7 +6,6 @@ namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteable;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Cache\Simple\ArrayCache;
@@ -52,18 +51,6 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
     public function findUnDeletedRecords(): array
     {
         return $this->findBy(['deletedAt' => null]);
-    }
-
-    public function restore(string $id): void
-    {
-        /** @var SoftDeleteable $record */
-        $record = $this->find($id);
-        if ($record) {
-            $record->setDeletedAt(null);
-        }
-
-        $this->_em->persist($record);
-        $this->_em->flush($record);
     }
 
     public function isCacheable(): bool

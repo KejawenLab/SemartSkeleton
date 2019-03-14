@@ -42,12 +42,4 @@ class UserService implements UserProviderInterface
     {
         return User::class === $class;
     }
-
-    /**
-     * @return User[]
-     */
-    public function getActiveUsers(): array
-    {
-        return $this->userRepository->findUnDeletedRecords();
-    }
 }

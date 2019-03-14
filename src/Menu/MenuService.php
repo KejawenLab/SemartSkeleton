@@ -30,6 +30,6 @@ class MenuService
      */
     public function getActiveMenus(): array
     {
-        return $this->menuRepository->findUnDeletedRecords();
+        return $this->menuRepository->findAll();
     }
 }

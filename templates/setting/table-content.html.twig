@@ -10,9 +10,6 @@
         <td>{{ data.parameter }}</td>
         <td>{{ data.value }}</td>
         <td class="text-center">
-            {% if is_admin() and data.deleted %}
-                <button data-primary="{{ data.id }}" class="btn btn-xs btn-success restore margin-r-5"><i class="fa fa-recycle"></i> {{ 'label.crud.restore' | trans }}</button>
-            {% endif %}
             {% if is_granted('edit', menu) and false == data.deleted %}
                 <button data-primary="{{ data.id }}" class="btn btn-xs btn-instagram edit margin-r-5"><i class="fa fa-edit"></i> {{ 'label.crud.edit' | trans }}</button>
             {% endif %}

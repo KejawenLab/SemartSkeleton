@@ -10,7 +10,6 @@ use KejawenLab\Semart\Skeleton\Repository\UserRepository;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
-use KejawenLab\Semart\Skeleton\Security\Service\SuperAdministratorCheckerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -99,22 +98,6 @@ class UserController extends AdminController
         }
 
         $this->remove($user);
-
-        return new JsonResponse(['status' => 'OK']);
-    }
-
-    /**
-     * @Route("/{id}/restore", methods={"POST"}, name="users_restore", options={"expose"=true})
-     *
-     * @Permission(actions=Permission::DELETE)
-     */
-    public function restore(string $id, UserRepository $repository, SuperAdministratorCheckerService $service)
-    {
-        if (!$city = $repository->find($id) && $service->isAdmin()) {
-            throw new NotFoundHttpException();
-        }
-
-        $repository->restore($id);
 
         return new JsonResponse(['status' => 'OK']);
     }

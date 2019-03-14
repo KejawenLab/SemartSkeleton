@@ -9,7 +9,6 @@ use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use KejawenLab\Semart\Skeleton\Repository\SettingRepository;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
-use KejawenLab\Semart\Skeleton\Security\Service\SuperAdministratorCheckerService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -98,22 +97,6 @@ class SettingController extends AdminController
         }
 
         $this->remove($setting);
-
-        return new JsonResponse(['status' => 'OK']);
-    }
-
-    /**
-     * @Route("/{id}/restore", methods={"POST"}, name="settings_restore", options={"expose"=true})
-     *
-     * @Permission(actions=Permission::DELETE)
-     */
-    public function restore(string $id, SettingRepository $repository, SuperAdministratorCheckerService $service)
-    {
-        if (!$city = $repository->find($id) && $service->isAdmin()) {
-            throw new NotFoundHttpException();
-        }
-
-        $repository->restore($id);
 
         return new JsonResponse(['status' => 'OK']);
     }
