@@ -75,7 +75,7 @@ class TodoRepository extends Repository
 
 - Run `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
 
-- Edit translation `translations/messages.id.yaml` add 
+- Edit translation in `translations/messages.id.yaml` and add 
 
 ```yaml
 label:
