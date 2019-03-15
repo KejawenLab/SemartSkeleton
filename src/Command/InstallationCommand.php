@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Command;
 
+use KejawenLab\Semart\Skeleton\Application;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,8 +18,8 @@ class InstallationCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('semart:install')
-            ->setAliases(['semart:install'])
+            ->setName(sprintf('%s:install', Application::APP_UNIQUE_NAME))
+            ->setAliases([sprintf('%s:create', Application::APP_UNIQUE_NAME)])
             ->setDescription('Install Semart Application Skeleton')
             ->setHelp('Install Semart Application Skeleton')
         ;

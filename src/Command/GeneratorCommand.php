@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Command;
 
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,8 +28,8 @@ class GeneratorCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('semart:crud:generate')
-            ->setAliases(['semart:generate', 'semart:gen', 'semart:generate', 'semart:gen'])
+            ->setName(sprintf('%s:crud:generate', Application::APP_UNIQUE_NAME))
+            ->setAliases([sprintf('%s:generate', Application::APP_UNIQUE_NAME), sprintf('%s:gen', Application::APP_UNIQUE_NAME)])
             ->setDescription('Generate Simpel CRUD')
             ->setHelp('Generate Simpel CRUD')
             ->addArgument('entity', InputArgument::REQUIRED)

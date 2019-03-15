@@ -61,7 +61,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $generators = $container->findTaggedServiceIds('semart.generator');
+        $generators = $container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME));
         $services  = [];
         foreach ($generators as $serviceId => $attributes) {
             $services[] = new Reference($serviceId);

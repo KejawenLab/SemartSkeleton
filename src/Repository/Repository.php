@@ -6,6 +6,7 @@ namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 use Symfony\Component\Cache\Simple\ArrayCache;
@@ -50,7 +51,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
 
     public function findUniqueBy(array $criteria): array
     {
-        $this->_em->getFilters()->disable('semart_softdeletable');
+        $this->_em->getFilters()->disable(sprintf('%s_softdeletable', Application::APP_UNIQUE_NAME));
 
         return $this->findBy(array_merge($criteria));
     }

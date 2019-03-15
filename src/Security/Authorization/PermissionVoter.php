@@ -52,8 +52,10 @@ class PermissionVoter extends Voter
 
         switch ($attribute) {
             case Permission::ADD:
+                return $role->isAddable();
+                break;
             case Permission::EDIT:
-                return $role->isAddable() || $role->isEditable();
+                return $role->isEditable();
                 break;
             case Permission::VIEW:
                 return $role->isViewable();
