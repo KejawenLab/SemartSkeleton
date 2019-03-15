@@ -44,4 +44,10 @@ class GroupRepository extends Repository
 
         return $objects;
     }
+
+    public function commit(Group $group): void
+    {
+        $this->_em->persist($group);
+        $this->_em->flush();
+    }
 }

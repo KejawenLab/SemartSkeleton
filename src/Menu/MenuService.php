@@ -25,6 +25,11 @@ class MenuService
         return $this->menuRepository->findByCode(Str::make($code)->uppercase()->__toString());
     }
 
+    public function addMenu(Menu $menu): void
+    {
+        $this->menuRepository->commit($menu);
+    }
+
     /**
      * @return Menu[]
      */

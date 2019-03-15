@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class AppEventTest extends WebTestCase
+class ApplicationTest extends WebTestCase
 {
     public function testConst()
     {

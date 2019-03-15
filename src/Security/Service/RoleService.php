@@ -66,4 +66,10 @@ class RoleService
 
         $this->roleRepository->commit();
     }
+
+    public function addRole(Role $role): void
+    {
+        $this->roleRepository->persist($role);
+        $this->roleRepository->commit();
+    }
 }

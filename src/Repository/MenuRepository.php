@@ -49,4 +49,10 @@ class MenuRepository extends Repository
     {
         return $this->findOneBy(['code' => $code]);
     }
+
+    public function commit(Menu $menu): void
+    {
+        $this->_em->persist($menu);
+        $this->_em->flush();
+    }
 }

@@ -19,6 +19,16 @@ class GroupService
         $this->groupRepository = $groupRepository;
     }
 
+    public function getSuperAdmin(): Group
+    {
+        return $this->groupRepository->findOneBy(['code' => Group::SUPER_ADMINISTRATOR_CODE]);
+    }
+
+    public function addGroup(Group $group): void
+    {
+        $this->groupRepository->commit($group);
+    }
+
     /**
      * @return Group[]
      */
