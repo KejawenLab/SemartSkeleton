@@ -40,7 +40,7 @@ class SortQuery implements EventSubscriberInterface
                 continue;
             }
 
-            $sort = sprintf('o.%s', $sortField);
+            $sort = sprintf('%s.%s', $event->getJoinAlias('root'), $sortField);
             if (false !== strpos($sortField, '.')) {
                 $fields = explode('.', $sortField);
 
@@ -56,7 +56,7 @@ class SortQuery implements EventSubscriberInterface
                         $alias  = $random[rand($key, strlen($random)-1)];
 
                         if (0 === $key) {
-                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $alias);
+                            $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $field), $alias);
                         } else {
                             $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $alias);
                         }

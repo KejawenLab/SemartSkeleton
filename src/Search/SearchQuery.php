@@ -50,7 +50,7 @@ class SearchQuery implements EventSubscriberInterface
                         $alias  = $random[rand($key, strlen($random)-1)];
 
                         if (0 === $key) {
-                            $queryBuilder->leftJoin(sprintf('o.%s', $field), $alias);
+                            $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $field), $alias);
                         } else {
                             $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $alias);
                         }
@@ -60,7 +60,7 @@ class SearchQuery implements EventSubscriberInterface
 
                     $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($fields[$length - 2]), $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                 } else {
-                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(o.%s)', $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
                 }
             }
         }
