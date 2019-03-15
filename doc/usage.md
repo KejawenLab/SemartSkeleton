@@ -92,7 +92,5 @@ label:
 
 By default, your menu is already registered in root. To edit the menu, open **Menu** menu and search `Todo` and then click **edit** button.
 
-## Setting Permission
-
 ## Customize Template
 
