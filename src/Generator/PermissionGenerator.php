@@ -38,7 +38,7 @@ class PermissionGenerator implements GeneratorInterface
         $menu = new Menu();
         $menu->setCode($menuCode);
         $menu->setName($menuCode);
-        $menu->setRouteName(Inflector::tableize(Inflector::pluralize($entityClass->getShortName())));
+        $menu->setRouteName(sprintf('%s_index', Inflector::tableize(Inflector::pluralize($entityClass->getShortName()))));
 
         $this->menuService->addMenu($menu);
 
