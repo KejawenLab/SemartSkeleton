@@ -76,7 +76,7 @@ class TodoRepository extends ServiceEntityRepository
 
 - Yeeeaaaahhhhhh!!! Your crud is generated
 
-> Use [MakerBundle](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) to generate entity and repository
+> **Tips:** Use [MakerBundle](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) to generate entity and repository
 
 ## Create Menu
 
