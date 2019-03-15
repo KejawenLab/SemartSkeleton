@@ -75,7 +75,14 @@ class TodoRepository extends Repository
 
 - Run `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
 
-- Create translation `translations/messages.id.yaml`
+- Edit translation `translations/messages.id.yaml` add 
+
+```yaml
+label:
+    # Hide others translation
+    todo:
+        name: 'Nama'
+```
 
 - Yeeeaaaahhhhhh!!! Your crud is generated
 
