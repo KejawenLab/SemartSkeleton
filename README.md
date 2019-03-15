@@ -4,7 +4,7 @@
 
 ```bash
 - PHP 7.2 or Later
-- MySQL/MariaDB/PostgreSQL/Oracle as Database Engine
+- MySQL/MariaDB as Database Engine
 - Redis Server as Session Storage
 - Composer
 

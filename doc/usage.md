@@ -78,7 +78,9 @@ class TodoRepository extends ServiceEntityRepository
 
 > **Tips:** Use [MakerBundle](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) to generate entity and repository
 
-## Create Menu
+## Change Menu
+
+By default, your menu is already registered in root. To edit the menu, open **Menu** menu and search `Todo` and then click **edit** button.
 
 ## Setting Permission
 
