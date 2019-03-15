@@ -31,7 +31,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @Searchable({"name"})
  * @Sortable({"name"})
  *
- * @UniqueEntity(fields={"code"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
+ * @UniqueEntity(fields={"name"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
@@ -55,14 +55,13 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Skeleton\Entity\Todo;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class TodoRepository extends ServiceEntityRepository
+class TodoRepository extends Repository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -72,7 +71,11 @@ class TodoRepository extends ServiceEntityRepository
 
 ```
 
+- Run `php bin/console doctrine:schema:update --force`
+
 - Run `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
+
+- Create translation `translations/messages.id.yaml`
 
 - Yeeeaaaahhhhhh!!! Your crud is generated
 
