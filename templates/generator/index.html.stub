@@ -94,8 +94,6 @@
         $('.query-string').val('');
 
         $(document).on('click', '.form-modal-action', function () {
-            formReset();
-
             $('.form-title').html('{{ 'label.crud.add_title' | trans({'%title%': title }) }}');
             $('#form-modal').modal();
         });
@@ -113,8 +111,6 @@
             }, function (response) {
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
-
-                    formReset();
 
                     $('#form-modal').modal('hide');
 
