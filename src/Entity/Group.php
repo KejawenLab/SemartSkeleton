@@ -30,7 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Group
 {
-    const SUPER_ADMINISTRATOR_CODE = 'SPRADM';
+    public const SUPER_ADMINISTRATOR_CODE = 'SPRADM';
 
     use BlameableEntity;
     use CodeNameableTrait;

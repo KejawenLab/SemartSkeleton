@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Tests\Pagination;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
-use Doctrine\ORM\QueryBuilder;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
