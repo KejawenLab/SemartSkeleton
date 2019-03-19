@@ -1,56 +1,99 @@
 # Semart Skeleton
 
-## Requirements
+## Tentang
+
+**Semart Skeleton** adalah sebuah skeleton atau boilerplate atau kerangka awal untuk memulai sebuah proyek. Dibangun dengan menggunakan framework [Symfony](https://symfony.com) dan berbagai bundle serta diramu oleh Developer yang telah berpengalaman lebih dari **7 tahun** menggunakan Symfony.
+Ditujukan untuk memudahkan Developer dalam mengerjakan proyek tanpa perlu dipusingkan dengan berbagai pengaturan-pengaturan yang bersifat rutinitas dan berulang.
+Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses yang dapat diatur dengan mudah melalui menu yang telah kami siapkan.
+
+## Kebutuhan Sistem
+
+- PHP 7.2 atau lebih baru
+
+- MySQL atau MariaDB sebagai RDBMS
+
+- Redis Server sebagai Session Storage
+
+- Composer sebagai Dependencies Management
+
+
+## Cara Instalasi (Menggunakan Composer)
+
+- Clone repositori `git clone https://github.com/KejawenLab/SemartSkeleton.git Semart`
+
+- Masuk ke direktori `Semart` dengan perintah `cd Semart`
+
+- Ubah konfigurasi database
 
 ```bash
-- PHP 7.2 or Later
-- MySQL/MariaDB as Database Engine
-- Redis Server as Session Storage
-- Composer
+# database driver (for this case you must set as pdo_mysql)
+DATABASE_DRIVER=pdo_mysql
+# database version
+DATABASE_SERVER_VERSION=5.7
+# charset
+DATABASE_CHARSET=utf8mb4
+
+# specify db url with format
+# DATABASE_URL=mysql://{user}:{password}@{host}:{port}/{db}
+# IF your database doesn't use password, you can use format:
+# DATABASE_URL=mysql://{user}@{host}:{port}/{db}, eg:
+#
+#    DATABASE_URL=mysql://root@127.0.0.1:3306/semart
+#
+DATABASE_URL=mysql://root:aden@localhost:3306/semart
 
 ```
 
-## How to install
+- Jalankan perintah `composer update --prefer-dist -vvv`
 
-```bash
-git clone https://github.com/KejawenLab/Skeleton.git Semart
+- Jalankan perintah `php bin/console semart:install`
 
-cd Semart
+- Jalankan perintah `php bin/console server:run` untuk menjalankan web server
 
-> Configure DATABASE_URL in `.env.dist` and `.env.test`
+- Buka browser pada alamat `http://localhost:8000` atau sesuai port yang tampil ketika menjalankan perintah diatas.
 
-composer install --prefer-dist
+## Cara Instalasi (Menggunakan Docker)
 
-php bin/console semart:install
+- Clone repositori `git clone https://github.com/KejawenLab/SemartSkeleton.git Semart`
+
+- Masuk ke direktori `Semart` dengan perintah `cd Semart`
+
+- Ubah konfigurasi pada file `docker-compose.yml`
+
+```yaml
+services:
+    app:
+        build: .
+        environment:
+            NGINX_WEBROOT: /semart/public
+            APP_ENV: dev
+            APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
+            DATABASE_DRIVER: pdo_mysql
+            DATABASE_SERVER_VERSION: 5.7
+            DATABASE_CHARSET: utf8mb4
+            DATABASE_URL: mysql://root:aden@localhost:3306/semart
+            REDIS_URL: redis://session
 ```
 
-## KejawenLab Love Docker
+- Jalankan perintah `docker-compose up -d`
 
-```bash
-git clone https://github.com/KejawenLab/Skeleton.git Semart
+- Masuk ke container `app` dengan perintah `docker-compose exec app bash`
 
-cd Semart 
+- Jalankan perintah `php bin/console semart:install` dari dalam container `app`
 
-docker-compose up -d
+- Buka browser pada alamat `http://localhost:8080`
 
-docker-compose exec app bash
-
-> Configure DATABASE_URL in `.env.dist` and `.env.test`
-
-php bin/console semart:install
-```
-
-## Documentation
+## Dokumentasi Lengkap
 
 [Doc](doc)
 
-## Running Tests
+## Unit Testing
 
 ```bash
 php vendor/bin/phpunit
 ```
 
-## Screenshots
+## Preview
 
 * Login
 
