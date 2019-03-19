@@ -9,10 +9,10 @@ namespace KejawenLab\Semart\Skeleton;
  */
 class Application
 {
-    const APP_UNIQUE_NAME = 'semart';
+    public const APP_UNIQUE_NAME = 'semart';
 
-    const REQUEST_EVENT = 'app.request';
-    const PRE_VALIDATION_EVENT = 'app.pre_validation';
-    const PAGINATION_EVENT = 'app.pagination';
-    const PRE_COMMIT_EVENT = 'app.pre_commit';
+    public const REQUEST_EVENT = 'app.request';
+    public const PRE_VALIDATION_EVENT = 'app.pre_validation';
+    public const PAGINATION_EVENT = 'app.pagination';
+    public const PRE_COMMIT_EVENT = 'app.pre_commit';
 }

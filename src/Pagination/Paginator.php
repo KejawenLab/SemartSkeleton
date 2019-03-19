@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class Paginator
 {
-    const PER_PAGE = 9;
+    public const PER_PAGE = 9;
 
-    const ROOT_ALIAS = 'o';
+    protected const ROOT_ALIAS = 'o';
 
     private $doctrine;
 

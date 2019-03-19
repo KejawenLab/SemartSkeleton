@@ -12,10 +12,10 @@ namespace KejawenLab\Semart\Skeleton\Security\Authorization;
  */
 class Permission
 {
-    const ADD = 'add';
-    const EDIT = 'edit';
-    const VIEW = 'view';
-    const DELETE = 'delete';
+    public const ADD = 'add';
+    public const EDIT = 'edit';
+    public const VIEW = 'view';
+    public const DELETE = 'delete';
 
     private $menu;
 
