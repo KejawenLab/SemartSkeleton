@@ -18,7 +18,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 abstract class Fixture extends Base
 {
-    const REF_KEY = 'ref:';
+    protected const REF_KEY = 'ref:';
 
     private $encoder;
 
