@@ -13,7 +13,7 @@
 ## How to install
 
 ```bash
-git clone git@gitlab.com:kejawenlab/skeleton.git Semart
+git clone https://github.com/KejawenLab/Skeleton.git Semart
 
 cd Semart
 
@@ -25,7 +25,7 @@ php bin/console semart:install
 ## KejawenLab Love Docker
 
 ```bash
-git clone git@gitlab.com:kejawenlab/skeleton.git Semart
+git clone https://github.com/KejawenLab/Skeleton.git Semart
 
 cd Semart 
 
