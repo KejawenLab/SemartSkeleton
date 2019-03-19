@@ -17,6 +17,8 @@ git clone git@gitlab.com:kejawenlab/skeleton.git Semart
 
 cd Semart
 
+> Configure DATABASE_URL in `.env.dist` and `.env.test`
+
 composer install --prefer-dist
 
 php bin/console semart:install
@@ -32,6 +34,8 @@ cd Semart
 docker-compose up -d
 
 docker-compose exec app bash
+
+> Configure DATABASE_URL in `.env.dist` and `.env.test`
 
 php bin/console semart:install
 ```
