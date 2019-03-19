@@ -66,7 +66,7 @@
                 <h4 class="modal-title form-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST">
+                <form class="form-horizontal" id="semartForm" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
                         <label for="role" class="col-sm-2 control-label">{{ 'label.menu.parent' | trans }}</label>
@@ -150,6 +150,9 @@
         $('.query-string').val('');
 
         $(document).on('click', '.form-modal-action', function () {
+            formReset(function () {
+                $('.select2-static').trigger('change');
+            });
             $('.form-title').html('{{ 'label.crud.add_title' | trans({'%title%': title }) }}');
             $('#form-modal').modal();
         });
@@ -178,18 +181,11 @@
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
-                    $('#id').val('');
-                    $('#parent').val('');
-                    $('#code').val('');
-                    $('#name').val('');
-                    $('#menuOrder').val('');
-                    $('#iconClass').val('');
-                    $('#routeName').val('');
-                    $('#showable').val('');
+                    formReset(function () {
+                        $('.select2-static').trigger('change');
+                    });
 
                     $('#form-modal').modal('hide');
-
-                    $('.select2-static').trigger('change');
 
                     toastr['success']('{{ 'label.crud.save_message' | trans }}');
 

@@ -61,7 +61,7 @@
                 <h4 class="modal-title form-title"></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST">
+                <form class="form-horizontal" id="semartForm" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">{{ 'label.group.code' | trans }}</label>
@@ -140,6 +140,7 @@
         $('input[type="checkbox"]').bootstrapToggle();
 
         $(document).on('click', '.form-modal-action', function () {
+            formReset();
             $('.form-title').html('{{ 'label.crud.add_title' | trans({'%title%': title }) }}');
             $('#form-modal').modal();
         });
@@ -158,10 +159,7 @@
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
-                    $('#id').val('');
-                    $('#code').val('');
-                    $('#name').val('');
-
+                    formReset();
                     $('#form-modal').modal('hide');
 
                     toastr['success']('{{ 'label.crud.save_message' | trans }}');

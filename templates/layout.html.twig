@@ -218,6 +218,16 @@
             });
         }
 
+        function formReset(callback) {
+            let form = $('#semartForm');
+
+            form.trigger('reset');
+            form.find('select').val('');
+            if ('function' === typeof callback) {
+                callback();
+            }
+        }
+
         function sort(element) {
             jQuery('.sortable').each(function () {
                 let elm = jQuery(this);
