@@ -14,7 +14,7 @@
 
 - Install [Docker](https://docs.docker.com/v17.09/engine/installation) and [Docker Compose](https://docs.docker.com/compose/install/)
 
-- Clone repository `git clone git@gitlab.com:kejawenlab/skeleton.git Semart`
+- Clone repository `git clone https://github.com/KejawenLab/Skeleton.git Semart`
 
 - Change to project root `cd Semart`
 
@@ -36,7 +36,7 @@
 
 - Install Requirements
 
-- Clone repository `git clone git@gitlab.com:kejawenlab/skeleton.git Semart`
+- Clone repository `git clone https://github.com/KejawenLab/Skeleton.git Semart`
 
 - Change to project root `cd Semart`
 
