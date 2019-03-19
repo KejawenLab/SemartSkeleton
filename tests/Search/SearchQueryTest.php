@@ -11,7 +11,6 @@ use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
 use KejawenLab\Semart\Skeleton\Search\Searchable;
 use KejawenLab\Semart\Skeleton\Search\SearchQuery;
 use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

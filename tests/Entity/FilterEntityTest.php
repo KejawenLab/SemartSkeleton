@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Tests\Entity;
 
-use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
 use Doctrine\Common\Persistence\ObjectManager;
+use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
 use PHPUnit\Framework\TestCase;
 
 /**
