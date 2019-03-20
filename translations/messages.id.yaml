@@ -54,3 +54,5 @@ label:
         group: 'Grup'
         username: 'Nama Pengguna'
         password: 'Kata Sandi'
+    todo:
+        name: 'Nama'
