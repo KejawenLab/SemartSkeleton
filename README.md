@@ -124,3 +124,7 @@ php vendor/bin/phpunit
 * User List
 
 ![User List](doc/imgs/user_list.png "User List")
+
+## Kontributor
+
+Terima kasih kepada semua [kontributor](https://github.com/KejawenLab/SemartSkeleton/graphs/contributors)
