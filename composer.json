@@ -1,4 +1,6 @@
 {
+    "name": "kejawenlab/semart-skeleton",
+    "description": "Symfony Skeleton with common functionalities so developer can focus on business",
     "type": "project",
     "license": "proprietary",
     "require": {
