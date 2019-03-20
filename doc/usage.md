@@ -214,4 +214,6 @@ Selanjutnya Anda harus mengubah file `todo/table-content.html.twig` dan menghapu
 
 Sehingga tamplete kita hanya memiliki field `name` saja baik pada form maupun list tabel. Sehingga hasilnya adalah sebagai berikut:
 
- ![Todo Final](imgs/todo_final.png "Todo Final")
+![Todo Final](imgs/todo_final.png "Todo Final")
+ 
+Selamat!!! Menu `Todo` kita sudah dapat diakses dan jalan 100% 
