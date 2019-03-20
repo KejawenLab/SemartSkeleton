@@ -102,15 +102,15 @@ Secara default, template yang di-generate ada 3 yaitu `todo/index.html.twig`, `t
 
 - `todo/index.html.twig`
 
-Ini adalah template utama, berisi form dan list dari `Todo`
+> Ini adalah template utama, berisi form dan list dari `Todo`
 
 - `todo/pagination.html.twig`
 
-Berisi definisi dari pagination
+> Berisi definisi dari pagination
 
 - `todo/table-content.html.twig`
 
-Berisi definisi dari list tabel
+> Berisi definisi dari list tabel
 
 
 Secara default, setiap form dan list tabel berisi 2 fields yaitu `code` dan `name` sehingga kita perlu mengubah form dan list tabel untuk disesuaikan dengan entity `Todo` yang hanya punya `name`.
