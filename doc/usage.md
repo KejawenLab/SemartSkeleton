@@ -90,11 +90,10 @@ label:
 
 Secara default, CRUD yang dibuat di atas terdaftar pada root menu sebagai berikut:
 
- ![Todo](doc/imgs/todo.png "Todo")
+ ![Todo](imgs/todo.png "Todo")
  
  Untuk mengubahnya, kita masuk ke menu **Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
  
- ![Todo Menu](doc/imgs/todo_menu.png "Todo Menu")
+ ![Todo Menu](imgs/todo_menu.png "Todo Menu")
 
-## Customize Template
-
+## Ubah Template
