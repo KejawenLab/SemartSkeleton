@@ -1,8 +1,8 @@
-# Basic Usage
+# Penggunaan Dasar
 
-## Generate CRUD Template
+## Generate CRUD
 
-- Create new entity, for example `Todo`
+- Buat entity baru, sebagai contoh `Todo`
 
 ```php
 <?php
@@ -46,7 +46,7 @@ class Todo
 
 ```
 
-- Create repository class `TodoRepository`
+- Buat repository class-nya, dalam kasus ini class `TodoRepository`
 
 ```php
 <?php
@@ -71,11 +71,11 @@ class TodoRepository extends Repository
 
 ```
 
-- Run `php bin/console doctrine:schema:update --force`
+- Jalankan perintah `php bin/console doctrine:schema:update --force`
 
-- Run `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
+- Jalankan perintah `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
 
-- Edit translation in `translations/messages.id.yaml` and add 
+- Ubah translasi pada file `translations/messages.id.yaml` dan tambahkan 
 
 ```yaml
 label:
@@ -84,13 +84,17 @@ label:
         name: 'Nama'
 ```
 
-- Yeeeaaaahhhhhh!!! Your crud is generated
+- Yeeeaaaahhhhhh!!! CRUD Anda sudah jadi!!!
 
-> **Tips:** Use [MakerBundle](https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html) to generate entity and repository
+## Ubah Menu
 
-## Change Menu
+Secara default, CRUD yang dibuat di atas terdaftar pada root menu sebagai berikut:
 
-By default, your menu is already registered in root. To edit the menu, open **Menu** menu and search `Todo` and then click **edit** button.
+ ![Todo](doc/imgs/todo.png "Todo")
+ 
+ Untuk mengubahnya, kita masuk ke menu **Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
+ 
+ ![Todo Menu](doc/imgs/todo_menu.png "Todo Menu")
 
 ## Customize Template
 

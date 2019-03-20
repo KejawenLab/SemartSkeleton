@@ -52,7 +52,9 @@ DATABASE_URL=mysql://root:aden@localhost:3306/semart
 
 - Jalankan perintah `php bin/console server:run` untuk menjalankan web server
 
-- Buka browser pada alamat `http://localhost:8000` atau sesuai port yang tampil ketika menjalankan perintah diatas.
+- Buka browser pada alamat `http://localhost:8000` atau sesuai port yang tampil ketika menjalankan perintah diatas
+
+- Gunakan username `admin` dan password `semartadmin` untuk masuk ke aplikasi
 
 ## Cara Instalasi (Menggunakan Docker)
 
@@ -84,6 +86,8 @@ services:
 - Jalankan perintah `php bin/console semart:install` dari dalam container `app`
 
 - Buka browser pada alamat `http://localhost:8080`
+
+- Gunakan username `admin` dan password `semartadmin` untuk masuk ke aplikasi
 
 ## Dokumentasi Lengkap
 
