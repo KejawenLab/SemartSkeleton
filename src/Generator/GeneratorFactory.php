@@ -11,7 +11,7 @@ use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
  */
 class GeneratorFactory
 {
-    private $generators;
+    private $generators = [];
 
     public function __construct(array $generators = [])
     {

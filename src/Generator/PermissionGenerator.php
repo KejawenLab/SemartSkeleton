@@ -50,4 +50,9 @@ class PermissionGenerator extends AbstractGenerator
             $this->roleService->updateRole($role);
         }
     }
+
+    public function getPriority(): int
+    {
+        return 255;
+    }
 }

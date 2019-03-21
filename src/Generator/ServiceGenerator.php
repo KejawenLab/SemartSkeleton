@@ -33,4 +33,9 @@ class ServiceGenerator extends AbstractGenerator
 
         $this->fileSystem->dumpFile(sprintf('%s/src/%s/%sService.php', $this->kernel->getProjectDir(), $shortName, $shortName), $template);
     }
+
+    public function getPriority(): int
+    {
+        return -100;
+    }
 }
