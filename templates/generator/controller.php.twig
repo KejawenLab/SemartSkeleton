@@ -1,12 +1,22 @@
+{% set entityHumanize = entity | humanize %}
+{% set entityLowerize = entity | lower %}
+{% set entityUnderscoreLowerize = entityLowerize | underscore %}
+{% set entityUpper = entity | upper %}
+{% set entityPlural =  entity | pluralize %}
+{% set entityPluralLowerize = entityPlural | lower %}
+{% set entityPluralUnderscore = entityPlural | underscore %}
+{% set entityPluralDash = entityPlural | dash %}
+{% set entityPluralCamelCase = entityPlural | camelcase %}
+
 <?php
 
 declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
-use KejawenLab\Semart\Skeleton\Entity\{{ entity | humanize }};
+use KejawenLab\Semart\Skeleton\Entity\{{ entityHumanize }};
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
-use KejawenLab\Semart\Skeleton\Repository\{{ entity | humanize }}Repository;
+use KejawenLab\Semart\Skeleton\{{ entityHumanize}}\{{ entityHumanize}}Service;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,26 +26,26 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
- * @Route("/{{ entity | pluralize | dash }}")
+ * @Route("/{{ entityPluralDash }}")
  *
- * @Permission(menu="{{ entity | upper }}")
+ * @Permission(menu="{{ entityUpper }}")
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class {{ entity | humanize }}Controller extends AdminController
+class {{ entityHumanize }}Controller extends AdminController
 {
     /**
-     * @Route("/", methods={"GET"}, name="{{ entity | pluralize | underscore }}_index", options={"expose"=true})
+     * @Route("/", methods={"GET"}, name="{{ entityPluralUnderscore }}_index", options={"expose"=true})
      *
      * @Permission(actions=Permission::VIEW)
      */
     public function index(Request $request, Paginator $paginator)
     {
-        ${{ entity | pluralize | lower }} = $paginator->paginate({{ entity | humanize }}::class, (int) $request->query->get('page', 1));
+        ${{ entityPluralLowerize }} = $paginator->paginate({{ entityHumanize }}::class, (int) $request->query->get('page', 1));
 
         if ($request->isXmlHttpRequest()) {
-            $table = $this->renderView('{{ entity | underscore | lower }}/table-content.html.twig', ['{{ entity | pluralize | camelcase }}' => ${{ entity | pluralize | lower }}]);
-            $pagination = $this->renderView('{{ entity | underscore | lower }}/pagination.html.twig', ['{{ entity | pluralize | camelcase }}' => ${{ entity | pluralize | lower }}]);
+            $table = $this->renderView('{{ entityUnderscoreLowerize }}/table-content.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
+            $pagination = $this->renderView('{{ entityUnderscoreLowerize }}/pagination.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
 
             return new JsonResponse([
                 'table' => $table,
@@ -43,60 +53,60 @@ class {{ entity | humanize }}Controller extends AdminController
             ]);
         }
 
-        return $this->render('{{ entity | underscore| lower  }}/index.html.twig', ['title' => '{{ entity | humanize }}', '{{ entity | pluralize | camelcase }}' => ${{ entity | pluralize | lower }}]);
+        return $this->render('{{ entityUnderscoreLowerize }}/index.html.twig', ['title' => '{{ entityHumanize }}', '{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
     }
 
     /**
-     * @Route("/{id}", methods={"GET"}, name="{{ entity | pluralize | underscore }}_detail", options={"expose"=true})
+     * @Route("/{id}", methods={"GET"}, name="{{ entityPluralUnderscore }}_detail", options={"expose"=true})
      *
      * @Permission(actions=Permission::VIEW)
      */
-    public function find(string $id, {{ entity | humanize }}Repository $repository, SerializerInterface $serializer)
+    public function find(string $id, {{ entityHumanize }}Service $service, SerializerInterface $serializer)
     {
-        ${{ entity | lower }} = $repository->find($id);
-        if (!${{ entity | lower }}) {
+        ${{ entityLowerize }} = $service->find($id);
+        if (!${{ entityLowerize }}) {
             throw new NotFoundHttpException();
         }
 
-        return new JsonResponse($serializer->serialize(${{ entity | lower }}, 'json', ['groups' => ['read']]));
+        return new JsonResponse($serializer->serialize(${{ entityLowerize }}, 'json', ['groups' => ['read']]));
     }
 
     /**
-     * @Route("/save", methods={"POST"}, name="{{ entity | pluralize | underscore }}_save", options={"expose"=true})
+     * @Route("/save", methods={"POST"}, name="{{ entityPluralUnderscore }}_save", options={"expose"=true})
      *
      * @Permission(actions={Permission::ADD, Permission::EDIT})
      */
-    public function save(Request $request, {{ entity | humanize }}Repository $repository, RequestHandler $requestHandler)
+    public function save(Request $request, {{ entityHumanize }}Service $service, RequestHandler $requestHandler)
     {
         $primary = $request->get('id');
         if ($primary) {
-            ${{ entity | lower }} = $repository->find($primary);
+            ${{ entityLowerize }} = $service->find($primary);
         } else {
-            ${{ entity | lower }} = new {{ entity | humanize }}();
+            ${{ entityLowerize }} = new {{ entityHumanize }}();
         }
 
-        $requestHandler->handle($request, ${{ entity | lower }});
+        $requestHandler->handle($request, ${{ entityLowerize }});
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);
         }
 
-        $this->commit(${{ entity | lower }});
+        $this->commit(${{ entityLowerize }});
 
         return new JsonResponse(['status' => 'OK']);
     }
 
     /**
-     * @Route("/{id}/delete", methods={"POST"}, name="{{ entity | pluralize | underscore }}_remove", options={"expose"=true})
+     * @Route("/{id}/delete", methods={"POST"}, name="{{ entityPluralUnderscore }}_remove", options={"expose"=true})
      *
      * @Permission(actions=Permission::DELETE)
      */
-    public function delete(string $id, {{ entity | humanize }}Repository $repository)
+    public function delete(string $id, {{ entityHumanize }}Service $service)
     {
-        if (!${{ entity | lower }} = $repository->find($id)) {
+        if (!${{ entityLowerize }} = $service->find($id)) {
             throw new NotFoundHttpException();
         }
 
-        $this->remove(${{ entity | lower }});
+        $this->remove(${{ entityLowerize }});
 
         return new JsonResponse(['status' => 'OK']);
     }

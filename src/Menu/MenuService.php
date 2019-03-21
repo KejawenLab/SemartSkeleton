@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Menu;
 
+use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use PHLAK\Twine\Str;
@@ -11,7 +12,7 @@ use PHLAK\Twine\Str;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class MenuService
+class MenuService implements ServiceInterface
 {
     private $menuRepository;
 
@@ -36,5 +37,15 @@ class MenuService
     public function getActiveMenus(): array
     {
         return $this->menuRepository->findAll();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Menu|null
+     */
+    public function find(string $id): ?object
+    {
+        return $this->menuRepository->find($id);
     }
 }

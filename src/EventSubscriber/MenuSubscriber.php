@@ -6,7 +6,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
-use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
+use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Request\FilterRequest;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -15,11 +15,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class MenuSubscriber implements EventSubscriberInterface
 {
-    private $menuRepository;
+    private $menuService;
 
-    public function __construct(MenuRepository $menuRepository)
+    public function __construct(MenuService $menuService)
     {
-        $this->menuRepository = $menuRepository;
+        $this->menuService = $menuService;
     }
 
     public function filterRequest(FilterRequest $event)
@@ -37,7 +37,7 @@ class MenuSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $object->setParent($this->menuRepository->find($parentId));
+        $object->setParent($this->menuService->find($parentId));
     }
 
     public static function getSubscribedEvents()

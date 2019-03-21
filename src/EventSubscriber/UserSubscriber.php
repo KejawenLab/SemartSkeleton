@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Skeleton\Application;
-use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Repository\GroupRepository;
 use KejawenLab\Semart\Skeleton\Request\FilterRequest;
+use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -19,12 +18,12 @@ class UserSubscriber implements EventSubscriberInterface
 {
     private $passwordEncoder;
 
-    private $groupRepository;
+    private $groupService;
 
-    public function __construct(PasswordEncoderService $encodePasswordService, GroupRepository $groupRepository)
+    public function __construct(PasswordEncoderService $encodePasswordService, GroupService $groupService)
     {
         $this->passwordEncoder = $encodePasswordService;
-        $this->groupRepository = $groupRepository;
+        $this->groupService = $groupService;
     }
 
     public function filterRequest(FilterRequest $event)
@@ -35,8 +34,7 @@ class UserSubscriber implements EventSubscriberInterface
             return;
         }
 
-        /** @var Group $group */
-        if ($group = $this->groupRepository->find($request->request->get('group'))) {
+        if ($group = $this->groupService->find($request->request->get('group'))) {
             $user->setGroup($group);
         }
 

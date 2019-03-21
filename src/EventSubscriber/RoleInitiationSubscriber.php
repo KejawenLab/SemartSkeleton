@@ -16,11 +16,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class RoleInitiationSubscriber implements EventSubscriberInterface
 {
-    private $roleAssigner;
+    private $roleService;
 
-    public function __construct(RoleService $roleAssigner)
+    public function __construct(RoleService $roleService)
     {
-        $this->roleAssigner = $roleAssigner;
+        $this->roleService = $roleService;
     }
 
     public function initiate(FilterEntity $event)
@@ -28,11 +28,11 @@ class RoleInitiationSubscriber implements EventSubscriberInterface
         $entity = $event->getEntity();
 
         if ($entity instanceof Group && !$entity->getId()) {
-            $this->roleAssigner->assignToGroup($entity);
+            $this->roleService->assignToGroup($entity);
         }
 
         if ($entity instanceof Menu && !$entity->getId()) {
-            $this->roleAssigner->assignToMenu($entity);
+            $this->roleService->assignToMenu($entity);
         }
     }
 

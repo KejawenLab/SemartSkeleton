@@ -12,7 +12,7 @@ use Twig\Environment;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class ControllerGenerator implements GeneratorInterface
+class ServiceGenerator implements GeneratorInterface
 {
     private $twig;
 
@@ -30,8 +30,8 @@ class ControllerGenerator implements GeneratorInterface
     public function generate(\ReflectionClass $entityClass): void
     {
         $shortName = $entityClass->getShortName();
-        $template = $this->twig->render('generator/controller.php.twig', ['entity' => $shortName]);
+        $template = $this->twig->render('generator/service.php.twig', ['entity' => $shortName]);
 
-        $this->fileSystem->dumpFile(sprintf('%s/src/Controller/Admin/%sController.php', $this->kernel->getProjectDir(), $shortName), $template);
+        $this->fileSystem->dumpFile(sprintf('%s/src/%s/%sService.php', $this->kernel->getProjectDir(), $shortName, $shortName), $template);
     }
 }

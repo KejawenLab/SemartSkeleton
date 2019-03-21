@@ -8,7 +8,7 @@ use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Role;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
+use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -17,11 +17,11 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class PermissionVoter extends Voter
 {
-    private $roleRepository;
+    private $roleService;
 
-    public function __construct(RoleRepository $roleRepository)
+    public function __construct(RoleService $roleService)
     {
-        $this->roleRepository = $roleRepository;
+        $this->roleService = $roleService;
     }
 
     protected function supports($attribute, $subject): bool
@@ -45,7 +45,7 @@ class PermissionVoter extends Voter
             return false;
         }
 
-        $role = $this->roleRepository->findRole($group, $subject);
+        $role = $this->roleService->getRole($group, $subject);
         if (!$role instanceof Role) {
             return false;
         }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Security\Service;
 
+use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -13,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class UserService implements UserProviderInterface
+class UserService implements UserProviderInterface, ServiceInterface
 {
     private $userRepository;
 
@@ -41,5 +42,15 @@ class UserService implements UserProviderInterface
     public function supportsClass($class): bool
     {
         return User::class === $class;
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return User|null
+     */
+    public function find(string $id): ?object
+    {
+        return $this->userRepository->find($id);
     }
 }

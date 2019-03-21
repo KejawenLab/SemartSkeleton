@@ -7,7 +7,6 @@ namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
-use KejawenLab\Semart\Skeleton\Repository\MenuRepository;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -52,9 +51,9 @@ class MenuController extends AdminController
      *
      * @Permission(actions=Permission::VIEW)
      */
-    public function find(string $id, MenuRepository $repository, SerializerInterface $serializer)
+    public function find(string $id, MenuService $service, SerializerInterface $serializer)
     {
-        $menu = $repository->find($id);
+        $menu = $service->find($id);
         if (!$menu) {
             throw new NotFoundHttpException();
         }
@@ -67,11 +66,11 @@ class MenuController extends AdminController
      *
      * @Permission(actions={Permission::ADD, Permission::EDIT})
      */
-    public function save(Request $request, MenuRepository $repository, RequestHandler $requestHandler)
+    public function save(Request $request, MenuService $service, RequestHandler $requestHandler)
     {
         $primary = $request->get('id');
         if ($primary) {
-            $menu = $repository->find($primary);
+            $menu = $service->find($primary);
         } else {
             $menu = new Menu();
         }
@@ -91,9 +90,9 @@ class MenuController extends AdminController
      *
      * @Permission(actions=Permission::DELETE)
      */
-    public function delete(string $id, MenuRepository $repository)
+    public function delete(string $id, MenuService $service)
     {
-        if (!$menu = $repository->find($id)) {
+        if (!$menu = $service->find($id)) {
             throw new NotFoundHttpException();
         }
 

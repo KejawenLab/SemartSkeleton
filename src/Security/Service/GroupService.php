@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Security\Service;
 
+use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\Group;
+use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Repository\GroupRepository;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class GroupService
+class GroupService implements ServiceInterface
 {
     private $groupRepository;
 
@@ -24,9 +26,9 @@ class GroupService
         return $this->groupRepository->findOneBy(['code' => Group::SUPER_ADMINISTRATOR_CODE]);
     }
 
-    public function addGroup(Group $group): void
+    public function isSuperAdmin(User $user): bool
     {
-        $this->groupRepository->commit($group);
+        return Group::SUPER_ADMINISTRATOR_CODE === $user->getGroup()->getCode();
     }
 
     /**
@@ -35,5 +37,15 @@ class GroupService
     public function getActiveGroups(): array
     {
         return $this->groupRepository->findAll();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Group|null
+     */
+    public function find(string $id): ?object
+    {
+        return $this->groupRepository->find($id);
     }
 }

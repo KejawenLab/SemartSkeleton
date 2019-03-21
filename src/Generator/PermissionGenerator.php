@@ -7,7 +7,6 @@ namespace KejawenLab\Semart\Skeleton\Generator;
 use Doctrine\Common\Inflector\Inflector;
 use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
-use KejawenLab\Semart\Skeleton\Entity\Role;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
 use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
@@ -41,17 +40,15 @@ class PermissionGenerator implements GeneratorInterface
         $menu->setRouteName(sprintf('%s_index', Inflector::tableize(Inflector::pluralize($entityClass->getShortName()))));
 
         $this->menuService->addMenu($menu);
+        $this->roleService->assignToMenu($menu);
 
-        $group = $this->groupService->getSuperAdmin();
+        if ($role = $this->roleService->getRole($this->groupService->getSuperAdmin(), $menu)) {
+            $role->setAddable(true);
+            $role->setEditable(true);
+            $role->setViewable(true);
+            $role->setDeletable(true);
 
-        $role = new Role();
-        $role->setGroup($group);
-        $role->setMenu($menu);
-        $role->setAddable(true);
-        $role->setEditable(true);
-        $role->setViewable(true);
-        $role->setDeletable(true);
-
-        $this->roleService->addRole($role);
+            $this->roleService->updateRole($role);
+        }
     }
 }

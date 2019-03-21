@@ -6,9 +6,9 @@ namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
-use KejawenLab\Semart\Skeleton\Repository\GroupRepository;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
+use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -51,9 +51,9 @@ class GroupController extends AdminController
      *
      * @Permission(actions=Permission::VIEW)
      */
-    public function find(string $id, GroupRepository $repository, SerializerInterface $serializer)
+    public function find(string $id, GroupService $service, SerializerInterface $serializer)
     {
-        $group = $repository->find($id);
+        $group = $service->find($id);
         if (!$group) {
             throw new NotFoundHttpException();
         }
@@ -66,11 +66,11 @@ class GroupController extends AdminController
      *
      * @Permission(actions={Permission::ADD, Permission::EDIT})
      */
-    public function save(Request $request, GroupRepository $repository, RequestHandler $requestHandler)
+    public function save(Request $request, GroupService $service, RequestHandler $requestHandler)
     {
         $primary = $request->get('id');
         if ($primary) {
-            $group = $repository->find($primary);
+            $group = $service->find($primary);
         } else {
             $group = new Group();
         }
@@ -90,9 +90,9 @@ class GroupController extends AdminController
      *
      * @Permission(actions=Permission::DELETE)
      */
-    public function delete(string $id, GroupRepository $repository)
+    public function delete(string $id, GroupService $service)
     {
-        if (!$group = $repository->find($id)) {
+        if (!$group = $service->find($id)) {
             throw new NotFoundHttpException();
         }
 

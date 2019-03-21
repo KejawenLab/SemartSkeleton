@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Security\Service;
 
+use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Role;
@@ -14,7 +15,7 @@ use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class RoleService
+class RoleService implements ServiceInterface
 {
     private $roleRepository;
 
@@ -67,9 +68,29 @@ class RoleService
         $this->roleRepository->commit();
     }
 
-    public function addRole(Role $role): void
+    public function getRolesByGroup(Group $group, string $query = ''): array
+    {
+        return $this->roleRepository->findRolesByGroup($group, $query);
+    }
+
+    public function getRole(Group $group, Menu $menu): ?Role
+    {
+        return $this->roleRepository->findRole($group, $menu);
+    }
+
+    public function updateRole(Role $role): void
     {
         $this->roleRepository->persist($role);
         $this->roleRepository->commit();
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Role|null
+     */
+    public function find(string $id): ?object
+    {
+        return $this->roleRepository->find($id);
     }
 }

@@ -124,7 +124,7 @@ class RoleRepository extends Repository
         return $results;
     }
 
-    public function findRolesByGroup(Group $group, string $queryString = ''): ?array
+    public function findRolesByGroup(Group $group, string $queryString = ''): array
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($group), $queryString));
 
@@ -134,7 +134,7 @@ class RoleRepository extends Repository
             $queryBuilder->join('o.group', 'g');
             $queryBuilder->join('o.menu', 'm');
             $queryBuilder->leftJoin('m.parent', 'p');
-            $queryBuilder->orWhere($queryBuilder->expr()->like('m.name', $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->uppercase()))));
+            $queryBuilder->orWhere($queryBuilder->expr()->like('LOWER(m.name)', $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId())));
             $queryBuilder->addOrderBy('p.name', 'ASC');
             $queryBuilder->addOrderBy('m.menuOrder', 'ASC');

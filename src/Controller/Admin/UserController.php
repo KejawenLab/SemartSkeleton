@@ -6,10 +6,10 @@ namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
-use KejawenLab\Semart\Skeleton\Repository\UserRepository;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
+use KejawenLab\Semart\Skeleton\Security\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -52,9 +52,9 @@ class UserController extends AdminController
      *
      * @Permission(actions=Permission::VIEW)
      */
-    public function find(string $id, UserRepository $repository, SerializerInterface $serializer)
+    public function find(string $id, UserService $service, SerializerInterface $serializer)
     {
-        $user = $repository->find($id);
+        $user = $service->find($id);
         if (!$user) {
             throw new NotFoundHttpException();
         }
@@ -67,11 +67,11 @@ class UserController extends AdminController
      *
      * @Permission(actions={Permission::ADD, Permission::EDIT})
      */
-    public function save(Request $request, UserRepository $repository, RequestHandler $requestHandler)
+    public function save(Request $request, UserService $service, RequestHandler $requestHandler)
     {
         $primary = $request->get('id');
         if ($primary) {
-            $user = $repository->find($primary);
+            $user = $service->find($primary);
         } else {
             $user = new User();
         }
@@ -91,9 +91,9 @@ class UserController extends AdminController
      *
      * @Permission(actions=Permission::DELETE)
      */
-    public function delete(string $id, UserRepository $repository)
+    public function delete(string $id, UserService $service)
     {
-        if (!$user = $repository->find($id)) {
+        if (!$user = $service->find($id)) {
             throw new NotFoundHttpException();
         }
 
