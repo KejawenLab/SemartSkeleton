@@ -21,27 +21,35 @@ class SettingRepository extends Repository
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy)));
 
-        $object = $this->getItem($key);
-        if (!$object) {
-            $object = parent::findOneBy($criteria, $orderBy);
+        if ($this->isCacheable()) {
+            $object = $this->getItem($key);
+            if (!$object) {
+                $object = parent::findOneBy($criteria, $orderBy);
 
-            $this->cache($key, $object);
+                $this->cache($key, $object);
+            }
+
+            return $object;
         }
 
-        return $object;
+        return parent::findOneBy($criteria, $orderBy);
     }
 
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
     {
         $key = md5(sprintf('%s:%s:%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy), $limit, $offset));
 
-        $objects = $this->getItem($key);
-        if (!$objects) {
-            $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
+        if ($this->isCacheable()) {
+            $objects = $this->getItem($key);
+            if (!$objects) {
+                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
 
-            $this->cache($key, $objects);
+                $this->cache($key, $objects);
+            }
+
+            return $objects;
         }
 
-        return $objects;
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
     }
 }

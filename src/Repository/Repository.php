@@ -34,7 +34,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
             return null;
         }
 
-        if (!$this->cacheable) {
+        if (!$this->isCacheable()) {
             return parent::find($id);
         }
 
@@ -46,7 +46,6 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         }
 
         return $entity;
-
     }
 
     public function findUniqueBy(array $criteria): array
@@ -69,7 +68,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
     protected function cache(string $key, $item): void
     {
         if (!$this->cache->has($key)) {
-            $this->cache->set($key, $item);
+            $this->cache->set($key, $item, 1);
         }
     }
 
