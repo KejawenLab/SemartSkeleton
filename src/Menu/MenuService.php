@@ -18,6 +18,7 @@ class MenuService implements ServiceInterface
 
     public function __construct(MenuRepository $menuRepository)
     {
+        $menuRepository->setCacheable(true);
         $this->menuRepository = $menuRepository;
     }
 

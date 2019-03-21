@@ -9,7 +9,8 @@ framework:
     # Enables session support. Note that the session will ONLY be started if you read or write from it.
     # Remove or comment this section to explicitly disable session support.
     session:
-        handler_id: ~
+        handler_id: snc_redis.session.handler
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
 
     #esi: true
     #fragments: true
@@ -39,7 +40,7 @@ knp_paginator:
         sort_direction_name: direction  # sort direction query parameter name
         distinct: true                  # ensure distinct results, useful when ORM queries are using GROUP BY statements
         filter_field_name: filterField  # filter field query parameter name
-        filter_value_name: filterValue  # filter value query paameter name
+        filter_value_name: filterValue  # filter value query parameter name
     template:
         pagination: 'pagination.html.twig'     # sliding pagination controls template
         sortable: '@KnpPaginator/Pagination/sortable_link.html.twig' # sort link template

@@ -19,6 +19,7 @@ class {{ entityHumanize }}Service implements ServiceInterface
 
     public function __construct({{ entityHumanize }}Repository ${{ entityLowerize }}Repository)
     {
+        ${{ entityLowerize }}Repository->setCacheable(true);
         $this->{{ entityLowerize }}Repository = ${{ entityLowerize }}Repository;
     }
 

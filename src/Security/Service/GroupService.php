@@ -18,6 +18,7 @@ class GroupService implements ServiceInterface
 
     public function __construct(GroupRepository $groupRepository)
     {
+        $groupRepository->setCacheable(true);
         $this->groupRepository = $groupRepository;
     }
 

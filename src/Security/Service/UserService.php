@@ -20,6 +20,7 @@ class UserService implements UserProviderInterface, ServiceInterface
 
     public function __construct(UserRepository $userRepository)
     {
+        $userRepository->setCacheable(true);
         $this->userRepository = $userRepository;
     }
 

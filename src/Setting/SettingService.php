@@ -18,6 +18,7 @@ class SettingService implements ServiceInterface
 
     public function __construct(SettingRepository $settingRepository)
     {
+        $settingRepository->setCacheable(true);
         $this->settingRepository = $settingRepository;
     }
 

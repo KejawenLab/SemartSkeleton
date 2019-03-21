@@ -25,6 +25,10 @@ class RoleService implements ServiceInterface
 
     public function __construct(RoleRepository $roleRepository, MenuRepository $menuRepository, GroupRepository $groupRepository)
     {
+        $roleRepository->setCacheable(true);
+        $menuRepository->setCacheable(true);
+        $groupRepository->setCacheable(true);
+
         $this->roleRepository = $roleRepository;
         $this->menuRepository = $menuRepository;
         $this->groupRepository = $groupRepository;
