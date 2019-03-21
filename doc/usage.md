@@ -23,7 +23,7 @@ use KejawenLab\Semart\Skeleton\Sort\Sortable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="tbl_todo", indexes={@ORM\Index(name="tbl_todo_search_idx", columns={"nama"})})
+ * @ORM\Table(name="todos", indexes={@ORM\Index(name="todos_search_idx", columns={"nama"})})
  * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\TodoRepository")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")

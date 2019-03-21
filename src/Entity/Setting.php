@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="tbl_setting", indexes={@ORM\Index(name="tbl_setting_search_idx", columns={"parameter"})})
+ * @ORM\Table(name="semart_setting", indexes={@ORM\Index(name="semart_setting_search_idx", columns={"parameter"})})
  * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\SettingRepository")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")

@@ -16,7 +16,7 @@ use KejawenLab\Semart\Skeleton\Sort\Sortable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table(name="tbl_grup", indexes={@ORM\Index(name="tbl_grup_search_idx", columns={"kode", "nama"})})
+ * @ORM\Table(name="semart_grup", indexes={@ORM\Index(name="semart_grup_search_idx", columns={"kode", "nama"})})
  * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\GroupRepository")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")

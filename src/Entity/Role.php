@@ -15,7 +15,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="tbl_hak_akses")
+ * @ORM\Table(name="semart_hak_akses")
  * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\RoleRepository")
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
