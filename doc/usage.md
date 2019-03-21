@@ -46,31 +46,6 @@ class Todo
 
 ```
 
-- Buat repository class-nya, dalam kasus ini class `TodoRepository`
-
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace KejawenLab\Semart\Skeleton\Repository;
-
-use Doctrine\Common\Persistence\ManagerRegistry;
-use KejawenLab\Semart\Skeleton\Entity\Todo;
-
-/**
- * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
- */
-class TodoRepository extends Repository
-{
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Todo::class);
-    }
-}
-
-```
-
 - Jalankan perintah `php bin/console doctrine:schema:update --force`
 
 - Jalankan perintah `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
