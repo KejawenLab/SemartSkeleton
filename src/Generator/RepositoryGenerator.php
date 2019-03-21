@@ -11,7 +11,7 @@ use Twig\Environment;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class ControllerGenerator extends AbstractGenerator
+class RepositoryGenerator extends AbstractGenerator
 {
     private $twig;
 
@@ -29,8 +29,13 @@ class ControllerGenerator extends AbstractGenerator
     public function generate(\ReflectionClass $entityClass): void
     {
         $shortName = $entityClass->getShortName();
-        $template = $this->twig->render('generator/controller.php.twig', ['entity' => $shortName]);
+        $template = $this->twig->render('generator/repository.php.twig', ['entity' => $shortName]);
 
-        $this->fileSystem->dumpFile(sprintf('%s/src/Controller/Admin/%sController.php', $this->kernel->getProjectDir(), $shortName), $template);
+        $this->fileSystem->dumpFile(sprintf('%s/src/Repository/%sRepository.php', $this->kernel->getProjectDir(), $shortName), $template);
+    }
+
+    public function getPriority(): int
+    {
+        return 0;
     }
 }

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Generator;
 
 use Doctrine\Common\Inflector\Inflector;
-use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
@@ -15,7 +14,7 @@ use PHLAK\Twine\Str;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class PermissionGenerator implements GeneratorInterface
+class PermissionGenerator extends AbstractGenerator
 {
     private $groupService;
 

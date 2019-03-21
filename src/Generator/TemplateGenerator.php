@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Generator;
 
 use Doctrine\Common\Inflector\Inflector;
-use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 use PHLAK\Twine\Str;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -13,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class TemplateGenerator implements GeneratorInterface
+class TemplateGenerator extends AbstractGenerator
 {
     private $fileSystem;
 

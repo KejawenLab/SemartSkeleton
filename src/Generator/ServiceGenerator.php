@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Generator;
 
-use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Twig\Environment;
@@ -12,7 +11,7 @@ use Twig\Environment;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class ServiceGenerator implements GeneratorInterface
+class ServiceGenerator extends AbstractGenerator
 {
     private $twig;
 
