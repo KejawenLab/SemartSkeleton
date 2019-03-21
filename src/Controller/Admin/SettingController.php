@@ -53,7 +53,7 @@ class SettingController extends AdminController
      */
     public function find(string $id, SettingService $service, SerializerInterface $serializer)
     {
-        $setting = $service->find($id);
+        $setting = $service->get($id);
         if (!$setting) {
             throw new NotFoundHttpException();
         }
@@ -70,7 +70,7 @@ class SettingController extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            $setting = $service->find($primary);
+            $setting = $service->get($primary);
         } else {
             $setting = new Setting();
         }
@@ -92,7 +92,7 @@ class SettingController extends AdminController
      */
     public function delete(string $id, SettingService $service)
     {
-        if (!$setting = $service->find($id)) {
+        if (!$setting = $service->get($id)) {
             throw new NotFoundHttpException();
         }
 

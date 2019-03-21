@@ -28,7 +28,7 @@ class {{ entityHumanize }}Service implements ServiceInterface
      *
      * @return {{ entityHumanize }}|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->{{ entityLowerize }}Repository->find($id);
     }

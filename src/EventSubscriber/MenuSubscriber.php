@@ -37,7 +37,7 @@ class MenuSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $object->setParent($this->menuService->find($parentId));
+        $object->setParent($this->menuService->get($parentId));
     }
 
     public static function getSubscribedEvents()

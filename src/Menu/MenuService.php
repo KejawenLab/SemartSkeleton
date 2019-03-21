@@ -45,7 +45,7 @@ class MenuService implements ServiceInterface
      *
      * @return Menu|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->menuRepository->find($id);
     }

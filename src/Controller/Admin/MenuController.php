@@ -53,7 +53,7 @@ class MenuController extends AdminController
      */
     public function find(string $id, MenuService $service, SerializerInterface $serializer)
     {
-        $menu = $service->find($id);
+        $menu = $service->get($id);
         if (!$menu) {
             throw new NotFoundHttpException();
         }
@@ -70,7 +70,7 @@ class MenuController extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            $menu = $service->find($primary);
+            $menu = $service->get($primary);
         } else {
             $menu = new Menu();
         }
@@ -92,7 +92,7 @@ class MenuController extends AdminController
      */
     public function delete(string $id, MenuService $service)
     {
-        if (!$menu = $service->find($id)) {
+        if (!$menu = $service->get($id)) {
             throw new NotFoundHttpException();
         }
 

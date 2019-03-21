@@ -53,7 +53,7 @@ class GroupController extends AdminController
      */
     public function find(string $id, GroupService $service, SerializerInterface $serializer)
     {
-        $group = $service->find($id);
+        $group = $service->get($id);
         if (!$group) {
             throw new NotFoundHttpException();
         }
@@ -70,7 +70,7 @@ class GroupController extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            $group = $service->find($primary);
+            $group = $service->get($primary);
         } else {
             $group = new Group();
         }
@@ -92,7 +92,7 @@ class GroupController extends AdminController
      */
     public function delete(string $id, GroupService $service)
     {
-        if (!$group = $service->find($id)) {
+        if (!$group = $service->get($id)) {
             throw new NotFoundHttpException();
         }
 

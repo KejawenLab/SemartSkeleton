@@ -31,7 +31,7 @@ class RoleController extends AdminController
      */
     public function userRoles(Request $request, GroupService $groupService, RoleService $roleService)
     {
-        $group = $groupService->find($request->query->get('groupId'));
+        $group = $groupService->get($request->query->get('groupId'));
         if (!$group instanceof Group) {
             throw new NotFoundHttpException();
         }
@@ -54,7 +54,7 @@ class RoleController extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            $role = $service->find($primary);
+            $role = $service->get($primary);
         } else {
             $role = new Role();
         }

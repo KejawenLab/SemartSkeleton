@@ -9,5 +9,5 @@ namespace KejawenLab\Semart\Skeleton\Contract\Service;
  */
 interface ServiceInterface
 {
-    public function find(string $id): ?object;
+    public function get(string $id): ?object;
 }

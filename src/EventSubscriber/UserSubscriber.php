@@ -34,7 +34,7 @@ class UserSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($group = $this->groupService->find($request->request->get('group'))) {
+        if ($group = $this->groupService->get($request->request->get('group'))) {
             $user->setGroup($group);
         }
 

@@ -93,7 +93,7 @@ class RoleService implements ServiceInterface
      *
      * @return Role|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->roleRepository->find($id);
     }

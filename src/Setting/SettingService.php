@@ -41,7 +41,7 @@ class SettingService implements ServiceInterface
      *
      * @return Setting|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->settingRepository->find($id);
     }

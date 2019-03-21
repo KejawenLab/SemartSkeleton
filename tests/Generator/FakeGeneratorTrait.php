@@ -12,4 +12,9 @@ trait FakeGeneratorTrait
     public function generate(\ReflectionClass $class): void
     {
     }
+
+    public function getPriority(): int
+    {
+        return 255;
+    }
 }

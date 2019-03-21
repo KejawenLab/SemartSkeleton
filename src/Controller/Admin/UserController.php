@@ -54,7 +54,7 @@ class UserController extends AdminController
      */
     public function find(string $id, UserService $service, SerializerInterface $serializer)
     {
-        $user = $service->find($id);
+        $user = $service->get($id);
         if (!$user) {
             throw new NotFoundHttpException();
         }
@@ -71,7 +71,7 @@ class UserController extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            $user = $service->find($primary);
+            $user = $service->get($primary);
         } else {
             $user = new User();
         }
@@ -93,7 +93,7 @@ class UserController extends AdminController
      */
     public function delete(string $id, UserService $service)
     {
-        if (!$user = $service->find($id)) {
+        if (!$user = $service->get($id)) {
             throw new NotFoundHttpException();
         }
 

@@ -50,7 +50,7 @@ class UserService implements UserProviderInterface, ServiceInterface
      *
      * @return User|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->userRepository->find($id);
     }

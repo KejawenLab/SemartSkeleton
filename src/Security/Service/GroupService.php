@@ -45,7 +45,7 @@ class GroupService implements ServiceInterface
      *
      * @return Group|null
      */
-    public function find(string $id): ?object
+    public function get(string $id): ?object
     {
         return $this->groupRepository->find($id);
     }
