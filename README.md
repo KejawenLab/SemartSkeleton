@@ -12,7 +12,7 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 - PHP 7.2 atau lebih baru
 
-- MySQL atau MariaDB sebagai RDBMS
+- MySQL/MariaDB/PostgreSQL sebagai RDBMS
 
 - Redis Server sebagai Session Storage
 
@@ -91,7 +91,17 @@ services:
 
 ## Dokumentasi Lengkap
 
-[Doc](doc)
+- [Penggunaan Dasar](doc/usage.md)
+
+- [Pengaturan Hak Akses](doc/permission.md)
+
+- [Konfigurasi Menu](doc/menu.md)
+
+- [Pencarian dan Sorting](doc/search_sort.md)
+
+- [Pagination](doc/pagination.md)
+
+- [Event System](doc/event.md)
 
 ## Unit Testing
 
