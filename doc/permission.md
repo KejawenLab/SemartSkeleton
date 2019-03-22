@@ -12,6 +12,35 @@ Konsep ini sangat umum menurut saya dan lebih mudah dipahami ketimbang harus men
 
 ## Mengatur Hak Akses
 
+Untuk mengatur hak akses, dapat dilakukan melakui menu **Group** kemudian mengeklik menu **Hak Akses** pada Group yang akan diubah sehingga akan tampak seperti gambar berikut:
+
+![Role List](imgs/roles.png "Role List")
+
+Anda cukup menekan pada bagian hak akses untuk mengatur apa saya yang dapat diakses oleh Group tersebut.
+
 ## Annotation `@Permission`
 
-## Mengatur Menu
+Untuk memudahkan developer, saya membuat custom annotation `@Permission` yang dapat digunakan pada class controller untuk mengatur hak akses dari User atau Group. Penggunaan annotation `@Permission` adalah sebagai berikut:
+
+- Pada bagian atas dari definisi class controller, ditambahkan annotation `@Permission` dengan atribute `menu` sebagai berikut:
+
+```php
+@Permission(menu="KODEMENU")
+``` 
+
+Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
+
+
+- Pada bagian atas dari definisi method controller, ditambahkan annotation `@Permission` dengan atribute `actions` sebagai berikut:
+
+```php
+@Permission(actions=Permission::VIEW)
+
+//Atau bisa juga menggunakan multiple hak akses sebagai berikut
+
+@Permission(actions={Permission::ADD, Permission::EDIT})
+```
+
+Untuk contoh penggunaannya, bisa melihat contoh pada folder `Controller/Admin` pada file `GroupController.php`
+
+Sangat mudah sekali, bukan? 
