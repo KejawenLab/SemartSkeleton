@@ -36,10 +36,11 @@ class InstallationCommand extends Command
 
         $noInteraction = ['--no-interaction' => true];
 
-        $output->writeln('<info>Running Semart Application migration</info>');
-        $migration = $this->getApplication()->find('doctrine:migration:migrate');
+        $output->writeln('<info>Running Semart Schema Updater</info>');
+        $migration = $this->getApplication()->find('doctrine:schema:update');
         $migration->run(new ArrayInput([
-            'command' => 'doctrine:migration:migrate',
+            'command' => 'doctrine:schema:update',
+            '--force' => true,
         ] + $noInteraction), $output);
 
         $output->writeln('<info>Loading Semart Application initial data</info>');
