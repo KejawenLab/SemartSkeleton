@@ -50,6 +50,7 @@ class InstallationCommand extends Command
         ] + $noInteraction), $output);
 
         $output->writeln('<info>Semart Application Installation is finished</info>');
-        $output->writeln('<comment>Run <info>php bin/console server:run</info> to check your installation</comment>');
+        $output->writeln('<comment>Run <info>php bin/console server:run</info> to start your server</comment>');
+        $output->writeln('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
     }
 }
