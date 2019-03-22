@@ -62,7 +62,7 @@ class {{ entityHumanize }}Controller extends AdminController
      */
     public function find(string $id, {{ entityHumanize }}Service $service, SerializerInterface $serializer)
     {
-        ${{ entityLowerize }} = $service->find($id);
+        ${{ entityLowerize }} = $service->get($id);
         if (!${{ entityLowerize }}) {
             throw new NotFoundHttpException();
         }
@@ -101,7 +101,7 @@ class {{ entityHumanize }}Controller extends AdminController
      */
     public function delete(string $id, {{ entityHumanize }}Service $service)
     {
-        if (!${{ entityLowerize }} = $service->find($id)) {
+        if (!${{ entityLowerize }} = $service->get($id)) {
             throw new NotFoundHttpException();
         }
 
