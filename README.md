@@ -99,8 +99,6 @@ services:
 
 - [Pencarian dan Sorting](doc/search_sort.md)
 
-- [Pagination](doc/pagination.md)
-
 - [Event System](doc/event.md)
 
 ## Unit Testing
