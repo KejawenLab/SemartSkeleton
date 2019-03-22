@@ -65,7 +65,7 @@ Secara default, CRUD yang dibuat di atas terdaftar pada root menu sebagai beriku
 
  ![Todo](imgs/todo.png "Todo")
  
- Untuk mengubahnya, kita masuk ke menu **Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
+ Untuk mengubahnya, kita masuk ke menu **Administrator > Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
  
  ![Todo Menu](imgs/todo_menu.png "Todo Menu")
 
