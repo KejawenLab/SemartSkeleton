@@ -46,8 +46,6 @@ class Todo
 
 ```
 
-- Jalankan perintah `php bin/console doctrine:schema:update --force`
-
 - Jalankan perintah `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
 
 - Ubah translasi pada file `translations/messages.id.yaml` dan tambahkan 
