@@ -54,3 +54,7 @@ label:
         group: 'Grup'
         username: 'Nama Pengguna'
         password: 'Kata Sandi'
+    query:
+        connection: 'Koneksi'
+        run: 'Jalankan'
+        notice: 'Setiap query yang dijalankan tidak dapat dibatalkan. Harap lakukan dengan hati-hati.'

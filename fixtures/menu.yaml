@@ -4,3 +4,4 @@
 - { parent: 'ref:menu#administrator', code: 'GROUP', menuOrder: 2, name: 'Grup', iconClass: 'address-book', routeName: 'groups_index', ref: 'administrator_group' }
 - { parent: 'ref:menu#administrator', code: 'MENU', menuOrder: 4, name: 'Menu', iconClass: 'bars', routeName: 'menus_index', ref: 'administrator_menu' }
 - { parent: 'ref:menu#administrator', code: 'SETTING', menuOrder: 5, name: 'Pengaturan', iconClass: 'cogs', routeName: 'settings_index', ref: 'administrator_setting' }
+- { parent: 'ref:menu#administrator', code: 'QUERY', menuOrder: 6, name: 'Query', iconClass: 'database', routeName: 'queries_runner', ref: 'administrator_query' }
