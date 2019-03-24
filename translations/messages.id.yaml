@@ -58,3 +58,4 @@ label:
         connection: 'Koneksi'
         run: 'Jalankan'
         notice: 'Setiap query yang dijalankan tidak dapat dibatalkan. Harap lakukan dengan hati-hati.'
+        total: 'Total Data'
