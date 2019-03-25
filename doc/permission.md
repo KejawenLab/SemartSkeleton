@@ -41,6 +41,6 @@ Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
 @Permission(actions={Permission::ADD, Permission::EDIT})
 ```
 
-Untuk contoh penggunaannya, bisa melihat contoh pada folder `Controller/Admin` pada file `GroupController.php`
+Untuk melihat contoh penggunaannya, Anda membuka file [Group Controller](../src/Controller/Admin/GroupController.php)
 
 Sangat mudah sekali, bukan? 

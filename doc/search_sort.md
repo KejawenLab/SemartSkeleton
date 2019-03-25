@@ -19,3 +19,5 @@ Untuk melakukan pencarian sangatlah mudah, Anda cukup menggunakan annotation `@S
 ```
 
 Dengan `field1` dan `field2` adalah nama property pada entity yang diberi annotation `@Sortable` tersebut.
+
+Untuk melihat contoh dari penggunaan `@Searchable` dan `@Sortable`, Anda dapat melihatnya pada entity [Group](../src/Entity/Group.php)
