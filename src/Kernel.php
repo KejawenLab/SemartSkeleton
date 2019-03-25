@@ -3,6 +3,7 @@
 namespace KejawenLab\Semart\Skeleton;
 
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
+use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -69,5 +70,14 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
         $definition = $container->getDefinition(GeneratorFactory::class);
         $definition->addArgument($services);
+
+        $taggedServices = $container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME));
+        $services = [];
+        foreach ($taggedServices as $serviceId => $attributes) {
+            $services[] = new Reference($serviceId);
+        }
+
+        $definition = $container->getDefinition(RequestHandler::class);
+        $definition->addMethodCall('setServices', [$services]);
     }
 }

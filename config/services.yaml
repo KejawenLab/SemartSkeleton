@@ -28,3 +28,6 @@ services:
         KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface:
             tags:
                 - { name: 'semart.generator' }
+        KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface:
+            tags:
+                - { name: 'semart.service' }

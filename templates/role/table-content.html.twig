@@ -6,7 +6,7 @@
     {% set menu = data.menu %}
     {% set parent = menu.parent %}
     <tr>
-        <td class="text-right" style="width: 49px;">{{ (key + startNumber)  }}</td>
+        <td class="text-right">{{ (key + startNumber)  }}</td>
         <td>
             {% if parent is not null %}
                 {{ parent.name ~ ' > ' ~ menu.name }}

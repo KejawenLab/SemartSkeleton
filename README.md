@@ -101,8 +101,6 @@ services:
 
 - [Event System](doc/event.md)
 
-- [Penggunaan Lebih Lanjut](doc/advance_usage.md)
-
 ## Unit Testing
 
 ```bash

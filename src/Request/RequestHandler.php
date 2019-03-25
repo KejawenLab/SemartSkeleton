@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Request;
 
 use KejawenLab\Semart\Skeleton\Application;
+use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
+use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -26,6 +28,9 @@ class RequestHandler
     private $eventDispatcher;
 
     private $translator;
+
+    /** @var ServiceInterface[] */
+    private $services;
 
     private $errors;
 
@@ -58,7 +63,17 @@ class RequestHandler
             $field = $property->getName();
             $value = $request->request->get($field);
             if ('id' !== strtolower($field) && null !== $value && '' !== $value) {
-                $this->propertyAccessor->setValue($object, $field, $value);
+                try {
+                    $this->propertyAccessor->setValue($object, $field, $value);
+                } catch (\Exception $e) {
+                    $key = $this->getServiceKey($field, $object);
+                    if (!array_key_exists($key, $this->services)) {
+                        throw new \InvalidArgumentException();
+                    }
+
+                    $service = $this->services[$key];
+                    $this->propertyAccessor->setValue($object, $field, $service->get($value));
+                }
             }
         }
 
@@ -83,5 +98,32 @@ class RequestHandler
     public function getErrors(): array
     {
         return $this->errors;
+    }
+
+    public function setServices(array $services)
+    {
+        foreach ($services as $service) {
+            $this->addService($service);
+        }
+    }
+
+    private function addService(ServiceInterface $service)
+    {
+        $classLong = explode('\\', get_class($service));
+        $class = array_pop($classLong);
+        $key = Str::make($class)->lowercase()->replace('service', '')->__toString();
+        $this->services[$key] = $service;
+    }
+
+    private function getServiceKey(string $field, object $object)
+    {
+        $key = Str::make($field)->lowercase()->__toString();
+        if ('parent' === $key) {
+            $classLong = explode('\\', get_class($object));
+
+            return Str::make(array_pop($classLong))->lowercase()->__toString();
+        }
+
+        return $key;
     }
 }

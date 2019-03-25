@@ -7,7 +7,7 @@
             <thead>
             <tr>
                 {% if status %}
-                    <th class="text-center" style="width: 49px;">No</th>
+                    <th class="text-center">No</th>
                 {% endif %}
                 {% for i, column in columns %}
                     <th class="text-center{% if status != true %} text-danger{% endif %}">{{ column | upper }}</th>
