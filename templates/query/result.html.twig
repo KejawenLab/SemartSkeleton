@@ -1,4 +1,7 @@
 {% filter spaceless %}
+    <div class="row col-md-12 col-xs-12 col-sm-12 col-lg-12">
+        <b class="{% if status %}text-success{% else %}text-danger{% endif %}">{{ 'label.query.total' | trans }}: {{ total }}</b>
+    </div>
     <div class="row col-md-12 col-xs-12 col-sm-12 col-lg-12 margin-b-7">
         <table class="table table-responsive no-padding table-bordered table-hover table-striped">
             <thead>
@@ -7,7 +10,7 @@
                     <th class="text-center" style="width: 49px;">No</th>
                 {% endif %}
                 {% for i, column in columns %}
-                    <th class="text-center">{{ column | upper }}</th>
+                    <th class="text-center{% if status != true %} text-danger{% endif %}">{{ column | upper }}</th>
                 {% endfor %}
             </tr>
             </thead>
@@ -18,14 +21,11 @@
                         <td class="text-right" style="width: 49px;">{{ (i + 1)  }}</td>
                     {% endif %}
                     {% for column in record %}
-                        <td class="text-center">{{ column }}</td>
+                        <td class="text-center{% if status != true %} text-danger{% endif %}">{{ column }}</td>
                     {% endfor %}
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-    </div>
-    <div class="row col-md-12 col-xs-12 col-sm-12 col-lg-12">
-        <b>{{ 'label.query.total' | trans }}: {{ total }}</b>
     </div>
 {% endfilter %}

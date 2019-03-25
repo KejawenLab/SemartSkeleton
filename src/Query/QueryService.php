@@ -53,9 +53,11 @@ class QueryService
             $output['records'] = $results;
             $output['total'] = count($results);
         } catch (\Exception $e) {
+            $messages = explode(':', $e->getMessage());
+
             $output['status'] = false;
-            $output['columns'] = ['error'];
-            $output['records'][] = [$e->getMessage()];
+            $output['columns'] = ['error', 'reason', 'solution'];
+            $output['records'][] = [Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make(explode(';', $messages[3])[1])->trim()->uppercaseFirst()->__toString()];
         }
 
         return $output;
