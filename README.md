@@ -133,6 +133,10 @@ php vendor/bin/phpunit
 
 ![User List](doc/imgs/user_list.png "User List")
 
+* Query Runner
+
+![Query Runner](doc/imgs/query_runner.png "Query Runner")
+
 ## Kontributor
 
 Terima kasih kepada semua [kontributor](https://github.com/KejawenLab/SemartSkeleton/graphs/contributors)
