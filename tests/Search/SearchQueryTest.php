@@ -31,6 +31,7 @@ class SearchQueryTest extends DatabaseTestCase
         $event->setRequest($request);
         $event->setEntityClass(User::class);
         $event->setQueryBuilder($queryBuilder);
+        $event->addJoinAlias('root', 'o');
 
         $readerMock = $this->getMockBuilder(Reader::class)->disableOriginalConstructor()->getMock();
         $readerMock

@@ -8,9 +8,9 @@ use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Role;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Authorization\PermissionVoter;
+use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
@@ -43,10 +43,10 @@ class PermissionVoterTest extends TestCase
         $role->setViewable(true);
         $role->setDeletable(false);
 
-        $roleRepositoryMock = $this->getMockBuilder(RoleRepository::class)->disableOriginalConstructor()->getMock();
+        $roleRepositoryMock = $this->getMockBuilder(RoleService::class)->disableOriginalConstructor()->getMock();
         $roleRepositoryMock
             ->expects($this->atLeastOnce())
-            ->method('findRole')
+            ->method('getRole')
             ->with($group, $subject)
             ->willReturn($role)
         ;

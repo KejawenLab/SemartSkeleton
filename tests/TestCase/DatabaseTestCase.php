@@ -28,6 +28,7 @@ class DatabaseTestCase extends CommandTestCase
         static::$entityManager = static::$container->get('doctrine.orm.entity_manager');
 
         parent::setUp();
+//        dump('here too');
     }
 
     public function tearDown()

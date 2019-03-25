@@ -41,7 +41,7 @@ class SettingExtensionTest extends TestCase
             )
             ->will(
                 $this->returnCallback(function (array $parameter) use ($setting) {
-                    if (static::NOT_EXIST === $parameter['parameter']) {
+                    if (static::NOT_EXIST === $parameter['parameter']->__toString()) {
                         return null;
                     }
 

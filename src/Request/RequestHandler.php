@@ -48,46 +48,24 @@ class RequestHandler
     public function handle(Request $request, object $object)
     {
         $filterEvent = new FilterRequest($request, $object);
-
         $this->eventDispatcher->dispatch(Application::REQUEST_EVENT, $filterEvent);
 
         $reflection = new \ReflectionObject($object);
-
         if ($parent = $reflection->getParentClass()) {
             $reflection = $parent;
         }
 
         $properties = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE|\ReflectionProperty::IS_PROTECTED);
-
         foreach ($properties as $property) {
             $field = $property->getName();
             $value = $request->request->get($field);
             if ('id' !== strtolower($field) && null !== $value && '' !== $value) {
-                try {
-                    $this->propertyAccessor->setValue($object, $field, $value);
-                } catch (\Exception $e) {
-                    $key = $this->getServiceKey($field, $object);
-                    if (!array_key_exists($key, $this->services)) {
-                        throw new \InvalidArgumentException();
-                    }
-
-                    $service = $this->services[$key];
-                    $this->propertyAccessor->setValue($object, $field, $service->get($value));
-                }
+                $this->bindValue($object, $field, $value);
             }
         }
 
         $this->eventDispatcher->dispatch(Application::PRE_VALIDATION_EVENT, $filterEvent);
-
-        $errors = $this->validator->validate($object);
-        if (count($errors) > 0) {
-            /** @var ConstraintViolationInterface $error */
-            foreach ($errors as $error) {
-                $this->errors[] = sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($error->getPropertyPath()))), $this->translator->trans($error->getMessage()));
-            }
-        } else {
-            $this->valid = true;
-        }
+        $this->validate($object, $reflection);
     }
 
     public function isValid()
@@ -109,9 +87,8 @@ class RequestHandler
 
     private function addService(ServiceInterface $service)
     {
-        $classLong = explode('\\', get_class($service));
-        $class = array_pop($classLong);
-        $key = Str::make($class)->lowercase()->replace('service', '')->__toString();
+        $class = explode('\\', get_class($service));
+        $key = Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
         $this->services[$key] = $service;
     }
 
@@ -119,11 +96,39 @@ class RequestHandler
     {
         $key = Str::make($field)->lowercase()->__toString();
         if ('parent' === $key) {
-            $classLong = explode('\\', get_class($object));
+            $class = explode('\\', get_class($object));
 
-            return Str::make(array_pop($classLong))->lowercase()->__toString();
+            return Str::make(array_pop($class))->lowercase()->__toString();
         }
 
         return $key;
+    }
+
+    private function validate(object $object, \ReflectionClass $reflection): void
+    {
+        $errors = $this->validator->validate($object);
+        if (count($errors) > 0) {
+            /** @var ConstraintViolationInterface $error */
+            foreach ($errors as $error) {
+                $this->errors[] = sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($error->getPropertyPath()))), $this->translator->trans($error->getMessage()));
+            }
+        } else {
+            $this->valid = true;
+        }
+    }
+
+    private function bindValue(object $object, string $field, $value): void
+    {
+        try {
+            $this->propertyAccessor->setValue($object, $field, $value);
+        } catch (\Exception $e) {
+            $key = $this->getServiceKey($field, $object);
+            if (!array_key_exists($key, $this->services)) {
+                throw new \InvalidArgumentException();
+            }
+
+            $service = $this->services[$key];
+            $this->propertyAccessor->setValue($object, $field, $service->get($value));
+        }
     }
 }

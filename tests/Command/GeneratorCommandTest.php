@@ -15,11 +15,6 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class GeneratorCommandTest extends DatabaseTestCase
 {
-    public function setUp()
-    {
-        static::bootKernel();
-    }
-
     public function testRunCommand()
     {
         static::$application->add(new GeneratorCommand($this->getMockBuilder(GeneratorFactory::class)->disableOriginalConstructor()->getMock()));
