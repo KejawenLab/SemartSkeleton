@@ -26,13 +26,13 @@ class ControllerGeneratorTest extends KernelTestCase
         $reflection = new \ReflectionClass(Stub::class);
 
         $dumpDir = sprintf('%s/src/Controller/Admin', static::$kernel->getProjectDir());
-        $generatedIndexPath = sprintf('%s/%sController.php', $dumpDir, $reflection->getShortName());
+        $generatedControllerPath = sprintf('%s/%sController.php', $dumpDir, $reflection->getShortName());
 
         $generator = new ControllerGenerator(static::$container->get('twig'), $fileSystem, static::$kernel);
 
         $this->assertInstanceOf(GeneratorInterface::class, $generator);
         $generator->generate($reflection);
-        $this->assertFileExists($generatedIndexPath);
-        $fileSystem->remove($generatedIndexPath);
+        $this->assertFileExists($generatedControllerPath);
+        $fileSystem->remove($generatedControllerPath);
     }
 }
