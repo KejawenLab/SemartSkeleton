@@ -7,13 +7,13 @@ namespace KejawenLab\Semart\Skeleton\Tests\Command;
 use KejawenLab\Semart\Skeleton\Command\GeneratorCommand;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
 use KejawenLab\Semart\Skeleton\Tests\Generator\Stub;
-use KejawenLab\Semart\Skeleton\Tests\TestCase\CommandTestCase;
+use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class GeneratorCommandTest extends CommandTestCase
+class GeneratorCommandTest extends DatabaseTestCase
 {
     public function setUp()
     {
