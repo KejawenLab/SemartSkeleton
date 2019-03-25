@@ -39,7 +39,7 @@
             <div class="box-body">
                 <div class="row margin-b-7">
                     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 margin-b-7">
-                        <textarea id="query" class="col-md-12 col-xs-12 col-sm-12 col-lg-12" style="min-height: 127px;"></textarea>
+                        <textarea id="query" class="col-md-12 col-xs-12 col-sm-12 col-lg-12" style="min-height: 277px;"></textarea>
                     </div>
                     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
                         <p class="text-danger pull-left"><span class="fa fa-warning"></span> {{ 'label.query.notice' | trans | upper }}</p>
@@ -70,21 +70,47 @@
 
         $(document).on('click', '.run-query', function () {
             let connection = $('#connection').val();
-            let query = $('#query').val();
+            let query = $.trim($('#query').val());
 
-            $.post(Routing.generate('queries_run'), {
-                _csrf_token: localStorage.getItem('csrf_token'),
-                s: query,
-                c: connection,
-            }, function (response) {
-                localStorage.setItem('csrf_token', response._csrf_token);
-                $('#result').html(response.result);
-            });
+            if ('' !== query) {
+                $.post(Routing.generate('queries_run'), {
+                    _csrf_token: localStorage.getItem('csrf_token'),
+                    s: query,
+                    c: connection,
+                }, function (response) {
+                    localStorage.setItem('csrf_token', response._csrf_token);
+                    $('#result').html(response.result);
+                });
+            }
         });
 
         $(document).on('change', '#connection', function () {
             let connection = $(this).val();
             listSchema(connection);
+        });
+
+        $(document).on('change', '#schemas', function () {
+            let query = $('#query');
+            let table = $(this).val();
+            let sql = query.val();
+
+            if ('' !== table) {
+                query.val(sql + ' ' + table);
+            }
+        });
+
+        $(document).on('keydown', '#query', function(e) {
+            if(9 === e.keyCode) {
+                let start = this.selectionStart;
+                let end = this.selectionEnd;
+                let $this = $(this);
+
+                $this.val($this.val().substring(0, start) + "\t" + $this.val().substring(end));
+
+                this.selectionStart = this.selectionEnd = start + 1;
+
+                return false;
+            }
         });
     });
 
@@ -92,8 +118,15 @@
         $.get(Routing.generate('queries_tables'), {
             c: connection
         }, function (response) {
-            console.log(response);
-            //handle response
+            if (response.status) {
+                let options = '<option value="" selected="selected">---{{ 'label.query.schema_option' | trans | upper }}---</option>';
+                $.each(response.result, function (k, v) {
+                    options = options + '<option value="' + v + '">' + v + '</option>';
+                });
+
+                $('#schemas').html(options);
+                $('.select2-static').select2();
+            }
         });
     }
 </script>
