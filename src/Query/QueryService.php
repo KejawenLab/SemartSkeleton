@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Query;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\DBAL\Schema\AbstractAsset;
+use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use PHLAK\Twine\Str;
 
 /**
@@ -54,6 +56,21 @@ class QueryService
             $output['status'] = false;
             $output['columns'] = ['error'];
             $output['records'][] = [$e->getMessage()];
+        }
+
+        return $output;
+    }
+
+    public function getTables(string $connection = 'default')
+    {
+        /** @var AbstractSchemaManager $schemaManager */
+        $schemaManager = $this->registryManager->getConnection(Str::make($connection)->lowercase()->__toString())->getSchemaManager();
+
+        $output = [];
+        /** @var AbstractAsset[] $tables */
+        $tables =array_merge($schemaManager->listTables(), $schemaManager->listViews());
+        foreach ($tables as $table) {
+            $output[] = $table->getName();
         }
 
         return $output;

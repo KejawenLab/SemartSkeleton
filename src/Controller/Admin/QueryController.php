@@ -36,11 +36,24 @@ class QueryController extends AdminController
      */
     public function run(Request $request, QueryService $service)
     {
-        $result = $service->runQuery($request->request->get('s'), $request->request->get('c'));
+        $result = $service->runQuery($request->request->get('s'), $request->request->get('c', 'default'));
 
         return new JsonResponse([
             'status' => $result['status'],
             'result' => $this->renderView('query/result.html.twig', $result),
+        ]);
+    }
+
+    /**
+     * @Route("/tables", methods={"GET"}, name="queries_tables", options={"expose"=true})
+     *
+     * @Permission(actions=Permission::EDIT)
+     */
+    public function tables(Request $request, QueryService $service)
+    {
+        return new JsonResponse([
+            'status' => true,
+            'result' => $service->getTables($request->query->get('c', 'default')),
         ]);
     }
 }

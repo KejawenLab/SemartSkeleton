@@ -16,9 +16,9 @@
                 <h3 class="box-title">Query Manual</h3>
                 <div class="box-tools col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right">
                     <div class="form-group">
-                        <div class="col-sm-8 pull-right">
+                        <div class="col-sm-5">
                             <select class="form-control select2-static" id="connection">
-                                <option value="">---PILIH {{ 'label.query.connection' | trans | upper }}---</option>
+                                <option value="">---{{ 'label.query.connection_option' | trans | upper }}---</option>
                                 {% for i, connection in connections %}
                                     {% if 0 == connection %}
                                         <option value="{{ connection }}" selected="selected">{{ connection | upper }}</option>
@@ -26,6 +26,11 @@
                                         <option value="{{ connection }}">{{ connection | upper }}</option>
                                     {% endif %}
                                 {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-sm-7 pull-right">
+                            <select class="form-control select2-static" id="schemas">
+                                <option value="">---{{ 'label.query.schema_option' | trans | upper }}---</option>
                             </select>
                         </div>
                     </div>
@@ -61,6 +66,8 @@
 
         $('.select2-static').select2();
 
+        listSchema($('#connection').val());
+
         $(document).on('click', '.run-query', function () {
             let connection = $('#connection').val();
             let query = $('#query').val();
@@ -74,6 +81,21 @@
                 $('#result').html(response.result);
             });
         });
+
+        $(document).on('change', '#connection', function () {
+            let connection = $(this).val();
+
+
+        });
     });
+
+    function listSchema(connection) {
+        $.get(Routing.generate('queries_tables'), {
+            c: connection
+        }, function (response) {
+            console.log(response);
+            //handle response
+        });
+    }
 </script>
 {% endfilter %}{% endblock %}

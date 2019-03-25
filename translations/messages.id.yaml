@@ -55,7 +55,8 @@ label:
         username: 'Nama Pengguna'
         password: 'Kata Sandi'
     query:
-        connection: 'Koneksi'
+        connection_option: 'Pilih Koneksi'
+        schema_option: 'Pilih Tabel'
         run: 'Jalankan'
         notice: 'Setiap query yang dijalankan tidak dapat dibatalkan. Harap lakukan dengan hati-hati.'
         total: 'Total Data'
