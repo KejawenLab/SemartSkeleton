@@ -4,7 +4,7 @@
             <thead>
             <tr>
                 {% if status %}
-                    <th class="text-center">No</th>
+                    <th class="text-center" style="width: 49px;">No</th>
                 {% endif %}
                 {% for i, column in columns %}
                     <th class="text-center">{{ column | upper }}</th>
@@ -15,7 +15,7 @@
             {% for i, record in records %}
                 <tr>
                     {% if status %}
-                        <td class="text-right">{{ (i + 1)  }}</td>
+                        <td class="text-right" style="width: 49px;">{{ (i + 1)  }}</td>
                     {% endif %}
                     {% for column in record %}
                         <td class="text-center">{{ column }}</td>

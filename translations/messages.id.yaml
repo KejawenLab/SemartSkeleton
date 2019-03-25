@@ -55,6 +55,7 @@ label:
         username: 'Nama Pengguna'
         password: 'Kata Sandi'
     query:
+        title: 'Query Manual'
         connection_option: 'Pilih Koneksi'
         schema_option: 'Pilih Tabel'
         run: 'Jalankan'

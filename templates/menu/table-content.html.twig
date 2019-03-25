@@ -6,7 +6,7 @@
 
 {% for key, data in menus %}
     <tr>
-        <td class="text-right">{{ (key + startNumber)  }}</td>
+        <td class="text-right" style="width: 49px;">{{ (key + startNumber)  }}</td>
         <td>{% if data.parent is not null %}{{ data.parent.name }}{% else %}-{% endif %}</td>
         <td>{{ data.code }}</td>
         <td>{{ data.name }}</td>
