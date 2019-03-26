@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterEntity extends Event
+class EntityEvent extends Event
 {
     private $manager;
 

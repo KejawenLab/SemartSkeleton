@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Tests\Search;
+namespace KejawenLab\Semart\Skeleton\Tests\Query;
 
-use KejawenLab\Semart\Skeleton\Search\Searchable;
+use KejawenLab\Semart\Skeleton\Query\Searchable;
 use PHPUnit\Framework\TestCase;
 
 /**

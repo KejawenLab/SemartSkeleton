@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterPagination extends Event
+class PaginationEvent extends Event
 {
     private $request;
 

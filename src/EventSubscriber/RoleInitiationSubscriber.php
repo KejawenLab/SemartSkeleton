@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Skeleton\Application;
-use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
+use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
@@ -23,7 +23,7 @@ class RoleInitiationSubscriber implements EventSubscriberInterface
         $this->roleService = $roleService;
     }
 
-    public function initiate(FilterEntity $event)
+    public function initiate(EntityEvent $event)
     {
         $entity = $event->getEntity();
 

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterRequest extends Event
+class RequestEvent extends Event
 {
     private $request;
 

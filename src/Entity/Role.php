@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\Skeleton\Contract\Entity\PrimaryableTrait;
-use KejawenLab\Semart\Skeleton\Search\Searchable;
+use KejawenLab\Semart\Skeleton\Query\Searchable;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 

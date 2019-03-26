@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Tests\Search;
+namespace KejawenLab\Semart\Skeleton\Tests\Query;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
-use KejawenLab\Semart\Skeleton\Search\Searchable;
-use KejawenLab\Semart\Skeleton\Search\SearchQuery;
+use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
+use KejawenLab\Semart\Skeleton\Query\Searchable;
+use KejawenLab\Semart\Skeleton\Query\SearchQuery;
 use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,7 +27,7 @@ class SearchQueryTest extends DatabaseTestCase
         $request = Request::createFromGlobals();
         $request->query->set('q', 'test');
 
-        $event = new FilterPagination();
+        $event = new PaginationEvent();
         $event->setRequest($request);
         $event->setEntityClass(User::class);
         $event->setQueryBuilder($queryBuilder);

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Tests\Entity;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use KejawenLab\Semart\Skeleton\Entity\FilterEntity;
+use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +19,7 @@ class FilterEntityTest extends TestCase
 
         $object = new \stdClass();
 
-        $filterEntity = new FilterEntity($objectManagerMock, $object);
+        $filterEntity = new EntityEvent($objectManagerMock, $object);
 
         $this->assertSame($object, $filterEntity->getEntity());
         $this->assertSame($objectManagerMock, $filterEntity->getManager());

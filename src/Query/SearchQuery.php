@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Search;
+namespace KejawenLab\Semart\Skeleton\Query;
 
 use Doctrine\Common\Annotations\Reader;
 use KejawenLab\Semart\Skeleton\Application;
-use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
+use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -22,7 +22,7 @@ class SearchQuery implements EventSubscriberInterface
         $this->annotationReader = $reader;
     }
 
-    public function apply(FilterPagination $event): void
+    public function apply(PaginationEvent $event): void
     {
         if ('' === $queryString = $event->getRequest()->query->get('q', '')) {
             return;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Tests\Request;
 
-use KejawenLab\Semart\Skeleton\Request\FilterRequest;
+use KejawenLab\Semart\Skeleton\Request\RequestEvent;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -15,7 +15,7 @@ class FilterRequestTest extends TestCase
 {
     public function testObject()
     {
-        $filterRequest = new FilterRequest(Request::createFromGlobals(), new \stdClass());
+        $filterRequest = new RequestEvent(Request::createFromGlobals(), new \stdClass());
 
         $this->assertInstanceOf(Request::class, $filterRequest->getRequest());
         $this->assertInstanceOf(\stdClass::class, $filterRequest->getObject());

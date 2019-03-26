@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Search;
+namespace KejawenLab\Semart\Skeleton\Query;
 
 /**
  * @Annotation()

@@ -6,7 +6,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Request\FilterRequest;
+use KejawenLab\Semart\Skeleton\Request\RequestEvent;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -22,7 +22,7 @@ class UserSubscriber implements EventSubscriberInterface
         $this->passwordEncoder = $encodePasswordService;
     }
 
-    public function setPassword(FilterRequest $event)
+    public function setPassword(RequestEvent $event)
     {
         $user = $event->getObject();
         if (!$user instanceof User) {

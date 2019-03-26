@@ -6,7 +6,7 @@ namespace KejawenLab\Semart\Skeleton\Tests\Pagination;
 
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
+use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class FilterPaginationTest extends KernelTestCase
     {
         static::bootKernel();
 
-        $filterPagination = new FilterPagination();
+        $filterPagination = new PaginationEvent();
         $filterPagination->setRequest(Request::createFromGlobals());
         $filterPagination->setQueryBuilder(new QueryBuilder(static::$container->get('doctrine.orm.entity_manager')));
         $filterPagination->setEntityClass(User::class);

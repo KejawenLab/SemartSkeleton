@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Sort;
+namespace KejawenLab\Semart\Skeleton\Query;
 
 use Doctrine\Common\Annotations\Reader;
 use KejawenLab\Semart\Skeleton\Application;
-use KejawenLab\Semart\Skeleton\Pagination\FilterPagination;
+use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -21,7 +21,7 @@ class SortQuery implements EventSubscriberInterface
         $this->annotationReader = $reader;
     }
 
-    public function apply(FilterPagination $event): void
+    public function apply(PaginationEvent $event): void
     {
         $request = $event->getRequest();
         if ('' === $sortField = $request->query->get('s', '')) {

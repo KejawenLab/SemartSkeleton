@@ -54,7 +54,7 @@ class Paginator
         $repository = $this->doctrine->getRepository($entityClass);
         $queryBuilder = $repository->createQueryBuilder(self::ROOT_ALIAS);
 
-        $event = new FilterPagination();
+        $event = new PaginationEvent();
         $event->setQueryBuilder($queryBuilder);
         $event->setRequest($this->request);
         $event->setEntityClass($entityClass);
