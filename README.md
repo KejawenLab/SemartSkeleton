@@ -28,6 +28,8 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 - Pencarian
 
+- Multiple File Upload
+
 
 ## Kebutuhan Sistem
 
