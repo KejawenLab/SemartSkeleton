@@ -35,6 +35,9 @@ class SearchQuery implements EventSubscriberInterface
                 continue;
             }
 
+            $expr = $queryBuilder->expr();
+            $filters = [];
+
             $searchable = $annotation->getFields();
             foreach ($searchable as $value) {
                 if (false !== strpos($value, '.')) {
@@ -58,11 +61,13 @@ class SearchQuery implements EventSubscriberInterface
                         $event->addJoinAlias($field, $alias);
                     }
 
-                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($fields[$length - 2]), $fields[$length - 1]), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                    $filters[] = $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($fields[$length - 2]), $fields[$length - 1]), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
                 } else {
-                    $queryBuilder->orWhere($queryBuilder->expr()->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
+                    $filters[] = $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
                 }
             }
+
+            $queryBuilder->andWhere(call_user_func_array([$expr, 'orX'], $filters));
         }
     }
 

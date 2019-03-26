@@ -27,3 +27,20 @@ Untuk melakukan pencarian sangatlah mudah, Anda cukup menggunakan annotation `@S
 Dengan `field1` dan `field2` adalah nama property pada entity yang diberi annotation `@Sortable` tersebut.
 
 Untuk melihat contoh dari penggunaan `@Searchable` dan `@Sortable`, Anda dapat melihatnya pada entity [Group](../src/Entity/Group.php)
+
+
+Selanjutnya, untuk mengetahui bahwa sebuah request berisi **query string**, Semart Skeleton mendeteksi melalui URL yang dikirim yaitu dengan menyertakan GET parameter `s` yang berisi field yang akan disort dan `d` untuk direksi sort-nya para URLnya.
+
+
+Sebagai contoh, Anda mengirimkan request URL `http://localhost:8000/admin/groups/?s=name&d=a`, maka Semart Skeleton akan mengurutkan berdasarkan field `name` secara `asc`. Anda juga dapat mengganti `a` dengan `d` untuk mengurutkan secara `desc`.
+
+
+## Pencarian dan Pengurutan pada Relasi
+
+Semart Skeleton support relasi untuk pencarian maupun pengurutan, sebagai contoh Anda punya field `parent` yang berelasi dengan dirinya sendiri (self reference) maka annotation-nya adalah sebagai berikut:
+
+```php
+@Sortable({"parent.name", "code", "name"})
+```
+
+Seperti pada entity [Menu](../src/Entity/Menu.php)
