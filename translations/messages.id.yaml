@@ -5,6 +5,7 @@ label:
         button: 'Masuk'
         error_title: 'PESAN ERROR'
         error_message: 'Kombinasi username dan password tidak sesuai'
+        logout: 'Keluar'
     crud:
         add: 'Tambah'
         add_title: 'Tambah %title% Baru'
@@ -52,8 +53,11 @@ label:
         value: 'Nilai Parameter'
     user:
         group: 'Grup'
+        full_name: 'Nama Lengkap'
         username: 'Nama Pengguna'
         password: 'Kata Sandi'
+        profile: 'Profil'
+        change_password: 'Ubah Kata Sandi'
     query:
         title: 'Query Manual'
         connection_option: 'Pilih Koneksi'

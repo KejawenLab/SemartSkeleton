@@ -33,6 +33,7 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 49px;">No</th>
+                            <th class="text-center">{{ 'label.user.full_name' | trans }} <i data-sort="no" data-sort-field="username" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center">{{ 'label.user.username' | trans }} <i data-sort="no" data-sort-field="username" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center">{{ 'label.user.group' | trans }} <i data-sort="no" data-sort-field="group.name" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
@@ -72,6 +73,12 @@
                                     <option value="{{ data.id }}">{{ data.name }}</option>
                                 {% endfor %}
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" class="col-sm-2 control-label">{{ 'label.user.full_name' | trans }}</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="fullName" placeholder="{{ 'label.user.full_name' | trans }}">
                         </div>
                     </div>
                     <div class="form-group">

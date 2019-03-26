@@ -24,8 +24,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
- * @Searchable({"group.code", "group.name", "username"})
- * @Sortable({"group.name", "username"})
+ * @Searchable({"group.code", "group.name", "fullName", "username"})
+ * @Sortable({"group.name", "fullName", "username"})
  *
  * @UniqueEntity(fields={"username"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
  *
@@ -47,6 +47,15 @@ class User implements UserInterface, \Serializable
      * @Groups({"read"})
      **/
     private $group;
+
+    /**
+     * @ORM\Column(name="nama_lengkap", type="string", length=77, nullable=true)
+     *
+     * @Assert\Length(max=77)
+     *
+     * @Groups({"read"})
+     */
+    private $fullName;
 
     /**
      * @ORM\Column(name="nama_pengguna", type="string", length=12, unique=true)
@@ -73,6 +82,16 @@ class User implements UserInterface, \Serializable
     public function setGroup(?Group $group): void
     {
         $this->group = $group;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullName ?: $this->username;
+    }
+
+    public function setFullName(string $fullName): void
+    {
+        $this->fullName = Str::make($fullName)->uppercase();
     }
 
     public function getUsername(): string
@@ -114,6 +133,7 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
+            $this->fullName,
             $this->username,
             $this->password,
             $this->group
@@ -122,7 +142,7 @@ class User implements UserInterface, \Serializable
 
     public function unserialize($serialized)
     {
-        list($this->id, $this->username, $this->password, $this->group) = unserialize($serialized);
+        list($this->id, $this->fullName, $this->username, $this->password, $this->group) = unserialize($serialized);
     }
 
     public function getSalt(): ?string

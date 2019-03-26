@@ -60,7 +60,7 @@
 <body class="hold-transition skin-purple-light sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
-            <a href="#" class="logo">
+            <a href="{{ path('home_dashboard') }}" class="logo">
                 <span class="logo-mini"><b>SMR</b></span>
                 <span class="logo-lg"><b>Sem</b>Art</span>
             </a>
@@ -71,25 +71,24 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         {% block top_nav_widget %}{% endblock %}
+                        {% set user = app.user %}
+                        {% set group = user.group %}
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="{{ asset(profilePhoto) }}" class="user-image" alt="{{ app.user.username }}">
-                                <span class="hidden-xs">{{ app.user.username }}</span>
+                                <img src="{{ asset(profilePhoto) }}" class="user-image" alt="{{ user.username }}">
+                                <span class="hidden-xs">{{ user.username }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="user-header">
-                                    <img src="{{ asset(profilePhoto) }}" class="img-circle" alt="{{ app.user.username }}">
-                                    <p>
-                                        {% set user = app.user %}
-                                        {% set group = user.group %}
-
-                                        {{ user.username }}
-                                        <small>{{ group.code ~ ' - ' ~ group.name }}</small>
-                                    </p>
+                                    <img src="{{ asset(profilePhoto) }}" class="img-circle" alt="{{ user.username }}">
+                                    <p>{{ user.fullName }}<small>{{ group.code ~ ' - ' ~ group.name }}</small></p>
                                 </li>
                                 <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="{{ path('profile_index') }}" class="btn btn-default btn-flat">{{ 'label.user.profile' | trans }}</a>
+                                    </div>
                                     <div class="pull-right">
-                                        <a href="{{ path('logout') }}" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{{ path('logout') }}" class="btn btn-default btn-flat">{{ 'label.login.logout' | trans }}</a>
                                     </div>
                                 </li>
                             </ul>

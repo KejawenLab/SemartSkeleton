@@ -8,6 +8,8 @@
 Ditujukan untuk memudahkan Developer dalam mengerjakan proyek tanpa perlu dipusingkan dengan berbagai pengaturan-pengaturan yang bersifat rutinitas dan berulang.
 Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses yang dapat diatur dengan mudah melalui menu yang telah kami siapkan.
 
+## Fitur Semart Skeleton
+
 ## Kebutuhan Sistem
 
 - PHP 7.2 atau lebih baru
