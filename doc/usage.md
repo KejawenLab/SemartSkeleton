@@ -18,8 +18,8 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use KejawenLab\Semart\Skeleton\Contract\Entity\NameableTrait;
 use KejawenLab\Semart\Skeleton\Contract\Entity\PrimaryableTrait;
-use KejawenLab\Semart\Skeleton\Search\Searchable;
-use KejawenLab\Semart\Skeleton\Sort\Sortable;
+use KejawenLab\Semart\Skeleton\Query\Searchable;
+use KejawenLab\Semart\Skeleton\Query\Sortable;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
