@@ -10,6 +10,25 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 ## Fitur Semart Skeleton
 
+- Pengaturan User
+
+- Pengaturan Group
+
+- Pengaturan Menu
+
+- Pengaturan Hak Akses
+
+- Pengaturan Aplikasi
+
+- SQL Editor
+
+- CRUD Generator
+
+- Pengurutan
+
+- Pencarian
+
+
 ## Kebutuhan Sistem
 
 - PHP 7.2 atau lebih baru
