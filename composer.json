@@ -2,7 +2,7 @@
     "name": "kejawenlab/semart-skeleton",
     "description": "Symfony Skeleton with common functionalities so developer can focus on business",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
