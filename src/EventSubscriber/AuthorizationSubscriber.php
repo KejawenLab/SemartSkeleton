@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 use Doctrine\Common\Annotations\Reader;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
+use KejawenLab\Semart\Skeleton\Security\Service\OwnershipService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -22,12 +23,15 @@ class AuthorizationSubscriber implements EventSubscriberInterface
 
     private $menuService;
 
+    private $ownershipService;
+
     private $authorizationChecker;
 
-    public function __construct(Reader $reader, MenuService $menuService, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(Reader $reader, MenuService $menuService, OwnershipService $ownershipService, AuthorizationCheckerInterface $authorizationChecker)
     {
         $this->reader = $reader;
         $this->menuService = $menuService;
+        $this->ownershipService = $ownershipService;
         $this->authorizationChecker = $authorizationChecker;
     }
 
@@ -54,6 +58,12 @@ class AuthorizationSubscriber implements EventSubscriberInterface
             }
 
             if (0 === $authorize) {
+                throw new AccessDeniedException();
+            }
+        }
+
+        if ($classAnnotation && $classAnnotation->isOwnership()) {
+            if (!$this->ownershipService->isOwner($event->getRequest(), $method)) {
                 throw new AccessDeniedException();
             }
         }

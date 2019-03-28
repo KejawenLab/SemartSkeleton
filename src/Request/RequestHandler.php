@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Request;
 
 use KejawenLab\Semart\Skeleton\Application;
-use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
-use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -19,7 +17,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class RequestHandler
 {
-    const REQUEST_TOKEN_NAME = 'APP_CSRF_TOKEN';
+    public const REQUEST_TOKEN_NAME = 'APP_CSRF_TOKEN';
+
+    private $application;
 
     private $propertyAccessor;
 
@@ -29,16 +29,14 @@ class RequestHandler
 
     private $translator;
 
-    /** @var ServiceInterface[] */
-    private $services;
-
     private $errors;
 
     private $valid = false;
 
-    public function __construct(ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
+    public function __construct(Application $application, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
     {
         $this->propertyAccessor = new PropertyAccessor();
+        $this->application = $application;
         $this->validator = $validator;
         $this->eventDispatcher = $eventDispatcher;
         $this->translator = $translator;
@@ -78,32 +76,6 @@ class RequestHandler
         return $this->errors;
     }
 
-    public function setServices(array $services)
-    {
-        foreach ($services as $service) {
-            $this->addService($service);
-        }
-    }
-
-    private function addService(ServiceInterface $service)
-    {
-        $class = explode('\\', get_class($service));
-        $key = Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
-        $this->services[$key] = $service;
-    }
-
-    private function getServiceKey(string $field, object $object)
-    {
-        $key = Str::make($field)->lowercase()->__toString();
-        if ('parent' === $key) {
-            $class = explode('\\', get_class($object));
-
-            return Str::make(array_pop($class))->lowercase()->__toString();
-        }
-
-        return $key;
-    }
-
     private function validate(object $object, \ReflectionClass $reflection): void
     {
         $errors = $this->validator->validate($object);
@@ -122,12 +94,7 @@ class RequestHandler
         try {
             $this->propertyAccessor->setValue($object, $field, $value);
         } catch (\Exception $e) {
-            $key = $this->getServiceKey($field, $object);
-            if (!array_key_exists($key, $this->services)) {
-                throw new \InvalidArgumentException();
-            }
-
-            $service = $this->services[$key];
+            $service = $this->application->getService(new \ReflectionObject($object), $field);
             $this->propertyAccessor->setValue($object, $field, $service->get($value));
         }
     }

@@ -44,3 +44,6 @@ Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
 Untuk melihat contoh penggunaannya, Anda membuka file [Group Controller](../src/Controller/Admin/GroupController.php)
 
 Sangat mudah sekali, bukan? 
+
+
+[Kembali Ke Index](../README.md)

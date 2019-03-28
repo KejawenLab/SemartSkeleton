@@ -21,6 +21,8 @@ class Permission
 
     private $actions = [];
 
+    private $ownership = false;
+
     public function __construct(array $configs = [])
     {
         if (isset($configs['menu']) && \is_string($configs['menu'])) {
@@ -36,6 +38,10 @@ class Permission
                 $this->actions = $configs['actions'];
             }
         }
+
+        if (isset($configs['ownership']) && \is_bool($configs['ownership'])) {
+            $this->ownership = $configs['ownership'];
+        }
     }
 
     public function getMenu(): string
@@ -46,5 +52,10 @@ class Permission
     public function getActions(): array
     {
         return $this->actions;
+    }
+
+    public function isOwnership()
+    {
+        return (bool) $this->ownership;
     }
 }

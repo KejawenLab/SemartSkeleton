@@ -49,3 +49,6 @@ Seperti pada entity [Menu](../src/Entity/Menu.php)
 ## Implementasi Pengurutan pada Template
 
 Untuk menggunakan fitur pengurutan pada template, Anda cukup menambahkan `<i data-sort="no" data-sort-field="username" class="fa fa-sort sortable pull-right"></i>` pada header table seperti pada file `index.html.twig` yang di-generate oleh Semart Skeleton.
+
+
+[Kembali Ke Index](../README.md)

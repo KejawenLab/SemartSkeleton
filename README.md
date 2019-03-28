@@ -30,6 +30,8 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 - Multiple File Upload
 
+- User Context Filter
+
 
 ## Kebutuhan Sistem
 
@@ -123,6 +125,8 @@ services:
 - [Pencarian dan Sorting](doc/search_sort.md)
 
 - [Event System](doc/event.md)
+
+- [User Context](doc/user_context.md)
 
 ## Unit Testing
 

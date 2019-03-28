@@ -25,3 +25,6 @@ Pada gambar di atas, terlihat ada beberapa atribut atau field pada form **Menu**
 - **Menu Rute**: Route controller.
 
 - **Tampilkan**: Ditampilkan atau tidak menu tersebut.
+
+
+[Kembali Ke Index](../README.md)

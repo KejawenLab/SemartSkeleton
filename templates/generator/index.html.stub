@@ -118,7 +118,7 @@
 
                     toastr['success']('{{ 'label.crud.save_message' | trans }}');
 
-                    refreshTable(Routing.generate('{# entity | pluralize | underscore #}_index'), '{{ title }}');
+                    refreshTable(window.location.href, '{{ title }}');
                 } else {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
