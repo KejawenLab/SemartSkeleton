@@ -39,7 +39,7 @@ class HomeController extends AbstractController
             $response->headers->set('Content-type', $file->getMimeType());
             $response->headers->set('Content-length', $file->getSize());
 
-            if ($request->query->get('force')) {
+            if ($request->query->get('f')) {
                 $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s.%s"', $fileLocator->createUniqueFileName(), $file->getExtension()));
             }
 

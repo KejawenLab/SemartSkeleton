@@ -31,7 +31,7 @@ class SettingController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $settings = $paginator->paginate(Setting::class, (int) $request->query->get('page', 1));
+        $settings = $paginator->paginate(Setting::class, (int) $request->query->get('p', 1));
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('setting/table-content.html.twig', ['settings' => $settings]);

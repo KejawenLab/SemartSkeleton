@@ -31,7 +31,7 @@ class GroupController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $groups = $paginator->paginate(Group::class, (int) $request->query->get('page', 1));
+        $groups = $paginator->paginate(Group::class, (int) $request->query->get('p', 1));
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('group/table-content.html.twig', ['groups' => $groups]);

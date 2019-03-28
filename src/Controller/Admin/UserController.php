@@ -32,7 +32,7 @@ class UserController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, GroupService $groupService)
     {
-        $users = $paginator->paginate(User::class, (int) $request->query->get('page', 1));
+        $users = $paginator->paginate(User::class, (int) $request->query->get('p', 1));
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('user/table-content.html.twig', ['users' => $users]);

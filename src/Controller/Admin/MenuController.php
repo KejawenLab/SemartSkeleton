@@ -31,7 +31,7 @@ class MenuController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, MenuService $menuService)
     {
-        $menus = $paginator->paginate(Menu::class, (int) $request->query->get('page', 1));
+        $menus = $paginator->paginate(Menu::class, (int) $request->query->get('p', 1));
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('menu/table-content.html.twig', ['menus' => $menus]);

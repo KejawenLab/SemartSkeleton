@@ -40,7 +40,7 @@ class {{ entityHumanize }}Controller extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        ${{ entityPluralLowerize }} = $paginator->paginate({{ entityHumanize }}::class, (int) $request->query->get('page', 1));
+        ${{ entityPluralLowerize }} = $paginator->paginate({{ entityHumanize }}::class, (int) $request->query->get('p', 1));
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('{{ entityUnderscoreLowerize }}/table-content.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
