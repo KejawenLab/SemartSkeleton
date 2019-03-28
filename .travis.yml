@@ -7,10 +7,6 @@ php:
 matrix:
   fast_finish: true
 
-global:
-  - CI=true
-  - CI_ENVIRONMENT=testing
-
 sudo: required
 dist: trusty
 group: edge
