@@ -13,7 +13,6 @@ use PHLAK\Twine\Str;
 class Application
 {
     public const APP_UNIQUE_NAME = 'semart';
-
     public const REQUEST_EVENT = 'app.request';
     public const PRE_VALIDATION_EVENT = 'app.pre_validation';
     public const PAGINATION_EVENT = 'app.pagination';
@@ -29,13 +28,6 @@ class Application
         }
     }
 
-    private function addService(ServiceInterface $service)
-    {
-        $class = explode('\\', get_class($service));
-        $key = Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
-        $this->services[$key] = $service;
-    }
-
     public function getService(\ReflectionClass $class, string $field = 'id')
     {
         $key = $this->getServiceKey($field, $class);
@@ -45,6 +37,13 @@ class Application
         }
 
         return $this->services[$key];
+    }
+
+    private function addService(ServiceInterface $service)
+    {
+        $class = explode('\\', get_class($service));
+        $key = Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
+        $this->services[$key] = $service;
     }
 
     private function getServiceKey(string $field, \ReflectionClass $class)
