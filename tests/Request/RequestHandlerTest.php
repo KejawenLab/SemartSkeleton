@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Tests\Request;
 
+use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +32,7 @@ class RequestHandlerTest extends TestCase
 
         $translatorMock = $this->getMockBuilder(TranslatorInterface::class)->disableOriginalConstructor()->getMock();
 
-        $requestHandler = new RequestHandler($validatorMock, $eventDispatcherMock, $translatorMock);
+        $requestHandler = new RequestHandler(new Application(), $validatorMock, $eventDispatcherMock, $translatorMock);
 
         $request = Request::createFromGlobals();
         $request->request->set('code', 'XXX');
