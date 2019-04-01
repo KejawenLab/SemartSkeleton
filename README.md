@@ -1,5 +1,7 @@
 # Semart Skeleton
 
+[![Build Status](https://travis-ci.org/KejawenLab/SemartSkeleton.svg?branch=master)](https://travis-ci.org/KejawenLab/SemartSkeleton)
+
 ## Tentang
 
 **Semart Skeleton** adalah sebuah skeleton atau boilerplate atau kerangka awal untuk memulai sebuah proyek. Dibangun dengan menggunakan framework [Symfony](https://symfony.com) dan berbagai bundle serta diramu oleh Developer yang telah berpengalaman lebih dari **7 tahun** menggunakan Symfony.
