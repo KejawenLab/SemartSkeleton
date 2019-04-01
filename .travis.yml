@@ -1,0 +1,26 @@
+language: php
+
+php:
+  - 7.2
+  - 7.3
+
+matrix:
+  fast_finish: true
+
+sudo: required
+dist: trusty
+group: edge
+
+addons:
+  mariadb: '10.0'
+
+services:
+  - mysql
+  - redis-server
+
+before_script:
+  - echo 'extension = redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - composer install --prefer-dist
+
+script:
+  - php vendor/bin/phpunit -c phpunit.xml.travis.dist
