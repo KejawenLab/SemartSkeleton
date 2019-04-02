@@ -25,5 +25,5 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - bin/phpunit -c phpunit.xml.travis.dist
-  - bin/php-coveralls -v --exclude-no-stmt
+  - vendor/bin/phpunit -c phpunit.xml.travis.dist
+  - vendor/bin/php-coveralls -v --exclude-no-stmt
