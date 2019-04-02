@@ -45,9 +45,9 @@ class AuthorizationSubscriber implements EventSubscriberInterface
         $controller = new \ReflectionObject($controllerObject[0]);
         $method = $controller->getMethod($controllerObject[1]);
 
-        /** @var Permission $classAnnotation */
+        /** @var Permission|null $classAnnotation */
         $classAnnotation = $this->reader->getClassAnnotation($controller, Permission::class);
-        /** @var Permission $methodAnnotation */
+        /** @var Permission|null $methodAnnotation */
         $methodAnnotation = $this->reader->getMethodAnnotation($method, Permission::class);
 
         if ($classAnnotation && $methodAnnotation) {
