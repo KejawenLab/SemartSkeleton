@@ -1,6 +1,7 @@
 # Semart Skeleton
 
 [![Build Status](https://travis-ci.org/KejawenLab/SemartSkeleton.svg?branch=master)](https://travis-ci.org/KejawenLab/SemartSkeleton)
+[![Coverage Status](https://coveralls.io/repos/github/KejawenLab/SemartSkeleton/badge.svg?branch=master)](https://coveralls.io/github/KejawenLab/SemartSkeleton?branch=master)
 
 ## Tentang
 
