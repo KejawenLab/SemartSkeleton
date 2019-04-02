@@ -37,7 +37,8 @@ class AuthorizationSubscriber implements EventSubscriberInterface
 
     public function authorize(FilterControllerEvent $event)
     {
-        if (!is_array($controllerObject = $event->getController())) {
+        $controllerObject = $event->getController();
+        if (!is_array($controllerObject)) {
             return;
         }
 

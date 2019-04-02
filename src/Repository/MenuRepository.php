@@ -17,13 +17,14 @@ class MenuRepository extends Repository
         parent::__construct($registry, Menu::class);
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria, array $orderBy = null): ?Menu
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy)));
 
         if ($this->isCacheable()) {
             $object = $this->getItem($key);
             if (!$object) {
+                /** @var Menu|null $object */
                 $object = parent::findOneBy($criteria, $orderBy);
 
                 $this->cache($key, $object);
@@ -32,7 +33,9 @@ class MenuRepository extends Repository
             return $object;
         }
 
-        return parent::findOneBy($criteria, $orderBy);
+        /** @var Menu|null $object */
+        $object = parent::findOneBy($criteria, $orderBy);
+        return $object;
     }
 
     public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
