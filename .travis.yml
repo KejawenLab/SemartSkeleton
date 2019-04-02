@@ -22,6 +22,7 @@ before_script:
   - echo 'extension = redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --prefer-dist
   - composer require --dev php-coveralls/php-coveralls
+  - composer require --dev phpstan/phpstan
   - mkdir -p build/logs
 
 script:

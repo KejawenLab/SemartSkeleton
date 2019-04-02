@@ -28,7 +28,7 @@ class RequestEvent extends Event
     }
 
     /**
-     * @return \object
+     * @return object
      */
     public function getObject(): object
     {
