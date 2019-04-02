@@ -1,3 +1,0 @@
-parameters:
-	ignoreErrors:
-		- '#Parameter \#2 $values of method Symfony\Component\HttpFoundation\ResponseHeaderBag::set() expects array<string>|string, int given.#'
