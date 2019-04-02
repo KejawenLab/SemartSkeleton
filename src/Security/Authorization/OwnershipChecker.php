@@ -41,8 +41,7 @@ class OwnershipChecker
             return false;
         }
 
-        $reflection = new \ReflectionObject($data);
-        if (!$reflection->hasMethod('getCreatedBy')) {
+        if (! method_exists($data, 'getCreatedBy')) {
             return false;
         }
 

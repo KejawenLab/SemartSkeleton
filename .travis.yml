@@ -26,6 +26,6 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - vendor/bin/phpstan analyze --level=5 src/
+  - vendor/bin/phpstan analyze --level=6 src/
   - vendor/bin/phpunit -c phpunit.xml.travis.dist
   - vendor/bin/php-coveralls -v --exclude-no-stmt
