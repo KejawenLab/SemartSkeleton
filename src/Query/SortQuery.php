@@ -24,10 +24,15 @@ class SortQuery implements EventSubscriberInterface
     public function apply(PaginationEvent $event): void
     {
         $request = $event->getRequest();
+        if (! $request) {
+            return;
+        }
+
         if ('' === $sortField = $request->query->get('s', '')) {
             return;
         }
 
+        /** @var \Doctrine\ORM\QueryBuilder $queryBuilder */
         $queryBuilder = $event->getQueryBuilder();
         $annotations = $this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass()));
         foreach ($annotations as $annotation) {

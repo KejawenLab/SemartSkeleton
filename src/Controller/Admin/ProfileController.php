@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -37,6 +38,9 @@ class ProfileController extends AdminController
         }
 
         $user = $service->get($user->getId());
+        if (! $user) {
+            throw new NotFoundHttpException();
+        }
         $requestHandler->handle($request, $user);
         $this->commit($user);
 

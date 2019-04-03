@@ -48,9 +48,9 @@ class TemplateGenerator extends AbstractGenerator
             Inflector::camelize(Inflector::pluralize($entity->__toString())),
         ];
 
-        $indexTemplate = str_replace($search, $replace, file_get_contents(sprintf('%s/templates/generator/index.html.stub', $projectDir)));
-        $paginationTemplate = str_replace($search, $replace, file_get_contents(sprintf('%s/templates/generator/pagination.html.stub', $projectDir)));
-        $tableTemplate = str_replace($search, $replace, file_get_contents(sprintf('%s/templates/generator/table-content.html.stub', $projectDir)));
+        $indexTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/index.html.stub', $projectDir)));
+        $paginationTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/pagination.html.stub', $projectDir)));
+        $tableTemplate = str_replace($search, $replace, (string) file_get_contents(sprintf('%s/templates/generator/table-content.html.stub', $projectDir)));
 
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/index.html.twig', $projectDir, $folderName), $indexTemplate);
         $this->fileSystem->dumpFile(sprintf('%s/templates/%s/pagination.html.twig', $projectDir, $folderName), $paginationTemplate);

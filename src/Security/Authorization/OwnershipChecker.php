@@ -33,7 +33,13 @@ class OwnershipChecker
 
         /** @var User $user */
         $user = $this->token->getUser();
-        if (Group::SUPER_ADMINISTRATOR_CODE === $user->getGroup()->getCode()) {
+        $group = $user->getGroup();
+
+        if (! $group) {
+            return false;
+        }
+
+        if (Group::SUPER_ADMINISTRATOR_CODE === $group->getCode()) {
             return true;
         }
 
@@ -41,8 +47,7 @@ class OwnershipChecker
             return false;
         }
 
-        $reflection = new \ReflectionObject($data);
-        if (!$reflection->hasMethod('getCreatedBy')) {
+        if (! method_exists($data, 'getCreatedBy')) {
             return false;
         }
 

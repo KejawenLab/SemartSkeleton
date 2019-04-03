@@ -69,6 +69,6 @@ abstract class Fixture extends Base
     {
         $path = sprintf('%s/fixtures/%s.yaml', $this->container->getParameter('kernel.project_dir'), $this->getReferenceKey());
 
-        return Yaml::parse(file_get_contents($path));
+        return Yaml::parse((string) file_get_contents($path));
     }
 }

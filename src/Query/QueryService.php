@@ -51,13 +51,13 @@ class QueryService
 
             $output['columns'] = $columns;
             $output['records'] = $results;
-            $output['total'] = count($results);
+            $output['total'] = $results ? count($results) : 0;
         } catch (\Exception $e) {
             $messages = explode(':', $e->getMessage());
 
             $output['status'] = false;
             $output['columns'] = ['error', 'reason', 'solution'];
-            $output['records'][] = [Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make(explode(';', $messages[3])[1])->trim()->uppercaseFirst()->__toString()];
+            $output['records'] = [[Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make(explode(';', $messages[3])[1])->trim()->uppercaseFirst()->__toString()]];
         }
 
         return $output;

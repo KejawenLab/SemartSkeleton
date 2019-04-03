@@ -117,7 +117,7 @@ class Role
         $this->addable = (bool) $addable;
     }
 
-    public function isEditable(): ?bool
+    public function isEditable(): bool
     {
         return $this->editable;
     }
@@ -127,7 +127,7 @@ class Role
         $this->editable = (bool) $editable;
     }
 
-    public function isViewable(): ?bool
+    public function isViewable(): bool
     {
         return $this->viewable;
     }
@@ -137,7 +137,7 @@ class Role
         $this->viewable = (bool) $viewable;
     }
 
-    public function isDeletable(): ?bool
+    public function isDeletable(): bool
     {
         return $this->deletable;
     }

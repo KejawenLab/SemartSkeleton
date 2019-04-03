@@ -75,6 +75,10 @@ class SettingController extends AdminController
             $setting = new Setting();
         }
 
+        if (! $setting) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $setting);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);

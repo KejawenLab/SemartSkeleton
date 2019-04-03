@@ -42,7 +42,7 @@ class Application
     private function addService(ServiceInterface $service)
     {
         $class = explode('\\', get_class($service));
-        $key = Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
+        $key = Str::make((string) array_pop($class))->lowercase()->replace('service', '')->__toString();
         $this->services[$key] = $service;
     }
 
@@ -52,7 +52,7 @@ class Application
         if ('parent' === $key || 'id' === $key) {
             $class = explode('\\', $class->getName());
 
-            return Str::make(array_pop($class))->lowercase()->replace('service', '')->__toString();
+            return Str::make((string) array_pop($class))->lowercase()->replace('service', '')->__toString();
         }
 
         return $key;

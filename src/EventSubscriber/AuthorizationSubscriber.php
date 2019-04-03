@@ -37,16 +37,17 @@ class AuthorizationSubscriber implements EventSubscriberInterface
 
     public function authorize(FilterControllerEvent $event)
     {
-        if (!is_array($controllerObject = $event->getController())) {
+        $controllerObject = $event->getController();
+        if (!is_array($controllerObject)) {
             return;
         }
 
         $controller = new \ReflectionObject($controllerObject[0]);
         $method = $controller->getMethod($controllerObject[1]);
 
-        /** @var Permission $classAnnotation */
+        /** @var Permission|null $classAnnotation */
         $classAnnotation = $this->reader->getClassAnnotation($controller, Permission::class);
-        /** @var Permission $methodAnnotation */
+        /** @var Permission|null $methodAnnotation */
         $methodAnnotation = $this->reader->getMethodAnnotation($method, Permission::class);
 
         if ($classAnnotation && $methodAnnotation) {

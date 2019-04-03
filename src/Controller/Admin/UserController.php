@@ -76,6 +76,10 @@ class UserController extends AdminController
             $user = new User();
         }
 
+        if (! $user) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $user);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);

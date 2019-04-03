@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/KejawenLab/SemartSkeleton.svg?branch=master)](https://travis-ci.org/KejawenLab/SemartSkeleton)
 [![Coverage Status](https://coveralls.io/repos/github/KejawenLab/SemartSkeleton/badge.svg?branch=master)](https://coveralls.io/github/KejawenLab/SemartSkeleton?branch=master)
+[![PHPStan](https://img.shields.io/badge/style-level%20max-brightgreen.svg?style=flat-square&label=phpstan)](https://github.com/phpstan/phpstan)
 
 ## Tentang
 

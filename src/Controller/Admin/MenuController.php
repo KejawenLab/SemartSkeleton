@@ -75,6 +75,10 @@ class MenuController extends AdminController
             $menu = new Menu();
         }
 
+        if (! $menu) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $menu);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);

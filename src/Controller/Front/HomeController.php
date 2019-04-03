@@ -36,8 +36,8 @@ class HomeController extends AbstractController
             $file = new File($filePath);
 
             $response->headers->set('Cache-Control', 'private');
-            $response->headers->set('Content-type', $file->getMimeType());
-            $response->headers->set('Content-length', $file->getSize());
+            $response->headers->set('Content-type', (string) $file->getMimeType());
+            $response->headers->set('Content-length', (string) $file->getSize());
 
             if ($request->query->get('f')) {
                 $response->headers->set('Content-Disposition', sprintf('attachment; filename="%s.%s"', $fileLocator->createUniqueFileName(), $file->getExtension()));

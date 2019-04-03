@@ -36,12 +36,18 @@ class OwnershipService
                 break;
             }
 
-            if ('id' === $argument->getName() && $argument->getType() && 'string' === $argument->getType()->getName()) {
-                $id = $request->get($argument->getName());
+            if (! $argumentType = $argument->getType()) {
+                continue;
             }
 
-            if ('service' === $argument->getName() && $argument->getType()) {
-                $reflectionClass = new \ReflectionClass($argument->getType()->getName());
+            $argumentName = $argument->getName();
+
+            if ('id' === $argumentName && 'string' === $argumentType->getName()) {
+                $id = $request->get($argumentName);
+            }
+
+            if ('service' === $argumentName) {
+                $reflectionClass = new \ReflectionClass($argumentType->getName());
                 if ($reflectionClass->implementsInterface(ServiceInterface::class)) {
                     $service = $this->application->getService($reflectionClass);
                 }
