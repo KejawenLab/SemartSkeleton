@@ -5080,7 +5080,7 @@ var Buttons = /** @class */ (function () {
     };
     Buttons.prototype.addToolbarButtons = function () {
         var _this = this;
-        this.context.memo('button.style', function () {
+        this.context.memo('style', function () {
             return _this.ui.buttonGroup([
                 _this.button({
                     className: 'dropdown-toggle',
@@ -5110,7 +5110,7 @@ var Buttons = /** @class */ (function () {
         });
         var _loop_1 = function (styleIdx, styleLen) {
             var item = this_1.options.styleTags[styleIdx];
-            this_1.context.memo('button.style.' + item, function () {
+            this_1.context.memo('style.' + item, function () {
                 return _this.button({
                     className: 'note-btn-style-' + item,
                     contents: '<div data-value="' + item + '">' + item.toUpperCase() + '</div>',

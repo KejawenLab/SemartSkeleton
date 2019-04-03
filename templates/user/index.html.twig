@@ -108,8 +108,6 @@
 
 {% block javascripts %}{% filter spaceless %}
 <script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
-<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 <script>
     $(window).ready(function () {
         localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');

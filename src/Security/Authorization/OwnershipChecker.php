@@ -18,22 +18,19 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class OwnershipChecker
 {
-    private $username;
-
     private $token;
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {
-        if (!$token = $tokenStorage->getToken()) {
-            throw new AccessDeniedException();
-        }
-
-        $this->token = $token;
-        $this->username = $token->getUsername();
+        $this->token = $tokenStorage->getToken();
     }
 
     public function isOwner(string $id, ServiceInterface $service): bool
     {
+        if (!$this->token) {
+            return false;
+        }
+
         /** @var User $user */
         $user = $this->token->getUser();
         if (Group::SUPER_ADMINISTRATOR_CODE === $user->getGroup()->getCode()) {
@@ -49,7 +46,7 @@ class OwnershipChecker
             return false;
         }
 
-        if ($data->getCreatedBy() === $this->username) {
+        if ($data->getCreatedBy() === $user->getUsername()) {
             return true;
         }
 
