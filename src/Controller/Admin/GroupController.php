@@ -75,6 +75,10 @@ class GroupController extends AdminController
             $group = new Group();
         }
 
+        if (! $group) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $group);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);

@@ -59,6 +59,10 @@ class RoleController extends AdminController
             $role = new Role();
         }
 
+        if (! $role) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $role);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);
