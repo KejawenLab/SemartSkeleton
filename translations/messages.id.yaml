@@ -6,6 +6,7 @@ label:
         error_title: 'PESAN ERROR'
         error_message: 'Kombinasi username dan password tidak sesuai'
         logout: 'Keluar'
+        goto_homepage: 'Kembali Ke Halaman Awal'
     crud:
         add: 'Tambah'
         add_title: 'Tambah %title% Baru'
