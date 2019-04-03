@@ -130,6 +130,8 @@
     <script src="{{ asset('lib/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('lib/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/jquery.numeric.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script>
         $(document).ready(function () {
             toastr.options = {
