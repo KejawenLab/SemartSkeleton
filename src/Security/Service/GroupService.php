@@ -29,7 +29,13 @@ class GroupService implements ServiceInterface
 
     public function isSuperAdmin(User $user): bool
     {
-        return Group::SUPER_ADMINISTRATOR_CODE === $user->getGroup()->getCode();
+        $group = $user->getGroup();
+
+        if (! $group) {
+            return false;
+        }
+
+        return Group::SUPER_ADMINISTRATOR_CODE === $group->getCode();
     }
 
     /**
