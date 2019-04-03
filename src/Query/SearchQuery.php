@@ -24,10 +24,16 @@ class SearchQuery implements EventSubscriberInterface
 
     public function apply(PaginationEvent $event): void
     {
-        if ('' === $queryString = $event->getRequest()->query->get('q', '')) {
+        $request = $event->getRequest();
+        if (! $request) {
             return;
         }
 
+        if ('' === $queryString = $request->query->get('q', '')) {
+            return;
+        }
+
+        /** @var \Doctrine\ORM\QueryBuilder $queryBuilder */
         $queryBuilder = $event->getQueryBuilder();
         $annotations = $this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass()));
         foreach ($annotations as $annotation) {
