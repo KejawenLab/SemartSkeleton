@@ -40,11 +40,13 @@ class OwnershipService
                 continue;
             }
 
-            if ('id' === $argument->getName() && 'string' === $argumentType->getName()) {
-                $id = $request->get($argument->getName());
+            $argumentName = $argument->getName();
+
+            if ('id' === $argumentName && 'string' === $argumentType->getName()) {
+                $id = $request->get($argumentName);
             }
 
-            if ('service' === $argument->getName()) {
+            if ('service' === $argumentName) {
                 $reflectionClass = new \ReflectionClass($argumentType->getName());
                 if ($reflectionClass->implementsInterface(ServiceInterface::class)) {
                     $service = $this->application->getService($reflectionClass);
