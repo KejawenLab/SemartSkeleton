@@ -11,6 +11,12 @@ security:
         ROLE_USER: ROLE_USER
 
     firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt))/
+            security: false
+        assets:
+            pattern: ^/(css|images|img|js|lib|fonts|bundles)/
+            security: false
         main:
             pattern: ^/
             form_login:
@@ -23,14 +29,6 @@ security:
                 path: logout
                 target: home_dashboard
             anonymous:    true
-
-        assets:
-            pattern: ^/(css|images|img|js|lib|fonts|bundles)/
-            security: false
-
-        dev:
-            pattern:  ^/(_(profiler|wdt))/
-            security: false
 
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
