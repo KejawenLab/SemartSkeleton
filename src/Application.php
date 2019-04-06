@@ -31,7 +31,6 @@ class Application
     public function getService(\ReflectionClass $class, string $field = 'id')
     {
         $key = $this->getServiceKey($field, $class);
-        dump($key);
         if (!array_key_exists($key, $this->services)) {
             return null;
         }
