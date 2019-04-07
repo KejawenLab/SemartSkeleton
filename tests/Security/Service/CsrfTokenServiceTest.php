@@ -74,11 +74,11 @@ class CsrfTokenServiceTest extends TestCase
 
         $response = new Response();
         $response->headers->set('Content-Type', 'application/json');
-        $this->assertEquals(JsonResponse::class, get_class($service->apply($response)));
+        $this->assertEquals(JsonResponse::class, \get_class($service->apply($response)));
 
         $response = new Response();
         $responseService = $service->apply($response);
-        $this->assertNotEquals(JsonResponse::class, get_class($responseService));
-        $this->assertEquals(Response::class, get_class($service->apply($response)));
+        $this->assertNotEquals(JsonResponse::class, \get_class($responseService));
+        $this->assertEquals(Response::class, \get_class($service->apply($response)));
     }
 }

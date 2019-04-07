@@ -45,7 +45,7 @@ class RoleRepositoryTest extends DatabaseTestCase
 
         $group = (new GroupRepository(static::$container->get('doctrine')))->findOneBy(['code' => 'SPRADM']);
 
-        $this->assertGreaterThanOrEqual(0, count($repository->findParentMenuByGroup($group)));
+        $this->assertGreaterThanOrEqual(0, \count($repository->findParentMenuByGroup($group)));
     }
 
     public function testFindRolesByGroup()
@@ -58,7 +58,7 @@ class RoleRepositoryTest extends DatabaseTestCase
 
         $group = (new GroupRepository(static::$container->get('doctrine')))->findOneBy(['code' => 'SPRADM']);
 
-        $this->assertGreaterThanOrEqual(0, count($repository->findRolesByGroup($group)));
+        $this->assertGreaterThanOrEqual(0, \count($repository->findRolesByGroup($group)));
     }
 
     public function testFindChildMenuByGroupAndMenu()
@@ -72,6 +72,6 @@ class RoleRepositoryTest extends DatabaseTestCase
         $group = (new GroupRepository(static::$container->get('doctrine')))->findOneBy(['code' => 'SPRADM']);
         $menu = (new MenuRepository(static::$container->get('doctrine')))->findByCode('ADMIN');
 
-        $this->assertGreaterThanOrEqual(0, count($repository->findChildMenuByGroupAndMenu($group, $menu)));
+        $this->assertGreaterThanOrEqual(0, \count($repository->findChildMenuByGroupAndMenu($group, $menu)));
     }
 }

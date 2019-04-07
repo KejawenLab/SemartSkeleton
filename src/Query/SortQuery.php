@@ -24,7 +24,7 @@ class SortQuery implements EventSubscriberInterface
     public function apply(PaginationEvent $event): void
     {
         $request = $event->getRequest();
-        if (! $request) {
+        if (!$request) {
             return;
         }
 
@@ -41,7 +41,7 @@ class SortQuery implements EventSubscriberInterface
             }
 
             $sortableFields = $annotation->getFields();
-            if (!in_array($sortField, $sortableFields)) {
+            if (!\in_array($sortField, $sortableFields)) {
                 continue;
             }
 
@@ -49,7 +49,7 @@ class SortQuery implements EventSubscriberInterface
             if (false !== strpos($sortField, '.')) {
                 $fields = explode('.', $sortField);
 
-                $length = count($fields);
+                $length = \count($fields);
                 foreach ($fields as $key => $field) {
                     if ($key === $length - 1) {
                         continue;
@@ -58,7 +58,7 @@ class SortQuery implements EventSubscriberInterface
                     $alias = $event->getJoinAlias($field);
                     if (!$alias) {
                         $random = Application::APP_UNIQUE_NAME;
-                        $alias  = $random[rand($key, strlen($random)-1)];
+                        $alias = $random[rand($key, \strlen($random) - 1)];
 
                         if (0 === $key) {
                             $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $field), $alias);

@@ -35,6 +35,7 @@ class MenuRepository extends Repository
 
         /** @var Menu|null $object */
         $object = parent::findOneBy($criteria, $orderBy);
+
         return $object;
     }
 

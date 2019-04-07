@@ -29,7 +29,7 @@ class SettingExtension extends AbstractExtension
     /**
      * @param string $parameter
      *
-     * @return null|string|int|float
+     * @return string|int|float|null
      */
     public function findSetting(string $parameter)
     {

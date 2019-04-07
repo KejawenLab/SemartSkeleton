@@ -25,7 +25,7 @@ class SearchQuery implements EventSubscriberInterface
     public function apply(PaginationEvent $event): void
     {
         $request = $event->getRequest();
-        if (! $request) {
+        if (!$request) {
             return;
         }
 
@@ -49,14 +49,14 @@ class SearchQuery implements EventSubscriberInterface
                 if (false !== strpos($value, '.')) {
                     $fields = explode('.', $value);
 
-                    $length = count($fields);
+                    $length = \count($fields);
                     foreach ($fields as $key => $field) {
                         if ($key === $length - 1 || \in_array($field, $event->getJoinFields())) {
                             continue;
                         }
 
                         $random = Application::APP_UNIQUE_NAME;
-                        $alias  = $random[rand($key, strlen($random)-1)];
+                        $alias = $random[rand($key, \strlen($random) - 1)];
 
                         if (0 === $key) {
                             $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $field), $alias);
@@ -73,7 +73,7 @@ class SearchQuery implements EventSubscriberInterface
                 }
             }
 
-            $queryBuilder->andWhere(call_user_func_array([$expr, 'orX'], $filters));
+            $queryBuilder->andWhere(\call_user_func_array([$expr, 'orX'], $filters));
         }
     }
 

@@ -59,7 +59,7 @@ class RoleController extends AdminController
             $role = new Role();
         }
 
-        if (! $role) {
+        if (!$role) {
             throw new NotFoundHttpException();
         }
 

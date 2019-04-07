@@ -43,11 +43,11 @@ abstract class Fixture extends Base
                 if (self::REF_KEY === sprintf('%s:', $key)) {
                     $this->setReference(Str::make(sprintf('%s#%s', $this->getReferenceKey(), $value))->uppercase()->__toString(), $entity);
                 } else {
-                    if (is_string($value) && false !== strpos($value, self::REF_KEY)) {
+                    if (\is_string($value) && false !== strpos($value, self::REF_KEY)) {
                         $value = $this->getReference(Str::make(str_replace('ref:', '', $value))->uppercase()->__toString());
                     }
 
-                    if (is_string($value) && false !== strpos($value, 'date:')) {
+                    if (\is_string($value) && false !== strpos($value, 'date:')) {
                         $value = \DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
                     }
 

@@ -14,6 +14,6 @@ class MenuTest extends TestCase
 {
     public function testObject()
     {
-        $this->assertEquals(Menu::class, get_class(new Menu()));
+        $this->assertEquals(Menu::class, \get_class(new Menu()));
     }
 }

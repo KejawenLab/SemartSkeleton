@@ -16,7 +16,9 @@ class GeneratorFactoryTest extends TestCase
     public function testGenerate()
     {
         $factory = new GeneratorFactory([
-            new class implements GeneratorInterface { use FakeGeneratorTrait; },
+            new class() implements GeneratorInterface {
+                use FakeGeneratorTrait;
+            },
         ]);
 
         $this->assertEmpty($factory->generate(new \ReflectionClass(Stub::class)));

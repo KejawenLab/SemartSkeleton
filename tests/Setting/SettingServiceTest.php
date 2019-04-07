@@ -45,6 +45,6 @@ class SettingServiceTest extends TestCase
         $settingService = new SettingService($repositoryMock);
 
         $this->assertEquals($setting->getValue(), $settingService->getValue($setting->getParameter()));
-        $this->assertEquals(null, $settingService->getValue(static::NOT_EXIST));
+        $this->assertNull($settingService->getValue(static::NOT_EXIST));
     }
 }

@@ -38,7 +38,7 @@ class ProfileController extends AdminController
         }
 
         $user = $service->get($user->getId());
-        if (! $user) {
+        if (!$user) {
             throw new NotFoundHttpException();
         }
         $requestHandler->handle($request, $user);

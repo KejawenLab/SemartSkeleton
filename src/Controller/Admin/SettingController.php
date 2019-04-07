@@ -75,7 +75,7 @@ class SettingController extends AdminController
             $setting = new Setting();
         }
 
-        if (! $setting) {
+        if (!$setting) {
             throw new NotFoundHttpException();
         }
 

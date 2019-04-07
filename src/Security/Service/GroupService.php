@@ -31,7 +31,7 @@ class GroupService implements ServiceInterface
     {
         $group = $user->getGroup();
 
-        if (! $group) {
+        if (!$group) {
             return false;
         }
 

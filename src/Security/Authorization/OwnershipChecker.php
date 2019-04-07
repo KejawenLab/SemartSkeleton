@@ -34,7 +34,7 @@ class OwnershipChecker
         $user = $this->token->getUser();
         $group = $user->getGroup();
 
-        if (! $group) {
+        if (!$group) {
             return false;
         }
 
@@ -46,7 +46,7 @@ class OwnershipChecker
             return false;
         }
 
-        if (! method_exists($data, 'getCreatedBy')) {
+        if (!method_exists($data, 'getCreatedBy')) {
             return false;
         }
 

@@ -51,7 +51,7 @@ class QueryService
 
             $output['columns'] = $columns;
             $output['records'] = $results;
-            $output['total'] = $results ? count($results) : 0;
+            $output['total'] = $results ? \count($results) : 0;
         } catch (\Exception $e) {
             $messages = explode(':', $e->getMessage());
 
@@ -70,7 +70,7 @@ class QueryService
 
         $output = [];
         /** @var AbstractAsset[] $tables */
-        $tables =array_merge($schemaManager->listTables(), $schemaManager->listViews());
+        $tables = array_merge($schemaManager->listTables(), $schemaManager->listViews());
         foreach ($tables as $table) {
             $output[] = $table->getName();
         }

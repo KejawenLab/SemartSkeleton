@@ -75,7 +75,7 @@ class GroupController extends AdminController
             $group = new Group();
         }
 
-        if (! $group) {
+        if (!$group) {
             throw new NotFoundHttpException();
         }
 

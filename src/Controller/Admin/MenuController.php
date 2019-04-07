@@ -75,7 +75,7 @@ class MenuController extends AdminController
             $menu = new Menu();
         }
 
-        if (! $menu) {
+        if (!$menu) {
             throw new NotFoundHttpException();
         }
 
