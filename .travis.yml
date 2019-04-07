@@ -27,7 +27,7 @@ before_script:
   - mkdir -p build/logs
 
 script:
-  - vendor/bin/php-cs-fixer fix --dry-run --format txt
+  - vendor/bin/php-cs-fixer fix -v --diff --dry-run --format txt
   - vendor/bin/phpstan analyze --level=max src/
   - vendor/bin/phpunit -c phpunit.xml.travis.dist
   - vendor/bin/php-coveralls -v --exclude-no-stmt
