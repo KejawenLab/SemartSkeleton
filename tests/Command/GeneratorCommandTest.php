@@ -21,10 +21,10 @@ class GeneratorCommandTest extends DatabaseTestCase
 
         $command = static::$application->find('semart:generate');
         $commandTester = new CommandTester($command);
-        $commandTester->execute(array(
-            'command'  => $command->getName(),
+        $commandTester->execute([
+            'command' => $command->getName(),
             'entity' => Stub::class,
-        ));
+        ]);
 
         $output = $commandTester->getDisplay();
         $this->assertContains(sprintf('Simple CRUD for %s class is generated', Stub::class), $output);

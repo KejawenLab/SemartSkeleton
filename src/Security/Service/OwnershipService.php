@@ -36,7 +36,7 @@ class OwnershipService
                 break;
             }
 
-            if (! $argumentType = $argument->getType()) {
+            if (!$argumentType = $argument->getType()) {
                 continue;
             }
 

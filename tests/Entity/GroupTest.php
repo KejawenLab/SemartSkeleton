@@ -14,6 +14,6 @@ class GroupTest extends TestCase
 {
     public function testObject()
     {
-        $this->assertEquals(Group::class, get_class(new Group()));
+        $this->assertEquals(Group::class, \get_class(new Group()));
     }
 }

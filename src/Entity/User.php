@@ -136,7 +136,7 @@ class User implements UserInterface, \Serializable
             $this->fullName,
             $this->username,
             $this->password,
-            $this->group
+            $this->group,
         ]);
     }
 

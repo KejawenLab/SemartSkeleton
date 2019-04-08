@@ -9,5 +9,4 @@ namespace KejawenLab\Semart\Skeleton\Tests\Generator;
  */
 class Stub
 {
-
 }

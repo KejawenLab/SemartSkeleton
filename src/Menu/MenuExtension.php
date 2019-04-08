@@ -64,7 +64,7 @@ class MenuExtension extends AbstractExtension
 
     private function buildHtml(Menu $menu): string
     {
-        $href = $menu->getRouteName()? $this->urlGenerator->generate($menu->getRouteName()) : '#';
+        $href = $menu->getRouteName() ? $this->urlGenerator->generate($menu->getRouteName()) : '#';
 
         return sprintf('<li><a href="%s" id="%s"><i class="fa fa-%s"></i> <span>%s</span></a></li>', $href, $menu->getId(), $menu->getIconClass() ?: 'circle-o', $menu->getName());
     }

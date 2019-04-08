@@ -38,7 +38,7 @@ class AuthorizationSubscriber implements EventSubscriberInterface
     public function authorize(FilterControllerEvent $event)
     {
         $controllerObject = $event->getController();
-        if (!is_array($controllerObject)) {
+        if (!\is_array($controllerObject)) {
             return;
         }
 
@@ -54,7 +54,7 @@ class AuthorizationSubscriber implements EventSubscriberInterface
             $authorize = 0;
             foreach ($methodAnnotation->getActions() as $action) {
                 if ($this->authorizationChecker->isGranted($action, $this->menuService->getMenuByCode($classAnnotation->getMenu()))) {
-                    $authorize++;
+                    ++$authorize;
                 }
             }
 

@@ -25,7 +25,7 @@ class SettingService implements ServiceInterface
     /**
      * @param string $parameter
      *
-     * @return null|string|int|float
+     * @return string|int|float|null
      */
     public function getValue(string $parameter)
     {

@@ -53,7 +53,7 @@ class RequestHandler
             $reflection = $parent;
         }
 
-        $properties = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE|\ReflectionProperty::IS_PROTECTED);
+        $properties = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED);
         foreach ($properties as $property) {
             $field = $property->getName();
             $value = $request->request->get($field);
@@ -79,7 +79,7 @@ class RequestHandler
     private function validate(object $object, \ReflectionClass $reflection): void
     {
         $errors = $this->validator->validate($object);
-        if (count($errors) > 0) {
+        if (\count($errors) > 0) {
             /** @var ConstraintViolationInterface $error */
             foreach ($errors as $error) {
                 $this->errors[] = sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($error->getPropertyPath()))), $this->translator->trans($error->getMessage()));

@@ -58,7 +58,7 @@ class PaginationEvent extends Event
 
     public function getJoinAlias(string $field): ?string
     {
-        if (!array_key_exists($field, $this->joinAlias)) {
+        if (!\array_key_exists($field, $this->joinAlias)) {
             return null;
         }
 

@@ -76,7 +76,7 @@ class UserController extends AdminController
             $user = new User();
         }
 
-        if (! $user) {
+        if (!$user) {
             throw new NotFoundHttpException();
         }
 

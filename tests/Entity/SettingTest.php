@@ -14,6 +14,6 @@ class SettingTest extends TestCase
 {
     public function testObject()
     {
-        $this->assertEquals(Setting::class, get_class(new Setting()));
+        $this->assertEquals(Setting::class, \get_class(new Setting()));
     }
 }

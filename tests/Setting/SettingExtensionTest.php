@@ -57,11 +57,11 @@ class SettingExtensionTest extends TestCase
     public function testFindSetting()
     {
         $this->assertEquals($this->setting->getValue(), $this->settingExtension->findSetting($this->setting->getParameter()));
-        $this->assertEquals(null, $this->settingExtension->findSetting(static::NOT_EXIST));
+        $this->assertNull($this->settingExtension->findSetting(static::NOT_EXIST));
     }
 
     public function testGetFunctions()
     {
-        $this->assertEquals(1, count($this->settingExtension->getFunctions()));
+        $this->assertCount(1, $this->settingExtension->getFunctions());
     }
 }

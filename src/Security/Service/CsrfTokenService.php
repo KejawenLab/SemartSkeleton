@@ -38,7 +38,7 @@ class CsrfTokenService
     public function apply(Response $response): Response
     {
         if (
-            $response->getStatusCode() === Response::HTTP_OK &&
+            Response::HTTP_OK === $response->getStatusCode() &&
             $this->request->isMethod('POST') &&
             $this->request->isXmlHttpRequest() &&
             'application/json' === $response->headers->get('Content-Type')

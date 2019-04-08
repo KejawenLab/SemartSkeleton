@@ -31,7 +31,7 @@ class Application
     public function getService(\ReflectionClass $class, string $field = 'id')
     {
         $key = $this->getServiceKey($field, $class);
-        if (!array_key_exists($key, $this->services)) {
+        if (!\array_key_exists($key, $this->services)) {
             return null;
         }
 
@@ -40,7 +40,7 @@ class Application
 
     private function addService(ServiceInterface $service)
     {
-        $class = explode('\\', get_class($service));
+        $class = explode('\\', \get_class($service));
         $key = Str::make((string) array_pop($class))->lowercase()->replace('service', '')->__toString();
         $this->services[$key] = $service;
     }

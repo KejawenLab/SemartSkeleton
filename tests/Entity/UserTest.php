@@ -14,6 +14,6 @@ class UserTest extends TestCase
 {
     public function testObject()
     {
-        $this->assertEquals(User::class, get_class(new User()));
+        $this->assertEquals(User::class, \get_class(new User()));
     }
 }

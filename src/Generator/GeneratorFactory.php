@@ -30,7 +30,7 @@ class GeneratorFactory
 
     private function addGenerator(GeneratorInterface $generator)
     {
-        $index = $generator->getPriority() === 255 ?: count($this->generators);
+        $index = 255 === $generator->getPriority() ?: \count($this->generators);
 
         $this->generators[$index] = $generator;
     }
