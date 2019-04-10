@@ -50,7 +50,17 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 ## Cara Instalasi (Menggunakan Composer)
 
-- Clone repositori `git clone https://github.com/KejawenLab/SemartSkeleton.git Semart`
+- Clone repositori dengan `git clone` command:
+
+```
+git clone https://github.com/KejawenLab/SemartSkeleton.git Semart
+```
+
+atau dengan `composer create-project` command:
+
+```
+composer create-project -sdev kejawenlab/semart-skeleton Semart
+```
 
 - Masuk ke direktori `Semart` dengan perintah `cd Semart`
 
@@ -87,7 +97,17 @@ DATABASE_URL=mysql://root:aden@localhost:3306/semart
 
 ## Cara Instalasi (Menggunakan Docker)
 
-- Clone repositori `git clone https://github.com/KejawenLab/SemartSkeleton.git Semart`
+- Clone repositori dengan `git clone` command:
+
+```
+git clone https://github.com/KejawenLab/SemartSkeleton.git Semart
+```
+
+atau dengan `composer create-project` command:
+
+```
+composer create-project -sdev kejawenlab/semart-skeleton Semart
+```
 
 - Masuk ke direktori `Semart` dengan perintah `cd Semart`
 
