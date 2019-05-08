@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
+use KejawenLab\Semart\Collection\Collection;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -16,16 +17,17 @@ class RequestNormalizer implements EventSubscriberInterface
     public function normalize(GetResponseEvent $event)
     {
         $request = $event->getRequest();
-        $requests = $request->request->all();
-        foreach ($requests as $key => $value) {
-            if ('false' === $value) {
-                $request->request->set($key, false);
-            }
+        Collection::collect($request->request->all())
+            ->each(function ($value, $key) use ($request) {
+                if ('false' === $value) {
+                    $request->request->set($key, false);
+                }
 
-            if ('true' === $value) {
-                $request->request->set($key, true);
-            }
-        }
+                if ('true' === $value) {
+                    $request->request->set($key, true);
+                }
+            })
+        ;
     }
 
     public static function getSubscribedEvents()

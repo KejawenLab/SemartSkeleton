@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Query;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Schema\AbstractAsset;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use KejawenLab\Semart\Collection\Collection;
 use PHLAK\Twine\Str;
 
 /**
@@ -68,13 +69,13 @@ class QueryService
         /** @var AbstractSchemaManager $schemaManager */
         $schemaManager = $this->registryManager->getConnection(Str::make($connection)->lowercase()->__toString())->getSchemaManager();
 
-        $output = [];
-        /** @var AbstractAsset[] $tables */
-        $tables = array_merge($schemaManager->listTables(), $schemaManager->listViews());
-        foreach ($tables as $table) {
-            $output[] = $table->getName();
-        }
-
-        return $output;
+        return Collection::collect($schemaManager->listTables())
+            ->merge($schemaManager->listViews())
+            ->map(function ($value) {
+                /** @var AbstractAsset $value */
+                return $value->getName();
+            })
+            ->toArray()
+        ;
     }
 }

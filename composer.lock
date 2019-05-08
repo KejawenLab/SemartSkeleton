@@ -1291,12 +1291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KejawenLab/SemartCollection.git",
-                "reference": "4585a2e30080e966c6a224655268fcf665294e33"
+                "reference": "b7c9ab2c29ef54b30d7495f36055cf516148c10b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/4585a2e30080e966c6a224655268fcf665294e33",
-                "reference": "4585a2e30080e966c6a224655268fcf665294e33",
+                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/b7c9ab2c29ef54b30d7495f36055cf516148c10b",
+                "reference": "b7c9ab2c29ef54b30d7495f36055cf516148c10b",
                 "shasum": ""
             },
             "require": {
@@ -1313,7 +1313,7 @@
                 "MIT"
             ],
             "description": "Kejawenlab Collection",
-            "time": "2019-05-08T07:24:12+00:00"
+            "time": "2019-05-08T20:22:53+00:00"
         },
         {
             "name": "knplabs/knp-components",
@@ -2940,16 +2940,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.2.3",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "d65041a4c9b1dbcd606f8be3a5bae2bee4534f6a"
+                "reference": "27909122a3da4676c3dc5dc34c8f82323c610d69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/d65041a4c9b1dbcd606f8be3a5bae2bee4534f6a",
-                "reference": "d65041a4c9b1dbcd606f8be3a5bae2bee4534f6a",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/27909122a3da4676c3dc5dc34c8f82323c610d69",
+                "reference": "27909122a3da4676c3dc5dc34c8f82323c610d69",
                 "shasum": ""
             },
             "require": {
@@ -2985,7 +2985,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2019-04-16T10:04:15+00:00"
+            "time": "2019-05-07T08:10:46+00:00"
         },
         {
             "name": "symfony/framework-bundle",

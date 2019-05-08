@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Role;
@@ -167,12 +168,9 @@ class RoleRepository extends Repository
 
     private function filterMenu(array $roles): array
     {
-        $menus = [];
-        /** @var Role $role */
-        foreach ($roles as $role) {
-            $menus[] = $role->getMenu();
-        }
-
-        return $menus;
+        return Collection::collect($roles)->map(function ($value) {
+            /** @var Role $value */
+            return $value->getMenu();
+        })->toArray();
     }
 }
