@@ -2,6 +2,7 @@
 
 namespace KejawenLab\Semart\Skeleton;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -61,22 +62,22 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $generators = $container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME));
-        $services = [];
-        foreach ($generators as $serviceId => $attributes) {
-            $services[] = new Reference($serviceId);
-        }
+        $services = Collection::collect([]);
+        $generators = Collection::collect($container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME)));
+        $generators->each(function ($attributes, $serviceId) use ($services) {
+            $services->add(new Reference($serviceId));
+        });
 
         $definition = $container->getDefinition(GeneratorFactory::class);
-        $definition->addArgument($services);
+        $definition->addArgument($services->toArray());
 
-        $taggedServices = $container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME));
-        $services = [];
-        foreach ($taggedServices as $serviceId => $attributes) {
-            $services[] = new Reference($serviceId);
-        }
+        $taggedServices = Collection::collect($container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME)));
+        $services->reset();
+        $taggedServices->each(function ($attributes, $serviceId) use ($services) {
+            $services->add(new Reference($serviceId));
+        });
 
         $definition = $container->getDefinition(Application::class);
-        $definition->addMethodCall('setServices', [$services]);
+        $definition->addMethodCall('setServices', [$services->toArray()]);
     }
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f308a489ec35b5f061e6bd1a02258583",
+    "content-hash": "67db698f8361b29f7ad6417029b986b1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1284,6 +1284,36 @@
                 "sql"
             ],
             "time": "2014-01-12T16:20:24+00:00"
+        },
+        {
+            "name": "kejawenlab/semart-collection",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KejawenLab/SemartCollection.git",
+                "reference": "4585a2e30080e966c6a224655268fcf665294e33"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/4585a2e30080e966c6a224655268fcf665294e33",
+                "reference": "4585a2e30080e966c6a224655268fcf665294e33",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "KejawenLab\\Semart\\Collection\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Kejawenlab Collection",
+            "time": "2019-05-08T07:24:12+00:00"
         },
         {
             "name": "knplabs/knp-components",
@@ -6671,7 +6701,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kejawenlab/semart-collection": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

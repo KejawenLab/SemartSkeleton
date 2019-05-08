@@ -95,6 +95,9 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "kejawenlab/semart-collection": {
+        "version": "dev-master"
+    },
     "knplabs/knp-components": {
         "version": "v1.3.10"
     },
