@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use PHLAK\Twine\Str;
 
@@ -23,9 +24,10 @@ class Application
 
     public function setServices(array $services)
     {
-        foreach ($services as $service) {
-            $this->addService($service);
-        }
+        $services = Collection::collect($services);
+        $services->each(function ($value) {
+            $this->addService($value);
+        });
     }
 
     public function getService(\ReflectionClass $class, string $field = 'id')

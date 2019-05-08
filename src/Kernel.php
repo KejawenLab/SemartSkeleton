@@ -62,22 +62,16 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
     public function process(ContainerBuilder $container)
     {
-        $services = Collection::collect([]);
         $generators = Collection::collect($container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME)));
-        $generators->each(function ($attributes, $serviceId) use ($services) {
-            $services->add(new Reference($serviceId));
-        });
-
         $definition = $container->getDefinition(GeneratorFactory::class);
-        $definition->addArgument($services->toArray());
+        $definition->addArgument($generators->keys()->map(function ($serviceId) {
+            return new Reference($serviceId);
+        })->toArray());
 
-        $taggedServices = Collection::collect($container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME)));
-        $services->reset();
-        $taggedServices->each(function ($attributes, $serviceId) use ($services) {
-            $services->add(new Reference($serviceId));
-        });
-
+        $services = Collection::collect($container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME)));
         $definition = $container->getDefinition(Application::class);
-        $definition->addMethodCall('setServices', [$services->toArray()]);
+        $definition->addMethodCall('setServices', [$services->keys()->map(function ($serviceId) {
+            return new Reference($serviceId);
+        })->toArray()]);
     }
 }
