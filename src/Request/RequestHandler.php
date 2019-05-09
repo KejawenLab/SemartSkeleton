@@ -83,7 +83,7 @@ class RequestHandler
         $this->errors = Collection::collect($this->validator->validate($object))
             ->flatten()
             ->map(function ($value) use ($reflection) {
-                /** @var ConstraintViolationInterface $value */
+                /* @var ConstraintViolationInterface $value */
                 return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
             })
             ->toArray()

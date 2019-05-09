@@ -73,7 +73,7 @@ class SortQuery implements EventSubscriberInterface
                     }
                 }
 
-                $sort = sprintf('%s.%s', $alias, $fields[$key + 1]);
+                $sort = sprintf('%s.%s', $alias, $fields->get($key + 1));
 
                 return true;
             });

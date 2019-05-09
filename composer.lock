@@ -1291,12 +1291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KejawenLab/SemartCollection.git",
-                "reference": "bc6a1c78935c2a4224f13cc6907a9ca2451d5523"
+                "reference": "0b0fef547270d8aad56aad550f44466f0d9eeb2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/bc6a1c78935c2a4224f13cc6907a9ca2451d5523",
-                "reference": "bc6a1c78935c2a4224f13cc6907a9ca2451d5523",
+                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/0b0fef547270d8aad56aad550f44466f0d9eeb2d",
+                "reference": "0b0fef547270d8aad56aad550f44466f0d9eeb2d",
                 "shasum": ""
             },
             "require": {

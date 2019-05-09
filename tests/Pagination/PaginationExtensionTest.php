@@ -45,14 +45,14 @@ class PaginationExtensionTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
         ;
 
@@ -90,14 +90,14 @@ class PaginationExtensionTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
         ;
 

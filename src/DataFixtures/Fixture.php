@@ -43,7 +43,7 @@ abstract class Fixture extends Base
                 $entity = $this->createNew();
 
                 Collection::collect($value)
-                    ->each(function ($value, $key) use ($accessor, $entity, $manager) {
+                    ->each(function ($value, $key) use ($accessor, $entity) {
                         if (self::REF_KEY === sprintf('%s:', $key)) {
                             $this->setReference(Str::make(sprintf('%s#%s', $this->getReferenceKey(), $value))->uppercase()->__toString(), $entity);
                         } else {

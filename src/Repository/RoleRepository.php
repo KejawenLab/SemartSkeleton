@@ -169,7 +169,7 @@ class RoleRepository extends Repository
     private function filterMenu(array $roles): array
     {
         return Collection::collect($roles)->map(function ($value) {
-            /** @var Role $value */
+            /* @var Role $value */
             return $value->getMenu();
         })->toArray();
     }
