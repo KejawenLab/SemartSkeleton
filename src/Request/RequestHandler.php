@@ -80,7 +80,7 @@ class RequestHandler
 
     private function validate(object $object, \ReflectionClass $reflection): void
     {
-        $this->errors  = Collection::collect($this->validator->validate($object))
+        $this->errors = Collection::collect($this->validator->validate($object))
             ->flatten()
             ->map(function ($value) use ($reflection) {
                 /** @var ConstraintViolationInterface $value */
