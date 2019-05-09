@@ -33,8 +33,6 @@ class RequestHandler
 
     private $errors;
 
-    private $valid = false;
-
     public function __construct(Application $application, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
     {
         $this->propertyAccessor = new PropertyAccessor();
@@ -72,7 +70,7 @@ class RequestHandler
 
     public function isValid()
     {
-        return $this->valid;
+        return empty($this->errors) ? true : false;
     }
 
     public function getErrors(): array
@@ -82,17 +80,14 @@ class RequestHandler
 
     private function validate(object $object, \ReflectionClass $reflection): void
     {
-        $errors = Collection::collect($this->validator->validate($object));
-        if (0 < $errors->count()) {
-            $errors->map(function ($value) use ($reflection) {
+        $this->errors  = Collection::collect($this->validator->validate($object))
+            ->flatten()
+            ->map(function ($value) use ($reflection) {
                 /** @var ConstraintViolationInterface $value */
                 return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
-            });
-
-            $this->errors = $errors->toArray();
-        } else {
-            $this->valid = true;
-        }
+            })
+            ->toArray()
+        ;
     }
 
     private function bindValue(object $object, string $field, $value): void

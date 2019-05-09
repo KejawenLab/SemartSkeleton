@@ -6,6 +6,7 @@ namespace KejawenLab\Semart\Skeleton\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
 use Doctrine\Common\Persistence\ObjectManager;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
 use PHLAK\Twine\Str;
@@ -37,30 +38,35 @@ abstract class Fixture extends Base
     public function load(ObjectManager $manager)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
-        foreach ($this->getData() as $data) {
-            $entity = $this->createNew();
-            foreach ($data as $key => $value) {
-                if (self::REF_KEY === sprintf('%s:', $key)) {
-                    $this->setReference(Str::make(sprintf('%s#%s', $this->getReferenceKey(), $value))->uppercase()->__toString(), $entity);
-                } else {
-                    if (\is_string($value) && false !== strpos($value, self::REF_KEY)) {
-                        $value = $this->getReference(Str::make(str_replace('ref:', '', $value))->uppercase()->__toString());
-                    }
+        Collection::collect($this->getData())
+            ->each(function ($value) use ($accessor, $manager) {
+                $entity = $this->createNew();
 
-                    if (\is_string($value) && false !== strpos($value, 'date:')) {
-                        $value = \DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
-                    }
+                Collection::collect($value)
+                    ->each(function ($value, $key) use ($accessor, $entity, $manager) {
+                        if (self::REF_KEY === sprintf('%s:', $key)) {
+                            $this->setReference(Str::make(sprintf('%s#%s', $this->getReferenceKey(), $value))->uppercase()->__toString(), $entity);
+                        } else {
+                            if (\is_string($value) && false !== strpos($value, self::REF_KEY)) {
+                                $value = $this->getReference(Str::make(str_replace('ref:', '', $value))->uppercase()->__toString());
+                            }
 
-                    $accessor->setValue($entity, $key, $value);
+                            if (\is_string($value) && false !== strpos($value, 'date:')) {
+                                $value = \DateTime::createFromFormat('Y-m-d', str_replace('date:', '', $value));
+                            }
+
+                            $accessor->setValue($entity, $key, $value);
+                        }
+                    })
+                ;
+
+                if ($entity instanceof User) {
+                    $this->encoder->encode($entity);
                 }
-            }
 
-            if ($entity instanceof User) {
-                $this->encoder->encode($entity);
-            }
-
-            $manager->persist($entity);
-        }
+                $manager->persist($entity);
+            })
+        ;
 
         $manager->flush();
     }

@@ -1291,12 +1291,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KejawenLab/SemartCollection.git",
-                "reference": "b7c9ab2c29ef54b30d7495f36055cf516148c10b"
+                "reference": "bc6a1c78935c2a4224f13cc6907a9ca2451d5523"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/b7c9ab2c29ef54b30d7495f36055cf516148c10b",
-                "reference": "b7c9ab2c29ef54b30d7495f36055cf516148c10b",
+                "url": "https://api.github.com/repos/KejawenLab/SemartCollection/zipball/bc6a1c78935c2a4224f13cc6907a9ca2451d5523",
+                "reference": "bc6a1c78935c2a4224f13cc6907a9ca2451d5523",
                 "shasum": ""
             },
             "require": {
@@ -1313,7 +1313,7 @@
                 "MIT"
             ],
             "description": "Kejawenlab Collection",
-            "time": "2019-05-08T20:22:53+00:00"
+            "time": "2019-05-09T04:14:04+00:00"
         },
         {
             "name": "knplabs/knp-components",

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Menu;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
@@ -35,26 +36,26 @@ class MenuExtension extends AbstractExtension
         ];
     }
 
-    public function renderMenu()
+    public function renderMenu(): string
     {
-        $html = '';
-        $parents = $this->menuLoader->getParentMenu();
-        foreach ($parents as $parent) {
-            if (!$this->menuLoader->hasChildMenu($parent)) {
-                $html .= $this->buildHtml($parent);
-            } else {
-                $html .= sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $parent->getId(), $parent->getIconClass() ?: 'circle-o', $parent->getName());
+        return Collection::collect($this->menuLoader->getParentMenu())
+            ->map(function ($value) {
+                /** @var Menu $value */
+                if (!$this->menuLoader->hasChildMenu($value)) {
+                    return $this->buildHtml($value);
+                } else {
+                    $html = sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
+                    Collection::collect($this->menuLoader->getChildMenu($value))
+                        ->each(function ($value) use (&$html) {
+                            $html .= $this->buildHtml($value);
+                        })
+                    ;
 
-                $childs = $this->menuLoader->getChildMenu($parent);
-                foreach ($childs as $child) {
-                    $html .= $this->buildHtml($child);
+                    return $html.'</ul></li>';
                 }
-
-                $html .= '</ul></li>';
-            }
-        }
-
-        return $html;
+            })
+            ->implode()
+        ;
     }
 
     public function findMenu(string $code): ?Menu

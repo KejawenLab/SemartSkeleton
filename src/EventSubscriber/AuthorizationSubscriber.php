@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use Doctrine\Common\Annotations\Reader;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Service\OwnershipService;
@@ -52,11 +53,13 @@ class AuthorizationSubscriber implements EventSubscriberInterface
 
         if ($classAnnotation && $methodAnnotation) {
             $authorize = 0;
-            foreach ($methodAnnotation->getActions() as $action) {
-                if ($this->authorizationChecker->isGranted($action, $this->menuService->getMenuByCode($classAnnotation->getMenu()))) {
-                    ++$authorize;
-                }
-            }
+            Collection::collect($methodAnnotation->getActions())
+                ->each(function ($value) use (&$authorize, $classAnnotation) {
+                    if ($this->authorizationChecker->isGranted($value, $this->menuService->getMenuByCode($classAnnotation->getMenu()))) {
+                        ++$authorize;
+                    }
+                })
+            ;
 
             if (0 === $authorize) {
                 throw new AccessDeniedException();
