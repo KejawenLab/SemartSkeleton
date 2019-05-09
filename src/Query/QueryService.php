@@ -72,7 +72,7 @@ class QueryService
         return Collection::collect($schemaManager->listTables())
             ->merge($schemaManager->listViews())
             ->map(function ($value) {
-                /** @var AbstractAsset $value */
+                /* @var AbstractAsset $value */
                 return $value->getName();
             })
             ->toArray()

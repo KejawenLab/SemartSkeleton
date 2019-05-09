@@ -47,7 +47,7 @@ class SearchQuery implements EventSubscriberInterface
                 return true;
             })
             ->map(function ($value) {
-                /** @var Searchable $value */
+                /* @var Searchable $value */
                 return $value->getFields();
             })
             ->flatten()
@@ -56,11 +56,11 @@ class SearchQuery implements EventSubscriberInterface
                     $fields = Collection::collect(explode('.', $value));
                     $fields
                         ->filter(function ($value) use ($event) {
-                            return in_array($value, $event->getJoinFields());
+                            return \in_array($value, $event->getJoinFields());
                         })
                         ->each(function ($value, $key) use ($fields, $queryBuilder, $expr, $event, $queryString) {
                             $random = Application::APP_UNIQUE_NAME;
-                            $alias = $random[rand($key, strlen($random) - 1)];
+                            $alias = $random[rand($key, \strlen($random) - 1)];
 
                             if (0 === $key) {
                                 $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $value), $alias);
