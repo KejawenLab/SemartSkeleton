@@ -58,7 +58,7 @@ class SearchQuery implements EventSubscriberInterface
                         ->filter(function ($value) use ($event) {
                             return \in_array($value, $event->getJoinFields());
                         })
-                        ->each(function ($value, $key) use ($fields, $queryBuilder, $expr, $event, $queryString) {
+                        ->each(function ($value, $key) use ($fields, $queryBuilder, $event) {
                             $random = Application::APP_UNIQUE_NAME;
                             $alias = $random[rand($key, \strlen($random) - 1)];
 
