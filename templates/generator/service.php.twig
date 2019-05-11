@@ -30,6 +30,6 @@ class {{ entityHumanize }}Service implements ServiceInterface
      */
     public function get(string $id): ?object
     {
-        return $this->{{ entityLowerize }}Repository->get($id);
+        return $this->{{ entityLowerize }}Repository->find($id);
     }
 }

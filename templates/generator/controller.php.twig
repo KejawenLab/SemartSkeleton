@@ -79,7 +79,7 @@ class {{ entityHumanize }}Controller extends AdminController
     {
         $primary = $request->get('id');
         if ($primary) {
-            ${{ entityLowerize }} = $service->find($primary);
+            ${{ entityLowerize }} = $service->get($primary);
         } else {
             ${{ entityLowerize }} = new {{ entityHumanize }}();
         }
