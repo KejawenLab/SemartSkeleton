@@ -154,9 +154,8 @@
                 code: code,
                 name: name
             }, function (response) {
+                localStorage.setItem('csrf_token', response._csrf_token);
                 if ('OK' === response.status) {
-                    localStorage.setItem('csrf_token', response._csrf_token);
-
                     formReset();
                     $('#form-modal').modal('hide');
 
@@ -164,8 +163,6 @@
 
                     refreshTable(Routing.generate('groups_index'), '{{ title }}');
                 } else {
-                    localStorage.setItem('csrf_token', response._csrf_token);
-
                     let listError = '<ul>';
                     $.each(response.errors, function (key, value) {
                         listError = listError + '<li>' + value + '</li>';

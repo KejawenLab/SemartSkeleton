@@ -278,6 +278,29 @@
             refreshTable(window.location.href.split('?')[0] + '?' + $.param(params), '{{ title }}');
         }
 
+        function upload(formData, callback) {
+            $.ajax({
+                url:Routing.generate('files_upload'),
+                data: formData,
+                type: 'post',
+                contentType:false,
+                processData:false,
+                cache:false,
+                dataType: 'json',
+                error:function(err){
+                    localStorage.setItem('csrf_token', err._csrf_token);
+                },
+                success:function(response){
+                    localStorage.setItem('csrf_token', response._csrf_token);
+                    if ('OK' === response.status) {
+                        if ('function' === typeof callback) {
+                            callback(response.files);
+                        }
+                    }
+                }
+            });
+        }
+
         function getQueriesString() {
             let vars = {};
             let hash = null;

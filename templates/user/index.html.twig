@@ -136,9 +136,8 @@
                 plainPassword: plainPassword,
                 group: group
             }, function (response) {
+                localStorage.setItem('csrf_token', response._csrf_token);
                 if ('OK' === response.status) {
-                    localStorage.setItem('csrf_token', response._csrf_token);
-
                     formReset();
                     $('#form-modal').modal('hide');
 
@@ -146,8 +145,6 @@
 
                     refreshTable(window.location.href, '{{ title }}');
                 } else {
-                    localStorage.setItem('csrf_token', response._csrf_token);
-
                     let listError = '<ul>';
                     $.each(response.errors, function (key, value) {
                         listError = listError + '<li><b> ' + value + '</b></li>';
