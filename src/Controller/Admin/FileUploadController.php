@@ -25,7 +25,7 @@ class FileUploadController
     {
         $files = Collection::collect($request->files->all())
             ->map(function ($value) use ($uploadHandler) {
-                /** @var UploadedFile $value */
+                /* @var UploadedFile $value */
                 return $uploadHandler->handle($value);
             })
             ->toArray()
