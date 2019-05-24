@@ -18,5 +18,7 @@ class RepositoryGeneratorTest extends KernelTestCase
 
     public function testGenerate()
     {
+        // @todo tests \KejawenLab\Semart\Skeleton\Generator\RepositoryGenerator::generate()
+        $this->assertTrue(true);
     }
 }

@@ -18,5 +18,7 @@ class ServiceGeneratorTest extends KernelTestCase
 
     public function testGenerate()
     {
+        // @todo tests \KejawenLab\Semart\Skeleton\Generator\ServiceGenerator::generate()
+        $this->assertTrue(true);
     }
 }

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Tests\Query;
+namespace KejawenLab\Semart\Skeleton\Tests\Security\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class QueryServiceTest extends KernelTestCase
+class SecurityExtensionAbstract extends KernelTestCase
 {
     public function setUp()
     {
