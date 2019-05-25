@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class GroupServiceAbstract extends KernelTestCase
+abstract class GroupServiceAbstract extends KernelTestCase
 {
     public function setUp()
     {

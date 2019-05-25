@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class QueryServiceAbstract extends KernelTestCase
+abstract class QueryServiceAbstract extends KernelTestCase
 {
     public function setUp()
     {

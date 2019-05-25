@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class SecurityExtensionAbstract extends KernelTestCase
+abstract class SecurityExtensionAbstract extends KernelTestCase
 {
     public function setUp()
     {
