@@ -18,5 +18,7 @@ class PermissionGeneratorTest extends KernelTestCase
 
     public function testGenerate()
     {
+        // @todo tests \KejawenLab\Semart\Skeleton\Generator\PermissionGenerator::generate()
+        $this->assertTrue(true);
     }
 }

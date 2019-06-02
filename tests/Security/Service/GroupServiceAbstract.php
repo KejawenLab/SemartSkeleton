@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Tests\Menu;
+namespace KejawenLab\Semart\Skeleton\Tests\Security\Service;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class MenuServiceTest extends KernelTestCase
+abstract class GroupServiceAbstract extends KernelTestCase
 {
     public function setUp()
     {
