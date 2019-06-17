@@ -57,7 +57,7 @@ class QueryService
             $messages = explode(':', $e->getMessage());
 
             $reason = explode(';', $messages[3]);
-            if (1 < count($reason)) {
+            if (1 < \count($reason)) {
                 $description = $reason[1];
             } else {
                 $description = $reason[0];
