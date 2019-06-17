@@ -56,9 +56,16 @@ class QueryService
         } catch (\Exception $e) {
             $messages = explode(':', $e->getMessage());
 
+            $reason = explode(';', $messages[3]);
+            if (1 < count($reason)) {
+                $reason = $reason[1];
+            } else {
+                $reason = $reason[0];
+            }
+
             $output['status'] = false;
-            $output['columns'] = ['error', 'reason', 'solution'];
-            $output['records'] = [[Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make(explode(';', $messages[3])[1])->trim()->uppercaseFirst()->__toString()]];
+            $output['columns'] = ['error', 'reason', 'description'];
+            $output['records'] = [[Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make($reason)->trim()->uppercaseFirst()->__toString()]];
         }
 
         return $output;
