@@ -135,34 +135,40 @@
     <script>
         $(document).ready(function () {
             toastr.options = {
-                "closeButton": false,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-top-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "3000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
+                'closeButton': false,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-right',
+                'preventDuplicates': false,
+                'onclick': null,
+                'showDuration': '300',
+                'hideDuration': '1000',
+                'timeOut': '3000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut'
             };
 
             $('[data-toggle="tooltip"]').tooltip();
 
             $('.modal').on('hidden.bs.modal', function () {
                 $(this)
-                    .find("input,textarea,select")
+                    .find('input,textarea,select')
                     .val('')
                     .end()
-                    .find("input[type=checkbox], input[type=radio]")
-                    .prop("checked", "")
+                    .find('input[type=checkbox], input[type=radio]')
+                    .prop('checked', '')
                     .end()
                 ;
+            });
+
+            $('.numeric').keyup(function(e) {
+                if (/\D/g.test(this.value)) {
+                    this.value = this.value.replace(/\D/g, '');
+                }
             });
 
             $('.phoneNumber').number(true, 0, '.', '-');
