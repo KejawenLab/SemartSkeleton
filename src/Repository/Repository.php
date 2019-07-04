@@ -74,6 +74,11 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
 
     protected function getItem(string $key)
     {
-        return $this->cache->get($key, null);
+        $entity = $this->cache->get($key, null);
+        if ($entity) {
+            $this->_em->merge($entity);
+        }
+
+        return $entity;
     }
 }
