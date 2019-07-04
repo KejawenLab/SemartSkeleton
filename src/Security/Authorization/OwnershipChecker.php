@@ -10,9 +10,6 @@ use KejawenLab\Semart\Skeleton\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * @Annotation()
- * @Target({"CLASS", "METHOD"})
- *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
 class OwnershipChecker
