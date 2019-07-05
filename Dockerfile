@@ -59,7 +59,7 @@ COPY composer.json ./
 COPY composer.lock ./
 
 RUN mkdir -p var/cache var/log var/sessions && \
-    chmod 777 -R var/
+    chmod 777 -R var/ && \
     composer install --prefer-dist --no-autoloader --no-scripts --no-suggest -vvv && \
     composer clear-cache
 
