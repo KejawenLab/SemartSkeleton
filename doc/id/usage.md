@@ -63,11 +63,11 @@ label:
 
 Secara default, CRUD yang dibuat di atas terdaftar pada root menu sebagai berikut:
 
-![Todo](../imgs/todo.png "Todo")
+![Todo](../assets/imgs/todo.png "Todo")
 
 Untuk mengubahnya, kita masuk ke menu **Administrator > Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
 
-![Todo Menu](../imgs/todo_menu.png "Todo Menu")
+![Todo Menu](../assets/imgs/todo_menu.png "Todo Menu")
 
 ## Ubah Template
 
@@ -199,7 +199,7 @@ Selanjutnya Anda harus mengubah file `todo/table-content.html.twig` dan menghapu
 
 Sehingga tamplete kita hanya memiliki field `name` saja baik pada form maupun list tabel. Sehingga hasilnya adalah sebagai berikut:
 
-![Todo Final](../imgs/todo_final.png "Todo Final")
+![Todo Final](../assets/imgs/todo_final.png "Todo Final")
 
 Selamat!!! Menu `Todo` kita sudah dapat diakses dan jalan 100%
 

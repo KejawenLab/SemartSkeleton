@@ -1,4 +1,8 @@
 import Vue from 'vue'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+import './style.styl'
+
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
@@ -7,4 +11,5 @@ export default ({
   siteData // site metadata
 }) => {
 
+  Vue.use(Buefy)
 }

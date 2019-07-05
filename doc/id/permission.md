@@ -12,7 +12,7 @@ Konsep ini sangat umum menurut saya dan lebih mudah dipahami ketimbang harus men
 
 Untuk mengatur hak akses, dapat dilakukan melakui menu **Administrator > Group** kemudian mengeklik pilihan **Hak Akses** pada Group yang akan diubah sehingga akan tampak seperti gambar berikut:
 
-![Role List](../imgs/roles.png "Role List")
+![Role List](../assets/imgs/roles.png "Role List")
 
 Anda cukup menekan pada bagian hak akses untuk mengatur apa saya yang dapat diakses oleh Group tersebut.
 

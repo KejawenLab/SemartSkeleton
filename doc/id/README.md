@@ -11,6 +11,8 @@
 Ditujukan untuk memudahkan Developer dalam mengerjakan proyek tanpa perlu dipusingkan dengan berbagai pengaturan-pengaturan yang bersifat rutinitas dan berulang.
 Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses yang dapat diatur dengan mudah melalui menu yang telah kami siapkan.
 
+## [Arsitektur Semart Skeleton (pdf file)](/arsitektur.pdf)
+
 ## Fitur Semart Skeleton
 
 - Pengaturan User
@@ -145,31 +147,31 @@ php vendor/bin/phpunit
 
 - Login
 
-![Login](../imgs/login.png "Login")
+![Login](../assets/imgs/login.png "Login")
 
 - Menu List
 
-![Menu List](../imgs/menu_list.png "Menu List")
+![Menu List](../assets/imgs/menu_list.png "Menu List")
 
 - Roles
 
-![Roles](../imgs/roles.png "Roles")
+![Roles](../assets/imgs/roles.png "Roles")
 
 - Setting List
 
-![Setting List](../imgs/setting_list.png "Setting List")
+![Setting List](../assets/imgs/setting_list.png "Setting List")
 
 - User Form
 
-![User Form](../imgs/user_form.png "User Form")
+![User Form](../assets/imgs/user_form.png "User Form")
 
 - User List
 
-![User List](../imgs/user_list.png "User List")
+![User List](../assets/imgs/user_list.png "User List")
 
 - Query Runner
 
-![Query Runner](../imgs/query_runner.png "Query Runner")
+![Query Runner](../assets/imgs/query_runner.png "Query Runner")
 
 ## Kontributor
 
