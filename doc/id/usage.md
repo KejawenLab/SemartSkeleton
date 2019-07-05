@@ -48,13 +48,13 @@ class Todo
 
 - Jalankan perintah `php bin/console semart:generate "KejawenLab\Semart\Skeleton\Entity\Todo"`
 
-- Ubah translasi pada file `translations/messages.id.yaml` dan tambahkan 
+- Ubah translasi pada file `translations/messages.id.yaml` dan tambahkan
 
 ```yaml
 label:
-    # Hide others translation
-    todo:
-        name: 'Nama'
+  # Hide others translation
+  todo:
+    name: "Nama"
 ```
 
 - Yeeeaaaahhhhhh!!! CRUD Anda sudah jadi!!!
@@ -63,11 +63,11 @@ label:
 
 Secara default, CRUD yang dibuat di atas terdaftar pada root menu sebagai berikut:
 
- ![Todo](imgs/todo.png "Todo")
- 
- Untuk mengubahnya, kita masuk ke menu **Administrator > Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
- 
- ![Todo Menu](imgs/todo_menu.png "Todo Menu")
+![Todo](../imgs/todo.png "Todo")
+
+Untuk mengubahnya, kita masuk ke menu **Administrator > Menu** lalu klik tombol **Ubah** pada menu `Todo`, dan Anda dapat mengubah menu induk, icon, dan sebagainya seperti pada gambar berikut:
+
+![Todo Menu](../imgs/todo_menu.png "Todo Menu")
 
 ## Ubah Template
 
@@ -85,22 +85,35 @@ Secara default, template yang di-generate ada 3 yaitu `todo/index.html.twig`, `t
 
 > Berisi definisi dari list tabel
 
-
 Secara default, setiap form dan list tabel berisi 2 fields yaitu `code` dan `name` sehingga kita perlu mengubah form dan list tabel untuk disesuaikan dengan entity `Todo` yang hanya punya `name`.
 Caranya buka file `todo/index.html.twig` dan hapus baris kode berikut:
 
 ```html
-<th class="text-center">{{ 'label.todo.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable pull-right"></i></th>
+<th class="text-center">
+  {{ 'label.todo.code' | trans }}
+  <i
+    data-sort="no"
+    data-sort-field="code"
+    class="fa fa-sort sortable pull-right"
+  ></i>
+</th>
 ```
 
-dan 
+dan
 
 ```html
 <div class="form-group">
-    <label for="username" class="col-sm-2 control-label">{{ 'label.todo.code' | trans }}</label>
-    <div class="col-sm-10">
-        <input type="text" class="form-control" id="code" placeholder="{{ 'label.todo.code' | trans }}">
-    </div>
+  <label for="username" class="col-sm-2 control-label"
+    >{{ 'label.todo.code' | trans }}</label
+  >
+  <div class="col-sm-10">
+    <input
+      type="text"
+      class="form-control"
+      id="code"
+      placeholder="{{ 'label.todo.code' | trans }}"
+    />
+  </div>
 </div>
 ```
 
@@ -174,10 +187,9 @@ let code = $('#code').val();
 //Baris
 code: code,
 
-//Baris 
+//Baris
 $('#code').val(data.code);
 ```
-
 
 Selanjutnya Anda harus mengubah file `todo/table-content.html.twig` dan menghapus baris kode berikut:
 
@@ -187,9 +199,8 @@ Selanjutnya Anda harus mengubah file `todo/table-content.html.twig` dan menghapu
 
 Sehingga tamplete kita hanya memiliki field `name` saja baik pada form maupun list tabel. Sehingga hasilnya adalah sebagai berikut:
 
-![Todo Final](imgs/todo_final.png "Todo Final")
- 
-Selamat!!! Menu `Todo` kita sudah dapat diakses dan jalan 100% 
+![Todo Final](../imgs/todo_final.png "Todo Final")
 
+Selamat!!! Menu `Todo` kita sudah dapat diakses dan jalan 100%
 
 [Kembali Ke Index](../README.md)
