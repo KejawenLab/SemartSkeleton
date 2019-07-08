@@ -6,15 +6,13 @@ Konsep awal security pada **Semart Skeleton** adalah bagaimana agar user dapat m
 kami sengaja tidak menggunakan fitur **Role Hierarchy** pada Symfony dan membuat sendiri konsep security menggunakan **User**, **Group**, **Menu** dan **Role** (bukan **Role** pada Symfony),
 sehingga user nantinya dapat mengubah hak akses hanya dengan mencentang list **Role** pada **Menu** dari **Group** tertentu.
 
-
 Konsep ini sangat umum menurut saya dan lebih mudah dipahami ketimbang harus menggunakan **Role Hierarchy**, **Access Control List** dan segala macam yang seringkali hanya dapat dipahami oleh developer.
-
 
 ## Mengatur Hak Akses
 
 Untuk mengatur hak akses, dapat dilakukan melakui menu **Administrator > Group** kemudian mengeklik pilihan **Hak Akses** pada Group yang akan diubah sehingga akan tampak seperti gambar berikut:
 
-![Role List](imgs/roles.png "Role List")
+![Role List](../assets/imgs/roles.png "Role List")
 
 Anda cukup menekan pada bagian hak akses untuk mengatur apa saya yang dapat diakses oleh Group tersebut.
 
@@ -26,10 +24,9 @@ Untuk memudahkan developer, saya membuat custom annotation `@Permission` yang da
 
 ```php
 @Permission(menu="KODEMENU")
-``` 
+```
 
 Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
-
 
 - Pada bagian atas dari definisi method controller, ditambahkan annotation `@Permission` dengan atribute `actions` sebagai berikut:
 
@@ -43,7 +40,6 @@ Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
 
 Untuk melihat contoh penggunaannya, Anda membuka file [Group Controller](../src/Controller/Admin/GroupController.php)
 
-Sangat mudah sekali, bukan? 
-
+Sangat mudah sekali, bukan?
 
 [Kembali Ke Index](../README.md)

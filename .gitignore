@@ -21,3 +21,8 @@
 ###> symfony/web-server-bundle ###
 /.web-server-pid
 ###< symfony/web-server-bundle ###
+
+
+
+# vuepress distribution
+.vuepress/dist

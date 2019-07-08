@@ -4,11 +4,11 @@
 
 Untuk mengatur menu sangatlah mudah, Anda cukup masuk ke menu **Administrator > Menu** lalu dapat menambah, mengedit maupun menghapus menu sesuai kebutuhan.
 
-![Menu List](imgs/menu_list.png "Menu List")
+![Menu List](../assets/imgs/menu_list.png "Menu List")
 
 ## Fungsi Masing-Masing Atribut
 
-![Menu Detail](imgs/menu_detail.png "Menu Detail")
+![Menu Detail](../assets/imgs/menu_detail.png "Menu Detail")
 
 Pada gambar di atas, terlihat ada beberapa atribut atau field pada form **Menu** yang memiliki fungsi sebagai berikut:
 
@@ -25,6 +25,5 @@ Pada gambar di atas, terlihat ada beberapa atribut atau field pada form **Menu**
 - **Menu Rute**: Route controller.
 
 - **Tampilkan**: Ditampilkan atau tidak menu tersebut.
-
 
 [Kembali Ke Index](../README.md)
