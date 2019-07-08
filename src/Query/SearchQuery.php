@@ -84,7 +84,7 @@ class SearchQuery implements EventSubscriberInterface
             ->toArray()
         ;
 
-        $queryBuilder->andWhere(\call_user_func_array([$expr, 'orX'], $searchs));
+        $queryBuilder->andWhere($expr->orX(...$searchs));
     }
 
     public static function getSubscribedEvents(): array
