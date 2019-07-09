@@ -138,6 +138,10 @@ services:
 
 - Gunakan username `admin` dan password `semartadmin` untuk masuk ke aplikasi
 
+## Flow Semart Skeleton
+
+![Flow](doc/assets/imgs/flow.png "Flow")
+
 ## Dokumentasi Lengkap
 
 - [Penggunaan Dasar](doc/id/usage.md)
