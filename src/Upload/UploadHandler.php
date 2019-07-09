@@ -20,7 +20,7 @@ class UploadHandler
         $this->fileLocator = $fileLocator;
     }
 
-    public function handle(UploadedFile $uploadedFile): void
+    public function handle(UploadedFile $uploadedFile): string 
     {
         $fileName = sprintf('%s.%s', $this->fileLocator->createUniqueFileName(), $uploadedFile->guessExtension() ?: Application::APP_UNIQUE_NAME);
         $uploadDir = $this->fileLocator->getUploadDir();
