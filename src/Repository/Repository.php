@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Cache\Simple\ArrayCache;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -67,14 +67,14 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
 
     protected function cache(string $key, $item): void
     {
-        if (!$this->cache->has($key)) {
-            $this->cache->set($key, $item, 1);
+        if (!$this->cache->contains($key)) {
+            $this->cache->save($key, $item, 17);
         }
     }
 
     protected function getItem(string $key)
     {
-        $entity = $this->cache->get($key, null);
+        $entity = $this->cache->fetch($key);
         if ($entity) {
             $this->_em->merge($entity);
         }
