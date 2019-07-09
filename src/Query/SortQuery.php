@@ -35,17 +35,17 @@ class SortQuery implements EventSubscriberInterface
         }
 
         $sortable = Collection::collect($this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass())))
-            ->map(function ($value) {
+            ->filter(function ($value) {
                 if ($value instanceof Sortable) {
-                    return $value->getFields();
+                    return true;
                 }
 
-                return $value;
+                return false;
             })
-            ->has($sortField)
+            ->toArray()
         ;
 
-        if (!$sortable) {
+        if (empty($sortable)) {
             return;
         }
 
