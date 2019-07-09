@@ -162,31 +162,31 @@ php vendor/bin/phpunit
 
 * Login
 
-![Login](doc/imgs/login.png "Login")
+![Login](doc/imgs/assets/login.png "Login")
 
 * Menu List
 
-![Menu List](doc/imgs/menu_list.png "Menu List")
+![Menu List](doc/imgs/assets/menu_list.png "Menu List")
 
 * Roles
 
-![Roles](doc/imgs/roles.png "Roles")
+![Roles](doc/imgs/assets/roles.png "Roles")
 
 * Setting List
 
-![Setting List](doc/imgs/setting_list.png "Setting List")
+![Setting List](doc/imgs/assets/setting_list.png "Setting List")
 
 * User Form
 
-![User Form](doc/imgs/user_form.png "User Form")
+![User Form](doc/imgs/assets/user_form.png "User Form")
 
 * User List
 
-![User List](doc/imgs/user_list.png "User List")
+![User List](doc/imgs/assets/user_list.png "User List")
 
 * Query Runner
 
-![Query Runner](doc/imgs/query_runner.png "Query Runner")
+![Query Runner](doc/imgs/assets/query_runner.png "Query Runner")
 
 ## Kontributor
 
