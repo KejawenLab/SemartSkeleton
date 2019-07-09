@@ -140,17 +140,19 @@ services:
 
 ## Dokumentasi Lengkap
 
-- [Penggunaan Dasar](doc/usage.md)
+- [Penggunaan Dasar](doc/id/usage.md)
 
-- [Pengaturan Hak Akses](doc/permission.md)
+- [Pengaturan Hak Akses](doc/id/permission.md)
 
-- [Konfigurasi Menu](doc/menu.md)
+- [Konfigurasi Menu](doc/id/menu.md)
 
-- [Pencarian dan Sorting](doc/search_sort.md)
+- [Pencarian dan Sorting](doc/id/search_sort.md)
 
-- [Event System](doc/event.md)
+- [Event System](doc/id/event.md)
 
-- [User Context](doc/user_context.md)
+- [User Context](doc/id/user_context.md)
+
+Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
 ## Unit Testing
 
@@ -162,31 +164,31 @@ php vendor/bin/phpunit
 
 * Login
 
-![Login](doc/imgs/assets/login.png "Login")
+![Login](doc/assets/imgs/login.png "Login")
 
 * Menu List
 
-![Menu List](doc/imgs/assets/menu_list.png "Menu List")
+![Menu List](doc/assets/imgs/menu_list.png "Menu List")
 
 * Roles
 
-![Roles](doc/imgs/assets/roles.png "Roles")
+![Roles](doc/assets/imgs/roles.png "Roles")
 
 * Setting List
 
-![Setting List](doc/imgs/assets/setting_list.png "Setting List")
+![Setting List](doc/assets/imgs/setting_list.png "Setting List")
 
 * User Form
 
-![User Form](doc/imgs/assets/user_form.png "User Form")
+![User Form](doc/assets/imgs/user_form.png "User Form")
 
 * User List
 
-![User List](doc/imgs/assets/user_list.png "User List")
+![User List](doc/assets/imgs/user_list.png "User List")
 
 * Query Runner
 
-![Query Runner](doc/imgs/assets/query_runner.png "Query Runner")
+![Query Runner](doc/assets/imgs/query_runner.png "Query Runner")
 
 ## Kontributor
 
