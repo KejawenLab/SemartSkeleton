@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterEntityTest extends TestCase
+class EntityEventTest extends TestCase
 {
     public function testObject()
     {
