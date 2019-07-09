@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterRequestTest extends TestCase
+class RequestEventTest extends TestCase
 {
     public function testObject()
     {

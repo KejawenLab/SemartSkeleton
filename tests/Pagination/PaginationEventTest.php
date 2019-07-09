@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class FilterPaginationTest extends KernelTestCase
+class PaginationEventTest extends KernelTestCase
 {
     public function testFilterPagination()
     {
