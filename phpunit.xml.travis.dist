@@ -40,9 +40,11 @@
         <whitelist>
             <directory>./src/</directory>
             <exclude>
-                <directory>./src/Migrations</directory>
+                <directory>./src/Controller</directory>
                 <directory>./src/DataFixutes</directory>
                 <directory>./src/Contract</directory>
+                <file>./src/Application.php</file>
+                <file>./src/Kernel.php</file>
             </exclude>
         </whitelist>
     </filter>
