@@ -18,7 +18,7 @@ class MenuRepository extends Repository
     }
 
     /**
-     * @param array $criteria
+     * @param array      $criteria
      * @param array|null $orderBy
      *
      * @return Menu|null
