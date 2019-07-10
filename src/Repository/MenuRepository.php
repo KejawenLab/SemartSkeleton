@@ -21,7 +21,7 @@ class MenuRepository extends Repository
      * @param array      $criteria
      * @param array|null $orderBy
      *
-     * @return Menu|null
+     * @return object|null
      */
     public function findOneBy(array $criteria, array $orderBy = null): ?object
     {
