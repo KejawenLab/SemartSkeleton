@@ -39,7 +39,10 @@ class MenuRepository extends Repository
 
     public function findByCode(string $code): ?Menu
     {
-        return $this->findOneBy(['code' => $code]);
+        /** @var Menu|null $menu */
+        $menu = $this->findOneBy(['code' => $code]);
+
+        return $menu;
     }
 
     public function commit(Menu $menu): void
