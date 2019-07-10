@@ -22,7 +22,7 @@ class SettingExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('setting', [$this, 'findSetting']),
+            new TwigFunction('setting', [$this, 'findSettingValue']),
         ];
     }
 
@@ -31,7 +31,7 @@ class SettingExtension extends AbstractExtension
      *
      * @return string|int|float|null
      */
-    public function findSetting(string $parameter)
+    public function findSettingValue(string $parameter)
     {
         return $this->settingService->getValue($parameter);
     }

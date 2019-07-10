@@ -22,14 +22,14 @@ class Application
     /** @var ServiceInterface[] */
     private $services;
 
-    public function setServices(array $services)
+    public function setServices(array $services): void
     {
         Collection::collect($services)->each(function ($value) {
             $this->addService($value);
         });
     }
 
-    public function getService(\ReflectionClass $class, string $field = 'id')
+    public function getService(\ReflectionClass $class, string $field = 'id'): ?ServiceInterface
     {
         $key = $this->getServiceKey($field, $class);
         if (!\array_key_exists($key, $this->services)) {
@@ -39,14 +39,14 @@ class Application
         return $this->services[$key];
     }
 
-    private function addService(ServiceInterface $service)
+    private function addService(ServiceInterface $service): void
     {
         $class = explode('\\', \get_class($service));
         $key = Str::make((string) array_pop($class))->lowercase()->replace('service', '')->__toString();
         $this->services[$key] = $service;
     }
 
-    private function getServiceKey(string $field, \ReflectionClass $class)
+    private function getServiceKey(string $field, \ReflectionClass $class): string
     {
         $key = Str::make($field)->lowercase()->__toString();
         if ('parent' === $key || 'id' === $key) {

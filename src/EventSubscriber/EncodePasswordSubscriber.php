@@ -13,7 +13,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class UserSubscriber implements EventSubscriberInterface
+class EncodePasswordSubscriber implements EventSubscriberInterface
 {
     private $passwordEncoder;
 

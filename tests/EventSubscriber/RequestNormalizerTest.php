@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Tests\Request;
+namespace KejawenLab\Semart\Skeleton\Tests\EventSubscriber;
 
-use KejawenLab\Semart\Skeleton\Request\RequestNormalizer;
+use KejawenLab\Semart\Skeleton\EventSubscriber\NormalizeRequestSubscriber;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -25,7 +25,7 @@ class RequestNormalizerTest extends KernelTestCase
 
         $event = new GetResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
-        $requestNormalizer = new RequestNormalizer();
+        $requestNormalizer = new NormalizeRequestSubscriber();
         $requestNormalizer->normalize($event);
 
         $this->assertTrue($request->request->get('a'));
@@ -34,6 +34,6 @@ class RequestNormalizerTest extends KernelTestCase
 
     public function testGetSubscribedEvents()
     {
-        $this->assertCount(1, RequestNormalizer::getSubscribedEvents());
+        $this->assertCount(1, NormalizeRequestSubscriber::getSubscribedEvents());
     }
 }

@@ -138,19 +138,25 @@ services:
 
 - Gunakan username `admin` dan password `semartadmin` untuk masuk ke aplikasi
 
+## Flow Semart Skeleton
+
+![Flow](doc/assets/imgs/flow.png "Flow")
+
 ## Dokumentasi Lengkap
 
-- [Penggunaan Dasar](doc/usage.md)
+- [Penggunaan Dasar](doc/id/usage.md)
 
-- [Pengaturan Hak Akses](doc/permission.md)
+- [Pengaturan Hak Akses](doc/id/permission.md)
 
-- [Konfigurasi Menu](doc/menu.md)
+- [Konfigurasi Menu](doc/id/menu.md)
 
-- [Pencarian dan Sorting](doc/search_sort.md)
+- [Pencarian dan Sorting](doc/id/search_sort.md)
 
-- [Event System](doc/event.md)
+- [Event System](doc/id/event.md)
 
-- [User Context](doc/user_context.md)
+- [User Context](doc/id/user_context.md)
+
+Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
 ## Unit Testing
 

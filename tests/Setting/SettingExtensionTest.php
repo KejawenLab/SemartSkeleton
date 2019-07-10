@@ -54,10 +54,10 @@ class SettingExtensionTest extends TestCase
         $this->settingExtension = new SettingExtension(new SettingService($repositoryMock));
     }
 
-    public function testFindSetting()
+    public function testFindSettingValue()
     {
-        $this->assertEquals($this->setting->getValue(), $this->settingExtension->findSetting($this->setting->getParameter()));
-        $this->assertNull($this->settingExtension->findSetting(static::NOT_EXIST));
+        $this->assertEquals($this->setting->getValue(), $this->settingExtension->findSettingValue($this->setting->getParameter()));
+        $this->assertNull($this->settingExtension->findSettingValue(static::NOT_EXIST));
     }
 
     public function testGetFunctions()
