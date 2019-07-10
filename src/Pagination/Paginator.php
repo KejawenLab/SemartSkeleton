@@ -20,7 +20,7 @@ class Paginator
 {
     public const PER_PAGE = 9;
 
-    protected const ROOT_ALIAS = 'o';
+    public const ROOT_ALIAS = 'o';
 
     private $doctrine;
 

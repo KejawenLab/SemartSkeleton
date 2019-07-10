@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Tests\Pagination;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
+use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,14 +21,18 @@ class PaginationEventTest extends KernelTestCase
     {
         static::bootKernel();
 
-        $filterPagination = new PaginationEvent();
-        $filterPagination->setRequest(Request::createFromGlobals());
-        $filterPagination->setQueryBuilder(new QueryBuilder(static::$container->get('doctrine.orm.entity_manager')));
-        $filterPagination->setEntityClass(User::class);
+        $paginationEvent = new PaginationEvent();
+        $paginationEvent->setRequest(Request::createFromGlobals());
+        $paginationEvent->setQueryBuilder(new QueryBuilder(static::$container->get('doctrine.orm.entity_manager')));
+        $paginationEvent->setEntityClass(User::class);
+        $paginationEvent->addJoinAlias('root', Paginator::ROOT_ALIAS);
 
-        $this->assertInstanceOf(Event::class, $filterPagination);
-        $this->assertInstanceOf(Request::class, $filterPagination->getRequest());
-        $this->assertInstanceOf(QueryBuilder::class, $filterPagination->getQueryBuilder());
-        $this->assertEquals(User::class, $filterPagination->getEntityClass());
+        $this->assertInstanceOf(Event::class, $paginationEvent);
+        $this->assertInstanceOf(Request::class, $paginationEvent->getRequest());
+        $this->assertInstanceOf(QueryBuilder::class, $paginationEvent->getQueryBuilder());
+        $this->assertEquals(User::class, $paginationEvent->getEntityClass());
+        $this->assertEquals('o', $paginationEvent->getJoinAlias('root'));
+        $this->assertNull($paginationEvent->getJoinAlias('not_exist_field'));
+        $this->assertContains('root', $paginationEvent->getJoinFields());
     }
 }
