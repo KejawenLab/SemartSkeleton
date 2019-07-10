@@ -65,6 +65,38 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         $this->cacheable = $cacheable;
     }
 
+    protected function doFindOneBy(string  $cacheKey, array $criteria, array $orderBy = null): ?object
+    {
+        if ($this->isCacheable()) {
+            $object = $this->getItem($cacheKey);
+            if (!$object) {
+                $object = parent::findOneBy($criteria, $orderBy);
+
+                $this->cache($cacheKey, $object);
+            }
+
+            return $object;
+        }
+
+        return parent::findOneBy($criteria, $orderBy);
+    }
+
+    protected function doFindBy(string  $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    {
+        if ($this->isCacheable()) {
+            $objects = $this->getItem($cacheKey);
+            if (!$objects) {
+                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
+
+                $this->cache($cacheKey, $objects);
+            }
+
+            return $objects;
+        }
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
     protected function cache(string $key, $item): void
     {
         if (!$this->cache->contains($key)) {
