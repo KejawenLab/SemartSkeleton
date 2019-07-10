@@ -34,7 +34,7 @@ class FileUploadLocator
     {
         $fileSystem = new Filesystem();
         if ($fileSystem->exists($path)) {
-            return file_get_contents($path);
+            return (string) file_get_contents($path);
         }
 
         throw new FileNotFoundException();
