@@ -8,10 +8,9 @@
 
 **Semart Skeleton** adalah sebuah skeleton atau boilerplate atau kerangka awal untuk memulai sebuah proyek. Dibangun dengan menggunakan framework [Symfony](https://symfony.com) dan berbagai bundle serta diramu oleh Developer yang telah berpengalaman lebih dari **7 tahun** menggunakan Symfony.
 
+
 Ditujukan untuk memudahkan Developer dalam mengerjakan proyek tanpa perlu dipusingkan dengan berbagai pengaturan-pengaturan yang bersifat rutinitas dan berulang.
 Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses yang dapat diatur dengan mudah melalui menu yang telah kami siapkan.
-
-## [Arsitektur Semart Skeleton (pdf file)](/arsitektur.pdf)
 
 ## Fitur Semart Skeleton
 
@@ -37,6 +36,7 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 
 - User Context Filter
 
+
 ## Kebutuhan Sistem
 
 - PHP 7.2 atau lebih baru
@@ -46,6 +46,7 @@ Memiliki beberapa fitur dasar seperti pengaturan user, group, menu dan hak akses
 - Redis Server sebagai Session Storage
 
 - Composer sebagai Dependencies Management
+
 
 ## Cara Instalasi (Menggunakan Composer)
 
@@ -114,17 +115,17 @@ composer create-project -sdev kejawenlab/semart-skeleton Semart
 
 ```yaml
 services:
-  app:
-    build: .
-    environment:
-      NGINX_WEBROOT: /semart/public
-      APP_ENV: dev
-      APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
-      DATABASE_DRIVER: pdo_mysql
-      DATABASE_SERVER_VERSION: 5.7
-      DATABASE_CHARSET: utf8mb4
-      DATABASE_URL: mysql://root:aden@localhost:3306/semart
-      REDIS_URL: redis://session
+    app:
+        build: .
+        environment:
+            NGINX_WEBROOT: /semart/public
+            APP_ENV: dev
+            APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
+            DATABASE_DRIVER: pdo_mysql
+            DATABASE_SERVER_VERSION: 5.7
+            DATABASE_CHARSET: utf8mb4
+            DATABASE_URL: mysql://root:aden@localhost:3306/semart
+            REDIS_URL: redis://session
 ```
 
 - Jalankan perintah `docker-compose up -d`
@@ -137,6 +138,26 @@ services:
 
 - Gunakan username `admin` dan password `semartadmin` untuk masuk ke aplikasi
 
+## Flow Semart Skeleton
+
+![Flow](../assets/imgs/flow.png "Flow")
+
+## Dokumentasi Lengkap
+
+- [Penggunaan Dasar](doc/id/usage.md)
+
+- [Pengaturan Hak Akses](doc/id/permission.md)
+
+- [Konfigurasi Menu](doc/id/menu.md)
+
+- [Pencarian dan Sorting](doc/id/search_sort.md)
+
+- [Event System](doc/id/event.md)
+
+- [User Context](doc/id/user_context.md)
+
+Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
+
 ## Unit Testing
 
 ```bash
@@ -145,31 +166,31 @@ php vendor/bin/phpunit
 
 ## Preview
 
-- Login
+* Login
 
 ![Login](../assets/imgs/login.png "Login")
 
-- Menu List
+* Menu List
 
 ![Menu List](../assets/imgs/menu_list.png "Menu List")
 
-- Roles
+* Roles
 
 ![Roles](../assets/imgs/roles.png "Roles")
 
-- Setting List
+* Setting List
 
 ![Setting List](../assets/imgs/setting_list.png "Setting List")
 
-- User Form
+* User Form
 
 ![User Form](../assets/imgs/user_form.png "User Form")
 
-- User List
+* User List
 
 ![User List](../assets/imgs/user_list.png "User List")
 
-- Query Runner
+* Query Runner
 
 ![Query Runner](../assets/imgs/query_runner.png "Query Runner")
 
