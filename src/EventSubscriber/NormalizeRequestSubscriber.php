@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace KejawenLab\Semart\Skeleton\Request;
+namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Collection\Collection;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class RequestNormalizer implements EventSubscriberInterface
+class NormalizeRequestSubscriber implements EventSubscriberInterface
 {
     public function normalize(GetResponseEvent $event)
     {
