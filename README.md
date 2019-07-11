@@ -158,6 +158,8 @@ services:
 
 - [Relasi Tabel](doc/id/relation.md)
 
+- [Relasi Tabel](doc/id/date_time.md)
+
 Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
 ## Unit Testing

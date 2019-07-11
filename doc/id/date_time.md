@@ -54,3 +54,5 @@ class DateTimeSubscriber implements EventSubscriberInterface
 Cukup seperti di atas maka field `eventDate` dapat diubah menjadi object `\DateTime` dan kemudian dihapus dari object `Request` agar [Request Handler](../../src/Request/RequestHandler.php) tidak lagi meng-handle field `eventDate` tersebut.
 
 Cara di atas dapat dipakai untuk kasus yang sama yang memerlukan manipulasi request.
+
+[Kembali Ke Index](README.md)

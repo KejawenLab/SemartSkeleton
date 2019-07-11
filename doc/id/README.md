@@ -140,23 +140,25 @@ services:
 
 ## Flow Semart Skeleton
 
-![Flow](doc/assets/imgs/flow.png "Flow")
+![Flow](../assets/imgs/flow.png "Flow")
 
 ## Dokumentasi Lengkap
 
-- [Penggunaan Dasar](doc/id/usage.md)
+- [Penggunaan Dasar](usage.md)
 
-- [Pengaturan Hak Akses](doc/id/permission.md)
+- [Pengaturan Hak Akses](permission.md)
 
-- [Konfigurasi Menu](doc/id/menu.md)
+- [Konfigurasi Menu](menu.md)
 
-- [Pencarian dan Sorting](doc/id/search_sort.md)
+- [Pencarian dan Sorting](search_sort.md)
 
-- [Event System](doc/id/event.md)
+- [Event System](event.md)
 
-- [User Context](doc/id/user_context.md)
+- [User Context](user_context.md)
 
-- [Relasi Tabel](doc/id/relation.md)
+- [Relasi Tabel](relation.md)
+
+- [Relasi Tabel](date_time.md)
 
 Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
@@ -170,31 +172,31 @@ php vendor/bin/phpunit
 
 * Login
 
-![Login](doc/assets/imgs/login.png "Login")
+![Login](../assets/imgs/login.png "Login")
 
 * Menu List
 
-![Menu List](doc/assets/imgs/menu_list.png "Menu List")
+![Menu List](../assets/imgs/menu_list.png "Menu List")
 
 * Roles
 
-![Roles](doc/assets/imgs/roles.png "Roles")
+![Roles](../assets/imgs/roles.png "Roles")
 
 * Setting List
 
-![Setting List](doc/assets/imgs/setting_list.png "Setting List")
+![Setting List](../assets/imgs/setting_list.png "Setting List")
 
 * User Form
 
-![User Form](doc/assets/imgs/user_form.png "User Form")
+![User Form](../assets/imgs/user_form.png "User Form")
 
 * User List
 
-![User List](doc/assets/imgs/user_list.png "User List")
+![User List](../assets/imgs/user_list.png "User List")
 
 * Query Runner
 
-![Query Runner](doc/assets/imgs/query_runner.png "Query Runner")
+![Query Runner](../assets/imgs/query_runner.png "Query Runner")
 
 ## Bug dan Request Fitur
 
