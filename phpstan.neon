@@ -1,3 +1,0 @@
-parameters:
-	ignoreErrors:
-		- '#PHPDoc tag @throws with type Psr\\Cache\\InvalidArgumentException is not subtype of Throwable#'
