@@ -31,3 +31,6 @@ script:
   - vendor/bin/phpstan analyze --level=max src/
   - vendor/bin/phpunit -c phpunit.xml.travis.dist
   - vendor/bin/php-coveralls -v --exclude-no-stmt
+
+notifications:
+  email: false
