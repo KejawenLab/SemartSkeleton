@@ -45,7 +45,7 @@ class MenuLoader
             return [];
         }
 
-        $key = md5(sprintf('%s:%s:%s', __CLASS__, __METHOD__, $group->getId()));
+        $key = md5(sprintf('%s:%s:%s', __CLASS__, __METHOD__, $group->getId()->getBytes()));
         if (!$this->cacheProvider->isCached($key)) {
             $menus = $this->roleRepository->findParentMenuByGroup($group);
             $this->cacheProvider->cache($key, $menus);
@@ -95,7 +95,7 @@ class MenuLoader
             return [];
         }
 
-        $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId()));
+        $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId()->getBytes(), $menu->getId()->getBytes()));
         if (!$this->cacheProvider->isCached($key)) {
             $menus = $this->roleRepository->findChildMenuByGroupAndMenu($group, $menu);
             $this->cacheProvider->cache($key, $menus);
