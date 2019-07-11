@@ -12,6 +12,7 @@ use KejawenLab\Semart\Skeleton\Menu\MenuLoader;
 use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -64,6 +65,11 @@ class MenuLoaderTest extends TestCase
 
         $user = new User();
         $user->setGroup($group);
+
+        $id = & \Closure::bind(static function & ($user) {
+            return $user->id;
+        }, null, $user)($user);
+        $id = Uuid::getFactory()->uuid4();
 
         $tokenMock = $this->getMockBuilder(TokenInterface::class)->disableOriginalConstructor()->getMock();
         $tokenMock
