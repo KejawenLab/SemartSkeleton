@@ -224,6 +224,7 @@
                 $('.table-content').html(response['table']);
                 $('.pagination-box').html(response['pagination']);
 
+                localStorage.setItem('cache_id', response['_cache_id']);
                 window.history.pushState(response, title, url);
 
                 container.trigger('destroy.semart.loader');
