@@ -22,6 +22,7 @@ class CacheHandlerTest extends KernelTestCase
         $content = 'bar';
 
         $this->assertFalse($cacheHandler->isCached($key));
+        $this->assertNull($cacheHandler->getItem($key));
         $cacheHandler->cache($key, $content);
         $this->assertTrue($cacheHandler->isCached($key));
         $this->assertEquals($content, $cacheHandler->getItem($key));
