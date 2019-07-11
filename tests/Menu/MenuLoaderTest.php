@@ -63,7 +63,7 @@ class MenuLoaderTest extends TestCase
     {
         $group = new Group();
 
-        $id = & \Closure::bind(static function & ($group) {
+        $id = &\Closure::bind(static function &($group) {
             return $group->id;
         }, null, $group)($group);
         $id = Uuid::getFactory()->uuid4();
@@ -71,7 +71,7 @@ class MenuLoaderTest extends TestCase
         $user = new User();
         $user->setGroup($group);
 
-        $id2 = & \Closure::bind(static function & ($user) {
+        $id2 = &\Closure::bind(static function &($user) {
             return $user->id;
         }, null, $user)($user);
         $id2 = Uuid::getFactory()->uuid4();

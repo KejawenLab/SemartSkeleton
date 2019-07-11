@@ -28,7 +28,7 @@ class MenuExtensionTest extends TestCase
         $menu1->setRouteName('parent');
         $menu1->setName('PARENT');
 
-        $id = & \Closure::bind(static function & ($menu1) {
+        $id = &\Closure::bind(static function &($menu1) {
             return $menu1->id;
         }, null, $menu1)($menu1);
         $id = Uuid::getFactory()->uuid4();
@@ -39,7 +39,7 @@ class MenuExtensionTest extends TestCase
         $menu2->setName('CHILD');
         $menu2->setRouteName('child');
 
-        $id2 = & \Closure::bind(static function & ($menu2) {
+        $id2 = &\Closure::bind(static function &($menu2) {
             return $menu2->id;
         }, null, $menu2)($menu2);
         $id2 = Uuid::getFactory()->uuid4();
