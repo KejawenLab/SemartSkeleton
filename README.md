@@ -156,6 +156,8 @@ services:
 
 - [User Context](doc/id/user_context.md)
 
+- [Relasi Tabel](doc/id/relation.md)
+
 Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
 ## Unit Testing
@@ -193,6 +195,10 @@ php vendor/bin/phpunit
 * Query Runner
 
 ![Query Runner](doc/assets/imgs/query_runner.png "Query Runner")
+
+## Bug dan Request Fitur
+
+Anda dapat menggunakan `Issues` untuk melaporkan adanya bug, atau menggunakan `Pull requests` untuk request fitur.
 
 ## Kontributor
 

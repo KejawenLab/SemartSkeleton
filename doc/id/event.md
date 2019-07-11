@@ -19,4 +19,4 @@ Pada Semart Skeleton terdapat 4 event yang dapat digunakan untuk memanipulasi al
 Disamping itu juga terdapat event lain yang berasal dari Framework Symfony yang dapat dibaca pada [link berikut](https://symfony.com/doc/current/reference/events.html).
 
 
-[Kembali Ke Index](../README.md)
+[Kembali Ke Index](README.md)

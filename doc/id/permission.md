@@ -38,8 +38,8 @@ Dengan ketentuan, `KODEMENU` adalah kode pada tabel menu.
 @Permission(actions={Permission::ADD, Permission::EDIT})
 ```
 
-Untuk melihat contoh penggunaannya, Anda membuka file [Group Controller](../src/Controller/Admin/GroupController.php)
+Untuk melihat contoh penggunaannya, Anda membuka file [Group Controller](../../src/Controller/Admin/GroupController.php)
 
 Sangat mudah sekali, bukan?
 
-[Kembali Ke Index](../README.md)
+[Kembali Ke Index](README.md)
