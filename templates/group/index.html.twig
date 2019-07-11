@@ -132,6 +132,7 @@
 <script>
     $(window).ready(function () {
         localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');
+        localStorage.setItem('cache_id', '{{ cacheId }}');
 
         $('.query-string').val('');
 
@@ -150,6 +151,7 @@
 
             $.post(Routing.generate('groups_save'), {
                 _csrf_token: localStorage.getItem('csrf_token'),
+                _cache_id: localStorage.getItem('cache_id'),
                 id: id,
                 code: code,
                 name: name

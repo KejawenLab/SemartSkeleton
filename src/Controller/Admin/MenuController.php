@@ -31,19 +31,36 @@ class MenuController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, MenuService $menuService)
     {
-        $menus = $paginator->paginate(Menu::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+        if (!$this->isCached($key)) {
+            $menus = $paginator->paginate(Menu::class, $page);
+            $this->cache($key, $menus);
+        } else {
+            $menus = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('menu/table-content.html.twig', ['menus' => $menus]);
             $pagination = $this->renderView('menu/pagination.html.twig', ['menus' => $menus]);
 
-            return new JsonResponse([
+            $response = new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
+            ]);
+        } else {
+            $response = $this->render('menu/index.html.twig', [
+                'title' => 'Menu',
+                'menus' => $menus,
+                'parents' => $menuService->getActiveMenus(),
+                'cacheId' => $key,
             ]);
         }
 
-        return $this->render('menu/index.html.twig', ['title' => 'Menu', 'menus' => $menus, 'parents' => $menuService->getActiveMenus()]);
+        return $response;
     }
 
     /**

@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
 use KejawenLab\Semart\Skeleton\Application;
+use KejawenLab\Semart\Skeleton\Cache\CacheHandler;
 use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Cache\Adapter\AdapterInterface;
-use Symfony\Component\Cache\Exception\InvalidArgumentException;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -20,9 +19,7 @@ abstract class AdminController extends AbstractController
 
     private $cacheProvider;
 
-    private $item;
-
-    public function __construct(EventDispatcherInterface $eventDispatcher, AdapterInterface $cacheProvider)
+    public function __construct(EventDispatcherInterface $eventDispatcher, CacheHandler $cacheProvider)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheProvider = $cacheProvider;
@@ -33,34 +30,19 @@ abstract class AdminController extends AbstractController
      * @param mixed  $content
      *
      * @return mixed
-     *
-     * @throws InvalidArgumentException
      */
     protected function cache(string $key, $content = null)
     {
-        if ($this->item) {
-            return $this->item;
+        if (!$content) {
+            $this->cacheProvider->cache($key, $content);
         }
 
-        $item = $this->cacheProvider->getItem($key);
-        if (!$item->isHit()) {
-            $item->set($content);
-            $item->expiresAfter((new \DateInterval('PT17S')));
-
-            $this->cacheProvider->save($item);
-        }
-
-        return $item->get();
+        return $this->cacheProvider->getItem($key);
     }
 
     protected function isCached(string $key): bool
     {
-        $item = $this->cacheProvider->getItem($key);
-        if ($this->item = $item->get()) {
-            return true;
-        }
-
-        return false;
+        return $this->cacheProvider->isCached($key);
     }
 
     protected function commit(object $entity): void

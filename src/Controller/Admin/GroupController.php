@@ -31,19 +31,35 @@ class GroupController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $groups = $paginator->paginate(Group::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+        if (!$this->isCached($key)) {
+            $groups = $paginator->paginate(Group::class, $page);
+            $this->cache($key, $groups);
+        } else {
+            $groups = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('group/table-content.html.twig', ['groups' => $groups]);
             $pagination = $this->renderView('group/pagination.html.twig', ['groups' => $groups]);
 
-            return new JsonResponse([
+            $response = new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
+            ]);
+        } else {
+            $response = $this->render('group/index.html.twig', [
+                'title' => 'Grup',
+                'groups' => $groups,
+                'cacheId' => $key,
             ]);
         }
 
-        return $this->render('group/index.html.twig', ['title' => 'Grup', 'groups' => $groups]);
+        return $response;
     }
 
     /**

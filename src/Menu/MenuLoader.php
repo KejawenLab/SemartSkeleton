@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Menu;
 
+use KejawenLab\Semart\Skeleton\Cache\CacheHandler;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
@@ -20,10 +21,13 @@ class MenuLoader
 
     private $childMenu;
 
-    public function __construct(RoleRepository $roleRepository, TokenStorageInterface $tokenStorage)
+    private $cacheProvider;
+
+    public function __construct(RoleRepository $roleRepository, TokenStorageInterface $tokenStorage, CacheHandler $cacheProvider)
     {
         $this->roleRepository = $roleRepository;
         $this->tokenStorage = $tokenStorage;
+        $this->cacheProvider = $cacheProvider;
     }
 
     /**
@@ -41,7 +45,15 @@ class MenuLoader
             return [];
         }
 
-        return $this->roleRepository->findParentMenuByGroup($group);
+        $key = md5(sprintf('%s:%s:%s', __CLASS__, __METHOD__, $group->getId()));
+        if (!$this->cacheProvider->isCached($key)) {
+            $menus = $this->roleRepository->findParentMenuByGroup($group);
+            $this->cacheProvider->cache($key, $menus);
+        } else {
+            $menus = $this->cacheProvider->getItem($key);
+        }
+
+        return $menus;
     }
 
     public function hasChildMenu(Menu $menu): bool
@@ -83,6 +95,14 @@ class MenuLoader
             return [];
         }
 
-        return $this->roleRepository->findChildMenuByGroupAndMenu($group, $menu);
+        $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, $group->getId(), $menu->getId()));
+        if (!$this->cacheProvider->isCached($key)) {
+            $menus = $this->roleRepository->findChildMenuByGroupAndMenu($group, $menu);
+            $this->cacheProvider->cache($key, $menus);
+        } else {
+            $menus = $this->cacheProvider->getItem($key);
+        }
+
+        return $menus;
     }
 }
