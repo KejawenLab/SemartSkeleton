@@ -46,6 +46,11 @@ class MenuLoaderTest extends TestCase
     {
         $menu = new Menu();
 
+        $id = &\Closure::bind(static function &($menu) {
+            return $menu->id;
+        }, null, $menu)($menu);
+        $id = Uuid::getFactory()->uuid4();
+
         $roleRepository
             ->expects($this->once())
             ->method('findChildMenuByGroupAndMenu')
