@@ -30,7 +30,7 @@ abstract class AdminController extends AbstractController
 
     /**
      * @param string $key
-     * @param null   $content
+     * @param mixed  $content
      *
      * @return mixed
      *
