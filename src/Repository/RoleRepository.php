@@ -44,8 +44,8 @@ class RoleRepository extends Repository
             $queryBuilder = $this->createQueryBuilder('o');
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId()->getBytes())));
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('m.id', $queryBuilder->expr()->literal($menu->getId()->getBytes())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('m.id', $queryBuilder->expr()->literal($menu->getId())));
 
             $role = $queryBuilder->getQuery()->getOneOrNullResult();
 
@@ -66,7 +66,7 @@ class RoleRepository extends Repository
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
             $queryBuilder->leftJoin('m.parent', 'p');
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId()->getBytes())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('m.showable', $queryBuilder->expr()->literal(true)));
             $queryBuilder->andWhere($queryBuilder->expr()->isNull('p'));
@@ -94,10 +94,10 @@ class RoleRepository extends Repository
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
             $queryBuilder->leftJoin('m.parent', 'p');
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId()->getBytes())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId())));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('o.viewable', $queryBuilder->expr()->literal(true)));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('m.showable', $queryBuilder->expr()->literal(true)));
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('p', $queryBuilder->expr()->literal($menu->getId()->getBytes())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('p', $queryBuilder->expr()->literal($menu->getId())));
             $queryBuilder->addOrderBy('m.menuOrder', 'ASC');
             $queryBuilder->andWhere($queryBuilder->expr()->isNull('m.deletedAt'));
             $queryBuilder->andWhere($queryBuilder->expr()->isNull('g.deletedAt'));
@@ -122,7 +122,7 @@ class RoleRepository extends Repository
             $queryBuilder->join('o.menu', 'm');
             $queryBuilder->leftJoin('m.parent', 'p');
             $queryBuilder->orWhere($queryBuilder->expr()->like('LOWER(m.name)', $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
-            $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId()->getBytes())));
+            $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId())));
             $queryBuilder->addOrderBy('p.name', 'ASC');
             $queryBuilder->addOrderBy('m.menuOrder', 'ASC');
 

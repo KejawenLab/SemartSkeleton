@@ -27,11 +27,11 @@ class RoleInitiationSubscriber implements EventSubscriberInterface
     {
         $entity = $event->getEntity();
 
-        if ($entity instanceof Group && !$entity->getId()->getBytes()) {
+        if ($entity instanceof Group && !$entity->getId()) {
             $this->roleService->assignToGroup($entity);
         }
 
-        if ($entity instanceof Menu && !$entity->getId()->getBytes()) {
+        if ($entity instanceof Menu && !$entity->getId()) {
             $this->roleService->assignToMenu($entity);
         }
     }

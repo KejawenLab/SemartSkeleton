@@ -33,11 +33,11 @@ class ProfileController extends AdminController
     {
         /** @var User $user */
         $user = $this->getUser();
-        if ($user->getId()->getBytes() !== $request->get('id')) {
+        if ($user->getId() !== $request->get('id')) {
             throw new AccessDeniedException();
         }
 
-        $user = $service->get($user->getId()->getBytes());
+        $user = $service->get($user->getId());
         if (!$user) {
             throw new NotFoundHttpException();
         }
