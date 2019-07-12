@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c1e1a925fd6114e728d242a6095831e",
+    "content-hash": "895bd29a4b3ed82f117dc8db70d54366",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1323,7 +1323,7 @@
                 "MIT"
             ],
             "description": "Kejawenlab Collection",
-            "time": "2019-05-09T07:21:27+00:00"
+            "time": "2019-05-09T04:14:04+00:00"
         },
         {
             "name": "knplabs/knp-components",
