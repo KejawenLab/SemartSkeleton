@@ -23,6 +23,7 @@
         "symfony/asset": "^4.2",
         "symfony/console": "^4.2",
         "symfony/event-dispatcher": "^4.2",
+        "symfony/form": "^4.2",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.2",
         "symfony/monolog-bundle": "^3.3",
