@@ -43,7 +43,7 @@ Semart Skeleton support relasi untuk pencarian maupun pengurutan, sebagai contoh
 @Sortable({"parent.name", "code", "name"})
 ```
 
-Seperti pada entity [Menu](../src/Entity/Menu.php)
+Seperti pada entity [Menu](../../src/Entity/Menu.php)
 
 
 ## Implementasi Pengurutan pada Template
@@ -51,4 +51,4 @@ Seperti pada entity [Menu](../src/Entity/Menu.php)
 Untuk menggunakan fitur pengurutan pada template, Anda cukup menambahkan `<i data-sort="no" data-sort-field="username" class="fa fa-sort sortable pull-right"></i>` pada header table seperti pada file `index.html.twig` yang di-generate oleh Semart Skeleton.
 
 
-[Kembali Ke Index](../README.md)
+[Kembali Ke Index](README.md)

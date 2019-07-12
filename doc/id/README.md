@@ -144,17 +144,21 @@ services:
 
 ## Dokumentasi Lengkap
 
-- [Penggunaan Dasar](doc/id/usage.md)
+- [Penggunaan Dasar](usage.md)
 
-- [Pengaturan Hak Akses](doc/id/permission.md)
+- [Pengaturan Hak Akses](permission.md)
 
-- [Konfigurasi Menu](doc/id/menu.md)
+- [Konfigurasi Menu](menu.md)
 
-- [Pencarian dan Sorting](doc/id/search_sort.md)
+- [Pencarian dan Sorting](search_sort.md)
 
-- [Event System](doc/id/event.md)
+- [Event System](event.md)
 
-- [User Context](doc/id/user_context.md)
+- [User Context](user_context.md)
+
+- [Relasi Tabel](relation.md)
+
+- [Relasi Tabel](date_time.md)
 
 Anda juga dapat membaca dokumentasinya secara online melalui [Github I/O Putra Kahfi](https://puterakahfi.github.io/SemartSkeleton)
 
@@ -193,6 +197,10 @@ php vendor/bin/phpunit
 * Query Runner
 
 ![Query Runner](../assets/imgs/query_runner.png "Query Runner")
+
+## Bug dan Request Fitur
+
+Anda dapat menggunakan `Issues` untuk melaporkan adanya bug, atau menggunakan `Pull requests` untuk request fitur.
 
 ## Kontributor
 
