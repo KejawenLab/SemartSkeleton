@@ -28,6 +28,7 @@
         "symfony/monolog-bundle": "^3.3",
         "symfony/security-bundle": "^4.2",
         "symfony/serializer-pack": "^1.0",
+        "symfony/templating": "^4.2",
         "symfony/translation": "^4.2",
         "symfony/validator": "^4.2",
         "symfony/yaml": "^4.2"
