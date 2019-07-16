@@ -1,6 +1,6 @@
 {% set entityHumanize = entity | humanize %}
 {% set entityLowerize = entity | lower %}
-{% set entityUnderscoreLowerize = entityLowerize | underscore %}
+{% set entityUnderscoreLowerize = entity | underscore | lower %}
 {% set entityUpper = entity | upper %}
 {% set entityPlural =  entity | pluralize %}
 {% set entityPluralLowerize = entityPlural | lower %}
