@@ -8,6 +8,7 @@ security:
             id: KejawenLab\Semart\Skeleton\Security\Service\UserService
 
     role_hierarchy:
+        ROLE_SEMART: [ROLE_USER, ROLE_SEMART]
         ROLE_USER: ROLE_USER
 
     firewalls:
