@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
+use Doctrine\Common\Inflector\Inflector;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Application;
 use ReflectionProperty;
@@ -84,7 +85,7 @@ class RequestHandler
             ->flatten()
             ->map(function ($value) use ($reflection) {
                 /* @var ConstraintViolationInterface $value */
-                return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
+                return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', Inflector::tableize($reflection->getShortName()), Inflector::tableize($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
             })
             ->toArray()
         ;
