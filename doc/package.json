@@ -1,4 +1,7 @@
 {
+    "name": "semarskeleton-doc",
+    "version": "1.0.0",
+    "license": "MIT",
     "scripts": {
         "dev": "vuepress dev ",
         "build": "vuepress build ",
@@ -9,7 +12,7 @@
         "gh-pages": "^2.0.1"
     },
     "dependencies": {
-        "buefy": "^0.7.8",
+        "buefy": "^0.7.10",
         "vuepress": "^1.0.2"
     }
 }
