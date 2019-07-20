@@ -34,7 +34,7 @@ class OwnershipService
         $service = null;
 
         Collection::collect($reflectionMethod->getParameters())
-            ->each(static function ($value) use (&$id, &$service, $request) {
+            ->each(function ($value) use (&$id, &$service, $request) {
                 /** @var ReflectionParameter $value */
                 if (!$argumentType = $value->getType()) {
                     return false;

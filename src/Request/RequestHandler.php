@@ -83,7 +83,7 @@ class RequestHandler
     {
         $this->errors = Collection::collect($this->validator->validate($object))
             ->flatten()
-            ->map(static function ($value) use ($reflection) {
+            ->map(function ($value) use ($reflection) {
                 /* @var ConstraintViolationInterface $value */
                 return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', Inflector::tableize($reflection->getShortName()), Inflector::tableize($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
             })
