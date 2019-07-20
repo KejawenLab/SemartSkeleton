@@ -64,7 +64,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
     {
         $generators = Collection::collect($container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME)))
             ->keys()
-            ->map(function ($serviceId) {
+            ->map(static function ($serviceId) {
                 return new Reference($serviceId);
             })
             ->toArray()
@@ -74,7 +74,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
 
         $services = Collection::collect($container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME)))
             ->keys()
-            ->map(function ($serviceId) {
+            ->map(static function ($serviceId) {
                 return new Reference($serviceId);
             })
             ->toArray()

@@ -24,7 +24,7 @@ class Application
 
     public function setServices(array $services): void
     {
-        Collection::collect($services)->each(function ($value) {
+        Collection::collect($services)->each(static function ($value) {
             $this->addService($value);
         });
     }

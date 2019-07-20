@@ -55,7 +55,7 @@ class RequestHandler
         }
 
         Collection::collect($reflection->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED))
-            ->each(function ($value) use ($request, $object) {
+            ->each(static function ($value) use ($request, $object) {
                 /** @var ReflectionProperty $value */
                 $field = $value->getName();
                 $value = $request->request->get($field);
@@ -83,7 +83,7 @@ class RequestHandler
     {
         $this->errors = Collection::collect($this->validator->validate($object))
             ->flatten()
-            ->map(function ($value) use ($reflection) {
+            ->map(static function ($value) use ($reflection) {
                 /* @var ConstraintViolationInterface $value */
                 return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', Inflector::tableize($reflection->getShortName()), Inflector::tableize($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
             })

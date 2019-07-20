@@ -16,14 +16,14 @@ class GeneratorFactory
 
     public function __construct(array $generators = [])
     {
-        Collection::collect($generators)->each(function ($value) {
+        Collection::collect($generators)->each(static function ($value) {
             $this->addGenerator($value);
         });
     }
 
     public function generate(\ReflectionClass $entityClass): void
     {
-        Collection::collect($this->generators)->each(function ($value) use ($entityClass) {
+        Collection::collect($this->generators)->each(static function ($value) use ($entityClass) {
             /* @var GeneratorInterface $value */
             $value->generate($entityClass);
         });

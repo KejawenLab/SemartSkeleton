@@ -54,7 +54,7 @@ class AuthorizationSubscriber implements EventSubscriberInterface
         if ($classAnnotation && $methodAnnotation) {
             $authorize = 0;
             Collection::collect($methodAnnotation->getActions())
-                ->each(function ($value) use (&$authorize, $classAnnotation) {
+                ->each(static function ($value) use (&$authorize, $classAnnotation) {
                     if ($this->authorizationChecker->isGranted($value, $this->menuService->getMenuByCode($classAnnotation->getMenu()))) {
                         ++$authorize;
                     }
