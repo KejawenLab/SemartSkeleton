@@ -39,14 +39,14 @@ class MenuExtension extends AbstractExtension
     public function renderMenu(): string
     {
         return Collection::collect($this->menuLoader->getParentMenu())
-            ->map(static function ($value) {
+            ->map(function ($value) {
                 /** @var Menu $value */
                 if (!$this->menuLoader->hasChildMenu($value)) {
                     return $this->buildHtml($value);
                 } else {
                     $html = sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
                     Collection::collect($this->menuLoader->getChildMenu($value))
-                        ->each(static function ($value) use (&$html) {
+                        ->each(function ($value) use (&$html) {
                             $html .= $this->buildHtml($value);
                         })
                     ;

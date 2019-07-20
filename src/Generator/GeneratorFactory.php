@@ -16,7 +16,7 @@ class GeneratorFactory
 
     public function __construct(array $generators = [])
     {
-        Collection::collect($generators)->each(static function ($value) {
+        Collection::collect($generators)->each(function ($value) {
             $this->addGenerator($value);
         });
     }

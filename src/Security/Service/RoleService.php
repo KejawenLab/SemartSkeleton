@@ -38,7 +38,7 @@ class RoleService implements ServiceInterface
     public function assignToGroup(Group $group): void
     {
         Collection::collect($this->menuRepository->findAll())
-            ->each(static function ($menu, $key) use ($group) {
+            ->each(function ($menu, $key) use ($group) {
                 $role = new Role();
                 $role->setGroup($group);
                 $role->setMenu($menu);
@@ -57,7 +57,7 @@ class RoleService implements ServiceInterface
     public function assignToMenu(Menu $menu): void
     {
         Collection::collect($this->groupRepository->findAll())
-            ->each(static function ($group, $key) use ($menu) {
+            ->each(function ($group, $key) use ($menu) {
                 /** @var Group $group */
                 $role = new Role();
                 $role->setGroup($group);

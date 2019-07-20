@@ -55,7 +55,7 @@ class RequestHandler
         }
 
         Collection::collect($reflection->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED))
-            ->each(static function ($value) use ($request, $object) {
+            ->each(function ($value) use ($request, $object) {
                 /** @var ReflectionProperty $value */
                 $field = $value->getName();
                 $value = $request->request->get($field);
