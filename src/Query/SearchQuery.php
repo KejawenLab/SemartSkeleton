@@ -61,9 +61,9 @@ class SearchQuery implements EventSubscriberInterface
                     $event->addJoinAlias($joins[0], $alias);
 
                     return $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($joins[0]), $joins[1]), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
-                } else {
-                    return $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
                 }
+
+                return $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
             })
             ->toArray()
         ;

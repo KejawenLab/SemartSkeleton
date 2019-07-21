@@ -43,16 +43,16 @@ class MenuExtension extends AbstractExtension
                 /** @var Menu $value */
                 if (!$this->menuLoader->hasChildMenu($value)) {
                     return $this->buildHtml($value);
-                } else {
-                    $html = sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
-                    Collection::collect($this->menuLoader->getChildMenu($value))
-                        ->each(function ($value) use (&$html) {
-                            $html .= $this->buildHtml($value);
-                        })
-                    ;
-
-                    return $html.'</ul></li>';
                 }
+
+                $html = sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
+                Collection::collect($this->menuLoader->getChildMenu($value))
+                    ->each(function ($value) use (&$html) {
+                        $html .= $this->buildHtml($value);
+                    })
+                ;
+
+                return $html.'</ul></li>';
             })
             ->implode()
         ;

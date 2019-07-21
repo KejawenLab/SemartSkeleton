@@ -46,20 +46,18 @@ class GroupController extends AdminController
             $table = $this->renderView('group/table-content.html.twig', ['groups' => $groups]);
             $pagination = $this->renderView('group/pagination.html.twig', ['groups' => $groups]);
 
-            $response = new JsonResponse([
+            return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
                 '_cache_id' => $key,
             ]);
-        } else {
-            $response = $this->render('group/index.html.twig', [
-                'title' => 'Grup',
-                'groups' => $groups,
-                'cacheId' => $key,
-            ]);
         }
 
-        return $response;
+        return $this->render('group/index.html.twig', [
+            'title' => 'Grup',
+            'groups' => $groups,
+            'cacheId' => $key,
+        ]);
     }
 
     /**
