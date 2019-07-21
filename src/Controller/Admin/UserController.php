@@ -48,21 +48,19 @@ class UserController extends AdminController
             $table = $this->renderView('user/table-content.html.twig', ['users' => $users]);
             $pagination = $this->renderView('user/pagination.html.twig', ['users' => $users]);
 
-            $response = new JsonResponse([
+            return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
                 '_cache_id' => $key,
             ]);
-        } else {
-            $response = $this->render('user/index.html.twig', [
-                'title' => 'Pengguna',
-                'users' => $users,
-                'groups' => $groupService->getActiveGroups(),
-                'cacheId' => $key,
-            ]);
         }
 
-        return $response;
+        return $this->render('user/index.html.twig', [
+            'title' => 'Pengguna',
+            'users' => $users,
+            'groups' => $groupService->getActiveGroups(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**

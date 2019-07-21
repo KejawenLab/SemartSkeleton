@@ -46,20 +46,18 @@ class SettingController extends AdminController
             $table = $this->renderView('setting/table-content.html.twig', ['settings' => $settings]);
             $pagination = $this->renderView('setting/pagination.html.twig', ['settings' => $settings]);
 
-            $response = new JsonResponse([
+            return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
                 '_cache_id' => $key,
             ]);
-        } else {
-            $response = $this->render('setting/index.html.twig', [
-                'title' => 'Setting',
-                'settings' => $settings,
-                'cacheId' => $key,
-            ]);
         }
 
-        return $response;
+        return $this->render('setting/index.html.twig', [
+            'title' => 'Setting',
+            'settings' => $settings,
+            'cacheId' => $key,
+        ]);
     }
 
     /**

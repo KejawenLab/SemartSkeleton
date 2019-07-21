@@ -46,8 +46,8 @@ class HomeController extends AbstractController
             $response->setContent($fileLocator->getFile($filePath));
 
             return $response;
-        } else {
-            throw new NotFoundHttpException();
         }
+
+        throw new NotFoundHttpException();
     }
 }

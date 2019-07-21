@@ -46,21 +46,19 @@ class MenuController extends AdminController
             $table = $this->renderView('menu/table-content.html.twig', ['menus' => $menus]);
             $pagination = $this->renderView('menu/pagination.html.twig', ['menus' => $menus]);
 
-            $response = new JsonResponse([
+            return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
                 '_cache_id' => $key,
             ]);
-        } else {
-            $response = $this->render('menu/index.html.twig', [
-                'title' => 'Menu',
-                'menus' => $menus,
-                'parents' => $menuService->getActiveMenus(),
-                'cacheId' => $key,
-            ]);
         }
 
-        return $response;
+        return $this->render('menu/index.html.twig', [
+            'title' => 'Menu',
+            'menus' => $menus,
+            'parents' => $menuService->getActiveMenus(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**
