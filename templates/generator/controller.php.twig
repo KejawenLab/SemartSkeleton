@@ -55,7 +55,7 @@ class {{ entityHumanize }}Controller extends AdminController
             $table = $this->renderView('{{ entityUnderscoreLowerize }}/table-content.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
             $pagination = $this->renderView('{{ entityUnderscoreLowerize }}/pagination.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
 
-            $response = new JsonResponse([
+            return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
                 '_cache_id' => $key,
