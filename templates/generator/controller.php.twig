@@ -60,15 +60,13 @@ class {{ entityHumanize }}Controller extends AdminController
                 'pagination' => $pagination,
                 '_cache_id' => $key,
             ]);
-        } else {
-            $response = $this->render('{{ entityUnderscoreLowerize }}/index.html.twig', [
-                'title' => '{{ entityHumanize }}',
-                '{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }},
-                'cacheId' => $key,
-            ]);
         }
 
-        return $response;
+        return $this->render('{{ entityUnderscoreLowerize }}/index.html.twig', [
+            'title' => '{{ entityHumanize }}',
+            '{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }},
+            'cacheId' => $key,
+        ]);
     }
 
     /**
