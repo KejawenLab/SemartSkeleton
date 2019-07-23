@@ -22,7 +22,7 @@ class MenuSubscriber implements EventSubscriberInterface
         }
 
         $request = $event->getRequest();
-        if (! $request) {
+        if (!$request) {
             return;
         }
 
