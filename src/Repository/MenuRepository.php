@@ -47,7 +47,7 @@ class MenuRepository extends Repository
 
     public function commit(Menu $menu): void
     {
-        $this->_em->persist($menu);
-        $this->_em->flush();
+        $this->manager->persist($menu);
+        $this->manager->flush();
     }
 }

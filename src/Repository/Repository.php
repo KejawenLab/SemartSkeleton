@@ -21,12 +21,12 @@ abstract class Repository implements CacheableRepositoryInterface
 
     private $cacheable;
 
-    private $repository;
+    protected $repository;
 
     /**
      * @var EntityManager
      */
-    private $manager;
+    protected $manager;
 
     public function __construct(ManagerRegistry $registry, string $entityClass)
     {

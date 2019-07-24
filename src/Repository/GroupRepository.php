@@ -33,7 +33,7 @@ class GroupRepository extends Repository
 
     public function commit(Group $group): void
     {
-        $this->_em->persist($group);
-        $this->_em->flush();
+        $this->manager->persist($group);
+        $this->manager->flush();
     }
 }

@@ -41,7 +41,7 @@ class RoleRepository extends Repository
 
         $role = $this->getItem($key);
         if (!$role) {
-            $queryBuilder = $this->createQueryBuilder('o');
+            $queryBuilder = $this->repository->createQueryBuilder('o');
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
             $queryBuilder->andWhere($queryBuilder->expr()->eq('g.id', $queryBuilder->expr()->literal($group->getId())));
@@ -61,7 +61,7 @@ class RoleRepository extends Repository
 
         $results = $this->getItem($key);
         if (!$results) {
-            $queryBuilder = $this->createQueryBuilder('o');
+            $queryBuilder = $this->repository->createQueryBuilder('o');
             $queryBuilder->select('o');
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
@@ -89,7 +89,7 @@ class RoleRepository extends Repository
 
         $results = $this->getItem($key);
         if (!$results) {
-            $queryBuilder = $this->createQueryBuilder('o');
+            $queryBuilder = $this->repository->createQueryBuilder('o');
             $queryBuilder->select('o');
             $queryBuilder->leftJoin('o.group', 'g');
             $queryBuilder->leftJoin('o.menu', 'm');
@@ -117,7 +117,7 @@ class RoleRepository extends Repository
 
         $results = $this->getItem($key);
         if (!$results) {
-            $queryBuilder = $this->createQueryBuilder('o');
+            $queryBuilder = $this->repository->createQueryBuilder('o');
             $queryBuilder->join('o.group', 'g');
             $queryBuilder->join('o.menu', 'm');
             $queryBuilder->leftJoin('m.parent', 'p');
@@ -136,12 +136,12 @@ class RoleRepository extends Repository
 
     public function persist(Role $role): void
     {
-        $this->_em->persist($role);
+        $this->manager->persist($role);
     }
 
     public function commit(): void
     {
-        $this->_em->flush();
+        $this->manager->flush();
     }
 
     private function filterMenu(array $roles): array
