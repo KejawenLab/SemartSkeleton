@@ -55,6 +55,11 @@ class RoleRepository extends Repository
         return $role;
     }
 
+    public function findAll(): array
+    {
+        return $this->repository->findAll();
+    }
+
     public function findParentMenuByGroup(Group $group): array
     {
         $key = md5(sprintf('%s:%s:%s', __CLASS__, __METHOD__, serialize($group)));

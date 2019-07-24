@@ -14,4 +14,6 @@ interface RepositoryInterface
     public function findBy(array $criteria): array;
 
     public function findOneBy(array $criteria): ?object;
+
+    public function findAll(): array;
 }
