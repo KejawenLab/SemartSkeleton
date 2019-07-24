@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
+use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
@@ -20,8 +21,14 @@ class MenuSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $filter = $event->getRequest()->query->get('f');
+        $request = $event->getRequest();
+        if (!$request) {
+            return;
+        }
+
+        $filter = $request->query->get('f');
         if ($filter) {
+            /** @var QueryBuilder $queryBuilder */
             $queryBuilder = $event->getQueryBuilder();
             $queryBuilder->join(sprintf('%s.parent', $event->getJoinAlias('root')), 'p');
             $queryBuilder->andWhere($queryBuilder->expr()->eq('p.id', $queryBuilder->expr()->literal($filter)));
