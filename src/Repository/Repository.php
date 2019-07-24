@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Repository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityManager;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
@@ -14,34 +15,40 @@ use Ramsey\Uuid\Uuid;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-abstract class Repository extends ServiceEntityRepository implements CacheableRepositoryInterface
+abstract class Repository implements CacheableRepositoryInterface
 {
     private $cache;
 
     private $cacheable;
 
+    private $repository;
+
+    /**
+     * @var EntityManager
+     */
+    private $manager;
+
     public function __construct(ManagerRegistry $registry, string $entityClass)
     {
-        parent::__construct($registry, $entityClass);
-
+        $this->manager = $registry->getManagerForClass($entityClass);
+        $this->repository = new ServiceEntityRepository($registry, $entityClass);
         $this->cache = new ArrayCache();
         $this->cacheable = false;
     }
 
-    public function find($id, $lockMode = null, $lockVersion = null): ?object
+    public function find($id): ?object
     {
         if (!Uuid::isValid($id)) {
             return null;
         }
 
         if (!$this->isCacheable()) {
-            return parent::find($id);
+            return $this->repository->find($id);
         }
 
         $entity = $this->getItem($id);
         if (!$entity) {
-            $entity = parent::find($id);
-
+            $entity = $this->repository->find($id);
             $this->cache($id, $entity);
         }
 
@@ -50,13 +57,13 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
 
     public function findUniqueBy(array $criteria): array
     {
-        $filters = $this->_em->getFilters();
+        $filters = $this->manager->getFilters();
         $filterName = sprintf('%s_softdeletable', Application::APP_UNIQUE_NAME);
         if ($filters->isEnabled($filterName)) {
             $filters->disable($filterName);
         }
 
-        return $this->findBy(array_merge($criteria));
+        return $this->repository->findBy(array_merge($criteria));
     }
 
     public function isCacheable(): bool
@@ -74,7 +81,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         if ($this->isCacheable()) {
             $object = $this->getItem($cacheKey);
             if (!$object) {
-                $object = parent::findOneBy($criteria, $orderBy);
+                $object = $this->repository->findOneBy($criteria, $orderBy);
 
                 $this->cache($cacheKey, $object);
             }
@@ -82,7 +89,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
             return $object;
         }
 
-        return parent::findOneBy($criteria, $orderBy);
+        return $this->repository->findOneBy($criteria, $orderBy);
     }
 
     protected function doFindBy(string  $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
@@ -90,7 +97,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         if ($this->isCacheable()) {
             $objects = $this->getItem($cacheKey);
             if (!$objects) {
-                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
+                $objects = $this->repository->findBy($criteria, $orderBy, $limit, $offset);
 
                 $this->cache($cacheKey, $objects);
             }
@@ -98,7 +105,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
             return $objects;
         }
 
-        return parent::findBy($criteria, $orderBy, $limit, $offset);
+        return $this->repository->findBy($criteria, $orderBy, $limit, $offset);
     }
 
     protected function cache(string $key, $item): void
@@ -112,7 +119,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
     {
         $entity = $this->cache->fetch($key);
         if ($entity) {
-            $this->_em->merge($entity);
+            $this->manager->merge($entity);
         }
 
         return $entity;
