@@ -63,7 +63,7 @@ abstract class Repository implements CacheableRepositoryInterface
             $filters->disable($filterName);
         }
 
-        return $this->repository->findBy(array_merge($criteria));
+        return $this->findBy($criteria);
     }
 
     public function isCacheable(): bool
