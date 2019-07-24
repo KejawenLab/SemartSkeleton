@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="semart_pengguna", indexes={@ORM\Index(name="semart_pengguna_search_idx", columns={"nama_pengguna"})})
- * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\UserRepository")
+ * @ORM\Entity()
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *

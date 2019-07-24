@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="semart_grup", indexes={@ORM\Index(name="semart_grup_search_idx", columns={"kode", "nama"})})
- * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\GroupRepository")
+ * @ORM\Entity()
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *

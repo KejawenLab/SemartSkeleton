@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="semart_menu", indexes={@ORM\Index(name="semart_menu_search_idx", columns={"kode", "nama"})})
- * @ORM\Entity(repositoryClass="KejawenLab\Semart\Skeleton\Repository\MenuRepository")
+ * @ORM\Entity()
  *
  * @Gedmo\SoftDeleteable(fieldName="deletedAt")
  *
