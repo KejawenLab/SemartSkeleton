@@ -12,6 +12,7 @@ use KejawenLab\Semart\Skeleton\Menu\MenuLoader;
 use KejawenLab\Semart\Skeleton\Repository\RoleRepository;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -45,6 +46,11 @@ class MenuLoaderTest extends TestCase
     {
         $menu = new Menu();
 
+        $id = &\Closure::bind(static function &($menu) {
+            return $menu->id;
+        }, null, $menu)($menu);
+        $id = Uuid::getFactory()->uuid4();
+
         $roleRepository
             ->expects($this->once())
             ->method('findChildMenuByGroupAndMenu')
@@ -62,8 +68,18 @@ class MenuLoaderTest extends TestCase
     {
         $group = new Group();
 
+        $id = &\Closure::bind(static function &($group) {
+            return $group->id;
+        }, null, $group)($group);
+        $id = Uuid::getFactory()->uuid4();
+
         $user = new User();
         $user->setGroup($group);
+
+        $id2 = &\Closure::bind(static function &($user) {
+            return $user->id;
+        }, null, $user)($user);
+        $id2 = Uuid::getFactory()->uuid4();
 
         $tokenMock = $this->getMockBuilder(TokenInterface::class)->disableOriginalConstructor()->getMock();
         $tokenMock

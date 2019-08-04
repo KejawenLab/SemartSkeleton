@@ -10,6 +10,7 @@ use KejawenLab\Semart\Skeleton\Menu\MenuLoader;
 use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -27,11 +28,21 @@ class MenuExtensionTest extends TestCase
         $menu1->setRouteName('parent');
         $menu1->setName('PARENT');
 
+        $id = &\Closure::bind(static function &($menu1) {
+            return $menu1->id;
+        }, null, $menu1)($menu1);
+        $id = Uuid::getFactory()->uuid4();
+
         $menu2 = new Menu();
         $menu2->setParent($menu1);
         $menu2->setCode('b');
         $menu2->setName('CHILD');
         $menu2->setRouteName('child');
+
+        $id2 = &\Closure::bind(static function &($menu2) {
+            return $menu2->id;
+        }, null, $menu2)($menu2);
+        $id2 = Uuid::getFactory()->uuid4();
 
         $menuLoader
             ->expects($this->once())
