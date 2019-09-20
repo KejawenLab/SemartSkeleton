@@ -11,7 +11,7 @@ use PHLAK\Twine\Str;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class Application
+final class Application
 {
     public const APP_UNIQUE_NAME = 'semart';
     public const REQUEST_EVENT = 'app.request';

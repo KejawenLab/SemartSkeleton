@@ -8,7 +8,7 @@ parameters:
 doctrine:
     dbal:
         # configure these for your database server
-        driver: '%env(resolve:DATABASE_DRIVER)%'
+        driver: 'pdo_%env(resolve:DATABASE_DRIVER)%'
         server_version: '%env(resolve:DATABASE_SERVER_VERSION)%'
         charset: '%env(resolve:DATABASE_CHARSET)%'
         default_table_options:
