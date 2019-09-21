@@ -69,7 +69,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         $this->cacheable = $cacheable;
     }
 
-    protected function doFindOneBy(string  $cacheKey, array $criteria, array $orderBy = null): ?object
+    protected function doFindOneBy(string $cacheKey, array $criteria, array $orderBy = null): ?object
     {
         if ($this->isCacheable()) {
             $object = $this->getItem($cacheKey);
@@ -85,7 +85,7 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return parent::findOneBy($criteria, $orderBy);
     }
 
-    protected function doFindBy(string  $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    protected function doFindBy(string $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         if ($this->isCacheable()) {
             $objects = $this->getItem($cacheKey);
