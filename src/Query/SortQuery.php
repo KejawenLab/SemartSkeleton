@@ -69,13 +69,13 @@ class SortQuery implements EventSubscriberInterface
                     if (0 === $key) {
                         $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $value), $alias);
                     } else {
-                        /** @var string $field;  */
+                        /** @var string $field; */
                         $field = $fields->get($key - 1);
                         $queryBuilder->leftJoin(sprintf('%s.%s', $field, $value), $alias);
                     }
                 }
 
-                /** @var string $field;  */
+                /** @var string $field; */
                 $field = $fields->get($key + 1);
                 $sort = sprintf('%s.%s', $alias, $field);
 
