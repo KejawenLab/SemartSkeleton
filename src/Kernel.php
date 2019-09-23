@@ -4,12 +4,14 @@ namespace KejawenLab\Semart\Skeleton;
 
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
+use KejawenLab\Semart\Skeleton\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -81,5 +83,17 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         ;
         $definition = $container->getDefinition(Application::class);
         $definition->addMethodCall('setServices', [$services]);
+
+        sprintf('%s/.env.template', $this->getProjectDir());
+
+        $env = new Dotenv();
+        $env->loadEnv(sprintf('%s/.env', $this->getProjectDir()));
+
+        $definition = $container->getDefinition('doctrine.dbal.default_connection');
+
+        $argument = $definition->getArgument(0);
+        $argument['password'] = Encryptor::decrypt(getenv('DATABASE_PASSWORD'), getenv('APP_SECRET'));
+
+        $definition->replaceArgument(0, $argument);
     }
 }

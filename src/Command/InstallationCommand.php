@@ -146,8 +146,8 @@ class InstallationCommand extends Command
             '{{APP_VERSION}}',
         ];
 
-        $secret = sprintf('%s:%s', Application::APP_UNIQUE_NAME, date('YmdHis'));
-        $replace = [$environment, Encryptor::encrypt($secret, $secret), $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, $dbPassword, $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
+        $secret = Encryptor::encrypt(sprintf('%s:%s', Application::APP_UNIQUE_NAME, date('YmdHis')), Application::APP_UNIQUE_NAME);
+        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt($dbPassword, $secret), $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
 
         $envString = str_replace($search, $replace, file_get_contents($this->envTemplate));
 
