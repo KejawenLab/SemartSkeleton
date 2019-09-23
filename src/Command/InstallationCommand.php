@@ -149,7 +149,7 @@ class InstallationCommand extends Command
         $secret = Encryptor::encrypt(sprintf('%s:%s', Application::APP_UNIQUE_NAME, date('YmdHis')), Application::APP_UNIQUE_NAME);
         $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt($dbPassword, $secret), $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
 
-        $envString = str_replace($search, $replace, file_get_contents($this->envTemplate));
+        $envString = str_replace($search, $replace, (string) file_get_contents($this->envTemplate));
 
         $output->writeln('<options=bold>Dumping Environment Variables</>');
 
@@ -158,10 +158,10 @@ class InstallationCommand extends Command
 
     private function dumpEnv(string $envConent): void
     {
-        $envFile = explode(DIRECTORY_SEPARATOR, $this->envTemplate);
+        $envFile = explode(\DIRECTORY_SEPARATOR, $this->envTemplate);
         array_pop($envFile);
 
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile(sprintf('%s%s.env', implode(DIRECTORY_SEPARATOR, $envFile), DIRECTORY_SEPARATOR), $envConent);
+        $fileSystem->dumpFile(sprintf('%s%s.env', implode(\DIRECTORY_SEPARATOR, $envFile), \DIRECTORY_SEPARATOR), $envConent);
     }
 }
