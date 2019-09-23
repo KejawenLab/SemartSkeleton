@@ -84,11 +84,6 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $definition = $container->getDefinition(Application::class);
         $definition->addMethodCall('setServices', [$services]);
 
-        sprintf('%s/.env.template', $this->getProjectDir());
-
-        $env = new Dotenv();
-        $env->loadEnv(sprintf('%s/.env', $this->getProjectDir()));
-
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
 
         $argument = $definition->getArgument(0);
