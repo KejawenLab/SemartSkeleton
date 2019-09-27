@@ -11,9 +11,6 @@ sudo: required
 dist: trusty
 group: edge
 
-addons:
-  mariadb: '10.0'
-
 services:
   - mysql
   - redis-server
