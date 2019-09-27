@@ -15,7 +15,7 @@
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
         <!-- define your env variables for the test env here -->
-        <env name="DATABASE_DRIVER" value="pdo_mysql" />
+        <env name="DATABASE_DRIVER" value="mysql" />
         <env name="DATABASE_SERVER_VERSION" value="10.1" />
         <env name="DATABASE_CHARSET" value="utf8mb4" />
         <env name="DATABASE_USER" value="root" />
