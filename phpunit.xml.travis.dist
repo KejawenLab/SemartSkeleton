@@ -19,6 +19,11 @@
         <env name="DATABASE_DRIVER" value="pdo_mysql" />
         <env name="DATABASE_SERVER_VERSION" value="10.1" />
         <env name="DATABASE_CHARSET" value="utf8mb4" />
+        <env name="DATABASE_USER" value="root" />
+        <env name="DATABASE_PASSWORD" value="" />
+        <env name="DATABASE_NAME" value="semart_test" />
+        <env name="DATABASE_HOST" value="127.0.0.1" />
+        <env name="DATABASE_PORT" value="3306" />
         <env name="DATABASE_URL" value="mysql://root@127.0.0.1:3306/semart_test" />
         <env name="APPLICATION_TITLE" value="SEMART SKELETON" />
         <env name="APPLICATION_TITLE_LONG" value="KEJAWENLAB APPLICATION SKELETON" />
