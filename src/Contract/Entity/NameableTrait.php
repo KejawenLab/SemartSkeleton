@@ -14,6 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 trait NameableTrait
 {
+    protected $normalize = true;
+
     /**
      * @ORM\Column(name="nama", type="string", length=77)
      *
@@ -31,6 +33,8 @@ trait NameableTrait
 
     public function setName(string $name): void
     {
-        $this->name = Str::make($name)->uppercase()->__toString();
+        $name = Str::make($name);
+
+        $this->name = $this->normalize ? $name->uppercase()->__toString() : $name->__toString();
     }
 }
