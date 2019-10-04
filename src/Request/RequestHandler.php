@@ -97,7 +97,9 @@ class RequestHandler
             $this->propertyAccessor->setValue($object, $field, $value);
         } catch (\Exception $e) {
             $service = $this->application->getService(new \ReflectionObject($object), $field);
-            $this->propertyAccessor->setValue($object, $field, $service->get($value));
+            if ($service) {
+                $this->propertyAccessor->setValue($object, $field, $service->get($value));
+            }
         }
     }
 }
