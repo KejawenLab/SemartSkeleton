@@ -11,7 +11,6 @@ use Symfony\Component\Config\Resource\FileResource;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\Dotenv\Dotenv;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 
@@ -87,7 +86,11 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
 
         $argument = $definition->getArgument(0);
-        $argument['password'] = Encryptor::decrypt(getenv('DATABASE_PASSWORD'), getenv('APP_SECRET'));
+        /** @var string $databasePassword */
+        $databasePassword = getenv('DATABASE_PASSWORD');
+        /** @var string $appSecret */
+        $appSecret = getenv('APP_SECRET');
+        $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
 
         $definition->replaceArgument(0, $argument);
     }
