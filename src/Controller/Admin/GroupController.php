@@ -54,7 +54,7 @@ class GroupController extends AdminController
         }
 
         return $this->render('group/index.html.twig', [
-            'title' => 'Grup',
+            'title' => $this->getPageTitle(),
             'groups' => $groups,
             'cacheId' => $key,
         ]);

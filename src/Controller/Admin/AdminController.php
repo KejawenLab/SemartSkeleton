@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Cache\CacheHandler;
 use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
+use PHLAK\Twine\Str;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -19,10 +20,17 @@ abstract class AdminController extends AbstractController
 
     private $cacheProvider;
 
+    private $title = '';
+
     public function __construct(EventDispatcherInterface $eventDispatcher, CacheHandler $cacheProvider)
     {
         $this->eventDispatcher = $eventDispatcher;
         $this->cacheProvider = $cacheProvider;
+    }
+
+    public function setPageTitle(string $title): void
+    {
+        $this->title = $title;
     }
 
     /**
@@ -63,5 +71,10 @@ abstract class AdminController extends AbstractController
 
         $manager->remove($entity);
         $manager->flush();
+    }
+
+    protected function getPageTitle(): string
+    {
+        return Str::make($this->title)->lowercase()->uppercaseWords()->__toString();
     }
 }

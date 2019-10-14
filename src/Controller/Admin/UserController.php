@@ -56,7 +56,7 @@ class UserController extends AdminController
         }
 
         return $this->render('user/index.html.twig', [
-            'title' => 'Pengguna',
+            'title' => $this->getPageTitle(),
             'users' => $users,
             'groups' => $groupService->getActiveGroups(),
             'cacheId' => $key,

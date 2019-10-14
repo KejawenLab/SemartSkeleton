@@ -54,7 +54,7 @@ class MenuController extends AdminController
         }
 
         return $this->render('menu/index.html.twig', [
-            'title' => 'Menu',
+            'title' => $this->getPageTitle(),
             'menus' => $menus,
             'parents' => $menuService->getActiveMenus(),
             'cacheId' => $key,
