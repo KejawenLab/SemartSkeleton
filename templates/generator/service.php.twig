@@ -32,4 +32,12 @@ class {{ entityHumanize }}Service implements ServiceInterface
     {
         return $this->{{ entityLowerize }}Repository->find($id);
     }
+
+    /**
+    * @return {{ entityHumanize }}[]
+    */
+    public function getActives(string $id): array
+    {
+        return $this->{{ entityLowerize }}Repository->findAll();
+    }
 }

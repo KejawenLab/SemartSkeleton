@@ -55,6 +55,9 @@
         "symfony/web-server-bundle": "^4.2"
     },
     "config": {
+        "platform": {
+            "php": "7.2"
+        },
         "preferred-install": {
             "*": "dist"
         },
