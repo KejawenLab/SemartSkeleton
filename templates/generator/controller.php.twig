@@ -63,7 +63,7 @@ class {{ entityHumanize }}Controller extends AdminController
         }
 
         return $this->render('{{ entityUnderscoreLowerize }}/index.html.twig', [
-            'title' => '{{ entityHumanize }}',
+            'title' => $this->getPageTitle(),
             '{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }},
             'cacheId' => $key,
         ]);
