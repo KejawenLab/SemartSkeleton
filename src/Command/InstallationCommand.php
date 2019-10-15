@@ -21,9 +21,12 @@ class InstallationCommand extends Command
 {
     private $envTemplate;
 
+    private $env;
+
     public function __construct(KernelInterface $kernel)
     {
-        $this->envTemplate = sprintf('%s/.env.template', $kernel->getProjectDir());
+        $this->envTemplate = sprintf('%s%s.env.template', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
+        $this->env = sprintf('%s%s.env', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
 
         parent::__construct();
     }
@@ -42,7 +45,16 @@ class InstallationCommand extends Command
         $output->writeln('<options=underscore>SEMART SKELETON INSTALLATION</>');
         $output->writeln('<comment>===========================================================</comment>');
 
-        $this->createEnvironment($input, $output);
+        $output->writeln('<comment>===========================================================</comment>');
+        $output->writeln('<options=bold>Checking Environment Variable File</>');
+        $output->writeln('<comment>===========================================================</comment>');
+        $fileSystem = new Filesystem();
+        if (!$fileSystem->exists($this->env)) {
+            $output->writeln('<info>Creating new environment variable file</info>');
+            $this->createEnvironment($input, $output);
+        } else {
+            $output->writeln('<info>Environment variable file is already exist</info>');
+        }
 
         $output->writeln('<comment>===========================================================</comment>');
         $output->writeln('<options=bold>Creating new Semart Application database</>');
@@ -147,7 +159,7 @@ class InstallationCommand extends Command
         ];
 
         $secret = Encryptor::encrypt(sprintf('%s:%s', Application::APP_UNIQUE_NAME, date('YmdHis')), Application::APP_UNIQUE_NAME);
-        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt($dbPassword, $secret), $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
+        $replace = [$environment, $secret, $redisUlr, $dbDriver, $dbVersion, $dbCharset, $dbUser, Encryptor::encrypt((string) $dbPassword, $secret), $dbName, $dbHost, $dbPort, $appShort, $appLong, $appVersion];
 
         $envString = str_replace($search, $replace, (string) file_get_contents($this->envTemplate));
 
@@ -158,10 +170,7 @@ class InstallationCommand extends Command
 
     private function dumpEnv(string $envConent): void
     {
-        $envFile = explode(\DIRECTORY_SEPARATOR, $this->envTemplate);
-        array_pop($envFile);
-
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile(sprintf('%s%s.env', implode(\DIRECTORY_SEPARATOR, $envFile), \DIRECTORY_SEPARATOR), $envConent);
+        $fileSystem->dumpFile($this->env, $envConent);
     }
 }
