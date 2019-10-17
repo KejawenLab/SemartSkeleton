@@ -25,8 +25,8 @@ class InstallationCommand extends Command
 
     public function __construct(KernelInterface $kernel)
     {
-        $this->envTemplate = sprintf('%s%s.env.template', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
-        $this->env = sprintf('%s%s.env', $kernel->getProjectDir(), DIRECTORY_SEPARATOR);
+        $this->envTemplate = sprintf('%s%s.env.template', $kernel->getProjectDir(), \DIRECTORY_SEPARATOR);
+        $this->env = sprintf('%s%s.env', $kernel->getProjectDir(), \DIRECTORY_SEPARATOR);
 
         parent::__construct();
     }
