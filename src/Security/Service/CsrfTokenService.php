@@ -43,7 +43,7 @@ class CsrfTokenService
             $this->request->isXmlHttpRequest() &&
             'application/json' === $response->headers->get('Content-Type')
         ) {
-            $content = \json_decode($response->getContent(), true);
+            $content = \json_decode((string) $response->getContent(), true);
             $content['_csrf_token'] = $this->crsfTokenManager->refreshToken(RequestHandler::REQUEST_TOKEN_NAME)->getValue();
 
             return new JsonResponse($content);

@@ -42,6 +42,8 @@ class GeneratorCommand extends Command
         $reflection = new \ReflectionClass($input->getArgument('entity'));
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
+        /** @var \Symfony\Component\Console\Application $application */
+        $application = $this->getApplication();
         $migration = $this->getApplication()->find('doctrine:schema:update');
         $migration->run(new ArrayInput([
             'command' => 'doctrine:schema:update',
