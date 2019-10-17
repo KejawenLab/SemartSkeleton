@@ -188,9 +188,6 @@
     "psr/log": {
         "version": "1.1.0"
     },
-    "psr/simple-cache": {
-        "version": "1.0.1"
-    },
     "ramsey/uuid": {
         "version": "3.8.0"
     },
@@ -269,6 +266,9 @@
     "symfony/cache": {
         "version": "v4.2.10"
     },
+    "symfony/cache-contracts": {
+        "version": "v1.1.7"
+    },
     "symfony/config": {
         "version": "v4.2.10"
     },
@@ -284,9 +284,6 @@
             "bin/console",
             "config/bootstrap.php"
         ]
-    },
-    "symfony/contracts": {
-        "version": "v1.1.5"
     },
     "symfony/debug": {
         "version": "v4.2.10"
@@ -318,6 +315,9 @@
     "symfony/event-dispatcher": {
         "version": "v4.2.10"
     },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.7"
+    },
     "symfony/filesystem": {
         "version": "v4.2.10"
     },
@@ -335,9 +335,6 @@
         "files": [
             ".env"
         ]
-    },
-    "symfony/form": {
-        "version": "v4.2.10"
     },
     "symfony/framework-bundle": {
         "version": "4.2",
@@ -367,8 +364,8 @@
     "symfony/inflector": {
         "version": "v4.2.10"
     },
-    "symfony/intl": {
-        "version": "v4.2.10"
+    "symfony/mime": {
+        "version": "v4.3.5"
     },
     "symfony/monolog-bridge": {
         "version": "v4.2.10"
@@ -387,9 +384,6 @@
             "config/packages/test/monolog.yaml"
         ]
     },
-    "symfony/options-resolver": {
-        "version": "v4.2.10"
-    },
     "symfony/phpunit-bridge": {
         "version": "4.3",
         "recipe": {
@@ -406,14 +400,17 @@
             "tests/.gitignore"
         ]
     },
-    "symfony/polyfill-intl-icu": {
-        "version": "v1.11.0"
+    "symfony/polyfill-intl-idn": {
+        "version": "v1.12.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.11.0"
     },
     "symfony/polyfill-php72": {
         "version": "v1.11.0"
+    },
+    "symfony/polyfill-php73": {
+        "version": "v1.12.0"
     },
     "symfony/process": {
         "version": "v4.2.10"
@@ -472,6 +469,9 @@
     "symfony/serializer-pack": {
         "version": "v1.0.2"
     },
+    "symfony/service-contracts": {
+        "version": "v1.1.7"
+    },
     "symfony/stopwatch": {
         "version": "v4.2.10"
     },
@@ -490,6 +490,9 @@
             "config/packages/translation.yaml",
             "translations/.gitignore"
         ]
+    },
+    "symfony/translation-contracts": {
+        "version": "v1.1.7"
     },
     "symfony/twig-bridge": {
         "version": "v4.2.10"
