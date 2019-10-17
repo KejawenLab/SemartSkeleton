@@ -44,7 +44,7 @@ class GeneratorCommand extends Command
         $output->writeln('<info>Running Semart Schema Updater</info>');
         /** @var \Symfony\Component\Console\Application $application */
         $application = $this->getApplication();
-        $migration = $this->getApplication()->find('doctrine:schema:update');
+        $migration = $application->find('doctrine:schema:update');
         $migration->run(new ArrayInput([
             'command' => 'doctrine:schema:update',
             '--force' => true,
