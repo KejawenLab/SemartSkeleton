@@ -55,7 +55,7 @@ class QueryService
             $output['total'] = $results ? \count($results) : 0;
         } catch (\Exception $e) {
             $messages = explode(':', $e->getMessage());
-            if (4 === count($messages)) {
+            if (4 === \count($messages)) {
                 $reason = explode(';', $messages[3]);
                 if (1 < \count($reason)) {
                     $description = $reason[1];
