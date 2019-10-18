@@ -59,13 +59,15 @@ class InstallationCommand extends Command
         $output->writeln('<comment>===========================================================</comment>');
         $output->writeln('<options=bold>Creating new Semart Application database</>');
         $output->writeln('<comment>===========================================================</comment>');
-        $dropDatabase = $this->getApplication()->find('doctrine:database:drop');
+        /** @var \Symfony\Component\Console\Application $application */
+        $application = $this->getApplication();
+        $dropDatabase = $application->find('doctrine:database:drop');
         $dropDatabase->run(new ArrayInput([
             'command' => 'doctrine:database:drop',
             '--force' => true,
         ]), $output);
 
-        $createDatabase = $this->getApplication()->find('doctrine:database:create');
+        $createDatabase = $application->find('doctrine:database:create');
         $createDatabase->run(new ArrayInput([
             'command' => 'doctrine:database:create',
         ]), $output);
@@ -77,7 +79,7 @@ class InstallationCommand extends Command
             '--no-interaction' => true,
         ]);
         $input->setInteractive(false);
-        $migration = $this->getApplication()->find('doctrine:schema:update');
+        $migration = $application->find('doctrine:schema:update');
         $migration->run($input, $output);
 
         $output->writeln('<info>Loading Semart Application initial data</info>');
@@ -86,7 +88,7 @@ class InstallationCommand extends Command
             '--no-interaction' => true,
         ]);
         $input->setInteractive(false);
-        $fixtures = $this->getApplication()->find('doctrine:fixtures:load');
+        $fixtures = $application->find('doctrine:fixtures:load');
         $fixtures->run($input, $output);
 
         $output->writeln('<comment>===========================================================</comment>');
