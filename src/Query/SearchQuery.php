@@ -74,7 +74,7 @@ class SearchQuery implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Application::PAGINATION_EVENT => [['apply', 255]],
+            PaginationEvent::class => [['apply', 255]],
         ];
     }
 }

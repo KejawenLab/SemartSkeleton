@@ -29,13 +29,12 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 49px;">No</th>
-                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable pull-right"></i></th>
+                            <th class="text-center">{{ 'label.{# entity | underscore | lower #}.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable sortable-default pull-right"></i></th>
                             <th class="text-center">{{ 'label.{# entity | underscore | lower #}.name' | trans }} <i data-sort="no" data-sort-field="name" class="fa fa-sort sortable pull-right"></i></th>
                             <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
-                        {% include '{# entity | underscore | lower #}/table-content.html.twig' %}
                     </tbody>
                 </table>
             </div>
@@ -44,7 +43,6 @@
                     <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i> {{ 'label.crud.refresh' | trans }}</button>
                 </div>
                 <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
-                    {% include '{# entity | underscore | lower #}/pagination.html.twig' %}
                 </div>
             </div>
         </div>
