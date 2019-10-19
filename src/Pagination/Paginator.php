@@ -60,7 +60,7 @@ class Paginator
         $event->setEntityClass($entityClass);
         $event->addJoinAlias('root', self::ROOT_ALIAS);
 
-        $this->eventDispatcher->dispatch(Application::PAGINATION_EVENT, $event);
+        $this->eventDispatcher->dispatch($event);
 
         return $this->paginator->paginate($queryBuilder, $page, $limit);
     }

@@ -57,7 +57,7 @@ abstract class AdminController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $this->eventDispatcher->dispatch(Application::PRE_COMMIT_EVENT, new EntityEvent($manager, $entity));
+        $this->eventDispatcher->dispatch(new EntityEvent($manager, $entity));
 
         $manager->persist($entity);
         $manager->flush();
@@ -67,7 +67,7 @@ abstract class AdminController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $this->eventDispatcher->dispatch(Application::PRE_COMMIT_EVENT, new EntityEvent($manager, $entity));
+        $this->eventDispatcher->dispatch(new EntityEvent($manager, $entity));
 
         $manager->remove($entity);
         $manager->flush();
