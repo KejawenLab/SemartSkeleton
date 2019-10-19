@@ -6,7 +6,6 @@ namespace KejawenLab\Semart\Skeleton\Pagination;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityRepository;
-use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Setting\SettingService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
