@@ -65,7 +65,7 @@ class RequestHandler
             })
         ;
 
-        $this->eventDispatcher->dispatch(Application::PRE_VALIDATION_EVENT, $filterEvent);
+        $this->eventDispatcher->dispatch($filterEvent);
         $this->validate($object, $reflection);
     }
 

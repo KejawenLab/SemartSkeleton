@@ -44,14 +44,14 @@ class {{ entityHumanize }}Controller extends AdminController
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
-        if (!$this->isCached($key)) {
-            ${{ entityPluralLowerize }} = $paginator->paginate({{ entityHumanize }}::class, $page);
-            $this->cache($key, ${{ entityPluralLowerize }});
-        } else {
-            ${{ entityPluralLowerize }} = $this->cache($key);
-        }
-
         if ($request->isXmlHttpRequest()) {
+            if (!$this->isCached($key)) {
+                ${{ entityPluralLowerize }} = $paginator->paginate({{ entityHumanize }}::class, $page);
+                $this->cache($key, ${{ entityPluralLowerize }});
+            } else {
+                ${{ entityPluralLowerize }} = $this->cache($key);
+            }
+
             $table = $this->renderView('{{ entityUnderscoreLowerize }}/table-content.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
             $pagination = $this->renderView('{{ entityUnderscoreLowerize }}/pagination.html.twig', ['{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }}]);
 
@@ -64,7 +64,6 @@ class {{ entityHumanize }}Controller extends AdminController
 
         return $this->render('{{ entityUnderscoreLowerize }}/index.html.twig', [
             'title' => $this->getPageTitle(),
-            '{{ entityPluralCamelCase }}' => ${{ entityPluralLowerize }},
             'cacheId' => $key,
         ]);
     }

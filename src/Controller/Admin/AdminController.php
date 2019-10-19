@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
-use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Cache\CacheHandler;
 use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
+use KejawenLab\Semart\Skeleton\Entity\RemoveEntityEvent;
 use PHLAK\Twine\Str;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -57,7 +57,7 @@ abstract class AdminController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $this->eventDispatcher->dispatch(Application::PRE_COMMIT_EVENT, new EntityEvent($manager, $entity));
+        $this->eventDispatcher->dispatch(new EntityEvent($manager, $entity));
 
         $manager->persist($entity);
         $manager->flush();
@@ -67,7 +67,7 @@ abstract class AdminController extends AbstractController
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $this->eventDispatcher->dispatch(Application::PRE_COMMIT_EVENT, new EntityEvent($manager, $entity));
+        $this->eventDispatcher->dispatch(new RemoveEntityEvent($manager, $entity));
 
         $manager->remove($entity);
         $manager->flush();

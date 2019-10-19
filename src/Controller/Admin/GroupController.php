@@ -35,14 +35,14 @@ class GroupController extends AdminController
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
-        if (!$this->isCached($key)) {
-            $groups = $paginator->paginate(Group::class, $page);
-            $this->cache($key, $groups);
-        } else {
-            $groups = $this->cache($key);
-        }
-
         if ($request->isXmlHttpRequest()) {
+            if (!$this->isCached($key)) {
+                $groups = $paginator->paginate(Group::class, $page);
+                $this->cache($key, $groups);
+            } else {
+                $groups = $this->cache($key);
+            }
+
             $table = $this->renderView('group/table-content.html.twig', ['groups' => $groups]);
             $pagination = $this->renderView('group/pagination.html.twig', ['groups' => $groups]);
 
@@ -55,7 +55,6 @@ class GroupController extends AdminController
 
         return $this->render('group/index.html.twig', [
             'title' => $this->getPageTitle(),
-            'groups' => $groups,
             'cacheId' => $key,
         ]);
     }
