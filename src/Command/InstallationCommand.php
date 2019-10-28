@@ -96,6 +96,7 @@ class InstallationCommand extends Command
         $output->writeln('<comment>===========================================================</comment>');
         $output->writeln('<comment>Run <info>php bin/console server:run</info> to start your server</comment>');
         $output->writeln('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
+
         return 0;
     }
 
