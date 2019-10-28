@@ -47,7 +47,7 @@ class RequestHandler
     public function handle(Request $request, object $object)
     {
         $filterEvent = new RequestEvent($request, $object);
-        $this->eventDispatcher->dispatch(Application::REQUEST_EVENT, $filterEvent);
+        $this->eventDispatcher->dispatch($filterEvent);
 
         $reflection = new \ReflectionObject($object);
         if ($parent = $reflection->getParentClass()) {
