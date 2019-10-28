@@ -40,7 +40,7 @@ class InstallationCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('<options=underscore>SEMART SKELETON INSTALLATION</>');
         $output->writeln('<comment>===========================================================</comment>');
@@ -96,6 +96,7 @@ class InstallationCommand extends Command
         $output->writeln('<comment>===========================================================</comment>');
         $output->writeln('<comment>Run <info>php bin/console server:run</info> to start your server</comment>');
         $output->writeln('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
+        return 0;
     }
 
     private function createEnvironment(InputInterface $input, OutputInterface $output): void

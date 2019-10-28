@@ -37,7 +37,7 @@ class GeneratorCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $reflection = new \ReflectionClass($input->getArgument('entity'));
 
@@ -54,5 +54,6 @@ class GeneratorCommand extends Command
         $output->writeln('<info>Running Semart CRUD Generator</info>');
         $this->generatorFactory->generate($reflection);
         $output->writeln(sprintf('<comment>Simple CRUD for %s class is generated</comment>', $reflection->getName()));
+        return 0;
     }
 }
