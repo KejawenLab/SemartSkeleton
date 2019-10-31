@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeneratorCommand extends Command
 {
+    const NAMESPACE = 'KejawenLab\Semart\Skeleton\Entity';
+
     private $generatorFactory;
 
     public function __construct(GeneratorFactory $generatorFactory)
@@ -39,7 +41,7 @@ class GeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $reflection = new \ReflectionClass($input->getArgument('entity'));
+        $reflection = new \ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $input->getArgument('entity')));
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
         /** @var \Symfony\Component\Console\Application $application */
