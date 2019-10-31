@@ -56,6 +56,7 @@ class GeneratorCommand extends Command
         $output->writeln('<info>Running Semart CRUD Generator</info>');
         $this->generatorFactory->generate($reflection);
         $output->writeln(sprintf('<comment>Simple CRUD for %s class is generated</comment>', $reflection->getName()));
+
         return 0;
     }
 }
