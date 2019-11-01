@@ -79,7 +79,10 @@
     "autoload-dev": {
         "psr-4": {
             "KejawenLab\\Semart\\Skeleton\\Tests\\": "tests/"
-        }
+        },
+        "classmap": [
+            "tests/Generator/Stub.php"
+        ]
     },
     "scripts": {
         "post-install-cmd": [

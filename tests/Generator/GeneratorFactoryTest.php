@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Tests\Generator;
 
 use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
+use KejawenLab\Semart\Skeleton\Entity\Stub;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
 use PHPUnit\Framework\TestCase;
 
