@@ -41,7 +41,9 @@ class GeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $reflection = new \ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $input->getArgument('entity')));
+        /** @var string $entity */
+        $entity = $input->getArgument('entity');
+        $reflection = new \ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $entity));
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
         /** @var \Symfony\Component\Console\Application $application */
