@@ -8,7 +8,6 @@ use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Role;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
-use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
 use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
