@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Tests\Command;
 
 use KejawenLab\Semart\Skeleton\Command\GeneratorCommand;
+use KejawenLab\Semart\Skeleton\Entity\Stub;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
 use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -26,6 +27,6 @@ class GeneratorCommandTest extends DatabaseTestCase
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertContains(sprintf('Simple CRUD for %s class is generated', 'Stub'), $output);
+        $this->assertContains(sprintf('Simple CRUD for %s class is generated', Stub::class), $output);
     }
 }
