@@ -215,7 +215,7 @@
             container.semartLoader();
 
             if ('undefined' !== typeof id) {
-                $.get(Routing.generate('user_roles'), {groupId: id}, function (response) {
+                $.get(Routing.generate('groups_roles', {id: id}), function (response) {
                     $('.roles-content').html(response['table']);
 
                     $('input[type="checkbox"]').bootstrapToggle();
@@ -228,7 +228,7 @@
         });
 
         $(document).on('click', '.menu-search-action', function () {
-            $.get(Routing.generate('user_roles'), {q: $('.menu-search').val(), groupId: localStorage.getItem('groupId')}, function (response) {
+            $.get(Routing.generate('groups_roles', {q: $('.menu-search').val(), id: localStorage.getItem('groupId')}), function (response) {
                 $('.roles-content').html(response['table']);
 
                 $('input[type="checkbox"]').bootstrapToggle();
@@ -335,7 +335,7 @@
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
-                    $.get(Routing.generate('user_roles', {q: $('.menu-search').val(), groupId: localStorage.getItem('groupId')}), {}, function (response) {
+                    $.get(Routing.generate('groups_roles', {q: $('.menu-search').val(), id: localStorage.getItem('groupId')}), {}, function (response) {
                         $('.roles-content').html(response['table']);
 
                         toastr['success']('{{ 'label.crud.roles_message' | trans }}');

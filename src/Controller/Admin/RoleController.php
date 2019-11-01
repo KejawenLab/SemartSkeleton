@@ -25,27 +25,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class RoleController extends AdminController
 {
     /**
-     * @Route("/user_roles", methods={"GET"}, name="user_roles", options={"expose"=true})
-     *
-     * @Permission(actions={Permission::ADD, Permission::EDIT})
-     */
-    public function userRoles(Request $request, GroupService $groupService, RoleService $roleService)
-    {
-        $group = $groupService->get($request->query->get('groupId'));
-        if (!$group instanceof Group) {
-            throw new NotFoundHttpException();
-        }
-
-        $roles = $roleService->getRolesByGroup($group, $request->query->get('q', ''));
-
-        $table = $this->renderView('role/table-content.html.twig', ['roles' => $roles]);
-
-        return new JsonResponse([
-            'table' => $table,
-        ]);
-    }
-
-    /**
      * @Route("/save", methods={"POST"}, name="roles_save", options={"expose"=true})
      *
      * @Permission(actions={Permission::ADD, Permission::EDIT})

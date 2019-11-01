@@ -9,6 +9,7 @@ use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
+use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -116,5 +117,23 @@ class GroupController extends AdminController
         $this->remove($group);
 
         return new JsonResponse(['status' => 'OK']);
+    }
+
+    /**
+     * @Route("/{id}/roles", methods={"GET"}, name="groups_roles", options={"expose"=true})
+     *
+     * @Permission(actions=Permission::VIEW)
+     */
+    public function findRoles(string $id, Request $request, GroupService $service, RoleService $roleService)
+    {
+        if (!$group = $service->get($id)) {
+            throw new NotFoundHttpException();
+        }
+
+        $roles = $roleService->getRolesByGroup($group, $request->query->get('q', ''));
+
+        return new JsonResponse([
+            'table' => $this->renderView('role/table-content.html.twig', ['roles' => $roles]),
+        ]);
     }
 }
