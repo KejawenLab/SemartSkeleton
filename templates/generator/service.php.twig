@@ -36,7 +36,7 @@ class {{ entityHumanize }}Service implements ServiceInterface
     /**
     * @return {{ entityHumanize }}[]
     */
-    public function getActives(string $id): array
+    public function getActives(): array
     {
         return $this->{{ entityLowerize }}Repository->findAll();
     }
