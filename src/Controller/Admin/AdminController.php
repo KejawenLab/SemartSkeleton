@@ -34,8 +34,7 @@ abstract class AdminController extends AbstractController
     }
 
     /**
-     * @param string $key
-     * @param mixed  $content
+     * @param mixed $content
      *
      * @return mixed
      */

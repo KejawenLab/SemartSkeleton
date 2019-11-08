@@ -16,7 +16,7 @@ final class UniqueAlias
         $random = Application::APP_UNIQUE_NAME;
         $alias = $random[rand(0, \strlen($random) - 1)];
 
-        if (in_array($alias, $excludes)) {
+        if (\in_array($alias, $excludes)) {
             return self::generate($excludes);
         }
 

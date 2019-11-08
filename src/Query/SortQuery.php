@@ -7,7 +7,6 @@ namespace KejawenLab\Semart\Skeleton\Query;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Collection\Collection;
-use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

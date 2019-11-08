@@ -17,12 +17,6 @@ class MenuRepository extends Repository
         parent::__construct($registry, Menu::class);
     }
 
-    /**
-     * @param array      $criteria
-     * @param array|null $orderBy
-     *
-     * @return object|null
-     */
     public function findOneBy(array $criteria, array $orderBy = null): ?object
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy)));
