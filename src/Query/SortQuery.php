@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
+use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -63,8 +64,7 @@ class SortQuery implements EventSubscriberInterface
 
                 $alias = $event->getJoinAlias($value);
                 if (!$alias) {
-                    $random = Application::APP_UNIQUE_NAME;
-                    $alias = $random[rand($key, \strlen($random) - 1)];
+                    $alias = UniqueAlias::generate($event->getJoinFields());
 
                     if (0 === $key) {
                         $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $value), $alias);

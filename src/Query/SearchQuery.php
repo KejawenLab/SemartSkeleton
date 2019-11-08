@@ -9,6 +9,7 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
+use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -54,8 +55,7 @@ class SearchQuery implements EventSubscriberInterface
             ->map(static function ($value) use ($queryBuilder, $expr, $event, $queryString) {
                 if (false !== strpos($value, '.')) {
                     $joins = explode('.', $value);
-                    $random = Application::APP_UNIQUE_NAME;
-                    $alias = $random[rand(0, \strlen($random) - 1)];
+                    $alias = UniqueAlias::generate($event->getJoinFields());
 
                     $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $joins[0]), $alias);
                     $event->addJoinAlias($joins[0], $alias);
