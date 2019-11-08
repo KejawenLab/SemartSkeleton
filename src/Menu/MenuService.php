@@ -41,8 +41,6 @@ class MenuService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Menu|null
      */
     public function get(string $id): ?object

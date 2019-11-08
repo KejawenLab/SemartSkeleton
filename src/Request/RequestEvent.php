@@ -27,9 +27,6 @@ class RequestEvent extends Event
         return $this->request;
     }
 
-    /**
-     * @return object
-     */
     public function getObject(): object
     {
         return $this->object;

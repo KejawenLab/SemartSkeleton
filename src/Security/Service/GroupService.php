@@ -47,8 +47,6 @@ class GroupService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Group|null
      */
     public function get(string $id): ?object

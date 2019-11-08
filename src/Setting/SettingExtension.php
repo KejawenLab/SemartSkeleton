@@ -27,8 +27,6 @@ class SettingExtension extends AbstractExtension
     }
 
     /**
-     * @param string $parameter
-     *
      * @return string|int|float|null
      */
     public function getSettingValue(string $parameter)
