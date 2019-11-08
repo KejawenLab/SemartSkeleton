@@ -67,8 +67,6 @@ class MenuLoader
     }
 
     /**
-     * @param Menu $menu
-     *
      * @return Menu[]
      */
     public function getChildMenu(Menu $menu): array

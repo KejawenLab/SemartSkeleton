@@ -91,8 +91,6 @@ class RoleService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Role|null
      */
     public function get(string $id): ?object

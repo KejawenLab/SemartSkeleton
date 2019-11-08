@@ -46,8 +46,6 @@ class UserService implements UserProviderInterface, ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return User|null
      */
     public function get(string $id): ?object
