@@ -1,10 +1,10 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{% filter spaceless %}{{ title | upper }}{% endfilter %}{% endblock %}
+{% block title %}{% apply spaceless %}{{ title | upper }}{% endapply %}{% endblock %}
 
-{% block page_title %}{% filter spaceless %}{{ title }}{% endfilter %}{% endblock %}
+{% block page_title %}{% apply spaceless %}{{ title }}{% endapply %}{% endblock %}
 
-{% block content %}{% filter spaceless %}
+{% block content %}{% apply spaceless %}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -80,9 +80,9 @@
 </div>
 
 {% include 'default/notification_modal.html.twig' %}
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
-{% block javascripts %}{% filter spaceless %}
+{% block javascripts %}{% apply spaceless %}
 <script>
     $(window).ready(function () {
         localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');
@@ -185,4 +185,4 @@
         });
     });
 </script>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}

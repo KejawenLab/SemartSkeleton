@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}{% filter spaceless %}{{ title | upper }}{% endfilter %}{% endblock %}
+{% block title %}{% apply spaceless %}{{ title | upper }}{% endapply %}{% endblock %}
 
-{% block page_title %}{% filter spaceless %}{{ title }}{% endfilter %}{% endblock %}
+{% block page_title %}{% apply spaceless %}{{ title }}{% endapply %}{% endblock %}

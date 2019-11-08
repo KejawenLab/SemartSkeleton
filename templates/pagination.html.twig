@@ -1,4 +1,4 @@
-{% filter spaceless %}
+{% apply spaceless %}
     {%- if pageCount > 1 -%}
         <div class="col-md-7 col-xl-7 col-xs-7 pull-right">
             <div class="btn-group pull-right">
@@ -32,4 +32,4 @@
             </div>
         </div>
     {%- endif -%}
-{% endfilter %}
+{% endapply %}

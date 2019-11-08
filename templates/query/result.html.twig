@@ -1,4 +1,4 @@
-{% filter spaceless %}
+{% apply spaceless %}
     <div class="row col-md-12 col-xs-12 col-sm-12 col-lg-12">
         <b class="{% if status %}text-success{% else %}text-danger{% endif %}">{{ 'label.query.total' | trans }}: {{ total }}</b>
     </div>
@@ -28,4 +28,4 @@
             </tbody>
         </table>
     </div>
-{% endfilter %}
+{% endapply %}

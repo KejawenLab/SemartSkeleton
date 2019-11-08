@@ -1,14 +1,14 @@
 {% extends 'layout.html.twig' %}
 
-{% block stylesheets %}{% filter spaceless %}
+{% block stylesheets %}{% apply spaceless %}
     <link rel="stylesheet" href="{{asset('lib/select2/css/select2.min.css')}}">
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
-{% block title %}{% filter spaceless %}{{ title | upper }}{% endfilter %}{% endblock %}
+{% block title %}{% apply spaceless %}{{ title | upper }}{% endapply %}{% endblock %}
 
-{% block page_title %}{% filter spaceless %}{{ title }}{% endfilter %}{% endblock %}
+{% block page_title %}{% apply spaceless %}{{ title }}{% endapply %}{% endblock %}
 
-{% block content %}{% filter spaceless %}
+{% block content %}{% apply spaceless %}
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -54,9 +54,9 @@
         </div>
     </div>
 </div>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
-{% block javascripts %}{% filter spaceless %}
+{% block javascripts %}{% apply spaceless %}
 <script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
 <script>
     $(window).ready(function () {
@@ -128,4 +128,4 @@
         });
     }
 </script>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}

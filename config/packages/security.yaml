@@ -1,7 +1,7 @@
 security:
     encoders:
         KejawenLab\Semart\Skeleton\Entity\User:
-            algorithm: argon2i
+            algorithm: auto
 
     providers:
         semart_provider:
