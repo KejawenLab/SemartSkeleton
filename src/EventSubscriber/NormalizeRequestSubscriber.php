@@ -6,15 +6,14 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Collection\Collection;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
 class NormalizeRequestSubscriber implements EventSubscriberInterface
 {
-    public function normalize(GetResponseEvent $event)
+    public function normalize(RequestEvent $event)
     {
         $request = $event->getRequest();
         Collection::collect($request->request->all())
@@ -33,7 +32,7 @@ class NormalizeRequestSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => [['normalize', 255]],
+            RequestEvent::class => [['normalize', 255]],
         ];
     }
 }

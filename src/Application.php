@@ -14,10 +14,6 @@ use PHLAK\Twine\Str;
 final class Application
 {
     public const APP_UNIQUE_NAME = 'semart';
-    public const REQUEST_EVENT = 'app.request';
-    public const PRE_VALIDATION_EVENT = 'app.pre_validation';
-    public const PAGINATION_EVENT = 'app.pagination';
-    public const PRE_COMMIT_EVENT = 'app.pre_commit';
 
     /** @var ServiceInterface[] */
     private $services;

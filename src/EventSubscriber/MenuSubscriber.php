@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -39,7 +38,7 @@ class MenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            Application::PAGINATION_EVENT => [['filterPagination']],
+            PaginationEvent::class => 'filterPagination',
         ];
     }
 }

@@ -6,10 +6,13 @@ namespace KejawenLab\Semart\Skeleton\Command;
 
 use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
+use KejawenLab\Semart\Skeleton\Menu\MenuService;
+use PHLAK\Twine\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -17,13 +20,16 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeneratorCommand extends Command
 {
-    const NAMESPACE = 'KejawenLab\Semart\Skeleton\Entity';
+    private const NAMESPACE = 'KejawenLab\Semart\Skeleton\Entity';
 
     private $generatorFactory;
 
-    public function __construct(GeneratorFactory $generatorFactory)
+    private $menuService;
+
+    public function __construct(GeneratorFactory $generatorFactory, MenuService $menuService)
     {
         $this->generatorFactory = $generatorFactory;
+        $this->menuService = $menuService;
 
         parent::__construct();
     }
@@ -36,6 +42,7 @@ class GeneratorCommand extends Command
             ->setDescription('Generate Simpel CRUD')
             ->setHelp('Generate Simpel CRUD')
             ->addArgument('entity', InputArgument::REQUIRED)
+            ->addOption('parent', 'p', InputOption::VALUE_REQUIRED)
         ;
     }
 
@@ -57,6 +64,20 @@ class GeneratorCommand extends Command
 
         $output->writeln('<info>Running Semart CRUD Generator</info>');
         $this->generatorFactory->generate($reflection);
+
+        $parentMenu = $input->getOption('parent');
+        if ($parentMenu) {
+            $menuCode = Str::make($reflection->getShortName())->uppercase()->__toString();
+
+            $menu = $this->menuService->getMenuByCode($menuCode);
+            $parent = $this->menuService->getMenuByCode($parentMenu);
+            if ($menu && $parent) {
+                $menu->setParent($parent);
+
+                $this->menuService->addMenu($menu);
+            }
+        }
+
         $output->writeln(sprintf('<comment>Simple CRUD for %s class is generated</comment>', $reflection->getName()));
 
         return 0;

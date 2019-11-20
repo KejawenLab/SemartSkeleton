@@ -6,8 +6,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -21,7 +20,7 @@ class CacheSubscriber implements EventSubscriberInterface
         $this->cacheProvider = $cacheProvider;
     }
 
-    public function invalidate(GetResponseEvent $event)
+    public function invalidate(RequestEvent $event)
     {
         $request = $event->getRequest();
         if ($request->isMethod('POST') && $request->isXmlHttpRequest()) {
@@ -37,7 +36,7 @@ class CacheSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => [['invalidate']],
+            RequestEvent::class => 'invalidate',
         ];
     }
 }
