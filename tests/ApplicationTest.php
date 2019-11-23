@@ -14,9 +14,6 @@ class ApplicationTest extends WebTestCase
 {
     public function testConst()
     {
-        $this->assertEquals('app.request', Application::REQUEST_EVENT);
-        $this->assertEquals('app.pre_validation', Application::PRE_VALIDATION_EVENT);
-        $this->assertEquals('app.pagination', Application::PAGINATION_EVENT);
-        $this->assertEquals('app.pre_commit', Application::PRE_COMMIT_EVENT);
+        $this->assertEquals('semart', Application::APP_UNIQUE_NAME);
     }
 }

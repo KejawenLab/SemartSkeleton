@@ -7,6 +7,7 @@ namespace KejawenLab\Semart\Skeleton\Tests\Command;
 use KejawenLab\Semart\Skeleton\Command\GeneratorCommand;
 use KejawenLab\Semart\Skeleton\Entity\Stub;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
+use KejawenLab\Semart\Skeleton\Menu\MenuService;
 use KejawenLab\Semart\Skeleton\Tests\TestCase\DatabaseTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -17,7 +18,10 @@ class GeneratorCommandTest extends DatabaseTestCase
 {
     public function testRunCommand()
     {
-        static::$application->add(new GeneratorCommand($this->getMockBuilder(GeneratorFactory::class)->disableOriginalConstructor()->getMock()));
+        static::$application->add(new GeneratorCommand(
+            $this->getMockBuilder(GeneratorFactory::class)->disableOriginalConstructor()->getMock(),
+            $this->getMockBuilder(MenuService::class)->disableOriginalConstructor()->getMock()
+        ));
 
         $command = static::$application->find('semart:generate');
         $commandTester = new CommandTester($command);
