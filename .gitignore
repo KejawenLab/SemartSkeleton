@@ -26,3 +26,6 @@
 
 # vuepress distribution
 .vuepress/dist
+
+# cs
+/.php_cs.cache
