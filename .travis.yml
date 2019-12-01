@@ -8,10 +8,6 @@ php:
 matrix:
   fast_finish: true
 
-sudo: required
-dist: trusty
-group: edge
-
 services:
   - mysql
   - redis-server
