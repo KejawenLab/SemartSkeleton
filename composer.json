@@ -3,8 +3,6 @@
     "type": "project",
     "description": "Symfony Skeleton with common functionalities so developer can focus on business",
     "license": "MIT",
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {
         "php": "^7.2",
         "ext-ctype": "*",
@@ -85,6 +83,15 @@
             "tests/Generator/Stub.php"
         ]
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/stefanbraspenning/StofDoctrineExtensionsBundle",
+            "no-api": true
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
             "@auto-scripts"
@@ -96,12 +103,5 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
-    },
-    "repositories" : [
-        {
-            "type" : "vcs",
-            "url" : "https://github.com/stefanbraspenning/StofDoctrineExtensionsBundle",
-            "no-api": true
-        }
-    ]
+    }
 }
