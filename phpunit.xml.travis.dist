@@ -9,7 +9,7 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[total]=999999" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="max[total]=44" />
         <env name="KERNEL_CLASS" value="KejawenLab\Semart\Skeleton\Kernel" />
         <env name="APP_ENV" value="test" />
         <env name="APP_DEBUG" value="1" />
