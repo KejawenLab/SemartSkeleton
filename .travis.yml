@@ -15,17 +15,17 @@ services:
 before_script:
   - echo 'extension = redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --prefer-dist
-  - composer global require --dev friendsofphp/php-cs-fixer
-  - composer global require --dev php-coveralls/php-coveralls
+  - composer require --dev friendsofphp/php-cs-fixer
+  - composer require --dev php-coveralls/php-coveralls
   - wget https://github.com/phpstan/phpstan/releases/download/0.11.19/phpstan.phar
   - chmod +x ./phpstan.phar
   - mkdir -p build/logs
 
 script:
-  - php-cs-fixer fix -v --diff --dry-run --format txt
+  - vendor/bin/php-cs-fixer fix -v --diff --dry-run --format txt
   - ./phpstan.phar analyze --level=max src/
   - vendor/bin/phpunit -c phpunit.xml.travis.dist
-  - php-coveralls -v --exclude-no-stmt
+  - vendor/bin/php-coveralls -v --exclude-no-stmt
 
 notifications:
   email: false
