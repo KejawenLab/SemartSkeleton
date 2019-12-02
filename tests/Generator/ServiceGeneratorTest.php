@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ServiceGeneratorTest extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }

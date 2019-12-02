@@ -21,7 +21,7 @@ class CsrfTokenServiceTest extends TestCase
 {
     private $requestMock;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $request = Request::createFromGlobals();
         $request->request->set('_csrf_token', 'test');

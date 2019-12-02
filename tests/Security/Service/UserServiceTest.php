@@ -24,7 +24,7 @@ class UserServiceTest extends TestCase
      */
     private $userProviderService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->user = new User();
         $this->user->setUsername('test');

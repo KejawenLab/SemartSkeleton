@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ControllerGeneratorTest extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }

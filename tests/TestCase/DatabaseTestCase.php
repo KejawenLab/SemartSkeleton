@@ -16,7 +16,7 @@ class DatabaseTestCase extends CommandTestCase
     /** @var EntityManagerInterface */
     protected static $entityManager;
 
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
 
