@@ -10,7 +10,7 @@ use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use PHLAK\Twine\Str;
-use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>

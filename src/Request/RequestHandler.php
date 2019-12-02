@@ -8,11 +8,11 @@ use Doctrine\Common\Inflector\Inflector;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Application;
 use ReflectionProperty;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**

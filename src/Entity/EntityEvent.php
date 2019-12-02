@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Entity;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Contracts\EventDispatcher\Event;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>

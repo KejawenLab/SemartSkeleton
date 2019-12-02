@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 
 use KejawenLab\Semart\Skeleton\Security\Service\CsrfTokenService;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>

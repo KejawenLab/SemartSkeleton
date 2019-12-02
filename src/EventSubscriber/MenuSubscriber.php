@@ -7,7 +7,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
-use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
