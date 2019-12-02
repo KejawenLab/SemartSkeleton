@@ -123,7 +123,7 @@
         "version": "2.3.0"
     },
     "php": {
-        "version": "7.2"
+        "version": "7.2.9"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
@@ -171,6 +171,9 @@
         "version": "1.0.1"
     },
     "psr/container": {
+        "version": "1.0.0"
+    },
+    "psr/event-dispatcher": {
         "version": "1.0.0"
     },
     "psr/log": {
@@ -276,9 +279,6 @@
             "config/bootstrap.php"
         ]
     },
-    "symfony/debug": {
-        "version": "v4.2.10"
-    },
     "symfony/debug-bundle": {
         "version": "4.1",
         "recipe": {
@@ -302,6 +302,9 @@
     },
     "symfony/dotenv": {
         "version": "v4.2.10"
+    },
+    "symfony/error-handler": {
+        "version": "v5.0.1"
     },
     "symfony/event-dispatcher": {
         "version": "v4.2.10"
