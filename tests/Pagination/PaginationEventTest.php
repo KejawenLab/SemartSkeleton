@@ -9,8 +9,8 @@ use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
