@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

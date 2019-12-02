@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
