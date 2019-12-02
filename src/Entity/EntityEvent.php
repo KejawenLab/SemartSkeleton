@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Entity;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -15,13 +16,13 @@ class EntityEvent extends Event
 
     private $entity;
 
-    public function __construct(EntityManager $entityManager, object $entity)
+    public function __construct(ObjectManager $entityManager, object $entity)
     {
         $this->manager = $entityManager;
         $this->entity = $entity;
     }
 
-    public function getManager(): EntityManager
+    public function getManager(): ObjectManager
     {
         return $this->manager;
     }
