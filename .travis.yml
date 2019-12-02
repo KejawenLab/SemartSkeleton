@@ -17,12 +17,13 @@ before_script:
   - composer install --prefer-dist
   - composer global require --dev friendsofphp/php-cs-fixer
   - composer global require --dev php-coveralls/php-coveralls
-  - composer global require --dev phpstan/phpstan
+  - wget https://github.com/phpstan/phpstan/releases/download/0.11.19/phpstan.phar
+  - chmod +x ./phpstan.phar
   - mkdir -p build/logs
 
 script:
   - php-cs-fixer fix -v --diff --dry-run --format txt
-  - phpstan analyze --level=max src/
+  - ./phpstan.phar analyze --level=max src/
   - vendor/bin/phpunit -c phpunit.xml.travis.dist
   - php-coveralls -v --exclude-no-stmt
 
