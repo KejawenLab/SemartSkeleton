@@ -30,7 +30,7 @@ class DatabaseTestCase extends CommandTestCase
         parent::setUp();
     }
 
-    protected function tearDown: void()
+    protected function tearDown(): void
     {
         static::runCommand('doctrine:database:drop --force');
 
