@@ -65,11 +65,9 @@ class UserServiceTest extends TestCase
         $this->assertNull($this->userProviderService->get('foo'));
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
-     */
     public function testUserNotFound()
     {
+        $this->expectException(\Symfony\Component\Security\Core\Exception\UsernameNotFoundException::class);
         $this->userProviderService->loadUserByUsername('foo');
     }
 }

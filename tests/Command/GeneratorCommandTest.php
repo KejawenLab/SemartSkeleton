@@ -31,6 +31,6 @@ class GeneratorCommandTest extends DatabaseTestCase
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertContains(sprintf('Simple CRUD for %s class is generated', Stub::class), $output);
+        $this->assertStringContainsString(sprintf('Simple CRUD for %s class is generated', Stub::class), $output);
     }
 }
