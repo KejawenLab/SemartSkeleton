@@ -11,7 +11,7 @@
         "ext-openssl": "*",
         "ext-pdo": "*",
         "ext-redis": "*",
-        "doctrine/doctrine-bundle": "^1.6.10",
+        "doctrine/doctrine-bundle": "^2.0",
         "doctrine/inflector": "^1.3",
         "doctrine/orm": "^2.5.11",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
