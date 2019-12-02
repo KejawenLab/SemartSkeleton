@@ -33,6 +33,6 @@ class PaginationEventTest extends KernelTestCase
         $this->assertEquals(User::class, $paginationEvent->getEntityClass());
         $this->assertEquals('o', $paginationEvent->getJoinAlias('root'));
         $this->assertNull($paginationEvent->getJoinAlias('not_exist_field'));
-        $this->assertStringContainsString('root', $paginationEvent->getJoinFields());
+        $this->assertContains('root', $paginationEvent->getJoinFields());
     }
 }
