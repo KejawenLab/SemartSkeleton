@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
@@ -35,7 +35,7 @@ abstract class Fixture extends Base
 
     abstract protected function getReferenceKey(): string;
 
-    public function load(EntityManagerInterface $manager)
+    public function load(ObjectManager $manager)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
         Collection::collect($this->getData())
