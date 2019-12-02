@@ -9,7 +9,7 @@ use KejawenLab\Semart\Skeleton\Entity\EntityEvent;
 use KejawenLab\Semart\Skeleton\Entity\RemoveEntityEvent;
 use PHLAK\Twine\Str;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>

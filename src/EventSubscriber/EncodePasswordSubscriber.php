@@ -7,7 +7,7 @@ namespace KejawenLab\Semart\Skeleton\EventSubscriber;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Request\RequestEvent;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Contracts\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
