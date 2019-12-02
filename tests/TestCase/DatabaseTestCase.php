@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class DatabaseTestCase extends CommandTestCase
+abstract class DatabaseTestCase extends CommandTestCase
 {
     const NOT_FOUND = 'NOT_FOUND';
 

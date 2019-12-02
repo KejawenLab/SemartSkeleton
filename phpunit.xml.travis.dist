@@ -36,17 +36,17 @@
 
     <testsuites>
         <testsuite name="Semart Tests Suite">
-            <directory>tests/</directory>
+            <directory suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src/</directory>
+            <directory suffix=".php">./src/</directory>
             <exclude>
-                <directory>./src/Controller</directory>
-                <directory>./src/DataFixutes</directory>
-                <directory>./src/Contract</directory>
+                <directory suffix=".php">./src/Controller</directory>
+                <directory suffix=".php">./src/DataFixutes</directory>
+                <directory suffix=".php">./src/Contract</directory>
                 <file>./src/Application.php</file>
                 <file>./src/Kernel.php</file>
             </exclude>
@@ -57,7 +57,9 @@
         <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
     </listeners>
 
+
     <logging>
-        <log type="coverage-clover" target="./build/logs/clover.xml"/>
+         <log type="coverage-clover" target="./build/logs/clover.xml"/>
     </logging>
+
 </phpunit>
