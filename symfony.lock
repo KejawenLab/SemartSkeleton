@@ -45,7 +45,7 @@
         ]
     },
     "doctrine/doctrine-cache-bundle": {
-        "version": "1.3.5"
+        "version": "1.4.0"
     },
     "doctrine/doctrine-fixtures-bundle": {
         "version": "3.0",
@@ -124,6 +124,9 @@
     },
     "phlak/twine": {
         "version": "2.3.0"
+    },
+    "php": {
+        "version": "7.2"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"

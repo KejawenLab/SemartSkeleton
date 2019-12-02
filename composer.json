@@ -16,7 +16,7 @@
         "doctrine/orm": "^2.5.11",
         "friendsofsymfony/jsrouting-bundle": "^2.2",
         "kejawenlab/semart-collection": "dev-master",
-        "knplabs/knp-paginator-bundle": "^2.8",
+        "knplabs/knp-paginator-bundle": "^4.1",
         "phlak/twine": "^2.1",
         "ramsey/uuid-doctrine": "^1.4",
         "snc/redis-bundle": "^2.1",
