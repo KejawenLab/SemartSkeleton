@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use KejawenLab\Semart\Skeleton\Setting\SettingService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -32,7 +32,7 @@ class Paginator
     private $settingService;
 
     public function __construct(
-        ObjectManager $doctrine,
+        EntityManagerInterface $doctrine,
         PaginatorInterface $paginator,
         RequestStack $requestStack,
         EventDispatcherInterface $eventDispatcher,
