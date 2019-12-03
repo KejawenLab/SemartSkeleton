@@ -21,7 +21,6 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: semart_provider
                 check_path: login_check
                 csrf_token_generator: security.csrf.token_manager
                 default_target_path: home_dashboard
