@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\StringInput;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class CommandTestCase extends KernelTestCase
+abstract class CommandTestCase extends KernelTestCase
 {
     /**
      * @var Application

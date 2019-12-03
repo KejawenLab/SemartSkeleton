@@ -16,7 +16,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class TemplateGeneratorTest extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }

@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 class PermissionGeneratorTest extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }

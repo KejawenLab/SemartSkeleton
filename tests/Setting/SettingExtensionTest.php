@@ -24,7 +24,7 @@ class SettingExtensionTest extends TestCase
 
     private $setting;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $setting = new Setting();
         $setting->setParameter('PER_PAGE');

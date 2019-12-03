@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  */
 abstract class MenuServiceAbstract extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }
