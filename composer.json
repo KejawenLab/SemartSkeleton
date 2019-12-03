@@ -52,8 +52,7 @@
         "symfony/dotenv": "^5.0",
         "symfony/phpunit-bridge": "^5.0",
         "symfony/profiler-pack": "*",
-        "symfony/var-dumper": "*",
-        "symfony/web-server-bundle": "^4.4"
+        "symfony/var-dumper": "*"
     },
     "config": {
         "platform": {
