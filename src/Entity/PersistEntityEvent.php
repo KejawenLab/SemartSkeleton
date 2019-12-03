@@ -10,7 +10,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class EntityEvent extends Event
+class PersistEntityEvent extends Event
 {
     private $manager;
 

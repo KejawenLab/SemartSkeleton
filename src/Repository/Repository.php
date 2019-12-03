@@ -48,17 +48,6 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return $entity;
     }
 
-    public function findUniqueBy(array $criteria): array
-    {
-        $filters = $this->_em->getFilters();
-        $filterName = sprintf('%s_softdeletable', Application::APP_UNIQUE_NAME);
-        if ($filters->isEnabled($filterName)) {
-            $filters->disable($filterName);
-        }
-
-        return $this->findBy(array_merge($criteria));
-    }
-
     public function isCacheable(): bool
     {
         return $this->cacheable;

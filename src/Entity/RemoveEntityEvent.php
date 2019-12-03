@@ -7,6 +7,6 @@ namespace KejawenLab\Semart\Skeleton\Entity;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class RemoveEntityEvent extends EntityEvent
+class RemoveEntityEvent extends PersistEntityEvent
 {
 }
