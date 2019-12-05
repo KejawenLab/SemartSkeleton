@@ -33,6 +33,6 @@ class PaginationExtension extends AbstractExtension
 
     public function startPageNumber()
     {
-        return ((int) $this->settingService->getValue('PER_PAGE') ?: Paginator::PER_PAGE) * ((int) $this->request->query->get('page', 1) - 1) + 1;
+        return ((int) $this->settingService->getValue('PER_PAGE') ?: Paginator::PER_PAGE) * ((int) $this->request->query->get('p', 1) - 1) + 1;
     }
 }
