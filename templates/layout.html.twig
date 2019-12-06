@@ -291,7 +291,9 @@
             params['s'] = field;
             params['d'] = direction;
 
-            refreshTable(window.location.href.split('?')[0] + '?' + $.param(params), '{{ title }}');
+            if (direction && field) {
+                refreshTable(window.location.href.split('?')[0] + '?' + $.param(params), '{{ title }}');
+            }
         }
 
         function upload(formData, callback) {
