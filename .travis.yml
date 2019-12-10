@@ -13,8 +13,8 @@ services:
   - redis-server
 
 before_script:
-  - phpenv config-rm xdebug.ini
-  - if [[ $TRAVIS_PHP_VERSION = 7.4 ]]; then git clone git://github.com/xdebug/xdebug.git && cd xdebug && git checkout 2.9.0 && phpize && ./configure --enable-xdebug && make && make install && echo "zend_extension = xdebug.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini && cd ..; fi
+  - if [[ $TRAVIS_PHP_VERSION = 7.4 ]]; then phpenv config-rm xdebug.ini; fi
+  - if [[ $TRAVIS_PHP_VERSION = 7.4 ]]; then pecl install xdebug; fi
   - echo 'extension = redis.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer install --prefer-dist
   - composer require --dev friendsofphp/php-cs-fixer
