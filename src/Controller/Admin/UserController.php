@@ -37,14 +37,15 @@ class UserController extends AdminController
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
-        if ($request->isXmlHttpRequest()) {
-            if (!$this->isCached($key)) {
-                $users = $paginator->paginate(User::class, $page);
-                $this->cache($key, $users);
-            } else {
-                $users = $this->cache($key);
-            }
 
+        if (!$this->isCached($key)) {
+            $users = $paginator->paginate(User::class, $page);
+            $this->cache($key, $users);
+        } else {
+            $users = $this->cache($key);
+        }
+
+        if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('user/table-content.html.twig', ['users' => $users]);
             $pagination = $this->renderView('user/pagination.html.twig', ['users' => $users]);
 
@@ -56,6 +57,7 @@ class UserController extends AdminController
         }
 
         return $this->render('user/index.html.twig', [
+            'users' => $users,
             'title' => $this->getPageTitle(),
             'groups' => $groupService->getActiveGroups(),
             'cacheId' => $key,
