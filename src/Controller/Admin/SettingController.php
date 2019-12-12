@@ -35,14 +35,15 @@ class SettingController extends AdminController
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
-        if ($request->isXmlHttpRequest()) {
-            if (!$this->isCached($key)) {
-                $settings = $paginator->paginate(Setting::class, $page);
-                $this->cache($key, $settings);
-            } else {
-                $settings = $this->cache($key);
-            }
 
+        if (!$this->isCached($key)) {
+            $settings = $paginator->paginate(Setting::class, $page);
+            $this->cache($key, $settings);
+        } else {
+            $settings = $this->cache($key);
+        }
+
+        if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('setting/table-content.html.twig', ['settings' => $settings]);
             $pagination = $this->renderView('setting/pagination.html.twig', ['settings' => $settings]);
 
@@ -54,6 +55,7 @@ class SettingController extends AdminController
         }
 
         return $this->render('setting/index.html.twig', [
+            'settings' => $settings,
             'title' => $this->getPageTitle(),
             'cacheId' => $key,
         ]);
