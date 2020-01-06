@@ -44,6 +44,7 @@
         <whitelist>
             <directory>./src/</directory>
             <exclude>
+                <file>./src/Composer/ScriptHandler.php</file>
                 <directory>./src/Controller</directory>
                 <directory>./src/DataFixutes</directory>
                 <directory>./src/Contract</directory>
