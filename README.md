@@ -89,7 +89,7 @@ DATABASE_URL=mysql://root:aden@localhost:3306/semart
 
 - Jalankan perintah `php bin/console semart:install`
 
-- Jalankan perintah `php bin/console server:run` untuk menjalankan web server
+- Jalankan perintah `symfony server:start` untuk menjalankan web server
 
 - Buka browser pada alamat `http://localhost:8000` atau sesuai port yang tampil ketika menjalankan perintah diatas
 
