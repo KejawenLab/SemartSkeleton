@@ -55,7 +55,6 @@ class SettingController extends AdminController
         }
 
         return $this->render('setting/index.html.twig', [
-            'settings' => $settings,
             'title' => $this->getPageTitle(),
             'cacheId' => $key,
         ]);

@@ -113,19 +113,21 @@
     });
 
     function listSchema(connection) {
-        $.get(Routing.generate('queries_tables'), {
-            c: connection
-        }, function (response) {
-            if (response.status) {
-                let options = '<option value="" selected="selected">---{{ 'label.query.schema_option' | trans | upper }}---</option>';
-                $.each(response.result, function (k, v) {
-                    options = options + '<option value="' + v + '">' + v + '</option>';
-                });
+        if (connection) {
+            $.get(Routing.generate('queries_tables'), {
+                c: connection
+            }, function (response) {
+                if (response.status) {
+                    let options = '<option value="" selected="selected">---{{ 'label.query.schema_option' | trans | upper }}---</option>';
+                    $.each(response.result, function (k, v) {
+                        options = options + '<option value="' + v + '">' + v + '</option>';
+                    });
 
-                $('#schemas').html(options);
-                $('.select2-static').select2();
-            }
-        });
+                    $('#schemas').html(options);
+                    $('.select2-static').select2();
+                }
+            });
+        }
     }
 </script>
 {% endapply %}{% endblock %}
