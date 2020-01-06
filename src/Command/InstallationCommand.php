@@ -80,7 +80,7 @@ class InstallationCommand extends Command
         $fixtures = $application->find('doctrine:fixtures:load');
         $fixtures->run($input, $output);
 
-        $fileSystem->dumpFile($this->semart, 0);
+        $fileSystem->dumpFile($this->semart, (string) 0);
 
         return 0;
     }

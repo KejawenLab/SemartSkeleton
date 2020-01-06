@@ -56,7 +56,7 @@ class ScriptHandler
         $io->write('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
 
         $fileSystem = new Filesystem();
-        $fileSystem->dumpFile($semartPath, 1);
+        $fileSystem->dumpFile($semartPath, (string) 1);
     }
 
     private static function createEnvironment(IOInterface $io, string $envPath, string $template): void
