@@ -1,6 +1,6 @@
 name: semartframework
 
-type: php:7.3
+type: php:7.2
 
 runtime:
     extensions:

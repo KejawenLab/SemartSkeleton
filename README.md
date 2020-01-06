@@ -64,30 +64,7 @@ composer create-project -sdev kejawenlab/semart-skeleton Semart
 
 - Masuk ke direktori `Semart` dengan perintah `cd Semart`
 
-- Ubah konfigurasi database
-
-```bash
-# database driver (for this case you must set as pdo_mysql)
-DATABASE_DRIVER=pdo_mysql
-# database version
-DATABASE_SERVER_VERSION=5.7
-# charset
-DATABASE_CHARSET=utf8mb4
-
-# specify db url with format
-# DATABASE_URL=mysql://{user}:{password}@{host}:{port}/{db}
-# IF your database doesn't use password, you can use format:
-# DATABASE_URL=mysql://{user}@{host}:{port}/{db}, eg:
-#
-#    DATABASE_URL=mysql://root@127.0.0.1:3306/semart
-#
-DATABASE_URL=mysql://root:aden@localhost:3306/semart
-
-```
-
 - Jalankan perintah `composer update --prefer-dist -vvv`
-
-- Jalankan perintah `php bin/console semart:install`
 
 - Jalankan perintah `symfony server:start` untuk menjalankan web server
 
