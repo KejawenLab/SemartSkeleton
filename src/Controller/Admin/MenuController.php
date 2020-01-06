@@ -35,14 +35,15 @@ class MenuController extends AdminController
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
-        if ($request->isXmlHttpRequest()) {
-            if (!$this->isCached($key)) {
-                $menus = $paginator->paginate(Menu::class, $page);
-                $this->cache($key, $menus);
-            } else {
-                $menus = $this->cache($key);
-            }
 
+        if (!$this->isCached($key)) {
+            $menus = $paginator->paginate(Menu::class, $page);
+            $this->cache($key, $menus);
+        } else {
+            $menus = $this->cache($key);
+        }
+
+        if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('menu/table-content.html.twig', ['menus' => $menus]);
             $pagination = $this->renderView('menu/pagination.html.twig', ['menus' => $menus]);
 
@@ -54,6 +55,7 @@ class MenuController extends AdminController
         }
 
         return $this->render('menu/index.html.twig', [
+            'menus' => $menus,
             'title' => $this->getPageTitle(),
             'parents' => $menuService->getActiveMenus(),
             'cacheId' => $key,
