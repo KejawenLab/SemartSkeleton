@@ -93,13 +93,18 @@
     "prefer-stable": true,
     "scripts": {
         "post-install-cmd": [
-            "@auto-scripts"
+            "KejawenLab\\Semart\\Skeleton\\Composer\\ScriptHandler::preInstall",
+            "@auto-scripts",
+            "KejawenLab\\Semart\\Skeleton\\Composer\\ScriptHandler::postInstall"
         ],
         "post-update-cmd": [
-            "@auto-scripts"
+            "KejawenLab\\Semart\\Skeleton\\Composer\\ScriptHandler::preInstall",
+            "@auto-scripts",
+            "KejawenLab\\Semart\\Skeleton\\Composer\\ScriptHandler::postInstall"
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
+            "semart:install": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
     }
