@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('lib/font-awesome/css/font-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('lib/Ionicons/css/ionicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/skins/skin-purple-light.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/skins/skin-purple.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/semart.css') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
@@ -64,7 +64,7 @@
     </style>
     {% block stylesheets %}{% endblock %}
 </head>
-<body class="hold-transition skin-purple-light sidebar-mini">
+<body class="hold-transition skin-purple sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <a href="{{ path('home_dashboard') }}" class="logo">
@@ -192,6 +192,13 @@
             });
 
             let params = getQueriesString();
+            if ('undefined' !== typeof params['m']) {
+                let menu = jQuery('.' + params['m']);
+                let parents = menu.parentsUntil(jQuery('.sidebar-menu'));
+                menu.addClass('active');
+                parents.addClass('menu-open');
+                parents.addClass('active');
+            }
 
             if ('undefined' !== typeof params['q']) {
                 delete params['q'];

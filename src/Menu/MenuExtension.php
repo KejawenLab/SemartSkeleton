@@ -45,7 +45,7 @@ class MenuExtension extends AbstractExtension
                     return $this->buildHtml($value);
                 }
 
-                $html = sprintf('<li class="treeview"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
+                $html = sprintf('<li class="treeview %s"><a href="#" id="%s"><i class="fa fa-%s"></i> <span>%s</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a><ul class="treeview-menu">', strtolower($value->getCode()), $value->getId(), $value->getIconClass() ?: 'circle-o', $value->getName());
                 Collection::collect($this->menuLoader->getChildMenu($value))
                     ->each(function ($value) use (&$html) {
                         $html .= $this->buildHtml($value);
@@ -65,8 +65,8 @@ class MenuExtension extends AbstractExtension
 
     private function buildHtml(Menu $menu): string
     {
-        $href = $menu->getRouteName() ? $this->urlGenerator->generate($menu->getRouteName()) : '#';
+        $href = $menu->getRouteName() ? $this->urlGenerator->generate($menu->getRouteName(), ['m' => strtolower($menu->getCode())]) : '#';
 
-        return sprintf('<li><a href="%s" id="%s"><i class="fa fa-%s"></i> <span>%s</span></a></li>', $href, $menu->getId(), $menu->getIconClass() ?: 'circle-o', $menu->getName());
+        return sprintf('<li class="%s %s"><a href="%s" id="%s"><i class="fa fa-%s"></i> <span>%s</span></a></li>', $menu->getParent() ? strtolower($menu->getParent()->getCode()): '', strtolower($menu->getCode()), $href, $menu->getId(), $menu->getIconClass() ?: 'circle-o', $menu->getName());
     }
 }
