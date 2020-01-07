@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Tests\Entity;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use KejawenLab\Semart\Skeleton\Entity\PersistEntityEvent;
 use PHPUnit\Framework\TestCase;
 

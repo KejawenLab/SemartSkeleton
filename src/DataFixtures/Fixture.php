@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture as Base;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
