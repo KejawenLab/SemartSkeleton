@@ -2,6 +2,21 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "composer/ca-bundle": {
+        "version": "1.2.5"
+    },
+    "composer/composer": {
+        "version": "1.10-dev"
+    },
+    "composer/semver": {
+        "version": "1.5.0"
+    },
+    "composer/spdx-licenses": {
+        "version": "1.5.2"
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -94,6 +109,9 @@
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.9"
     },
     "kejawenlab/semart-collection": {
         "version": "dev-master"
@@ -229,6 +247,12 @@
     },
     "sebastian/version": {
         "version": "2.0.1"
+    },
+    "seld/jsonlint": {
+        "version": "1.7.2"
+    },
+    "seld/phar-utils": {
+        "version": "1.0.1"
     },
     "snc/redis-bundle": {
         "version": "2.0",
@@ -402,6 +426,9 @@
     },
     "symfony/polyfill-php73": {
         "version": "v1.12.0"
+    },
+    "symfony/process": {
+        "version": "v5.0.2"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.4"

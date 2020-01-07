@@ -6,7 +6,7 @@ namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
 

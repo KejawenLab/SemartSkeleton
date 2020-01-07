@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Entity;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Contracts\EventDispatcher\Event;
 
 /**
