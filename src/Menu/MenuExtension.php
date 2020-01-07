@@ -67,6 +67,6 @@ class MenuExtension extends AbstractExtension
     {
         $href = $menu->getRouteName() ? $this->urlGenerator->generate($menu->getRouteName(), ['m' => strtolower((string) $menu->getCode())]) : '#';
 
-        return sprintf('<li class="%s %s"><a href="%s" id="%s"><i class="fa fa-%s"></i> <span>%s</span></a></li>', \is_object($menu->getParent()) ? strtolower((string) $menu->getParent()->getCode()): '', strtolower((string) $menu->getCode()), $href, $menu->getId(), $menu->getIconClass() ?: 'circle-o', $menu->getName());
+        return sprintf('<li class="%s %s"><a href="%s" id="%s"><i class="fa fa-%s"></i> <span>%s</span></a></li>', \is_object($menu->getParent()) ? strtolower((string) $menu->getParent()->getCode()) : '', strtolower((string) $menu->getCode()), $href, $menu->getId(), $menu->getIconClass() ?: 'circle-o', $menu->getName());
     }
 }
