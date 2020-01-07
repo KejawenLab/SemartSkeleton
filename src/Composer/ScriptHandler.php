@@ -30,7 +30,7 @@ class ScriptHandler
         if (!$fileSystem->exists($envPath)) {
             $io->write('<info>Creating new environment variable file</info>');
 
-            $template = file_get_contents(sprintf('%s/.env.template', $rootPath));
+            $template = (string) file_get_contents(sprintf('%s/.env.template', $rootPath));
 
             self::createEnvironment($io, $envPath, $template);
         } else {
@@ -74,7 +74,7 @@ class ScriptHandler
         $dbPassword = $io->ask('Please enter your database password [default: <info>null</info>]: ', '');
         $dbName = $io->ask('Please enter your database name [default: <info>semart_app</info>]: ', 'semart_app');
         $dbHost = $io->ask('Please enter your database host [default: <info>localhost</info>]: ', 'localhost');
-        $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', 3306);
+        $dbPort = $io->ask('Please enter your database port [default: <info>3306</info>]: ', '3306');
         $appShort = $io->ask('Please enter your application short title [default: <info>SEMART SKELETON</info>]: ', 'SEMART SKELETON');
         $appLong = $io->ask('Please enter your application long title [default: <info>KEJAWENLAB APPLICATION SKELETON</info>]: ', 'KEJAWENLAB APPLICATION SKELETON');
         $appVersion = $io->ask('Please enter your application version [default: <info>1@dev</info>]: ', '1@dev');
