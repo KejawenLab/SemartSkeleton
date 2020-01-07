@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Query;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Schema\AbstractAsset;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Collection\Collection;
 use PHLAK\Twine\Str;
 
