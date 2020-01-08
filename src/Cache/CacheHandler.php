@@ -29,8 +29,6 @@ class CacheHandler
     }
 
     /**
-     * @param string $key
-     *
      * @return mixed
      */
     public function getItem(string $key)
