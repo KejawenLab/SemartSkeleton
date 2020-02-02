@@ -251,7 +251,7 @@
             let form = $('#semartForm');
 
             form.trigger('reset');
-            select = form.find('select');
+            let select = form.find('select');
             select.prop('selectedIndex', 0);
             if (select.hasClass('select2-static')) {
                 select.select2();
