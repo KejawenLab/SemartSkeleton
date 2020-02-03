@@ -253,9 +253,11 @@
             form.trigger('reset');
             let select = form.find('select');
             select.prop('selectedIndex', 0);
-            if (select.hasClass('select2-static')) {
-                select.select2();
-            }
+            $.each(select, function() {
+                if ($(this).hasClass('select2-static')) {
+      		        $(this).select2();
+                }
+            });
             if ('function' === typeof callback) {
                 callback();
             }
