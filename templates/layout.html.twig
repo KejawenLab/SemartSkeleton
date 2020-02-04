@@ -251,7 +251,13 @@
             let form = $('#semartForm');
 
             form.trigger('reset');
-            form.find('select').val('');
+            let select = form.find('select');
+            select.prop('selectedIndex', 0);
+            $.each(select, function() {
+                if ($(this).hasClass('select2-static')) {
+                    $(this).select2();
+                }
+            });
             if ('function' === typeof callback) {
                 callback();
             }
