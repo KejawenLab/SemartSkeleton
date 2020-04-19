@@ -21,7 +21,7 @@
         "phlak/twine": "^2.1",
         "ramsey/uuid-doctrine": "^1.4",
         "snc/redis-bundle": "^3.0",
-        "stof/doctrine-extensions-bundle": "dev-master#6b284f9ede880099a857673c3ef3673eb0885e56",
+        "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/asset": "^5.0",
         "symfony/console": "^5.0",
         "symfony/event-dispatcher": "^5.0",
