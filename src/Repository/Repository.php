@@ -47,16 +47,25 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return $entity;
     }
 
+    /**
+     * @deprecated
+     */
     public function isCacheable(): bool
     {
         return $this->cacheable;
     }
 
+    /**
+     * @deprecated
+     */
     public function setCacheable(bool $cacheable): void
     {
         $this->cacheable = $cacheable;
     }
 
+    /**
+     * @deprecated
+     */
     protected function doFindOneBy(string $cacheKey, array $criteria, array $orderBy = null): ?object
     {
         if ($this->isCacheable()) {
@@ -73,6 +82,9 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return parent::findOneBy($criteria, $orderBy);
     }
 
+    /**
+     * @deprecated
+     */
     protected function doFindBy(string $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         if ($this->isCacheable()) {
@@ -89,6 +101,9 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return parent::findBy($criteria, $orderBy, $limit, $offset);
     }
 
+    /**
+     * @deprecated
+     */
     protected function cache(string $key, $item): void
     {
         if (!$this->cache->contains($key)) {
@@ -96,6 +111,9 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         }
     }
 
+    /**
+     * @deprecated
+     */
     protected function getItem(string $key)
     {
         $entity = $this->cache->fetch($key);
