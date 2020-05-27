@@ -73,10 +73,8 @@ class AuthorizationSubscriber implements EventSubscriberInterface
                 throw new AccessDeniedException();
             }
 
-            if ($methodAnnotation->isOwnership()) {
-                if (!$this->ownershipService->isOwner($event->getRequest(), $method)) {
-                    throw new AccessDeniedException();
-                }
+            if ($methodAnnotation->isOwnership() && !$this->ownershipService->isOwner($event->getRequest(), $method)) {
+                throw new AccessDeniedException();
             }
         }
     }
