@@ -45,7 +45,7 @@ class ScriptHandler
         $rootPath = (string) realpath(sprintf('%s/../', $composer->getConfig()->get('vendor-dir')));
         $semartPath = sprintf('%s/.semart', $rootPath);
 
-        if (1 === (int) file_get_contents($semartPath)) {
+        if (file_exists($semartPath) && 1 === (int) file_get_contents($semartPath)) {
             return 0;
         }
 
