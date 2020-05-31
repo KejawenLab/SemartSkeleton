@@ -48,6 +48,16 @@ class GeneratorCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $output->write('<fg=green;options=bold>
+   _____                           __     ______                           __
+  / ___/___  ____ ___  ____ ______/ /_   / ____/__  ____  ___  _________ _/ /_____  _____
+  \__ \/ _ \/ __ `__ \/ __ `/ ___/ __/  / / __/ _ \/ __ \/ _ \/ ___/ __ `/ __/ __ \/ ___/
+ ___/ /  __/ / / / / / /_/ / /  / /_   / /_/ /  __/ / / /  __/ /  / /_/ / /_/ /_/ / /
+/____/\___/_/ /_/ /_/\__,_/_/   \__/   \____/\___/_/ /_/\___/_/   \__,_/\__/\____/_/
+
+<comment>By: KejawenLab - Muhamad Surya Iksanudin<surya.kejawen@gmail.com></comment>
+
+</>');
         /** @var string $entity */
         $entity = $input->getArgument('entity');
         $reflection = new \ReflectionClass(sprintf('%s\%s', self::NAMESPACE, $entity));
