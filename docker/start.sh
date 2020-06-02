@@ -49,11 +49,7 @@ do
     sed -i "s|\${${name}}|${value}|g" /etc/nginx/conf.d/default.conf
 done
 
-if [ "$APP_ENV" = 'prod' ]; then
-	composer install --prefer-dist --no-dev --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
-else
-	composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative
-fi
+cd /semart && composer update --prefer-dist -vvv
 
 chmod 777 -R var/
 

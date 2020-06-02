@@ -88,24 +88,7 @@ composer create-project -sdev kejawenlab/semart-skeleton Semart
 
 - Masuk ke direktori `Semart` dengan perintah `cd Semart`
 
-- Ubah konfigurasi pada file `docker-compose.yml`
-
-```yaml
-services:
-    app:
-        build: .
-        environment:
-            NGINX_WEBROOT: /semart/public
-            APP_ENV: dev
-            APP_SECRET: 2a46d7812648fc10df43fa9431d5f75d
-            DATABASE_DRIVER: pdo_mysql
-            DATABASE_SERVER_VERSION: 5.7
-            DATABASE_CHARSET: utf8mb4
-            DATABASE_URL: mysql://root:aden@localhost:3306/semart
-            REDIS_URL: redis://session
-```
-
-- Jalankan perintah `docker-compose up -d`
+- Jalankan perintah `docker-compose build && docker-compose up`
 
 - Masuk ke container `app` dengan perintah `docker-compose exec app bash`
 

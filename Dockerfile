@@ -12,9 +12,9 @@ RUN apt-get install nginx supervisor vim software-properties-common curl ca-cert
 RUN apt-get update
 RUN apt-get install php php-cli php-curl php-intl php-mbstring php-xml php-zip \
     php-bcmath php-cli php-fpm php-imap php-json php-opcache php-xmlrpc \
-    php-bz2 php-common php-gd php-ldap php-pgsql php-readline php-soap php-tidy php-xsl php-apcu php-redis -y
+    php-bz2 php-common php-gd php-ldap php-pgsql php-mysql php-readline php-soap php-tidy php-xsl php-redis -y
 
-RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer.phar && chmod a+x /usr/local/bin/composer
+RUN curl -o /usr/local/bin/composer https://getcomposer.org/composer.phar && chmod a+x /usr/local/bin/composer && composer self-update
 
 RUN apt-get remove --purge -y software-properties-common && \
     apt-get autoremove -y && \
@@ -46,37 +46,8 @@ RUN mkdir /run/php
 RUN touch /run/php/php7.2-fpm.sock
 RUN chmod 777 /run/php/php7.2-fpm.sock
 
-# Setup Application
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-RUN composer config -g repositories.packagist composer https://packagist.jp
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-suggest --optimize-autoloader --classmap-authoritative -vvv && \
-   composer clear-cache
-
-WORKDIR /semart
-
-COPY composer.json ./
-COPY composer.lock ./
-
-RUN mkdir -p var/cache var/log var/sessions && \
-    chmod 777 -R var/ && \
-    composer install --prefer-dist --no-autoloader --no-scripts --no-suggest -vvv && \
-    composer clear-cache
-
-COPY bin bin/
-COPY config config/
-COPY public public/
-COPY src src/
-COPY templates templates/
-COPY translations translations/
-COPY fixtures fixtures/
-
-RUN composer dump-autoload --optimize --classmap-authoritative
-
 # Supervisor Configuration
 ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
-
-RUN chmod 755 -R config/
 
 # Here we go
 ADD docker/start.sh /start.sh

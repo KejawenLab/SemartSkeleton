@@ -64,8 +64,8 @@ class InstallationCommand extends Command
         $output->writeln('<info>Running Semart Schema Updater</info>');
         $input = new ArrayInput([
             'command' => 'doctrine:schema:update',
-            '--force' => true,
-            '--no-interaction' => true,
+            '--force' => null,
+            '--no-interaction' => null,
         ]);
         $input->setInteractive(false);
         $migration = $application->find('doctrine:schema:update');
@@ -74,7 +74,7 @@ class InstallationCommand extends Command
         $output->writeln('<info>Loading Semart Application initial data</info>');
         $input = new ArrayInput([
             'command' => 'doctrine:fixtures:load',
-            '--no-interaction' => true,
+            '--no-interaction' => null,
         ]);
         $input->setInteractive(false);
         $fixtures = $application->find('doctrine:fixtures:load');

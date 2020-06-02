@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 class Kernel extends BaseKernel implements CompilerPassInterface
 {
@@ -52,7 +52,7 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(RoutingConfigurator $routes)
     {
         $confDir = $this->getProjectDir().'/config';
 
@@ -86,11 +86,15 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $definition = $container->getDefinition('doctrine.dbal.default_connection');
 
         $argument = $definition->getArgument(0);
-        /** @var string $databasePassword */
-        $databasePassword = $_ENV['DATABASE_PASSWORD'];
-        /** @var string $appSecret */
-        $appSecret = $_ENV['APP_SECRET'];
-        $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+        if (isset($_SERVER['DATABASE_URL']) && $_SERVER['DATABASE_URL']) {
+            $argument['url'] = $_SERVER['DATABASE_URL'];
+        } else {
+            /** @var string $databasePassword */
+            $databasePassword = $_ENV['DATABASE_PASSWORD'];
+            /** @var string $appSecret */
+            $appSecret = $_ENV['APP_SECRET'];
+            $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+        }
 
         $definition->replaceArgument(0, $argument);
     }
