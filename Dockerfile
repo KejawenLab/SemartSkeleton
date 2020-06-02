@@ -53,6 +53,8 @@ ADD docker/supervisor/supervisor.conf /etc/supervisord.conf
 ADD docker/start.sh /start.sh
 RUN chmod +x /start.sh
 
+WORKDIR /semart
+
 EXPOSE 443 80
 
 CMD ["/start.sh"]
