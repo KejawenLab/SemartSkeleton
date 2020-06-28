@@ -10,7 +10,7 @@ use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Security\Service\PasswordEncoderService;
 use PHLAK\Twine\Str;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Yaml\Yaml;
 
@@ -23,11 +23,11 @@ abstract class Fixture extends Base
 
     private $encoder;
 
-    protected $container;
+    protected $kernel;
 
-    public function __construct(ContainerInterface $container, PasswordEncoderService $encoder)
+    public function __construct(KernelInterface $kernel, PasswordEncoderService $encoder)
     {
-        $this->container = $container;
+        $this->kernel = $kernel;
         $this->encoder = $encoder;
     }
 
@@ -73,7 +73,7 @@ abstract class Fixture extends Base
 
     protected function getData(): array
     {
-        $path = sprintf('%s/fixtures/%s.yaml', $this->container->getParameter('kernel.project_dir'), $this->getReferenceKey());
+        $path = sprintf('%s/fixtures/%s.yaml', $this->kernel->getProjectDir(), $this->getReferenceKey());
 
         return Yaml::parse((string) file_get_contents($path));
     }
