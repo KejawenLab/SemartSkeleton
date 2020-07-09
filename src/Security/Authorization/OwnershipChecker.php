@@ -8,12 +8,8 @@ use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Annotation()
- * @Target({"CLASS", "METHOD"})
- *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
 class OwnershipChecker
@@ -33,7 +29,13 @@ class OwnershipChecker
 
         /** @var User $user */
         $user = $this->token->getUser();
-        if (Group::SUPER_ADMINISTRATOR_CODE === $user->getGroup()->getCode()) {
+        $group = $user->getGroup();
+
+        if (!$group) {
+            return false;
+        }
+
+        if (Group::SUPER_ADMINISTRATOR_CODE === $group->getCode()) {
             return true;
         }
 
@@ -41,8 +43,7 @@ class OwnershipChecker
             return false;
         }
 
-        $reflection = new \ReflectionObject($data);
-        if (!$reflection->hasMethod('getCreatedBy')) {
+        if (!method_exists($data, 'getCreatedBy')) {
             return false;
         }
 

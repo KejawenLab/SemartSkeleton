@@ -4,5 +4,6 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         title: '%env(resolve:APPLICATION_TITLE)%'
+        app_title: '%env(resolve:APPLICATION_TITLE)%'
         title_long: '%env(resolve:APPLICATION_TITLE_LONG)%'
         version: '%env(resolve:APPLICATION_VERSION)%'

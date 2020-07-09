@@ -22,7 +22,7 @@ class MenuService implements ServiceInterface
         $this->menuRepository = $menuRepository;
     }
 
-    public function getMenuByCode(string $code)
+    public function getMenuByCode(string $code): ?Menu
     {
         return $this->menuRepository->findByCode(Str::make($code)->uppercase()->__toString());
     }
@@ -41,8 +41,6 @@ class MenuService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Menu|null
      */
     public function get(string $id): ?object

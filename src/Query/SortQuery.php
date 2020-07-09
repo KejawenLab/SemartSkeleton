@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Query;
 
 use Doctrine\Common\Annotations\Reader;
-use KejawenLab\Semart\Skeleton\Application;
+use Doctrine\ORM\QueryBuilder;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
+use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -24,56 +26,75 @@ class SortQuery implements EventSubscriberInterface
     public function apply(PaginationEvent $event): void
     {
         $request = $event->getRequest();
+        if (!$request) {
+            return;
+        }
+
         if ('' === $sortField = $request->query->get('s', '')) {
             return;
         }
 
-        $queryBuilder = $event->getQueryBuilder();
-        $annotations = $this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass()));
-        foreach ($annotations as $annotation) {
-            if (!$annotation instanceof Sortable) {
-                continue;
-            }
-
-            $sortableFields = $annotation->getFields();
-            if (!in_array($sortField, $sortableFields)) {
-                continue;
-            }
-
-            $sort = sprintf('%s.%s', $event->getJoinAlias('root'), $sortField);
-            if (false !== strpos($sortField, '.')) {
-                $fields = explode('.', $sortField);
-
-                $length = count($fields);
-                foreach ($fields as $key => $field) {
-                    if ($key === $length - 1) {
-                        continue;
-                    }
-
-                    $alias = $event->getJoinAlias($field);
-                    if (!$alias) {
-                        $random = Application::APP_UNIQUE_NAME;
-                        $alias  = $random[rand($key, strlen($random)-1)];
-
-                        if (0 === $key) {
-                            $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $field), $alias);
-                        } else {
-                            $queryBuilder->leftJoin(sprintf('%s.%s', $fields[$key - 1], $field), $alias);
-                        }
-                    }
-
-                    $sort = sprintf('%s.%s', $alias, $fields[$key + 1]);
+        $sortable = Collection::collect($this->annotationReader->getClassAnnotations(new \ReflectionClass($event->getEntityClass())))
+            ->filter(static function ($value) {
+                if ($value instanceof Sortable) {
+                    return true;
                 }
-            }
 
-            $queryBuilder->addOrderBy($sort, 'a' === $request->query->get('d', 'a') ? 'ASC' : 'DESC');
+                return false;
+            })
+            ->toArray()
+        ;
+
+        if (empty($sortable)) {
+            return;
         }
+
+        /** @var QueryBuilder $queryBuilder */
+        $queryBuilder = $event->getQueryBuilder();
+        $sort = sprintf('%s.%s', $event->getJoinAlias('root'), $sortField);
+        if (false !== strpos($sortField, '.')) {
+            $fields = Collection::collect(explode('.', $sortField));
+            $length = $fields->count();
+
+            $fields->each(static function ($value, $key) use (&$sort, $length, $fields, $event, $queryBuilder) {
+                if ($key === $length - 1) {
+                    return false;
+                }
+
+                $alias = $event->getJoinAlias($value);
+                if (!$alias) {
+                    $alias = UniqueAlias::generate($event->getJoinFields());
+
+                    if (0 === $key) {
+                        $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $value), $alias);
+                        $event->addJoinAlias($value, $alias);
+                    } else {
+                        /** @var string $field; */
+                        $field = $fields->get($key - 1);
+                        $event->addJoinAlias($value, $alias);
+                        if ($fieldAlias = $event->getJoinAlias($field)) {
+                            $field = $fieldAlias;
+                        }
+
+                        $queryBuilder->leftJoin(sprintf('%s.%s', $field, $value), $alias);
+                    }
+                }
+
+                /** @var string $field; */
+                $field = $fields->get($key + 1);
+                $sort = sprintf('%s.%s', $alias, $field);
+
+                return true;
+            });
+        }
+
+        $queryBuilder->addOrderBy($sort, 'a' === $request->query->get('d', 'a') ? 'ASC' : 'DESC');
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-            Application::PAGINATION_EVENT => [['apply', -255]],
+            PaginationEvent::class => [['apply', -255]],
         ];
     }
 }

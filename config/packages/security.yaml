@@ -1,13 +1,14 @@
 security:
     encoders:
         KejawenLab\Semart\Skeleton\Entity\User:
-            algorithm: argon2i
+            algorithm: auto
 
     providers:
         semart_provider:
             id: KejawenLab\Semart\Skeleton\Security\Service\UserService
 
     role_hierarchy:
+        ROLE_SEMART: [ROLE_USER, ROLE_SEMART]
         ROLE_USER: ROLE_USER
 
     firewalls:
@@ -20,7 +21,6 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: semart_provider
                 check_path: login_check
                 csrf_token_generator: security.csrf.token_manager
                 default_target_path: home_dashboard

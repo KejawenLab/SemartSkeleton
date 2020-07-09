@@ -1,0 +1,34 @@
+<?php
+
+declare(strict_types=1);
+
+namespace KejawenLab\Semart\Skeleton\Entity;
+
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Contracts\EventDispatcher\Event;
+
+/**
+ * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
+ */
+class PersistEntityEvent extends Event
+{
+    private $manager;
+
+    private $entity;
+
+    public function __construct(ObjectManager $entityManager, object $entity)
+    {
+        $this->manager = $entityManager;
+        $this->entity = $entity;
+    }
+
+    public function getManager(): ObjectManager
+    {
+        return $this->manager;
+    }
+
+    public function getEntity(): object
+    {
+        return $this->entity;
+    }
+}

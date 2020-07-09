@@ -2,7 +2,9 @@
 
 namespace KejawenLab\Semart\Skeleton;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Generator\GeneratorFactory;
+use KejawenLab\Semart\Skeleton\Util\Encryptor;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -10,7 +12,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Symfony\Component\Routing\RouteCollectionBuilder;
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 class Kernel extends BaseKernel implements CompilerPassInterface
 {
@@ -50,33 +52,48 @@ class Kernel extends BaseKernel implements CompilerPassInterface
         $loader->load($confDir.'/{services}_'.$this->environment.self::CONFIG_EXTS, 'glob');
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(RoutingConfigurator $routes)
     {
-        $confDir = $this->getProjectDir().'/config';
-
-        $routes->import($confDir.'/{routes}/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}/'.$this->environment.'/**/*'.self::CONFIG_EXTS, '/', 'glob');
-        $routes->import($confDir.'/{routes}'.self::CONFIG_EXTS, '/', 'glob');
+        $routes->import('../config/{routes}/'.$this->environment.'/*.yaml');
+        $routes->import('../config/{routes}/*.yaml');
+        $routes->import('../config/{routes}.yaml');
     }
 
     public function process(ContainerBuilder $container)
     {
-        $generators = $container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME));
-        $services  = [];
-        foreach ($generators as $serviceId => $attributes) {
-            $services[] = new Reference($serviceId);
-        }
-
+        $generators = Collection::collect($container->findTaggedServiceIds(sprintf('%s.generator', Application::APP_UNIQUE_NAME)))
+            ->keys()
+            ->map(static function ($serviceId) {
+                return new Reference($serviceId);
+            })
+            ->toArray()
+        ;
         $definition = $container->getDefinition(GeneratorFactory::class);
-        $definition->addArgument($services);
+        $definition->addArgument($generators);
 
-        $taggedServices = $container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME));
-        $services = [];
-        foreach ($taggedServices as $serviceId => $attributes) {
-            $services[] = new Reference($serviceId);
-        }
-
+        $services = Collection::collect($container->findTaggedServiceIds(sprintf('%s.service', Application::APP_UNIQUE_NAME)))
+            ->keys()
+            ->map(static function ($serviceId) {
+                return new Reference($serviceId);
+            })
+            ->toArray()
+        ;
         $definition = $container->getDefinition(Application::class);
         $definition->addMethodCall('setServices', [$services]);
+
+        $definition = $container->getDefinition('doctrine.dbal.default_connection');
+
+        $argument = $definition->getArgument(0);
+        if (isset($_SERVER['DATABASE_URL']) && $_SERVER['DATABASE_URL']) {
+            $argument['url'] = $_SERVER['DATABASE_URL'];
+        } else {
+            /** @var string $databasePassword */
+            $databasePassword = $_ENV['DATABASE_PASSWORD'];
+            /** @var string $appSecret */
+            $appSecret = $_ENV['APP_SECRET'];
+            $argument['password'] = Encryptor::decrypt($databasePassword, $appSecret);
+        }
+
+        $definition->replaceArgument(0, $argument);
     }
 }

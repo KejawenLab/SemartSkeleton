@@ -31,7 +31,17 @@ class SettingController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $settings = $paginator->paginate(Setting::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+
+        if (!$this->isCached($key)) {
+            $settings = $paginator->paginate(Setting::class, $page);
+            $this->cache($key, $settings);
+        } else {
+            $settings = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('setting/table-content.html.twig', ['settings' => $settings]);
@@ -40,10 +50,14 @@ class SettingController extends AdminController
             return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
             ]);
         }
 
-        return $this->render('setting/index.html.twig', ['title' => 'Setting', 'settings' => $settings]);
+        return $this->render('setting/index.html.twig', [
+            'title' => $this->getPageTitle(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**
@@ -73,6 +87,10 @@ class SettingController extends AdminController
             $setting = $service->get($primary);
         } else {
             $setting = new Setting();
+        }
+
+        if (!$setting) {
+            throw new NotFoundHttpException();
         }
 
         $requestHandler->handle($request, $setting);

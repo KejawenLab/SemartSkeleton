@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Repository;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\Role;
@@ -20,40 +21,18 @@ class RoleRepository extends Repository
         parent::__construct($registry, Role::class);
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria, array $orderBy = null): ?object
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy)));
 
-        if ($this->isCacheable()) {
-            $object = $this->getItem($key);
-            if (!$object) {
-                $object = parent::findOneBy($criteria, $orderBy);
-
-                $this->cache($key, $object);
-            }
-
-            return $object;
-        }
-
-        return parent::findOneBy($criteria, $orderBy);
+        return $this->doFindOneBy($key, $criteria, $orderBy);
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         $key = md5(sprintf('%s:%s:%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy), $limit, $offset));
 
-        if ($this->isCacheable()) {
-            $objects = $this->getItem($key);
-            if (!$objects) {
-                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
-
-                $this->cache($key, $objects);
-            }
-
-            return $objects;
-        }
-
-        return parent::findBy($criteria, $orderBy, $limit, $offset);
+        return $this->doFindBy($key, $criteria, $orderBy, $limit, $offset);
     }
 
     public function findRole(Group $group, Menu $menu): ?Role
@@ -144,7 +123,7 @@ class RoleRepository extends Repository
             $queryBuilder->leftJoin('m.parent', 'p');
             $queryBuilder->orWhere($queryBuilder->expr()->like('LOWER(m.name)', $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId())));
-            $queryBuilder->addOrderBy('p.name', 'ASC');
+//            $queryBuilder->addOrderBy('p.name', 'ASC');
             $queryBuilder->addOrderBy('m.menuOrder', 'ASC');
 
             $results = $queryBuilder->getQuery()->getResult();
@@ -167,12 +146,9 @@ class RoleRepository extends Repository
 
     private function filterMenu(array $roles): array
     {
-        $menus = [];
-        /** @var Role $role */
-        foreach ($roles as $role) {
-            $menus[] = $role->getMenu();
-        }
-
-        return $menus;
+        return Collection::collect($roles)->map(static function ($value) {
+            /* @var Role $value */
+            return $value->getMenu();
+        })->toArray();
     }
 }

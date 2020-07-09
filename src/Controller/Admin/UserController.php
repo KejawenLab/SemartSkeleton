@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Controller\Admin;
 
+use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Entity\User;
 use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
@@ -32,7 +33,17 @@ class UserController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, GroupService $groupService)
     {
-        $users = $paginator->paginate(User::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+
+        if (!$this->isCached($key)) {
+            $users = $paginator->paginate(User::class, $page);
+            $this->cache($key, $users);
+        } else {
+            $users = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('user/table-content.html.twig', ['users' => $users]);
@@ -41,10 +52,15 @@ class UserController extends AdminController
             return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
             ]);
         }
 
-        return $this->render('user/index.html.twig', ['title' => 'Pengguna', 'users' => $users, 'groups' => $groupService->getActiveGroups()]);
+        return $this->render('user/index.html.twig', [
+            'title' => $this->getPageTitle(),
+            'groups' => $groupService->getActiveGroups(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**
@@ -74,6 +90,10 @@ class UserController extends AdminController
             $user = $service->get($primary);
         } else {
             $user = new User();
+        }
+
+        if (!$user) {
+            throw new NotFoundHttpException();
         }
 
         $requestHandler->handle($request, $user);

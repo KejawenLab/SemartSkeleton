@@ -31,20 +31,26 @@ class SettingServiceTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']->__toString()) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
+        ;
+        $repositoryMock
+            ->method('find')
+            ->withAnyParameters()
+            ->willReturn(null)
         ;
 
         $settingService = new SettingService($repositoryMock);
 
         $this->assertEquals($setting->getValue(), $settingService->getValue($setting->getParameter()));
-        $this->assertEquals(null, $settingService->getValue(static::NOT_EXIST));
+        $this->assertNull($settingService->getValue(static::NOT_EXIST));
+        $this->assertNull($settingService->get(static::NOT_EXIST));
     }
 }

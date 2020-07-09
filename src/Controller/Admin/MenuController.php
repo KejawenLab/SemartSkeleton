@@ -31,7 +31,17 @@ class MenuController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, MenuService $menuService)
     {
-        $menus = $paginator->paginate(Menu::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+
+        if (!$this->isCached($key)) {
+            $menus = $paginator->paginate(Menu::class, $page);
+            $this->cache($key, $menus);
+        } else {
+            $menus = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('menu/table-content.html.twig', ['menus' => $menus]);
@@ -40,10 +50,15 @@ class MenuController extends AdminController
             return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
             ]);
         }
 
-        return $this->render('menu/index.html.twig', ['title' => 'Menu', 'menus' => $menus, 'parents' => $menuService->getActiveMenus()]);
+        return $this->render('menu/index.html.twig', [
+            'title' => $this->getPageTitle(),
+            'parents' => $menuService->getActiveMenus(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**
@@ -73,6 +88,10 @@ class MenuController extends AdminController
             $menu = $service->get($primary);
         } else {
             $menu = new Menu();
+        }
+
+        if (!$menu) {
+            throw new NotFoundHttpException();
         }
 
         $requestHandler->handle($request, $menu);

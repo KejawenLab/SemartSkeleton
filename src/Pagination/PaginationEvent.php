@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
 use Doctrine\ORM\QueryBuilder;
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -58,7 +58,7 @@ class PaginationEvent extends Event
 
     public function getJoinAlias(string $field): ?string
     {
-        if (!array_key_exists($field, $this->joinAlias)) {
+        if (!\array_key_exists($field, $this->joinAlias)) {
             return null;
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Tests\Generator;
 
 use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
+use KejawenLab\Semart\Skeleton\Entity\Stub;
 use KejawenLab\Semart\Skeleton\Generator\ControllerGenerator;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -14,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class ControllerGeneratorTest extends KernelTestCase
 {
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
     }

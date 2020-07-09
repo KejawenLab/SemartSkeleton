@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Searchable({"group.code", "group.name", "fullName", "username"})
  * @Sortable({"group.name", "fullName", "username"})
  *
- * @UniqueEntity(fields={"username"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
+ * @UniqueEntity(fields={"username"})
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
@@ -66,6 +66,15 @@ class User implements UserInterface, \Serializable
      * @Groups({"read"})
      */
     private $username;
+
+    /**
+     * @ORM\Column(name="foto_profil", type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(max=255)
+     *
+     * @Groups({"read"})
+     */
+    private $profileImage;
 
     /**
      * @ORM\Column(name="kata_sandi", type="string")
@@ -124,9 +133,19 @@ class User implements UserInterface, \Serializable
         $this->plainPassword = $plainPassword;
     }
 
+    public function getProfileImage(): ?string
+    {
+        return $this->profileImage;
+    }
+
+    public function setProfileImage(string $profileImage): void
+    {
+        $this->profileImage = $profileImage;
+    }
+
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        return ['ROLE_SEMART'];
     }
 
     public function serialize(): string
@@ -136,13 +155,14 @@ class User implements UserInterface, \Serializable
             $this->fullName,
             $this->username,
             $this->password,
-            $this->group
+            $this->profileImage,
+            $this->group,
         ]);
     }
 
     public function unserialize($serialized)
     {
-        list($this->id, $this->fullName, $this->username, $this->password, $this->group) = unserialize($serialized);
+        list($this->id, $this->fullName, $this->username, $this->password, $this->profileImage, $this->group) = unserialize($serialized);
     }
 
     public function getSalt(): ?string

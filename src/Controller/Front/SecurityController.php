@@ -15,8 +15,6 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="login")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function login(AuthenticationUtils $authenticationUtils)
     {

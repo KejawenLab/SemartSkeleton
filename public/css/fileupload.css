@@ -1,7 +1,7 @@
 .avatar-upload {
     position: relative;
     max-width: 227px;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 .avatar-upload .avatar-edit {
     position: absolute;
@@ -14,8 +14,8 @@
 }
 .avatar-upload .avatar-edit input + label {
     display: inline-block;
-    width: 34px;
-    height: 34px;
+    width: 33px;
+    height: 33px;
     margin-bottom: 0;
     border-radius: 100%;
     background: #FFFFFF;
@@ -30,8 +30,8 @@
     border-color: #d6d6d6;
 }
 .avatar-upload .avatar-edit input + label:after {
-    content: "\f040";
-    font-family: 'FontAwesome';
+    content: "\f044";
+    font-family: "Font Awesome 5 Free";
     color: #757575;
     position: absolute;
     top: 10px;

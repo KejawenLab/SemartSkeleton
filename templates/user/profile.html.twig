@@ -1,43 +1,52 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_new.html.twig' %}
+
+{% block stylesheets %}{% apply spaceless %}
+    <link rel="stylesheet" href="{{asset('css/fileupload.css')}}">
+{% endapply %}{% endblock %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block page_title %}{{ title }}{% endblock %}
 
-{% block content %}{% filter spaceless %}
+{% block content %}{% apply spaceless %}
 {% set user = app.user %}
 <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">{{ 'label.user.profile' | trans }}</h3>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'label.user.profile' | trans }}</h3>
             </div>
-            <div class="box-body table-responsive no-padding table-bordered table-hover table-striped">
-                <form class="form-horizontal col-xs-12" method="POST">
+            <div class="card-body">
+                <div class="col-md-2">
+                    <input type="hidden" id="profileImage" value="">
+                    <div class="avatar-upload">
+                        <div class="avatar-edit">
+                            <input type="file" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                            <label for="imageUpload"></label>
+                        </div>
+                        <div class="avatar-preview">
+                            <div id="imagePreview" style="background-image: url({% if user.profileImage %}{{ path('get_files', {path: user.profileImage}) }}{% else %}{{ asset('img/logo.gif') }}{% endif %});">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form class="form-horizontal col-md-12" method="POST">
                     <input type="hidden" id="id" value="{{ user.id }}">
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.user.username' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.user.username' | trans }}</label>
+                        <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="group" class="col-sm-2 control-label">{{ 'label.group.name' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="group" value="{{ user.group.name }}" readonly>
-                        </div>
+                        <label for="group" class="control-label">{{ 'label.group.name' | trans }}</label>
+                        <input type="text" class="form-control" id="group" value="{{ user.group.name }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="fullName" class="col-sm-2 control-label">{{ 'label.user.full_name' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="fullName" value="{{ user.fullName }}">
-                        </div>
+                        <label for="fullName" class="control-label">{{ 'label.user.full_name' | trans }}</label>
+                        <input type="text" class="form-control" id="fullName" value="{{ user.fullName }}">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">{{ 'label.user.password' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="plainPassword" placeholder="{{ 'label.user.change_password' | trans }}">
-                        </div>
+                        <label for="password" class="control-label">{{ 'label.user.password' | trans }}</label>
+                        <input type="password" class="form-control" id="plainPassword" placeholder="{{ 'label.user.change_password' | trans }}">
                     </div>
                 </form>
             </div>
@@ -47,11 +56,9 @@
         </div>
     </div>
 </div>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
-<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 <script>
     $(window).ready(function () {
         localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');
@@ -60,18 +67,43 @@
             let id = $('#id').val();
             let fullName = $('#fullName').val();
             let plainPassword = $('#plainPassword').val();
+            let profileImage = $('#profileImage').val();
 
             $.post(Routing.generate('profile_update'), {
                 _csrf_token: localStorage.getItem('csrf_token'),
                 id: id,
                 fullName: fullName,
                 plainPassword: plainPassword,
-
+                profileImage: profileImage,
             }, function (response) {
                 if ('OK' === response.status) {
                     localStorage.setItem('csrf_token', response._csrf_token);
 
                     toastr['success']('{{ 'label.crud.save_message' | trans }}');
+                }
+            });
+        });
+
+        $(document).on('change', '#imageUpload', function (e) {
+            let formData = new FormData();
+            let file = $(this)[0].files[0];
+
+            formData.append('profileImage', file);
+            formData.append('_csrf_token', localStorage.getItem('csrf_token'));
+
+            $.ajax({
+                url: Routing.generate('files_upload'),
+                type: 'POST',
+                data: formData,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    localStorage.setItem('csrf_token', response._csrf_token);
+
+                    $('#profileImage').val(response.files['profileImage']);
+                    $('#imagePreview').css('background-image', 'url(' + Routing.generate('get_files', {path: response.files['profileImage']}) + ')');
                 }
             });
         });

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Security\Service;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Contract\Service\ServiceInterface;
 use KejawenLab\Semart\Skeleton\Entity\Group;
 use KejawenLab\Semart\Skeleton\Entity\Menu;
@@ -36,38 +37,39 @@ class RoleService implements ServiceInterface
 
     public function assignToGroup(Group $group): void
     {
-        $menus = $this->menuRepository->findAll();
-        /** @var Menu $menu */
-        foreach ($menus as $key => $menu) {
-            $role = new Role();
-            $role->setGroup($group);
-            $role->setMenu($menu);
+        Collection::collect($this->menuRepository->findAll())
+            ->each(function ($menu, $key) use ($group) {
+                $role = new Role();
+                $role->setGroup($group);
+                $role->setMenu($menu);
 
-            $this->roleRepository->persist($role);
+                $this->roleRepository->persist($role);
 
-            if ($key > 0 && 0 === 17 % $key) {
-                $this->roleRepository->commit();
-            }
-        }
+                if ($key > 0 && 0 === 17 % $key) {
+                    $this->roleRepository->commit();
+                }
+            })
+        ;
 
         $this->roleRepository->commit();
     }
 
     public function assignToMenu(Menu $menu): void
     {
-        $groups = $this->groupRepository->findAll();
-        /** @var Group $group */
-        foreach ($groups as $key => $group) {
-            $role = new Role();
-            $role->setGroup($group);
-            $role->setMenu($menu);
+        Collection::collect($this->groupRepository->findAll())
+            ->each(function ($group, $key) use ($menu) {
+                /** @var Group $group */
+                $role = new Role();
+                $role->setGroup($group);
+                $role->setMenu($menu);
 
-            $this->roleRepository->persist($role);
+                $this->roleRepository->persist($role);
 
-            if ($key > 0 && 0 === 17 % $key) {
-                $this->roleRepository->commit();
-            }
-        }
+                if ($key > 0 && 0 === 17 % $key) {
+                    $this->roleRepository->commit();
+                }
+            })
+        ;
 
         $this->roleRepository->commit();
     }
@@ -89,8 +91,6 @@ class RoleService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Role|null
      */
     public function get(string $id): ?object

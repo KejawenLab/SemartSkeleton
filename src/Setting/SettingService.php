@@ -23,9 +23,7 @@ class SettingService implements ServiceInterface
     }
 
     /**
-     * @param string $parameter
-     *
-     * @return null|string|int|float
+     * @return string|int|float|null
      */
     public function getValue(string $parameter)
     {
@@ -37,8 +35,6 @@ class SettingService implements ServiceInterface
     }
 
     /**
-     * @param string $id
-     *
      * @return Setting|null
      */
     public function get(string $id): ?object

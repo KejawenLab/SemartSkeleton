@@ -9,6 +9,7 @@ use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Service\UserService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -37,6 +38,9 @@ class ProfileController extends AdminController
         }
 
         $user = $service->get($user->getId());
+        if (!$user) {
+            throw new NotFoundHttpException();
+        }
         $requestHandler->handle($request, $user);
         $this->commit($user);
 

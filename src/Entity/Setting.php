@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Searchable({"parameter", "value"})
  * @Sortable({"parameter", "value"})
  *
- * @UniqueEntity(fields={"parameter"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
+ * @UniqueEntity(fields={"parameter"})
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */

@@ -25,27 +25,27 @@ class FileUploadLocator
         $this->kernel = $kernel;
     }
 
-    public function getRealPath(string $file)
+    public function getRealPath(string $file): string
     {
         return sprintf('%s/%s', $this->getUploadDir(), $file);
     }
 
-    public function getFile(string $path)
+    public function getFile(string $path): string
     {
         $fileSystem = new Filesystem();
         if ($fileSystem->exists($path)) {
-            return file_get_contents($path);
+            return (string) file_get_contents($path);
         }
 
         throw new FileNotFoundException();
     }
 
-    public function getUploadDir()
+    public function getUploadDir(): string
     {
         return sprintf('%s/%s', $this->kernel->getProjectDir(), $this->setting->getValue('upload_dir'));
     }
 
-    public function createUniqueFileName()
+    public function createUniqueFileName(): string
     {
         return md5(Uuid::getFactory()->uuid4()->toString());
     }

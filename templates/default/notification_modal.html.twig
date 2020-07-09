@@ -1,13 +1,13 @@
-{% filter spaceless %}
+{% apply spaceless %}
 <input type="hidden" id="primaryId" value=""/>
 <div class="modal modal-danger fade delete-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">{{ 'label.crud.notification' | trans }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">{{ 'label.crud.notification' | trans }}</h4>
             </div>
             <div class="modal-body">
                 <p>{{ 'label.crud.delete_notification_message' | trans }}</p>
@@ -23,10 +23,10 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">{{ 'label.crud.notification' | trans }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">{{ 'label.crud.notification' | trans }}</h4>
             </div>
             <div class="modal-body error-body"></div>
             <div class="modal-footer">
@@ -35,4 +35,4 @@
         </div>
     </div>
 </div>
-{% endfilter %}
+{% endapply %}

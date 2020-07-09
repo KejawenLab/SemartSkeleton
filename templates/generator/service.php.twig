@@ -30,6 +30,14 @@ class {{ entityHumanize }}Service implements ServiceInterface
      */
     public function get(string $id): ?object
     {
-        return $this->{{ entityLowerize }}Repository->get($id);
+        return $this->{{ entityLowerize }}Repository->find($id);
+    }
+
+    /**
+    * @return {{ entityHumanize }}[]
+    */
+    public function getActives(): array
+    {
+        return $this->{{ entityLowerize }}Repository->findAll();
     }
 }

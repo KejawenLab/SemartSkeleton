@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Query;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\DBAL\Schema\AbstractAsset;
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Doctrine\Persistence\ManagerRegistry;
+use KejawenLab\Semart\Collection\Collection;
 use PHLAK\Twine\Str;
 
 /**
@@ -51,13 +52,27 @@ class QueryService
 
             $output['columns'] = $columns;
             $output['records'] = $results;
-            $output['total'] = count($results);
+            $output['total'] = $results ? \count($results) : 0;
         } catch (\Exception $e) {
             $messages = explode(':', $e->getMessage());
+            if (4 === \count($messages)) {
+                $reason = explode(';', $messages[3]);
+                if (1 < \count($reason)) {
+                    $description = $reason[1];
+                } else {
+                    $description = $reason[0];
+                }
+                $error = Str::make($messages[1])->trim()->__toString();
+                $reason = Str::make($messages[2])->trim()->__toString();
+            } else {
+                $error = Str::make($messages[0])->trim()->__toString();
+                $reason = Str::make($messages[1])->trim()->__toString();
+                $description = $reason;
+            }
 
             $output['status'] = false;
-            $output['columns'] = ['error', 'reason', 'solution'];
-            $output['records'][] = [Str::make($messages[1])->trim()->__toString(), Str::make($messages[2])->trim()->__toString(), Str::make(explode(';', $messages[3])[1])->trim()->uppercaseFirst()->__toString()];
+            $output['columns'] = ['error', 'reason', 'description'];
+            $output['records'] = [[$error, $reason, $description]];
         }
 
         return $output;
@@ -68,13 +83,13 @@ class QueryService
         /** @var AbstractSchemaManager $schemaManager */
         $schemaManager = $this->registryManager->getConnection(Str::make($connection)->lowercase()->__toString())->getSchemaManager();
 
-        $output = [];
-        /** @var AbstractAsset[] $tables */
-        $tables =array_merge($schemaManager->listTables(), $schemaManager->listViews());
-        foreach ($tables as $table) {
-            $output[] = $table->getName();
-        }
-
-        return $output;
+        return Collection::collect($schemaManager->listTables())
+            ->merge($schemaManager->listViews())
+            ->map(static function ($value) {
+                /* @var AbstractAsset $value */
+                return $value->getName();
+            })
+            ->toArray()
+        ;
     }
 }

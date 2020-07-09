@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
+use Doctrine\Common\Inflector\Inflector;
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Application;
+use ReflectionProperty;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -31,8 +34,6 @@ class RequestHandler
 
     private $errors;
 
-    private $valid = false;
-
     public function __construct(Application $application, ValidatorInterface $validator, EventDispatcherInterface $eventDispatcher, TranslatorInterface $translator)
     {
         $this->propertyAccessor = new PropertyAccessor();
@@ -46,29 +47,30 @@ class RequestHandler
     public function handle(Request $request, object $object)
     {
         $filterEvent = new RequestEvent($request, $object);
-        $this->eventDispatcher->dispatch(Application::REQUEST_EVENT, $filterEvent);
+        $this->eventDispatcher->dispatch($filterEvent);
 
         $reflection = new \ReflectionObject($object);
         if ($parent = $reflection->getParentClass()) {
             $reflection = $parent;
         }
 
-        $properties = $reflection->getProperties(\ReflectionProperty::IS_PRIVATE|\ReflectionProperty::IS_PROTECTED);
-        foreach ($properties as $property) {
-            $field = $property->getName();
-            $value = $request->request->get($field);
-            if ('id' !== strtolower($field) && null !== $value && '' !== $value) {
-                $this->bindValue($object, $field, $value);
-            }
-        }
+        Collection::collect($reflection->getProperties(\ReflectionProperty::IS_PRIVATE | \ReflectionProperty::IS_PROTECTED))
+            ->each(function ($value) use ($request, $object) {
+                /** @var ReflectionProperty $value */
+                $field = $value->getName();
+                $value = $request->request->get($field);
+                if ('id' !== strtolower($field) && null !== $value && '' !== $value) {
+                    $this->bindValue($object, $field, $value);
+                }
+            })
+        ;
 
-        $this->eventDispatcher->dispatch(Application::PRE_VALIDATION_EVENT, $filterEvent);
         $this->validate($object, $reflection);
     }
 
     public function isValid()
     {
-        return $this->valid;
+        return empty($this->errors) ? true : false;
     }
 
     public function getErrors(): array
@@ -78,15 +80,14 @@ class RequestHandler
 
     private function validate(object $object, \ReflectionClass $reflection): void
     {
-        $errors = $this->validator->validate($object);
-        if (count($errors) > 0) {
-            /** @var ConstraintViolationInterface $error */
-            foreach ($errors as $error) {
-                $this->errors[] = sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', strtolower($reflection->getShortName()), strtolower($error->getPropertyPath()))), $this->translator->trans($error->getMessage()));
-            }
-        } else {
-            $this->valid = true;
-        }
+        $this->errors = Collection::collect($this->validator->validate($object))
+            ->flatten()
+            ->map(function ($value) use ($reflection) {
+                /* @var ConstraintViolationInterface $value */
+                return sprintf('<b><i>%s</i></b>: %s', $this->translator->trans(sprintf('label.%s.%s', Inflector::tableize($reflection->getShortName()), Inflector::tableize($value->getPropertyPath()))), $this->translator->trans($value->getMessage()));
+            })
+            ->toArray()
+        ;
     }
 
     private function bindValue(object $object, string $field, $value): void
@@ -95,7 +96,9 @@ class RequestHandler
             $this->propertyAccessor->setValue($object, $field, $value);
         } catch (\Exception $e) {
             $service = $this->application->getService(new \ReflectionObject($object), $field);
-            $this->propertyAccessor->setValue($object, $field, $service->get($value));
+            if ($service) {
+                $this->propertyAccessor->setValue($object, $field, $service->get($value));
+            }
         }
     }
 }

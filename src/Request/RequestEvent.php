@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Request;
 
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Contracts\EventDispatcher\Event;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -27,9 +27,6 @@ class RequestEvent extends Event
         return $this->request;
     }
 
-    /**
-     * @return \object
-     */
     public function getObject(): object
     {
         return $this->object;

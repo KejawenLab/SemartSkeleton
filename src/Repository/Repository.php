@@ -5,11 +5,10 @@ declare(strict_types=1);
 namespace KejawenLab\Semart\Skeleton\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
-use KejawenLab\Semart\Skeleton\Application;
+use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Skeleton\Contract\Repository\CacheableRepositoryInterface;
 use Ramsey\Uuid\Uuid;
-use Symfony\Component\Cache\Simple\ArrayCache;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -48,32 +47,80 @@ abstract class Repository extends ServiceEntityRepository implements CacheableRe
         return $entity;
     }
 
-    public function findUniqueBy(array $criteria): array
-    {
-        $this->_em->getFilters()->disable(sprintf('%s_softdeletable', Application::APP_UNIQUE_NAME));
-
-        return $this->findBy(array_merge($criteria));
-    }
-
+    /**
+     * @deprecated
+     */
     public function isCacheable(): bool
     {
         return $this->cacheable;
     }
 
+    /**
+     * @deprecated
+     */
     public function setCacheable(bool $cacheable): void
     {
         $this->cacheable = $cacheable;
     }
 
+    /**
+     * @deprecated
+     */
+    protected function doFindOneBy(string $cacheKey, array $criteria, array $orderBy = null): ?object
+    {
+        if ($this->isCacheable()) {
+            $object = $this->getItem($cacheKey);
+            if (!$object) {
+                $object = parent::findOneBy($criteria, $orderBy);
+
+                $this->cache($cacheKey, $object);
+            }
+
+            return $object;
+        }
+
+        return parent::findOneBy($criteria, $orderBy);
+    }
+
+    /**
+     * @deprecated
+     */
+    protected function doFindBy(string $cacheKey, array $criteria, array $orderBy = null, $limit = null, $offset = null): array
+    {
+        if ($this->isCacheable()) {
+            $objects = $this->getItem($cacheKey);
+            if (!$objects) {
+                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
+
+                $this->cache($cacheKey, $objects);
+            }
+
+            return $objects;
+        }
+
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @deprecated
+     */
     protected function cache(string $key, $item): void
     {
-        if (!$this->cache->has($key)) {
-            $this->cache->set($key, $item, 1);
+        if (!$this->cache->contains($key)) {
+            $this->cache->save($key, $item, 17);
         }
     }
 
+    /**
+     * @deprecated
+     */
     protected function getItem(string $key)
     {
-        return $this->cache->get($key, null);
+        $entity = $this->cache->fetch($key);
+        if ($entity) {
+            $this->_em->merge($entity);
+        }
+
+        return $entity;
     }
 }

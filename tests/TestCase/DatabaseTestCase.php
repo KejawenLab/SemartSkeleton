@@ -9,14 +9,14 @@ use Doctrine\ORM\EntityManagerInterface;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class DatabaseTestCase extends CommandTestCase
+abstract class DatabaseTestCase extends CommandTestCase
 {
     const NOT_FOUND = 'NOT_FOUND';
 
     /** @var EntityManagerInterface */
     protected static $entityManager;
 
-    public function setUp()
+    protected function setUp(): void
     {
         static::bootKernel();
 
@@ -30,7 +30,7 @@ class DatabaseTestCase extends CommandTestCase
         parent::setUp();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         static::runCommand('doctrine:database:drop --force');
 

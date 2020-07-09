@@ -24,7 +24,7 @@ class SettingExtensionTest extends TestCase
 
     private $setting;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $setting = new Setting();
         $setting->setParameter('PER_PAGE');
@@ -39,14 +39,14 @@ class SettingExtensionTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']->__toString()) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
         ;
 
@@ -54,14 +54,14 @@ class SettingExtensionTest extends TestCase
         $this->settingExtension = new SettingExtension(new SettingService($repositoryMock));
     }
 
-    public function testFindSetting()
+    public function testGetSettingValue()
     {
-        $this->assertEquals($this->setting->getValue(), $this->settingExtension->findSetting($this->setting->getParameter()));
-        $this->assertEquals(null, $this->settingExtension->findSetting(static::NOT_EXIST));
+        $this->assertEquals($this->setting->getValue(), $this->settingExtension->getSettingValue($this->setting->getParameter()));
+        $this->assertNull($this->settingExtension->getSettingValue(static::NOT_EXIST));
     }
 
     public function testGetFunctions()
     {
-        $this->assertEquals(1, count($this->settingExtension->getFunctions()));
+        $this->assertCount(1, $this->settingExtension->getFunctions());
     }
 }

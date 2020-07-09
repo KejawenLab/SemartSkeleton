@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Pagination;
 
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use KejawenLab\Semart\Skeleton\Application;
 use KejawenLab\Semart\Skeleton\Setting\SettingService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -20,7 +19,7 @@ class Paginator
 {
     public const PER_PAGE = 9;
 
-    protected const ROOT_ALIAS = 'o';
+    public const ROOT_ALIAS = 'o';
 
     private $doctrine;
 
@@ -33,7 +32,7 @@ class Paginator
     private $settingService;
 
     public function __construct(
-        ObjectManager $doctrine,
+        EntityManagerInterface $doctrine,
         PaginatorInterface $paginator,
         RequestStack $requestStack,
         EventDispatcherInterface $eventDispatcher,
@@ -60,7 +59,7 @@ class Paginator
         $event->setEntityClass($entityClass);
         $event->addJoinAlias('root', self::ROOT_ALIAS);
 
-        $this->eventDispatcher->dispatch(Application::PAGINATION_EVENT, $event);
+        $this->eventDispatcher->dispatch($event);
 
         return $this->paginator->paginate($queryBuilder, $page, $limit);
     }

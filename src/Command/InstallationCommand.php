@@ -9,48 +9,79 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
 class InstallationCommand extends Command
 {
+    private $semart;
+
+    public function __construct(KernelInterface $kernel)
+    {
+        $this->semart = sprintf('%s%s.semart', $kernel->getProjectDir(), \DIRECTORY_SEPARATOR);
+
+        parent::__construct();
+    }
+
     protected function configure()
     {
         $this
             ->setName(sprintf('%s:install', Application::APP_UNIQUE_NAME))
-            ->setAliases([sprintf('%s:create', Application::APP_UNIQUE_NAME)])
             ->setDescription('Install Semart Application Skeleton')
             ->setHelp('Install Semart Application Skeleton')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $output->writeln('<info>Creating new Semart Application database</info>');
-        $createDatabase = $this->getApplication()->find('doctrine:database:create');
-        $createDatabase->run(new ArrayInput([
-            'command' => 'doctrine:database:create',
-            '--if-not-exists' => true,
+        $fileSystem = new Filesystem();
+        if ($fileSystem->exists($this->semart)) {
+            return 0;
+        }
+
+        $output->writeln('<options=underscore>SEMART SKELETON INSTALLATION</>');
+        $output->writeln('<comment>===========================================================</comment>');
+
+        $output->writeln('<comment>===========================================================</comment>');
+        $output->writeln('<options=bold>Creating new Semart Application database</>');
+        $output->writeln('<comment>===========================================================</comment>');
+        /** @var \Symfony\Component\Console\Application $application */
+        $application = $this->getApplication();
+        $dropDatabase = $application->find('doctrine:database:drop');
+        $dropDatabase->run(new ArrayInput([
+            'command' => 'doctrine:database:drop --if-exists',
+            '--force' => true,
         ]), $output);
 
-        $noInteraction = ['--no-interaction' => true];
+        $createDatabase = $application->find('doctrine:database:create');
+        $createDatabase->run(new ArrayInput([
+            'command' => 'doctrine:database:create',
+        ]), $output);
 
         $output->writeln('<info>Running Semart Schema Updater</info>');
-        $migration = $this->getApplication()->find('doctrine:schema:update');
-        $migration->run(new ArrayInput([
+        $input = new ArrayInput([
             'command' => 'doctrine:schema:update',
-            '--force' => true,
-        ] + $noInteraction), $output);
+            '--force' => null,
+            '--no-interaction' => null,
+        ]);
+        $input->setInteractive(false);
+        $migration = $application->find('doctrine:schema:update');
+        $migration->run($input, $output);
 
         $output->writeln('<info>Loading Semart Application initial data</info>');
-        $fixtures = $this->getApplication()->find('doctrine:fixtures:load');
-        $fixtures->run(new ArrayInput([
-                'command' => 'doctrine:fixtures:load',
-        ] + $noInteraction), $output);
+        $input = new ArrayInput([
+            'command' => 'doctrine:fixtures:load',
+            '--no-interaction' => null,
+        ]);
+        $input->setInteractive(false);
+        $fixtures = $application->find('doctrine:fixtures:load');
+        $fixtures->run($input, $output);
 
-        $output->writeln('<info>Semart Application Installation is finished</info>');
-        $output->writeln('<comment>Run <info>php bin/console server:run</info> to start your server</comment>');
-        $output->writeln('<comment>Login with username: <info>admin</info> and password: <info>semartadmin</info></comment>');
+        $fileSystem->dumpFile($this->semart, (string) 0);
+
+        return 0;
     }
 }

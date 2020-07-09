@@ -1,0 +1,17 @@
+{
+    "name": "semarskeleton-doc",
+    "version": "1.0.0",
+    "scripts": {
+        "dev": "vuepress dev ",
+        "build": "vuepress build ",
+        "predeploy": "yarn build",
+        "deploy": "gh-pages -d .vuepress/dist"
+    },
+    "devDependencies": {
+        "gh-pages": "^2.0.1"
+    },
+    "dependencies": {
+        "buefy": "^0.7.10",
+        "vuepress": "^1.0.2"
+    }
+}

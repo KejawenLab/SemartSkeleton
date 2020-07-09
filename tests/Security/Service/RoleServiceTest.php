@@ -19,7 +19,7 @@ class RoleServiceTest extends TestCase
 {
     private $roleService;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $menus = [new Menu(), new Menu()];
         $groups = [new Group(), new Group()];

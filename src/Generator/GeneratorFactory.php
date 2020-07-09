@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Generator;
 
+use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Contract\Generator\GeneratorInterface;
 
 /**
@@ -15,22 +16,22 @@ class GeneratorFactory
 
     public function __construct(array $generators = [])
     {
-        foreach ($generators as $generator) {
-            $this->addGenerator($generator);
-        }
+        Collection::collect($generators)->each(function ($value) {
+            $this->addGenerator($value);
+        });
     }
 
     public function generate(\ReflectionClass $entityClass): void
     {
-        /** @var GeneratorInterface $generator */
-        foreach ($this->generators as $generator) {
-            $generator->generate($entityClass);
-        }
+        Collection::collect($this->generators)->each(static function ($value) use ($entityClass) {
+            /* @var GeneratorInterface $value */
+            $value->generate($entityClass);
+        });
     }
 
     private function addGenerator(GeneratorInterface $generator)
     {
-        $index = $generator->getPriority() === 255 ?: count($this->generators);
+        $index = 255 === $generator->getPriority() ?: \count($this->generators);
 
         $this->generators[$index] = $generator;
     }

@@ -14,6 +14,6 @@ class RoleTest extends TestCase
 {
     public function testObject()
     {
-        $this->assertEquals(Role::class, get_class(new Role()));
+        $this->assertEquals(Role::class, \get_class(new Role()));
     }
 }

@@ -1,22 +1,22 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_new.html.twig' %}
 
-{% block stylesheets %}{% filter spaceless %}
+{% block stylesheets %}{% apply spaceless %}
     <link rel="stylesheet" href="{{asset('lib/select2/css/select2.min.css')}}">
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
-{% block title %}{% filter spaceless %}{{ title | upper }}{% endfilter %}{% endblock %}
+{% block title %}{% apply spaceless %}{{ title | upper }}{% endapply %}{% endblock %}
 
-{% block page_title %}{% filter spaceless %}{{ title }}{% endfilter %}{% endblock %}
+{% block page_title %}{% apply spaceless %}{{ title }}{% endapply %}{% endblock %}
 
-{% block content %}{% filter spaceless %}
+{% block content %}{% apply spaceless %}
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-md-12">
         <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">{{ 'label.query.title' | trans | upper }}</h3>
-                <div class="box-tools col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'label.query.title' | trans | upper }}</h3>
+                <div class="card-tools col-md-6">
                     <div class="form-group">
-                        <div class="col-sm-5">
+                        <div class="col-md-6 float-left">
                             <select class="form-control select2-static" id="connection">
                                 <option value="">---{{ 'label.query.connection_option' | trans | upper }}---</option>
                                 {% for i, connection in connections %}
@@ -28,7 +28,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-sm-7 pull-right">
+                        <div class="col-md-6 float-right">
                             <select class="form-control select2-static" id="schemas">
                                 <option value="">---{{ 'label.query.schema_option' | trans | upper }}---</option>
                             </select>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-            <div class="box-body">
+            <div class="card-body">
                 <div class="row margin-b-7">
                     <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 margin-b-7">
                         <textarea id="query" class="col-md-12 col-xs-12 col-sm-12 col-lg-12" style="min-height: 277px;"></textarea>
@@ -54,9 +54,9 @@
         </div>
     </div>
 </div>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}
 
-{% block javascripts %}{% filter spaceless %}
+{% block javascripts %}{% apply spaceless %}
 <script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
 <script>
     $(window).ready(function () {
@@ -113,19 +113,21 @@
     });
 
     function listSchema(connection) {
-        $.get(Routing.generate('queries_tables'), {
-            c: connection
-        }, function (response) {
-            if (response.status) {
-                let options = '<option value="" selected="selected">---{{ 'label.query.schema_option' | trans | upper }}---</option>';
-                $.each(response.result, function (k, v) {
-                    options = options + '<option value="' + v + '">' + v + '</option>';
-                });
+        if (connection) {
+            $.get(Routing.generate('queries_tables'), {
+                c: connection
+            }, function (response) {
+                if (response.status) {
+                    let options = '<option value="" selected="selected">---{{ 'label.query.schema_option' | trans | upper }}---</option>';
+                    $.each(response.result, function (k, v) {
+                        options = options + '<option value="' + v + '">' + v + '</option>';
+                    });
 
-                $('#schemas').html(options);
-                $('.select2-static').select2();
-            }
-        });
+                    $('#schemas').html(options);
+                    $('.select2-static').select2();
+                }
+            });
+        }
     }
 </script>
-{% endfilter %}{% endblock %}
+{% endapply %}{% endblock %}

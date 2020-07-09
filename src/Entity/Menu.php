@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Searchable({"parent.name", "code", "name"})
  * @Sortable({"parent.name", "code", "name"})
  *
- * @UniqueEntity(fields={"code"}, repositoryMethod="findUniqueBy", message="label.crud.non_unique_or_deleted")
+ * @UniqueEntity(fields={"code"})
  *
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */

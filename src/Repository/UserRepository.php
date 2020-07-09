@@ -4,52 +4,30 @@ declare(strict_types=1);
 
 namespace KejawenLab\Semart\Skeleton\Repository;
 
+use Doctrine\Persistence\ManagerRegistry;
 use KejawenLab\Semart\Skeleton\Entity\User;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
 class UserRepository extends Repository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
     }
 
-    public function findOneBy(array $criteria, array $orderBy = null)
+    public function findOneBy(array $criteria, array $orderBy = null): ?object
     {
         $key = md5(sprintf('%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy)));
 
-        if ($this->isCacheable()) {
-            $object = $this->getItem($key);
-            if (!$object) {
-                $object = parent::findOneBy($criteria, $orderBy);
-
-                $this->cache($key, $object);
-            }
-
-            return $object;
-        }
-
-        return parent::findOneBy($criteria, $orderBy);
+        return $this->doFindOneBy($key, $criteria, $orderBy);
     }
 
-    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+    public function findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null): array
     {
         $key = md5(sprintf('%s:%s:%s:%s:%s:%s', __CLASS__, __METHOD__, serialize($criteria), serialize($orderBy), $limit, $offset));
 
-        if ($this->isCacheable()) {
-            $objects = $this->getItem($key);
-            if (!$objects) {
-                $objects = parent::findBy($criteria, $orderBy, $limit, $offset);
-
-                $this->cache($key, $objects);
-            }
-
-            return $objects;
-        }
-
-        return parent::findBy($criteria, $orderBy, $limit, $offset);
+        return $this->doFindBy($key, $criteria, $orderBy, $limit, $offset);
     }
 }

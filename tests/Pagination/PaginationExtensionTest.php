@@ -45,14 +45,14 @@ class PaginationExtensionTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
         ;
 
@@ -60,7 +60,7 @@ class PaginationExtensionTest extends TestCase
 
         $this->assertEquals(1, (new PaginationExtension($requestStackMock, $service))->startPageNumber());
 
-        $request->query->set('page', 2);
+        $request->query->set('p', 2);
 
         $this->assertEquals(Paginator::PER_PAGE + 1, (new PaginationExtension($requestStackMock, $service))->startPageNumber());
     }
@@ -68,7 +68,7 @@ class PaginationExtensionTest extends TestCase
     public function testGetFunctions()
     {
         $request = Request::createFromGlobals();
-        $request->query->set('page', 1);
+        $request->query->set('p', 1);
 
         $requestStackMock = $this->getMockBuilder(RequestStack::class)->disableOriginalConstructor()->getMock();
         $requestStackMock
@@ -90,14 +90,14 @@ class PaginationExtensionTest extends TestCase
                     ['parameter' => static::NOT_EXIST]
                 )
             )
-            ->will(
-                $this->returnCallback(function (array $parameter) use ($setting) {
+            ->willReturnCallback(
+                function (array $parameter) use ($setting) {
                     if (static::NOT_EXIST === $parameter['parameter']) {
                         return null;
                     }
 
                     return $setting;
-                })
+                }
             )
         ;
 

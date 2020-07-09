@@ -9,6 +9,7 @@ use KejawenLab\Semart\Skeleton\Pagination\Paginator;
 use KejawenLab\Semart\Skeleton\Request\RequestHandler;
 use KejawenLab\Semart\Skeleton\Security\Authorization\Permission;
 use KejawenLab\Semart\Skeleton\Security\Service\GroupService;
+use KejawenLab\Semart\Skeleton\Security\Service\RoleService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -31,7 +32,17 @@ class GroupController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $groups = $paginator->paginate(Group::class, (int) $request->query->get('p', 1));
+        $page = (int) $request->query->get('p', 1);
+        $sort = $request->query->get('s');
+        $direction = $request->query->get('d');
+        $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
+
+        if (!$this->isCached($key)) {
+            $groups = $paginator->paginate(Group::class, $page);
+            $this->cache($key, $groups);
+        } else {
+            $groups = $this->cache($key);
+        }
 
         if ($request->isXmlHttpRequest()) {
             $table = $this->renderView('group/table-content.html.twig', ['groups' => $groups]);
@@ -40,10 +51,14 @@ class GroupController extends AdminController
             return new JsonResponse([
                 'table' => $table,
                 'pagination' => $pagination,
+                '_cache_id' => $key,
             ]);
         }
 
-        return $this->render('group/index.html.twig', ['title' => 'Grup', 'groups' => $groups]);
+        return $this->render('group/index.html.twig', [
+            'title' => $this->getPageTitle(),
+            'cacheId' => $key,
+        ]);
     }
 
     /**
@@ -75,6 +90,10 @@ class GroupController extends AdminController
             $group = new Group();
         }
 
+        if (!$group) {
+            throw new NotFoundHttpException();
+        }
+
         $requestHandler->handle($request, $group);
         if (!$requestHandler->isValid()) {
             return new JsonResponse(['status' => 'KO', 'errors' => $requestHandler->getErrors()]);
@@ -99,5 +118,23 @@ class GroupController extends AdminController
         $this->remove($group);
 
         return new JsonResponse(['status' => 'OK']);
+    }
+
+    /**
+     * @Route("/{id}/roles", methods={"GET"}, name="groups_roles", options={"expose"=true})
+     *
+     * @Permission(actions=Permission::VIEW)
+     */
+    public function findRoles(string $id, Request $request, GroupService $service, RoleService $roleService)
+    {
+        if (!$group = $service->get($id)) {
+            throw new NotFoundHttpException();
+        }
+
+        $roles = $roleService->getRolesByGroup($group, $request->query->get('q', ''));
+
+        return new JsonResponse([
+            'table' => $this->renderView('role/table-content.html.twig', ['roles' => $roles]),
+        ]);
     }
 }
