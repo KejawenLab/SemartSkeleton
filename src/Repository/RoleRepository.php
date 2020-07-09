@@ -123,7 +123,7 @@ class RoleRepository extends Repository
             $queryBuilder->leftJoin('m.parent', 'p');
             $queryBuilder->orWhere($queryBuilder->expr()->like('LOWER(m.name)', $queryBuilder->expr()->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase()))));
             $queryBuilder->andWhere($queryBuilder->expr()->eq('o.group', $queryBuilder->expr()->literal($group->getId())));
-            $queryBuilder->addOrderBy('p.name', 'ASC');
+//            $queryBuilder->addOrderBy('p.name', 'ASC');
             $queryBuilder->addOrderBy('m.menuOrder', 'ASC');
 
             $results = $queryBuilder->getQuery()->getResult();

@@ -52,7 +52,7 @@ class InstallationCommand extends Command
         $application = $this->getApplication();
         $dropDatabase = $application->find('doctrine:database:drop');
         $dropDatabase->run(new ArrayInput([
-            'command' => 'doctrine:database:drop',
+            'command' => 'doctrine:database:drop --if-exists',
             '--force' => true,
         ]), $output);
 

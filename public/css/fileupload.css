@@ -30,8 +30,8 @@
     border-color: #d6d6d6;
 }
 .avatar-upload .avatar-edit input + label:after {
-    content: "\f040";
-    font-family: 'FontAwesome';
+    content: "\f044";
+    font-family: "Font Awesome 5 Free";
     color: #757575;
     position: absolute;
     top: 10px;

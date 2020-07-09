@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_new.html.twig' %}
 
 {% block stylesheets %}{% apply spaceless %}
     <link rel="stylesheet" href="{{asset('lib/select2/css/select2.min.css')}}">
@@ -10,52 +10,52 @@
 
 {% block content %}{% apply spaceless %}
 <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">{{ 'label.crud.list_title' | trans }} {{ title }}</h3>
-                <div class="box-tools col-md-7 col-xs-7 col-sm-7 col-lg-7 pull-right">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'label.crud.list_title' | trans }} {{ title }}</h3>
+                <div class="card-tools col-md-6">
                     <div class="input-group">
                         {% if is_granted('add', code_to_menu('MENU')) %}
-                            <div class="input-group-btn">
+                            <div class="input-group-prepend">
                                 <button type="button" class="btn btn-primary form-modal-action"><i class="fa fa-plus-circle"></i> {{ 'label.crud.add' | trans }}</button>
                             </div>
                         {% endif %}
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+{#                        <div class="col">#}
                             <select class="form-control select2-static" id="filter-menu">
                                 <option value="">---FILTER {{ 'label.menu.parent' | trans | upper }}---</option>
                                 {% for i, data in parents %}
                                     <option value="{{ data.id }}">{% if data.parent is not null %}{{ data.parent.name ~ ' > ' ~ data.name }}{% else %}{{ data.name }}{% endif %}</option>
                                 {% endfor %}
                             </select>
-                        </div>
+{#                        </div>#}
                     </div>
                 </div>
             </div>
-            <div class="box-body">
-                <table id="table-content" class="table table-responsive no-padding table-bordered table-hover table-striped">
+            <div class="card-body">
+                <table id="table-content" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 49px;">No</th>
-                            <th class="text-center">{{ 'label.menu.parent' | trans }} <i data-sort="no" data-sort-field="parent.name" class="fa fa-sort sortable pull-right"></i></th>
-                            <th class="text-center">{{ 'label.menu.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable sortable-default pull-right"></i></th>
-                            <th class="text-center">{{ 'label.menu.name' | trans }} <i data-sort="no" data-sort-field="name" class="fa fa-sort sortable pull-right"></i></th>
-                            <th class="text-center">{{ 'label.menu.menuOrder' | trans }}</th>
+                            <th class="text-center">{{ 'label.menu.parent' | trans }} <i data-sort="no" data-sort-field="parent.name" class="fa fa-sort sortable float-right"></i></th>
+                            <th class="text-center">{{ 'label.menu.code' | trans }} <i data-sort="no" data-sort-field="code" class="fa fa-sort sortable float-right"></i></th>
+                            <th class="text-center">{{ 'label.menu.name' | trans }} <i data-sort="no" data-sort-field="name" class="fa fa-sort sortable float-right"></i></th>
+                            <th class="text-center">{{ 'label.menu.menuOrder' | trans }} <i data-sort="no" data-sort-field="menuOrder" class="fa fa-sort sortable sortable-default float-right"></i></th>
                             <th class="text-center">{{ 'label.menu.iconClass' | trans }}</th>
                             <th class="text-center">{{ 'label.menu.routeName' | trans }}</th>
                             <th class="text-center">{{ 'label.menu.showable' | trans }}</th>
-                            <th class="text-center" style="width: 177px">{{ 'label.crud.action' | trans }}</th>
+                            <th class="text-center" style="width: 150px">{{ 'label.crud.action' | trans }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-content">
                     </tbody>
                 </table>
             </div>
-            <div class="box box-footer">
-                <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2 pull-left margin-r-5">
+            <div class="card-footer">
+                <div class="float-left">
                     <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i> {{ 'label.crud.refresh' | trans }}</button>
                 </div>
-                <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
+                <div class="col-md-9 float-right pagination-box">
                 </div>
             </div>
         </div>
@@ -71,60 +71,42 @@
                 <form class="form-horizontal" id="semartForm" method="POST">
                     <input type="hidden" id="id" value="">
                     <div class="form-group">
-                        <label for="role" class="col-sm-2 control-label">{{ 'label.menu.parent' | trans }}</label>
-                        <div class="col-sm-10">
-                            <select class="form-control select2-static" id="parent">
-                                <option value="">---PILIH {{ 'label.menu.parent' | trans | upper }}---</option>
-                                {% for i, data in parents %}
-                                    <option value="{{ data.id }}">{% if data.parent is not null %}{{ data.parent.name ~ ' > ' ~ data.name }}{% else %}{{ data.name }}{% endif %}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        <label for="role" class="control-label">{{ 'label.menu.parent' | trans }}</label>
+                        <select class="form-control select2-static" id="parent">
+                            <option value="">---PILIH {{ 'label.menu.parent' | trans | upper }}---</option>
+                            {% for i, data in parents %}
+                                <option value="{{ data.id }}">{% if data.parent is not null %}{{ data.parent.name ~ ' > ' ~ data.name }}{% else %}{{ data.name }}{% endif %}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.code' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="code" placeholder="{{ 'label.menu.code' | trans }}">
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.code' | trans }}</label>
+                        <input type="text" class="form-control" id="code" placeholder="{{ 'label.menu.code' | trans }}">
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.name' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="name" placeholder="{{ 'label.menu.name' | trans }}">
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.name' | trans }}</label>
+                        <input type="text" class="form-control" id="name" placeholder="{{ 'label.menu.name' | trans }}">
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.menuOrder' | trans }}</label>
-                        <div class="col-sm-10">
-                            <select class="form-control select2-static" id="menuOrder">
-                                <option value="">---PILIH {{ 'label.menu.menuOrder' | trans | upper }}---</option>
-                                {% for i in 1..17 %}
-                                    <option value="{{ i }}">{{ i }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.menuOrder' | trans }}</label>
+                        <input type="text" class="form-control numeric number" id="menuOrder" placeholder="{{ 'label.menu.menuOrder' | trans }}">
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.iconClass' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="iconClass" placeholder="{{ 'label.menu.iconClass' | trans }}">
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.iconClass' | trans }}</label>
+{#                        <input type="text" class="form-control" id="iconClass" placeholder="{{ 'label.menu.iconClass' | trans }}">#}
+                        <select class="form-control icons_select2" id="iconClass"></select>
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.routeName' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="routeName" placeholder="{{ 'label.menu.routeName' | trans }}">
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.routeName' | trans }}</label>
+                        <input type="text" class="form-control" id="routeName" placeholder="{{ 'label.menu.routeName' | trans }}">
                     </div>
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.menu.showable' | trans }}</label>
-                        <div class="col-sm-10">
-                            <select class="form-control select2-static" id="showable">
-                                <option value="">---TAMPILKAN/TIDAK---</option>
-                                <option value="true">TAMPILKAN</option>
-                                <option value="false">TIDAK DITAMPILKAN</option>
-                            </select>
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.menu.showable' | trans }}</label>
+                        <select class="form-control select2-static" id="showable">
+                            <option value="">---TAMPILKAN/TIDAK---</option>
+                            <option value="true">TAMPILKAN</option>
+                            <option value="false">TIDAK DITAMPILKAN</option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -141,13 +123,32 @@
 
 {% block javascripts %}{% apply spaceless %}
 <script src="{{ asset('lib/select2/js/select2.min.js') }}"></script>
+<script src="{{ asset('js/yaml.js') }}"></script>
 <script>
     $(window).ready(function () {
         localStorage.setItem('csrf_token', '{{ csrf_token('APP_CSRF_TOKEN') }}');
         localStorage.setItem('cache_id', '{{ cacheId }}');
+        let options = new Array();
 
         $('.select2-static').select2();
         $('.query-string').val('');
+
+        $.get('https://raw.githubusercontent.com/FortAwesome/Font-Awesome/fa-4/src/icons.yml', function(data) {
+            var parsedYaml = YAML.eval(data);
+            $.each(parsedYaml.icons, function(index, icon){
+                options.push({
+                    id: icon.id,
+                    text: '<i class="fa fa-' + icon.id + '"></i> ' + icon.id
+                });
+            });
+
+            $('.icons_select2').select2({
+                data: options,
+                escapeMarkup: function(markup) {
+                    return markup;
+                }
+            });
+        });
 
         $(document).on('click', '.form-modal-action', function () {
             formReset(function () {
@@ -222,6 +223,12 @@
                 $('#showable').val(data.showable ? 'true' : 'false');
 
                 $('.select2-static').trigger('change');
+                $('.icons_select2').select2({
+                    data: options,
+                    escapeMarkup: function(markup) {
+                        return markup;
+                    }
+                }).val(data.iconClass).trigger('change');
 
                 $('.form-title').html('{{ 'label.crud.edit_title' | trans({'%title%': title }) }}');
                 $('#form-modal').modal();

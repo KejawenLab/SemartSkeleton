@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_new.html.twig' %}
 
 {% block stylesheets %}{% apply spaceless %}
     <link rel="stylesheet" href="{{asset('lib/bootstrap-toggle/css/bootstrap-toggle.min.css')}}">
@@ -10,26 +10,26 @@
 
 {% block content %}{% apply spaceless %}
 <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">{{ 'label.crud.list_title' | trans }} {{ title }}</h3>
-                <div class="box-tools col-md-7 col-xs-7 col-sm-7 col-lg-7 pull-right">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'label.crud.list_title' | trans }} {{ title }}</h3>
+                <div class="card-tools col-md-6">
                     <div class="input-group">
                         {% if is_granted('add', code_to_menu('GROUP')) %}
-                            <div class="input-group-btn">
+                            <div class="input-group-prepend">
                                 <button type="button" class="btn btn-primary form-modal-action"><i class="fa fa-plus-circle"></i> {{ 'label.crud.add' | trans }}</button>
                             </div>
                         {% endif %}
                         <input type="text" name="table_search" class="form-control pull-right query-string" placeholder="{{ 'label.crud.search_text' | trans }}">
-                        <div class="input-group-btn">
+                        <div class="input-group-append">
                             <button type="submit" class="btn btn-danger search-action"><i class="fa fa-search-plus"></i> {{ 'label.crud.search' | trans }}</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="box-body">
-                <table id="table-content" class="table table-responsive no-padding table-bordered table-hover table-striped">
+            <div class="card-body">
+                <table id="table-content" class="table table-bordered table-hover table-striped">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 49px;">No</th>
@@ -42,11 +42,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="box box-footer">
-                <div class="col-md-2 col-xs-2 col-sm-2 col-lg-2 pull-left margin-r-5">
+            <div class="card-footer">
+                <div class="float-left">
                     <button type="button" class="btn btn-danger refresh"><i class="fa fa-refresh"></i> {{ 'label.crud.refresh' | trans }}</button>
                 </div>
-                <div class="col-md-9 col-xs-9 col-sm-9 col-lg-9 pull-right pagination-box">
+                <div class="col-md-9 float-right pagination-box">
                 </div>
             </div>
         </div>
@@ -89,36 +89,34 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title">{{ 'label.crud.roles' | trans }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">{{ 'label.crud.roles' | trans }}</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group margin-b-7">
                     <input type="text" name="role_search" class="form-control pull-right menu-search" placeholder="{{ 'label.crud.search_text' | trans }}">
-                    <div class="input-group-btn">
+                    <div class="input-group-append">
                         <button type="submit" class="btn btn-danger menu-search-action"><i class="fa fa-search-plus"></i> {{ 'label.crud.search' | trans }}</button>
                     </div>
                 </div>
-                <div class="row">
-                    <table class="table table-hover table-responsive no-padding table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th rowspan="2" style="vertical-align: middle; width: 49px;" class="text-center">No</th>
-                                <th rowspan="2" style="vertical-align: middle" class="text-center">{{ 'label.menu.name' | trans }}</th>
-                                <th colspan="4" style="vertical-align: middle" class="text-center">{{ 'label.crud.roles' | trans }}</th>
-                            </tr>
-                            <tr>
-                                <th class="text-center">{{ 'label.crud.add' | trans }}</th>
-                                <th class="text-center">{{ 'label.crud.edit' | trans }}</th>
-                                <th class="text-center">{{ 'label.crud.view' | trans }}</th>
-                                <th class="text-center">{{ 'label.crud.delete' | trans }}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="roles-content"></tbody>
-                    </table>
-                </div>
+                <table class="table table-hover table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="vertical-align: middle; width: 49px;" class="text-center">No</th>
+                            <th rowspan="2" style="vertical-align: middle" class="text-center">{{ 'label.menu.name' | trans }}</th>
+                            <th colspan="4" style="vertical-align: middle" class="text-center">{{ 'label.crud.roles' | trans }}</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">{{ 'label.crud.add' | trans }}</th>
+                            <th class="text-center">{{ 'label.crud.edit' | trans }}</th>
+                            <th class="text-center">{{ 'label.crud.view' | trans }}</th>
+                            <th class="text-center">{{ 'label.crud.delete' | trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="roles-content"></tbody>
+                </table>
             </div>
         </div>
     </div>

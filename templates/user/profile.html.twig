@@ -1,4 +1,4 @@
-{% extends 'layout.html.twig' %}
+{% extends 'layout_new.html.twig' %}
 
 {% block stylesheets %}{% apply spaceless %}
     <link rel="stylesheet" href="{{asset('css/fileupload.css')}}">
@@ -11,12 +11,12 @@
 {% block content %}{% apply spaceless %}
 {% set user = app.user %}
 <div class="row">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title">{{ 'label.user.profile' | trans }}</h3>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ 'label.user.profile' | trans }}</h3>
             </div>
-            <div class="box-body">
+            <div class="card-body">
                 <div class="col-md-2">
                     <input type="hidden" id="profileImage" value="">
                     <div class="avatar-upload">
@@ -30,31 +30,23 @@
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal col-md-10 col-sm-10 col-xs-10" method="POST">
+                <form class="form-horizontal col-md-12" method="POST">
                     <input type="hidden" id="id" value="{{ user.id }}">
                     <div class="form-group">
-                        <label for="username" class="col-sm-2 control-label">{{ 'label.user.username' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
-                        </div>
+                        <label for="username" class="control-label">{{ 'label.user.username' | trans }}</label>
+                        <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="group" class="col-sm-2 control-label">{{ 'label.group.name' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="group" value="{{ user.group.name }}" readonly>
-                        </div>
+                        <label for="group" class="control-label">{{ 'label.group.name' | trans }}</label>
+                        <input type="text" class="form-control" id="group" value="{{ user.group.name }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="fullName" class="col-sm-2 control-label">{{ 'label.user.full_name' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="fullName" value="{{ user.fullName }}">
-                        </div>
+                        <label for="fullName" class="control-label">{{ 'label.user.full_name' | trans }}</label>
+                        <input type="text" class="form-control" id="fullName" value="{{ user.fullName }}">
                     </div>
                     <div class="form-group">
-                        <label for="password" class="col-sm-2 control-label">{{ 'label.user.password' | trans }}</label>
-                        <div class="col-sm-10">
-                            <input type="password" class="form-control" id="plainPassword" placeholder="{{ 'label.user.change_password' | trans }}">
-                        </div>
+                        <label for="password" class="control-label">{{ 'label.user.password' | trans }}</label>
+                        <input type="password" class="form-control" id="plainPassword" placeholder="{{ 'label.user.change_password' | trans }}">
                     </div>
                 </form>
             </div>
