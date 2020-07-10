@@ -46,6 +46,9 @@
 .nav-treeview li {
     margin-left: 20px;
 }
+.card-body{
+    overflow: overlay;
+}
 
 /* hide navbar */
 @media (min-width: 992px) {
