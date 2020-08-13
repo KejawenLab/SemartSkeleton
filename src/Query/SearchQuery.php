@@ -11,6 +11,7 @@ use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
 use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use KejawenLab\Semart\Skeleton\Query\CastToStringQuery;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -59,12 +60,12 @@ class SearchQuery implements EventSubscriberInterface
                     $queryBuilder->leftJoin(sprintf('%s.%s', $event->getJoinAlias('root'), $joins[0]), $alias);
                     $event->addJoinAlias($joins[0], $alias);
 
-                    return $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias($joins[0]), $joins[1]), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
+                    return $expr->like(sprintf('LOWER(TO_TEXT(%s.%s))', $event->getJoinAlias($joins[0]), $joins[1]), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
                 }
 
-                return $expr->like(sprintf('LOWER(%s.%s)', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
+                return $expr->like(sprintf('LOWER(TO_TEXT(%s.%s))', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
             })
-            ->toArray()
+            ->toArray();
         ;
 
         $queryBuilder->andWhere($expr->orX(...$searchs));

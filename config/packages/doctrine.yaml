@@ -38,3 +38,6 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'KejawenLab\Semart\Skeleton\Entity'
                 alias: Semart
+        dql:
+            string_functions:
+              TO_TEXT: KejawenLab\Semart\Skeleton\Query\CastToStringQuery
