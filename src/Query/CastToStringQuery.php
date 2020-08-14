@@ -3,19 +3,18 @@
 
 namespace KejawenLab\Semart\Skeleton\Query;
 
-use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
-class CastToStringQuery extends FunctionNode
+final class CastToStringQuery extends FunctionNode
 {
-    public $stringPrimary;
-    public $type = 'text';
+    const TYPE = 'text';
 
     public function getSql(SqlWalker $sqlWalker)
     {
-        return 'CAST(' . $this->stringPrimary->dispatch($sqlWalker) . ' AS '. $this->type .')';
+        return sprintf('CAST(%s AS %s)', $this->stringPrimary->dispatch($sqlWalker), self::TYPE);
     }
 
     public function parse(Parser $parser)

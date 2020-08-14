@@ -9,9 +9,9 @@ use Doctrine\ORM\QueryBuilder;
 use KejawenLab\Semart\Collection\Collection;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Util\UniqueAlias;
+use KejawenLab\Semart\Skeleton\Query\CastToStringQuery;
 use PHLAK\Twine\Str;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use KejawenLab\Semart\Skeleton\Query\CastToStringQuery;
 
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
@@ -65,7 +65,7 @@ class SearchQuery implements EventSubscriberInterface
 
                 return $expr->like(sprintf('LOWER(TO_TEXT(%s.%s))', $event->getJoinAlias('root'), $value), $expr->literal(sprintf('%%%s%%', Str::make($queryString)->lowercase())));
             })
-            ->toArray();
+            ->toArray()
         ;
 
         $queryBuilder->andWhere($expr->orX(...$searchs));
