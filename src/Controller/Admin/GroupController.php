@@ -131,9 +131,7 @@ class GroupController extends AdminController
             throw new NotFoundHttpException();
         }
 
-        /* @var string $q */
-        $q     = $request->query->get('q', '');
-        $roles = $roleService->getRolesByGroup($group, $q);
+        $roles = $roleService->getRolesByGroup($group, (string) $request->query->get('q', ''));
 
         return new JsonResponse([
             'table' => $this->renderView('role/table-content.html.twig', ['roles' => $roles]),
