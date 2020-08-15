@@ -53,7 +53,7 @@ class QueryController extends AdminController
     {
         return new JsonResponse([
             'status' => true,
-            'result' => $service->getTables($request->query->get('c', 'default')),
+            'result' => $service->getTables((string) $request->query->get('c', 'default')),
         ]);
     }
 }

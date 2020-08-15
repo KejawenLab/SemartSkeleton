@@ -31,7 +31,7 @@ class SearchQuery implements EventSubscriberInterface
             return;
         }
 
-        if ('' === $queryString = $request->query->get('q', '')) {
+        if ('' === $queryString = (string) $request->query->get('q', '')) {
             return;
         }
 

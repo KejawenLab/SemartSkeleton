@@ -30,7 +30,7 @@ class SortQuery implements EventSubscriberInterface
             return;
         }
 
-        if ('' === $sortField = $request->query->get('s', '')) {
+        if ('' === $sortField = (string) $request->query->get('s', '')) {
             return;
         }
 
