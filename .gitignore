@@ -24,4 +24,4 @@
 # cs
 /.php_cs.cache
 /.phpunit.result.cache
-/.phpstan.phar
+/phpstan.phar
