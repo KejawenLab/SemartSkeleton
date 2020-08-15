@@ -51,12 +51,9 @@ class QueryController extends AdminController
      */
     public function tables(Request $request, QueryService $service)
     {
-        /** @var string $c */
-        $c = $request->query->get('c', 'default');
-
         return new JsonResponse([
             'status' => true,
-            'result' => $service->getTables($c),
+            'result' => $service->getTables((string) $request->query->get('c', 'default')),
         ]);
     }
 }
