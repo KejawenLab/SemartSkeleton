@@ -51,6 +51,7 @@ class SortQuery implements EventSubscriberInterface
 
         /** @var QueryBuilder $queryBuilder */
         $queryBuilder = $event->getQueryBuilder();
+        /** @var string $sortField */
         $sort = sprintf('%s.%s', $event->getJoinAlias('root'), $sortField);
         if (false !== strpos($sortField, '.')) {
             $fields = Collection::collect(explode('.', $sortField));
