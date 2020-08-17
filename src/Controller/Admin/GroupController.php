@@ -32,7 +32,7 @@ class GroupController extends AdminController
      */
     public function index(Request $request, Paginator $paginator)
     {
-        $page = (int) $request->query->get('p', 1);
+        $page = (int) $request->query->get('p', '1');
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));
@@ -131,7 +131,7 @@ class GroupController extends AdminController
             throw new NotFoundHttpException();
         }
 
-        $roles = $roleService->getRolesByGroup($group, $request->query->get('q', ''));
+        $roles = $roleService->getRolesByGroup($group, (string) $request->query->get('q', ''));
 
         return new JsonResponse([
             'table' => $this->renderView('role/table-content.html.twig', ['roles' => $roles]),

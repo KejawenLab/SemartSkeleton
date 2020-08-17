@@ -33,7 +33,7 @@ class UserController extends AdminController
      */
     public function index(Request $request, Paginator $paginator, GroupService $groupService)
     {
-        $page = (int) $request->query->get('p', 1);
+        $page = (int) $request->query->get('p', '1');
         $sort = $request->query->get('s');
         $direction = $request->query->get('d');
         $key = md5(sprintf('%s:%s:%s:%s:%s', __CLASS__, __METHOD__, $page, $sort, $direction));

@@ -90,7 +90,7 @@ class MenuExtensionTest extends TestCase
      */
     public function testGetFunctions(MenuLoader $menuLoader, MenuService $menuService, UrlGeneratorInterface $urlGenerator)
     {
-        $this->assertCount(2, (new MenuExtension($menuLoader, $menuService, $urlGenerator))->getFunctions());
+        $this->assertCount(3, (new MenuExtension($menuLoader, $menuService, $urlGenerator))->getFunctions());
     }
 
     public function seed()
