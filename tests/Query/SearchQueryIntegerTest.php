@@ -6,7 +6,7 @@ namespace KejawenLab\Semart\Skeleton\Tests\Query;
 
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\ORM\QueryBuilder;
-use KejawenLab\Semart\Skeleton\Entity\User;
+use KejawenLab\Semart\Skeleton\Entity\Menu;
 use KejawenLab\Semart\Skeleton\Pagination\PaginationEvent;
 use KejawenLab\Semart\Skeleton\Query\Searchable;
 use KejawenLab\Semart\Skeleton\Query\SearchQuery;
@@ -16,20 +16,20 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Muhamad Surya Iksanudin <surya.iksanudin@gmail.com>
  */
-class SearchQueryTest extends DatabaseTestCase
+class SearchQueryIntegerTest extends DatabaseTestCase
 {
     public function testApply()
     {
         $queryBuilder = new QueryBuilder(static::$entityManager);
         $queryBuilder->select('o');
-        $queryBuilder->from(User::class, 'o');
+        $queryBuilder->from(Menu::class, 'o');
 
         $request = Request::createFromGlobals();
-        $request->query->set('q', 'test');
+        $request->query->set('q', '5');
 
         $event = new PaginationEvent();
         $event->setRequest($request);
-        $event->setEntityClass(User::class);
+        $event->setEntityClass(Menu::class);
         $event->setQueryBuilder($queryBuilder);
         $event->addJoinAlias('root', 'o');
 
@@ -37,11 +37,13 @@ class SearchQueryTest extends DatabaseTestCase
         $readerMock
             ->expects($this->once())
             ->method('getClassAnnotations')
-            ->willReturn([new Searchable(['fields' => ['username']])])
+            ->willReturn([new Searchable(['fields' => ['menuOrder']])])
         ;
 
         $this->assertNull((new SearchQuery($readerMock))->apply($event));
-        $this->assertRegExp('/%test%/', $queryBuilder->getQuery()->getSQL());
+
+        $result = $queryBuilder->getQuery()->getOneOrNullResult();
+        $this->assertRegExp('/PENGATURAN/', $result->getName());
     }
 
     public function testGetSubscribedEvents()

@@ -10,7 +10,8 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 final class CastToStringQuery extends FunctionNode
 {
-    const TYPE = 'text';
+    private const TYPE = 'text';
+    private $stringPrimary;
 
     public function getSql(SqlWalker $sqlWalker)
     {
